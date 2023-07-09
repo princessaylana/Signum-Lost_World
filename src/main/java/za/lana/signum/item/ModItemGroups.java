@@ -8,6 +8,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
+import za.lana.signum.block.ModBlocks;
 
 public class ModItemGroups {
     public static final ItemGroup SIGNUM_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -16,6 +17,8 @@ public class ModItemGroups {
                     .icon(() -> new ItemStack(ModItems.QUARTZ_CRYSTAL)).entries((displayContext, entries) -> {
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
                         entries.add(ModItems.QUARTZ_CRYSTAL);
+
+                        entries.add(ModBlocks.RAZORWIRE_BLOCK);
 
 
                     }).build());

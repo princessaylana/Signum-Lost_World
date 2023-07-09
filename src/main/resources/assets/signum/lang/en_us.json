@@ -1,5 +1,11 @@
 {
   "item.signum.quartz_crystal": "Quartz Crystal",
   "item.signum.raw_quartz_crystal": "Raw Quartz",
+
+  "block.signum.razorwire_block": "Razor Wire",
+  "block.signum.razorwire_block.tooltip": "Very Sharp and Dangerous",
+
+
   "itemgroup.signum": "Signum Mod Items"
+
 }

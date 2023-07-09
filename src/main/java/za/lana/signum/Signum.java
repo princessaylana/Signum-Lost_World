@@ -4,6 +4,9 @@ import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.bernie.example.registry.BlockRegistry;
+import za.lana.signum.block.ModBlocks;
+import za.lana.signum.block.custom.RazorWireBlock;
 import za.lana.signum.item.ModItemGroups;
 import za.lana.signum.item.ModItems;
 
@@ -17,7 +20,9 @@ public class Signum implements ModInitializer {
 		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
 
+		ModBlocks.registerModBlocks();
 
-		LOGGER.info("Signum Loading");
+
+		LOGGER.info("Signum Loaded");
 	}
 }
