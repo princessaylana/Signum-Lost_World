@@ -1,3 +1,7 @@
+/**
+ * SIGNUM
+ * Razorwire block, protects against monsters and other creatures.
+ * */
 package za.lana.signum.block.custom;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -5,12 +9,9 @@ import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -21,9 +22,6 @@ import net.minecraft.world.BlockView;
 import za.lana.signum.Signum;
 import java.util.List;
 
-/**
- *
- */
 public class RazorWireBlock extends FacingBlock {
     public RazorWireBlock(FabricBlockSettings fabricBlockSettings) {
         super(Settings.create().nonOpaque());

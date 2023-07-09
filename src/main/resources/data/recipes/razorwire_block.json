@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#A#",
+    "A A",
+    "#A#"],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "count": 4,
+    "item": "signum:razorwire_block"
+  },
+"show_notification": true
+}

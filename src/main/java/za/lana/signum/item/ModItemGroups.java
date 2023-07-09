@@ -17,6 +17,7 @@ public class ModItemGroups {
                     .icon(() -> new ItemStack(ModItems.QUARTZ_CRYSTAL)).entries((displayContext, entries) -> {
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
                         entries.add(ModItems.QUARTZ_CRYSTAL);
+                        entries.add(ModItems.TOXICBALL_ITEM);
 
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
 

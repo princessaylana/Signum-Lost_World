@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import software.bernie.example.registry.BlockRegistry;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.block.custom.RazorWireBlock;
+import za.lana.signum.entity.ModEntities;
 import za.lana.signum.item.ModItemGroups;
 import za.lana.signum.item.ModItems;
 
@@ -21,6 +22,7 @@ public class Signum implements ModInitializer {
 		ModItems.registerModItems();
 
 		ModBlocks.registerModBlocks();
+		ModEntities.registerModEntities();
 
 
 		LOGGER.info("Signum Loaded");
