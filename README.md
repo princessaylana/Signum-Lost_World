@@ -1,12 +1,17 @@
 
 # Signum
 Minecraft Fabric 1.20.1 Modification
- WIP
+Work in Progress
+
 Adds a few unique things to Minecraft:
 
 - Quartz Crystal - Future use
 - Razorwire Block - Keeps entities out, and does damage.
 
+
+![](https://images2.imgbox.com/fa/3d/eirQN485_o.png)
+
+(More stuff will be added soon)
 
 
 Dependancies:
