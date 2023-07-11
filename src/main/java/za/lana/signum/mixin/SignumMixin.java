@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
+
 package za.lana.signum.mixin;
 
 import net.minecraft.server.MinecraftServer;

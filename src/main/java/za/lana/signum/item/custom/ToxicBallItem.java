@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
+
 package za.lana.signum.item.custom;
 
 import net.minecraft.entity.player.PlayerEntity;

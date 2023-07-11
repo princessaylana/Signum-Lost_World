@@ -1,3 +1,10 @@
+/**
+ * SIGNUM
+ * Mod item Group and Tab
+ * MIT License
+ * Lana
+ * */
+
 package za.lana.signum.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;

@@ -1,3 +1,10 @@
+/**
+ * Registers the mod entities
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
+
 package za.lana.signum.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;

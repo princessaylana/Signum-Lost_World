@@ -1,3 +1,10 @@
+/**
+ * SIGNUM
+ * This is the client entry point
+ * MIT License
+ * Lana
+ * */
+
 package za.lana.signum;
 
 import net.fabricmc.api.ClientModInitializer;

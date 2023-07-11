@@ -1,10 +1,14 @@
-package za.lana.signum.entity.projectile;
-
 /**
+ * SIGNUM
  * Decompiled with CFR 0.2.1 (FabricMC 53fa44c9).
- * adapted from SnowballEntity
+ * adapted from SnowballEntity, using
+ * the Fabric projectile tutorial
+ * MIT License
  * Lana
+ *
+ * problems with the constructor
  **/
+package za.lana.signum.entity.projectile;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.StatusEffectInstance;

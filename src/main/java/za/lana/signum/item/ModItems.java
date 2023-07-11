@@ -1,3 +1,11 @@
+/**
+ * SIGNUM
+ * Register the Mod Items
+ * MIT License
+ * Lana
+ *
+ */
+
 package za.lana.signum.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
