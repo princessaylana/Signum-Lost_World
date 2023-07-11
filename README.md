@@ -1,9 +1,10 @@
 
 # Signum
 
-![](https://images2.imgbox.com/41/35/rRHCx6I4_o.png)
-Minecraft Fabric 1.20.1 Modification
-Work in Progress
+![Signum Icon](https://images2.imgbox.com/41/35/rRHCx6I4_o.png "Signum Minecraft Fabric Mod")
+
+A Minecraft Fabric 1.20.1 Modification
+(Work in Progress)
 
 Adds a few unique things to Minecraft:
 
