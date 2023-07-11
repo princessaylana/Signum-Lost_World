@@ -19,11 +19,13 @@ import net.minecraft.util.Identifier;
 import za.lana.signum.entity.projectile.ToxicBallEntity;
 
 public class ModEntities {
-    public static final EntityType<Entity> TOXICBALL= Registry.register(Registries.ENTITY_TYPE,
+    public static final EntityType<ToxicBallEntity> TOXICBALL = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(Signum.MOD_ID, "toxicball"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, ToxicBallEntity::new)
+            FabricEntityTypeBuilder.<ToxicBallEntity>create(SpawnGroup.MISC, ToxicBallEntity::new)
                     .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
                     .trackedUpdateRate(10).build());
+    
+
     public static void registerModEntities() {
         Signum.LOGGER.info("Registering Mod Entities for " + Signum.MOD_ID);
     }
