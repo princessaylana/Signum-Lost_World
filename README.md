@@ -1,3 +1,4 @@
+
 # Signum
 Minecraft Fabric 1.20.1 Modification
  WIP
@@ -15,6 +16,10 @@ Dependancies:
 
 Lana
 2023
+
+[![Github all releases](https://img.shields.io/github/downloads/princessaylana/Signum-1.20/total.svg)](https://GitHub.com/princessaylana/Signum-1.20/releases/)
+![](https://img.shields.io/github/license/princessaylana/Signum-1.20)
+[![](https://img.shields.io/github/v/release/princessaylana/Signum-1.20)](https://GitHub.com/princessaylana/Signum-1.20releases/)
 
 
 
