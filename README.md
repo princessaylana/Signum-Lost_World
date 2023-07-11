@@ -1,7 +1,7 @@
 
 # Signum
 
-![](https://images2.imgbox.com/67/f8/QLhBRMpX_o.png)
+![](https://images2.imgbox.com/41/35/rRHCx6I4_o.png)
 Minecraft Fabric 1.20.1 Modification
 Work in Progress
 
