@@ -24,13 +24,16 @@ public class ModItemGroups {
                     .icon(() -> new ItemStack(ModItems.QUARTZ_CRYSTAL)).entries((displayContext, entries) -> {
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
                         entries.add(ModItems.QUARTZ_CRYSTAL);
-                        entries.add(ModItems.TOXICBALL_ITEM);
 
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
+                        entries.add(ModItems.TOXICBALL_ITEM);
+                        entries.add(ModItems.TOXICGUN);
 
+                        entries.add(ModItems.BPISTOL_ITEM);
+                        entries.add(ModItems.LASERBOLT_ITEM);
 
                     }).build());
     public static void registerItemGroups(){
-        Signum.LOGGER.info("Registering Itemgroups for " + Signum.MOD_ID);
+        Signum.LOGGER.info("Registering ItemGroup for " + Signum.MOD_ID);
     }
 }

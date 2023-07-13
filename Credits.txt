@@ -1,7 +1,7 @@
 SIGNUM
 ------------------------------------------
-Attribution is the common sense to do.
-All sources and contributers will be
+Attribution is the common sense thing to do.
+All sources and contributors will be
 added in this file.
 Do not redistribute without this file.
 Thank you
@@ -10,6 +10,16 @@ Lana
 2023
 ------------------------------------------
 
+My Textures and Models:
+Lana
 
-razorwire model and texture - Lana
+Toxicball texture
+razorwire model and texture
 
+-----------------------------------------
+
+(ToxicBall Code)
+Fabric Projectile Tutuorial:
+https://fabricmc.net/wiki/tutorial:projectiles
+(Many Thanks to Kapenjoe`s Guidance and help)
+------------------------------------------

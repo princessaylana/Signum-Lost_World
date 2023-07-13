@@ -16,12 +16,18 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import za.lana.signum.entity.projectile.LaserBoltEntity;
 import za.lana.signum.entity.projectile.ToxicBallEntity;
 
 public class ModEntities {
     public static final EntityType<ToxicBallEntity> TOXICBALL = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(Signum.MOD_ID, "toxicball"),
             FabricEntityTypeBuilder.<ToxicBallEntity>create(SpawnGroup.MISC, ToxicBallEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
+    public static final EntityType<LaserBoltEntity> LASERBOLT = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "laserbolt"),
+            FabricEntityTypeBuilder.<LaserBoltEntity>create(SpawnGroup.MISC, LaserBoltEntity::new)
                     .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
                     .trackedUpdateRate(10).build());
     
