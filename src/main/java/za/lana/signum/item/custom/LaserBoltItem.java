@@ -15,11 +15,12 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import za.lana.signum.entity.projectile.LaserBoltEntity;
 import za.lana.signum.entity.projectile.ToxicBallEntity;
 
-public class ToxicBallItem
+public class LaserBoltItem
         extends Item {
-    public ToxicBallItem(Item.Settings settings) {
+    public LaserBoltItem(Settings settings) {
         super(settings);
     }
 
@@ -30,10 +31,10 @@ public class ToxicBallItem
                 SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL,
                 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
         if (!world.isClient) {
-            ToxicBallEntity toxicBallEntity = new ToxicBallEntity(world, user);
-            toxicBallEntity.setItem(itemStack);
-            toxicBallEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 2f, 1.0f);
-            world.spawnEntity(toxicBallEntity);
+            LaserBoltEntity laserBoltEntity = new LaserBoltEntity(world, user);
+            laserBoltEntity.setItem(itemStack);
+            laserBoltEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 2f, 1.0f);
+            world.spawnEntity(laserBoltEntity);
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         if (!user.getAbilities().creativeMode) {

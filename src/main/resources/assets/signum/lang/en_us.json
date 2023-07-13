@@ -3,6 +3,9 @@
   "item.signum.raw_quartz_crystal": "Raw Quartz",
   "item.signum.toxicball_item": "Toxic Ball",
   "entity.signum.toxicball": "Toxic Ball",
+  "item.signum.bpistol_item": "Baretta Pistol",
+  "item.signum.bpistol_item.ammo": "Ammo",
+  "item.signum.laserbolt_item": "Laser Bolt",
 
   "block.signum.razorwire_block": "Razor Wire",
   "block.signum.razorwire.tooltip": "Very Sharp and Dangerous",

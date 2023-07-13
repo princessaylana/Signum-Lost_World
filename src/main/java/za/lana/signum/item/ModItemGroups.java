@@ -25,9 +25,11 @@ public class ModItemGroups {
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
                         entries.add(ModItems.QUARTZ_CRYSTAL);
                         entries.add(ModItems.TOXICBALL_ITEM);
-
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
+                        entries.add(ModItems.TOXICGUN_ITEM);
 
+                        entries.add(ModItems.BPISTOL_ITEM);
+                        entries.add(ModItems.LASERBOLT_ITEM);
 
                     }).build());
     public static void registerItemGroups(){
