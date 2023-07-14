@@ -34,7 +34,6 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.Signum;
 import za.lana.signum.client.ToxicGunRenderer;
 import za.lana.signum.entity.projectile.ToxicBallEntity;
-
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;

@@ -2,16 +2,20 @@
   "item.signum.quartz_crystal": "Quartz Crystal",
   "item.signum.raw_quartz_crystal": "Raw Quartz",
   "item.signum.toxicball_item": "Toxic Ball",
-  "entity.signum.toxicball": "Toxic Ball",
   "item.signum.bpistol_item": "Baretta Pistol",
   "item.signum.bpistol_item.ammo": "Ammo",
   "item.signum.laserbolt": "Laser Bolt",
   "item.signum.toxicgun": "Toxic Gun",
   "item.signum.toxicgun.ammo": "Toxic Balls",
 
-  "block.signum.razorwire_block": "Razor Wire",
-  "block.signum.razorwire.tooltip": "Very Sharp and Dangerous",
+  "item.signum.raw_manganese": "Raw Manganese",
+  "item.signum.manganese_ingot": "Manganese Ingot",
 
+  "block.signum.razorwire_block": "Razor Wire",
+  "block.signum.razorwire_block.tooltip": "Very Sharp and Dangerous",
+  "block.signum.manganese_block": "Block of Manganese",
+
+  "entity.signum.toxicball": "Toxic Ball",
 
   "itemgroup.signum": "Signum Mod Items"
 

@@ -15,12 +15,13 @@ import za.lana.signum.block.custom.RazorWireBlock;
 public class ModBlocks {
     public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
             new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block MANGANESE_BLOCK = registerBlock("manganese_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
 
 
 
 
-
-
+    //registering blocks
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, new Identifier(Signum.MOD_ID, name), block);
     }

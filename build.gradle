@@ -23,6 +23,8 @@ repositories {
     }
 }
 
+def dataOutput = 'src/main/generated'
+
 loom {
     runs {
 		// This adds a new gradle task that runs the datagen API: "gradlew runDatagen"

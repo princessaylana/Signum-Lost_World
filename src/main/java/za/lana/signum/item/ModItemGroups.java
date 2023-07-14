@@ -22,10 +22,15 @@ public class ModItemGroups {
             new Identifier(Signum.MOD_ID, "signum_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.signum"))
                     .icon(() -> new ItemStack(ModItems.QUARTZ_CRYSTAL)).entries((displayContext, entries) -> {
+                        entries.add(ModBlocks.RAZORWIRE_BLOCK);
+                        entries.add(ModBlocks.MANGANESE_BLOCK);
+
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
                         entries.add(ModItems.QUARTZ_CRYSTAL);
 
-                        entries.add(ModBlocks.RAZORWIRE_BLOCK);
+                        entries.add(ModItems.RAW_MANGANESE);
+                        entries.add(ModItems.MANGANESE_INGOT);
+                        
                         entries.add(ModItems.TOXICBALL_ITEM);
                         entries.add(ModItems.TOXICGUN);
 
