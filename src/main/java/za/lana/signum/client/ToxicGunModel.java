@@ -1,3 +1,10 @@
+/**
+ * Registers the mod entities
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
+
 package za.lana.signum.client;
 
 import net.minecraft.util.Identifier;

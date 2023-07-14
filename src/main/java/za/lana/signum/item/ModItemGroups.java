@@ -22,9 +22,7 @@ public class ModItemGroups {
             new Identifier(Signum.MOD_ID, "signum_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.signum"))
                     .icon(() -> new ItemStack(ModItems.QUARTZ_CRYSTAL)).entries((displayContext, entries) -> {
-                        entries.add(ModBlocks.RAZORWIRE_BLOCK);
-                        entries.add(ModBlocks.MANGANESE_BLOCK);
-
+                        //items
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
                         entries.add(ModItems.QUARTZ_CRYSTAL);
 
@@ -36,6 +34,15 @@ public class ModItemGroups {
 
                         entries.add(ModItems.BPISTOL_ITEM);
                         entries.add(ModItems.LASERBOLT_ITEM);
+
+                        //blocks
+                        entries.add(ModBlocks.MANGANESE_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_MANGANESE_ORE);
+                        entries.add(ModBlocks.NETHERRACK_MANGANESE_ORE);
+                        entries.add(ModBlocks.ENDSTONE_MANGANESE_ORE);
+
+                        entries.add(ModBlocks.MANGANESE_BLOCK);
+                        entries.add(ModBlocks.RAZORWIRE_BLOCK);
 
                     }).build());
     public static void registerItemGroups(){

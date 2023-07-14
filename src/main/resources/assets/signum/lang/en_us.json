@@ -1,19 +1,27 @@
 {
-  "item.signum.quartz_crystal": "Quartz Crystal",
-  "item.signum.raw_quartz_crystal": "Raw Quartz",
-  "item.signum.toxicball_item": "Toxic Ball",
-  "item.signum.bpistol_item": "Baretta Pistol",
-  "item.signum.bpistol_item.ammo": "Ammo",
-  "item.signum.laserbolt": "Laser Bolt",
-  "item.signum.toxicgun": "Toxic Gun",
-  "item.signum.toxicgun.ammo": "Toxic Balls",
 
   "item.signum.raw_manganese": "Raw Manganese",
   "item.signum.manganese_ingot": "Manganese Ingot",
 
+  "item.signum.quartz_crystal": "Quartz Crystal",
+  "item.signum.raw_quartz_crystal": "Raw Quartz",
+  "item.signum.bpistol_item": "Baretta Pistol",
+  "item.signum.bpistol_item.ammo": "Ammo",
+  "item.signum.laserbolt": "Laser Bolt",
+  "item.signum.toxicball_item": "Toxic Ball",
+  "item.signum.toxicgun": "Toxic Gun",
+  "item.signum.toxicgun.ammo": "Toxic Balls",
+
+
+  "block.signum.manganese_ore": "Manganese Ore",
+  "block.signum.deepslate_manganese_ore": "Deepslate Manganese Ore",
+  "block.signum.netherrack_manganese_ore": "Netherrack Manganese Ore",
+  "block.signum.endstone_manganese_ore": "Endstone Manganese Ore",
+  "block.signum.manganese_block": "Block of Manganese",
+
   "block.signum.razorwire_block": "Razor Wire",
   "block.signum.razorwire_block.tooltip": "Very Sharp and Dangerous",
-  "block.signum.manganese_block": "Block of Manganese",
+
 
   "entity.signum.toxicball": "Toxic Ball",
 
