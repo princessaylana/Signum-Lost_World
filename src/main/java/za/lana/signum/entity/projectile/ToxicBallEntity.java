@@ -118,6 +118,8 @@ public class ToxicBallEntity
             this.setVelocity(vec3d.x, vec3d.y, -vec3d.z *d);
         }
 
+        this.remove(Entity.RemovalReason.DISCARDED);
+
 
     }
 

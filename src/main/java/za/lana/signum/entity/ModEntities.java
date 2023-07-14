@@ -33,7 +33,7 @@ public class ModEntities {
     
 
     public static void registerModEntities() {
-        Signum.LOGGER.info("Registering Mod Entities for " + Signum.MOD_ID);
+        Signum.LOGGER.info("Registering ModEntities for " + Signum.MOD_ID);
     }
     
 }

@@ -73,9 +73,10 @@ public class ToxicGunItem extends Item implements GeoItem {
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "shoot_controller", state -> PlayState.CONTINUE)
-				.triggerableAnim("shoot", RawAnimation.begin().thenPlay("toxicgun.shoot")));
-		controllers.add(new AnimationController<>(this, "shoot_controller", state -> PlayState.CONTINUE)
-				.triggerableAnim("idle", RawAnimation.begin().thenPlay("toxicgun.idle")));
+				.triggerableAnim("shoot", RawAnimation.begin().thenPlay("animation.toxicgun.shoot")));
+
+		controllers.add(new AnimationController<>(this, "idle_controller", state -> PlayState.CONTINUE)
+				.triggerableAnim("idle", RawAnimation.begin().thenPlay("animation.toxicgun.idle")));
 	}
 
 	// Start "using" the item once clicked
@@ -110,8 +111,9 @@ public class ToxicGunItem extends Item implements GeoItem {
 				// Trigger our animation
 				// We could trigger this outside of the client-side check if only wanted the animation to play for the shooter
 				// But we'll fire it on the server so all nearby players can see it
-				triggerAnim(player, GeoItem.getOrAssignId(stack, (ServerWorld)level), "shoot_controller", "toxicgun.shoot");
+				triggerAnim(player, GeoItem.getOrAssignId(stack, (ServerWorld)level), "shoot_controller", "animation.toxicgun.shoot");
 			}
+				//triggerAnim(player, GeoItem.getOrAssignId(stack, (ServerWorld)level), "idle_controller", "animation.toxicgun.idle");
 		}
 	}
 
@@ -120,6 +122,7 @@ public class ToxicGunItem extends Item implements GeoItem {
 	public UseAction getUseAction(ItemStack stack) {
 		return UseAction.BOW;
 	}
+
 
 	@Override
 	public boolean hasGlint(ItemStack stack) {
