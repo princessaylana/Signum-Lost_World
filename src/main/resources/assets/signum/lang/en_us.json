@@ -2,12 +2,13 @@
 
   "item.signum.raw_manganese": "Raw Manganese",
   "item.signum.manganese_ingot": "Manganese Ingot",
+  "item.signum.manganese_nugget": "Manganese Nugget",
 
   "item.signum.quartz_crystal": "Quartz Crystal",
   "item.signum.raw_quartz_crystal": "Raw Quartz",
   "item.signum.bpistol_item": "Baretta Pistol",
   "item.signum.bpistol_item.ammo": "Ammo",
-  "item.signum.laserbolt": "Laser Bolt",
+  "item.signum.laserbolt_item": "Laser Bolt",
   "item.signum.toxicball_item": "Toxic Ball",
   "item.signum.toxicgun": "Toxic Gun",
   "item.signum.toxicgun.ammo": "Toxic Balls",
@@ -18,9 +19,11 @@
   "block.signum.netherrack_manganese_ore": "Netherrack Manganese Ore",
   "block.signum.endstone_manganese_ore": "Endstone Manganese Ore",
   "block.signum.manganese_block": "Block of Manganese",
+  "block.signum.skyforge": "Sky Forge",
+  "block.signum.skyforge.tooltip": "Very Powerful Furnace",
 
   "block.signum.razorwire_block": "Razor Wire",
-  "block.signum.razorwire_block.tooltip": "Very Sharp and Dangerous",
+  "block.signum.razorwire.tooltip": "Very Sharp and Dangerous Wire",
 
 
   "entity.signum.toxicball": "Toxic Ball",

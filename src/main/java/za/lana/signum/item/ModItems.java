@@ -16,7 +16,6 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import software.bernie.example.item.PistolItem;
 import za.lana.signum.Signum;
 import za.lana.signum.item.custom.BPistolItem;
 import za.lana.signum.item.custom.LaserBoltItem;
@@ -29,6 +28,7 @@ public class ModItems {
 
     public static final Item RAW_MANGANESE = registerItem("raw_manganese", new Item(new FabricItemSettings()));
     public static final Item MANGANESE_INGOT = registerItem("manganese_ingot", new Item(new FabricItemSettings()));
+    public static final Item MANGANESE_NUGGET = registerItem("manganese_nugget", new Item(new FabricItemSettings()));
 
     public static final Item TOXICBALL_ITEM = registerItem("toxicball_item", new ToxicBallItem(new FabricItemSettings()));
     public static final Item BPISTOL_ITEM = registerItem("bpistol_item", new BPistolItem(new FabricItemSettings()));
@@ -45,6 +45,8 @@ public class ModItems {
         entries.add(BPISTOL_ITEM);
         entries.add(LASERBOLT_ITEM);
         entries.add(TOXICGUN);
+        entries.add(MANGANESE_INGOT);
+        entries.add(MANGANESE_NUGGET);
 
     }
 

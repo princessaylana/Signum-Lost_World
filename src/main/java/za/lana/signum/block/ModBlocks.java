@@ -21,6 +21,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import za.lana.signum.Signum;
 import za.lana.signum.block.custom.RazorWireBlock;
+import za.lana.signum.block.custom.SkyForgeBlock;
 
 //obsidian hardness (50.0f, 1200.0f)
 //iron hardness (5.0f, 6.0f)
@@ -46,6 +47,9 @@ public class ModBlocks {
                     .strength(30.0f, 600.0f)));
     public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
             new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(10.0f,250.0f)));
+    public static final Block SKYFORGE= registerBlock("skyforge",
+            new SkyForgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(10.0f,250.0f).nonOpaque()));
+
 
 
 

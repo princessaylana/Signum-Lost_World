@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "manganese_ingot",
+  "ingredients": [
+    {
+      "item": "signum:manganese_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "signum:manganese_ingot"
+  }
+}

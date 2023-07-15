@@ -22,4 +22,8 @@ razorwire model and texture
 Fabric Projectile Tutuorial:
 https://fabricmc.net/wiki/tutorial:projectiles
 (Many Thanks to Kapenjoe`s Guidance and help)
+
+ImplementedInventory:
+License:https://creativecommons.org/publicdomain/zero/1.0/">CC0
+Juuz
 ------------------------------------------
