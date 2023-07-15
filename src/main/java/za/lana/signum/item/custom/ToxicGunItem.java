@@ -137,7 +137,7 @@ public class ToxicGunItem extends Item implements GeoItem {
 	// Let's add some ammo text to the tooltip
 	@Override
 	public void appendTooltip(ItemStack stack, World worldIn, List<Text> tooltip, TooltipContext flagIn) {
-		tooltip.add(Text.translatable("item." + Signum.MOD_ID+ ".ammo",
+		tooltip.add(Text.translatable("item." + Signum.MOD_ID+ "toxicgun.ammo",
 				stack.getMaxDamage() - stack.getDamage() - 1,
 				stack.getMaxDamage() - 1)
 				.formatted(Formatting.ITALIC));

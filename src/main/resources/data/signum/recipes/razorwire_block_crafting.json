@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "signum:manganese_ingot"
+    },
+    "X": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "X#X",
+    "# #",
+    "X#X"
+  ],
+  "result": {
+    "count": 4,
+    "item": "signum:razorwire_block"
+  },
+  "show_notification": true
+}

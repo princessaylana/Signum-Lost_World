@@ -28,6 +28,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.RAW_MANGANESE);
                         entries.add(ModItems.MANGANESE_INGOT);
+                        entries.add(ModItems.MANGANESE_NUGGET);
                         
                         entries.add(ModItems.TOXICBALL_ITEM);
                         entries.add(ModItems.TOXICGUN);
