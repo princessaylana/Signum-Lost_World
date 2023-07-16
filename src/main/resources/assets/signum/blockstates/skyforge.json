@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "signum:block/skyforge"
+    },
+    "facing=south": {
+      "model": "signum:block/skyforge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "signum:block/skyforge",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "signum:block/skyforge",
+      "y": 90
+    },
+    "facing=down": {
+      "model": "signum:block/skyforge",
+      "z": 90
+    },
+    "facing=up": {
+      "model": "signum:block/skyforge",
+      "z": 180
+    }
+  }
+}
