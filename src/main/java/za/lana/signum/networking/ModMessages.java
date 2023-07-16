@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Registers the networking packets
+ * Lana
+ * */
 package za.lana.signum.networking;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

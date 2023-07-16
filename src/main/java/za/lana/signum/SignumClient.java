@@ -4,7 +4,6 @@
  * MIT License
  * Lana
  * */
-
 package za.lana.signum;
 
 import net.fabricmc.api.ClientModInitializer;

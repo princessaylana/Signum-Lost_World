@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * the skyforge gui
+ * Lana
+ * */
 package za.lana.signum.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;

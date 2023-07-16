@@ -1,5 +1,5 @@
 /**
- * Registers the mod blocks
+ * Registers the mod recipes
  * SIGNUM
  * MIT License
  * Lana

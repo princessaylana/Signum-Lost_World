@@ -1,3 +1,13 @@
+/**
+ *
+ * SIGNUM
+ * MIT License
+ *
+ * skyforge recipe type, need to change it to three inputs and one input
+ * a coal furnace type of this is also planned
+ * Lana
+ * */
+
 package za.lana.signum.recipe;
 
 import com.google.gson.JsonArray;

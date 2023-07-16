@@ -1,3 +1,10 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Registers the mod screenhandlers for block entities
+ * Lana
+ * */
+
 package za.lana.signum.screen;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;

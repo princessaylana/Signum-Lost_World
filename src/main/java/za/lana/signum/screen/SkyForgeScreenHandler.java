@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * the skyforge screengui code
+ * Lana
+ * */
 package za.lana.signum.screen;
 
 import net.minecraft.block.entity.BlockEntity;
