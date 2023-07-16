@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "signum:block/deepslate_manganese_ore"
-  }
-}
