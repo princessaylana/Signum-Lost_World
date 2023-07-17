@@ -10,6 +10,8 @@ Adds a few unique things to Minecraft:
 
 - Quartz Crystal - Future use
 - Razorwire Block - Keeps entities out, and does damage.
+- Manganese Ores (For creating Stainless Steel)
+- Skyforge WIP (Creating Skyforge Steel)
 
 
 ![](https://images2.imgbox.com/fa/3d/eirQN485_o.png)
