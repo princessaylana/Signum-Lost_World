@@ -34,6 +34,7 @@ public class ModItemGroups {
                         entries.add(ModItems.TOXICGUN);
 
                         entries.add(ModItems.BPISTOL_ITEM);
+                        entries.add(ModItems.GLASS_SHARD);
                         entries.add(ModItems.LASERBOLT_ITEM);
 
                         //blocks
@@ -44,6 +45,7 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.MANGANESE_BLOCK);
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
+                        entries.add(ModBlocks.SKYFORGE);
 
                     }).build());
     public static void registerItemGroups(){

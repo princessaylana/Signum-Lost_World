@@ -1,0 +1,9 @@
+// 1.20.1	2023-07-16T23:30:34.857102327	Signum/Recipes
+cb12f217c7e38e4e018bec210b1847cff7b0675e data/signum/advancements/recipes/decorations/manganese_block.json
+45e7ac480c9145ae43cf571aef6644ec2c68c10f data/signum/recipes/manganese_block.json
+480cdd2bb28b0f6fabcca1647f8d6e9d8930a265 data/signum/recipes/raw_manganese_from_smelting_raw_manganese.json
+169d15f8f429b674e416ced0733768af7d6a4362 data/signum/advancements/recipes/building_blocks/manganese_ingot.json
+9ca6cf98277c33ef677747c2565fa56ffd030fd3 data/signum/advancements/recipes/misc/raw_manganese_from_smelting_raw_manganese.json
+701f831e9e323fc45e0a81a32abc9cdf6ad0cbaf data/signum/recipes/manganese_ingot.json
+712e79f38d4c4de28e14bea935c5a70772959428 data/signum/recipes/raw_manganese.json
+1c7b901993c3b0663082d4dcc50260bee4176a38 data/signum/advancements/recipes/misc/raw_manganese.json

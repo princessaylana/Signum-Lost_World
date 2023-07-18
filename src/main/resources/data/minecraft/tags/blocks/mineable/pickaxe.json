@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "signum:manganese_ore",
+    "signum:deepslate_manganese_ore",
+    "signum:netherrack_manganese_ore",
+    "signum:endstone_manganese_ore",
+    "signum:manganese_block",
+    "signum:razorwire_block",
+    "signum:skyforge"
+  ]
+}

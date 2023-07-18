@@ -21,6 +21,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import za.lana.signum.Signum;
 import za.lana.signum.block.custom.RazorWireBlock;
+import za.lana.signum.block.custom.SkyForgeBlock;
 
 //obsidian hardness (50.0f, 1200.0f)
 //iron hardness (5.0f, 6.0f)
@@ -31,21 +32,24 @@ public class ModBlocks {
 
     public static final Block MANGANESE_ORE = registerBlock("manganese_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.STONE).sounds(BlockSoundGroup.STONE)
-                    .strength(10.0f, 100.0f), UniformIntProvider.create(3, 6)));
+                    .strength(10.0f, 100.0f).requiresTool(), UniformIntProvider.create(3, 6)));
     public static final Block DEEPSLATE_MANGANESE_ORE = registerBlock("deepslate_manganese_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).sounds(BlockSoundGroup.DEEPSLATE)
-                    .strength(15.0f, 150.0f), UniformIntProvider.create(3, 6)));
+                    .strength(15.0f, 150.0f).requiresTool(), UniformIntProvider.create(3, 6)));
     public static final Block NETHERRACK_MANGANESE_ORE = registerBlock("netherrack_manganese_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.END_STONE).sounds(BlockSoundGroup.NETHER_ORE)
-                    .strength(20.0f, 200.0f), UniformIntProvider.create(3, 6)));
+                    .strength(20.0f, 200.0f).requiresTool(), UniformIntProvider.create(3, 6)));
     public static final Block ENDSTONE_MANGANESE_ORE = registerBlock("endstone_manganese_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.END_STONE).sounds(BlockSoundGroup.NETHER_ORE)
-                    .strength(25.0f, 250.0f), UniformIntProvider.create(3, 6)));
+                    .strength(25.0f, 250.0f).requiresTool(), UniformIntProvider.create(3, 6)));
     public static final Block MANGANESE_BLOCK = registerBlock("manganese_block",
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.NETHERITE)
                     .strength(30.0f, 600.0f)));
     public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
             new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(10.0f,250.0f)));
+    public static final Block SKYFORGE= registerBlock("skyforge",
+            new SkyForgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(10.0f,250.0f).nonOpaque()));
+
 
 
 

@@ -34,6 +34,8 @@ public class ModItems {
     public static final Item BPISTOL_ITEM = registerItem("bpistol_item", new BPistolItem(new FabricItemSettings()));
     public static final Item LASERBOLT_ITEM = registerItem("laserbolt_item", new LaserBoltItem(new FabricItemSettings()));
     public static final ToxicGunItem TOXICGUN = (ToxicGunItem) registerItem("toxicgun", new ToxicGunItem());
+    public static final Item GLASS_SHARD = registerItem("glass_shard", new Item(new FabricItemSettings()));
+
 
 
 
@@ -47,6 +49,7 @@ public class ModItems {
         entries.add(TOXICGUN);
         entries.add(MANGANESE_INGOT);
         entries.add(MANGANESE_NUGGET);
+        entries.add(GLASS_SHARD);
 
     }
 

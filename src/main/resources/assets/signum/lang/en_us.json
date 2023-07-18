@@ -19,6 +19,8 @@
   "block.signum.netherrack_manganese_ore": "Netherrack Manganese Ore",
   "block.signum.endstone_manganese_ore": "Endstone Manganese Ore",
   "block.signum.manganese_block": "Block of Manganese",
+  "block.signum.skyforge": "Sky Forge",
+  "block.signum.skyforge.tooltip": "Very Powerful Furnace",
 
   "block.signum.razorwire_block": "Razor Wire",
   "block.signum.razorwire.tooltip": "Very Sharp and Dangerous Wire",
