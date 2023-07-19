@@ -18,6 +18,7 @@ import za.lana.signum.item.ModItemGroups;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.recipe.ModRecipes;
 import za.lana.signum.screen.ModScreenHandlers;
+import za.lana.signum.world.dimension.ModDimensions;
 
 public class Signum implements ModInitializer {
 	public static final String MOD_ID = "signum";
@@ -36,8 +37,7 @@ public class Signum implements ModInitializer {
 		ModRecipes.registerRecipes();
 
 		ModScreenHandlers.registerScreenHandler();
-
-
+		ModDimensions.register();
 
 		LOGGER.info("Signum Loaded");
 	}

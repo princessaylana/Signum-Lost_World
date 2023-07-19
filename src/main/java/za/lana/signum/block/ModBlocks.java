@@ -20,6 +20,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import za.lana.signum.Signum;
+import za.lana.signum.block.custom.AssemblyStationBlock;
 import za.lana.signum.block.custom.RazorWireBlock;
 import za.lana.signum.block.custom.SkyForgeBlock;
 
@@ -46,9 +47,12 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.NETHERITE)
                     .strength(30.0f, 600.0f)));
     public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
-            new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(10.0f,250.0f)));
-    public static final Block SKYFORGE= registerBlock("skyforge",
+            new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(8.0f,100.0f)));
+    public static final Block SKYFORGE = registerBlock("skyforge",
             new SkyForgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(10.0f,250.0f).nonOpaque()));
+    public static final Block ASSEMBLY_STATION_BLOCK = registerBlock("assembly_station_block",
+            new AssemblyStationBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(10.0f,100.0f).nonOpaque()));
+
 
 
 

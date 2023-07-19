@@ -46,6 +46,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.MANGANESE_BLOCK);
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
                         entries.add(ModBlocks.SKYFORGE);
+                        entries.add(ModBlocks.ASSEMBLY_STATION_BLOCK);
 
                     }).build());
     public static void registerItemGroups(){
