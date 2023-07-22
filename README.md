@@ -12,6 +12,8 @@ Adds a few unique things to Minecraft:
 - Razorwire Block - Keeps entities out, and does damage.
 - ToxicGun - Shoots Toxicballs
 - Manganese Ores (For creating Stainless Steel)
+- New Dimension WIP
+- New Biomes WIP
 - Skyforge WIP (Creating Skyforge Steel)
 
 
