@@ -7,7 +7,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "minecraft:snowy_taiga",
+          "biome": "signum:signum_snowy",
           "parameters": {
             "temperature": -0.5,
             "humidity": -0.7,
@@ -19,7 +19,7 @@
           }
         },
         {
-          "biome": "minecraft:desert",
+          "biome": "signum:signum_desert",
           "parameters": {
             "temperature": 0.5,
             "humidity": -0.7,
@@ -31,7 +31,7 @@
           }
         },
         {
-          "biome": "minecraft:plains",
+          "biome": "signum:signum_plains",
           "parameters": {
             "temperature": 0,
             "humidity": -0.1,
@@ -43,7 +43,7 @@
           }
         },
         {
-          "biome": "minecraft:jungle",
+          "biome": "signum:signum_jungle",
           "parameters": {
             "temperature": 0.5,
             "humidity": 0.7,
@@ -55,7 +55,7 @@
           }
         },
         {
-          "biome": "minecraft:bamboo_jungle",
+          "biome": "signum:signum_bamboo",
           "parameters": {
             "temperature": 0.5,
             "humidity": 0.7,
@@ -67,7 +67,7 @@
           }
         },
         {
-          "biome": "minecraft:badlands",
+          "biome": "signum:signum_badlands",
           "parameters": {
             "temperature": 0.5,
             "humidity": -0.7,
@@ -79,7 +79,7 @@
           }
         },
         {
-          "biome": "minecraft:savanna",
+          "biome": "signum:signum_savanna",
           "parameters": {
             "temperature": 0.5,
             "humidity": -0.1,
@@ -91,7 +91,7 @@
           }
         },
         {
-          "biome": "minecraft:savanna_plateau",
+          "biome": "signum:signum_plateau",
           "parameters": {
             "temperature": 0.5,
             "humidity": -0.1,
@@ -103,7 +103,7 @@
           }
         },
         {
-          "biome": "minecraft:mushroom_fields",
+          "biome": "signum:signum_mushrooms",
           "parameters": {
             "temperature": -0.5,
             "humidity": -0.1,
@@ -115,7 +115,7 @@
           }
         },
         {
-          "biome": "minecraft:flower_forest",
+          "biome": "signum:signum_flowers",
           "parameters": {
             "temperature": 0.5,
             "humidity": 0.1,
@@ -127,7 +127,7 @@
           }
         },
         {
-          "biome": "minecraft:sunflower_plains",
+          "biome": "signum:signum_sunflowers",
           "parameters": {
             "temperature": 0,
             "humidity": -0.1,
@@ -139,7 +139,7 @@
           }
         },
         {
-          "biome": "minecraft:cherry_grove",
+          "biome": "signum:signum_plains",
           "parameters": {
             "temperature": 0.5,
             "humidity": 0.1,
@@ -151,7 +151,7 @@
           }
         },
         {
-          "biome": "minecraft:forest",
+          "biome": "signum:signum_forest",
           "parameters": {
             "temperature": 0.5,
             "humidity": 0.1,
@@ -163,7 +163,7 @@
           }
         },
         {
-          "biome": "minecraft:dark_forest",
+          "biome": "signum:signum_dark",
           "parameters": {
             "temperature": 0,
             "humidity": 0.7,
@@ -187,7 +187,7 @@
           }
         },
         {
-          "biome": "minecraft:birch_forest",
+          "biome": "signum:signum_birch",
           "parameters": {
             "temperature": 0,
             "humidity": 0.1,
@@ -199,7 +199,7 @@
           }
         },
         {
-          "biome": "minecraft:stony_peaks",
+          "biome": "signum:signum_stony",
           "parameters": {
             "temperature": -0.3,
             "humidity": 0.5,
@@ -211,7 +211,7 @@
           }
         },
         {
-          "biome": "minecraft:jagged_peaks",
+          "biome": "signum:signum_peaks",
           "parameters": {
             "temperature": 0,
             "humidity": -0.7,
@@ -223,7 +223,7 @@
           }
         },
         {
-          "biome": "minecraft:ice_spikes",
+          "biome": "signum:signum_spikes",
           "parameters": {
             "temperature": -0.7,
             "humidity": -0.8,
