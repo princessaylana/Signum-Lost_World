@@ -19,6 +19,7 @@ import za.lana.signum.item.ModItems;
 import za.lana.signum.recipe.ModRecipes;
 import za.lana.signum.screen.ModScreenHandlers;
 import za.lana.signum.world.dimension.ModDimensions;
+import za.lana.signum.world.gen.ModWorldGeneration;
 
 public class Signum implements ModInitializer {
 	public static final String MOD_ID = "signum";
@@ -29,15 +30,15 @@ public class Signum implements ModInitializer {
 
 		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
-
 		ModBlocks.registerModBlocks();
-		ModEntities.registerModEntities();
-
 		ModBlockEntities.registerBlockEntities();
 		ModRecipes.registerRecipes();
-
 		ModScreenHandlers.registerScreenHandler();
 		ModDimensions.register();
+		ModWorldGeneration.generateModWorldGeneration();
+		ModEntities.registerModEntities();
+
+
 
 		LOGGER.info("Signum Loaded");
 	}

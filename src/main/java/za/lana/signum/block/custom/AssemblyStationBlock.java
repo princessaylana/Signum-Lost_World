@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
+
 package za.lana.signum.block.custom;
 
 import net.minecraft.block.*;

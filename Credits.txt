@@ -10,7 +10,8 @@ Lana
 2023
 ------------------------------------------
 
-My Textures and Models:
+My Textures Models and Sounds:
+(GIMP, BlockBench and Audacity)
 Lana
 
 Toxicball texture
@@ -27,3 +28,9 @@ ImplementedInventory:
 License:https://creativecommons.org/publicdomain/zero/1.0/">CC0
 Juuz
 ------------------------------------------
+
+Dimension,
+Biomes,
+Noise Generator,
+
+Generated with https://misode.github.io

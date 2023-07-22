@@ -18,8 +18,7 @@ public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
         super(output);
     }
-    // PLEASE ADD THE VOXEL AND GEO MODELS MANUALLY TO DATA GEN FOLDER,
-    // DO NOT ADD THEM HERE
+    // PLEASE DONT ADD VOXELS HERE, KEEP THEM IN RESOURCES,
     // ELSE IT WILL BREAK THE MODELS
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {

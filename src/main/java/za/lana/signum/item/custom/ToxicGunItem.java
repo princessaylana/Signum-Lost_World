@@ -15,6 +15,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.command.PlaySoundCommand;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -25,6 +26,7 @@ import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.client.RenderProvider;
+import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -33,6 +35,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.Signum;
 import za.lana.signum.client.ToxicGunRenderer;
+import za.lana.signum.constant.SignumAnimations;
 import za.lana.signum.entity.projectile.ToxicBallEntity;
 import java.util.List;
 import java.util.function.Consumer;
@@ -70,14 +73,12 @@ public class ToxicGunItem extends Item implements GeoItem {
 	}
 
 	// Register our animation controllers
-	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "shoot_controller", state -> PlayState.CONTINUE)
-				.triggerableAnim("shoot", RawAnimation.begin().thenPlay("weapon/animation.toxicgun.shoot")));
-
-		controllers.add(new AnimationController<>(this, "idle_controller", state -> PlayState.CONTINUE)
-				.triggerableAnim("idle", RawAnimation.begin().thenPlay("weapon/animation.toxicgun.idle")));
+				.triggerableAnim("shoot", SignumAnimations.TOXICGUN_SHOOT));
+		// We've marked the "shoot" animation as being triggerable from the server
 	}
+
 
 	// Start "using" the item once clicked
 	@Override
@@ -99,7 +100,7 @@ public class ToxicGunItem extends Item implements GeoItem {
 
 			if (!level.isClient) {
 				ToxicBallEntity arrow = new ToxicBallEntity(level, player);
-				arrow.age = 100;
+				arrow.age = 240;
 
 				arrow.setVelocity(player, player.getPitch(), player.getYaw(), 0, 1, 1);
 				arrow.setDamage();
@@ -111,18 +112,17 @@ public class ToxicGunItem extends Item implements GeoItem {
 				// Trigger our animation
 				// We could trigger this outside of the client-side check if only wanted the animation to play for the shooter
 				// But we'll fire it on the server so all nearby players can see it
-				triggerAnim(player, GeoItem.getOrAssignId(stack, (ServerWorld)level), "shoot_controller", "weapon/animation.toxicgun.shoot");
+				triggerAnim(player, GeoItem.getOrAssignId(stack, (ServerWorld)level), "shoot_controller", "shoot");
 			}
 				//triggerAnim(player, GeoItem.getOrAssignId(stack, (ServerWorld)level), "idle_controller", "animation.toxicgun.idle");
 		}
 	}
 
 	// Use vanilla animation to 'pull back' the pistol while charging it
-	@Override
-	public UseAction getUseAction(ItemStack stack) {
-		return UseAction.BOW;
-	}
-
+	//@Override
+	//public UseAction getUseAction(ItemStack stack) {
+	//return UseAction.BOW;
+	//}
 
 	@Override
 	public boolean hasGlint(ItemStack stack) {
@@ -137,7 +137,7 @@ public class ToxicGunItem extends Item implements GeoItem {
 	// Let's add some ammo text to the tooltip
 	@Override
 	public void appendTooltip(ItemStack stack, World worldIn, List<Text> tooltip, TooltipContext flagIn) {
-		tooltip.add(Text.translatable("item." + Signum.MOD_ID+ "toxicgun.ammo",
+		tooltip.add(Text.translatable("item." + Signum.MOD_ID+ ".toxicgun.ammo",
 				stack.getMaxDamage() - stack.getDamage() - 1,
 				stack.getMaxDamage() - 1)
 				.formatted(Formatting.ITALIC));

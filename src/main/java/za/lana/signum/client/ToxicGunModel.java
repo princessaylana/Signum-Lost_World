@@ -26,6 +26,6 @@ public class ToxicGunModel extends GeoModel<ToxicGunItem> {
 
     @Override
     public Identifier getAnimationResource(ToxicGunItem animatable) {
-        return new Identifier(Signum.MOD_ID, "animations/item/toxicgun.animation.json");
+        return new Identifier(Signum.MOD_ID, "animations/item/animation.toxicgun..json");
     }
 }

@@ -8,6 +8,7 @@ package za.lana.signum.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import za.lana.signum.Signum;
 
@@ -18,9 +19,10 @@ public class ModWorldGenerator extends FabricDynamicRegistryProvider {
         super(output, registriesFuture);
     }
 
-    //future worldgen below
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
+        entries.addAll(registries.getWrapperOrThrow(RegistryKeys.CONFIGURED_FEATURE));
+        entries.addAll(registries.getWrapperOrThrow(RegistryKeys.PLACED_FEATURE));
 
     }
 
@@ -28,4 +30,5 @@ public class ModWorldGenerator extends FabricDynamicRegistryProvider {
     public String getName() {
         return Signum.MOD_ID;
     }
+
 }

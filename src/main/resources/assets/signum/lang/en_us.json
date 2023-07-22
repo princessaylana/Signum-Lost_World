@@ -28,6 +28,7 @@
 
   "entity.signum.toxicball": "Toxic Ball",
 
-  "itemgroup.signum": "Signum Mod Items"
+  "itemgroup.signum": "Signum Mod Items",
+  "dimension.signum_dim": "SkyLand"
 
 }

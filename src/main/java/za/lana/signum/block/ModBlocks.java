@@ -4,7 +4,6 @@
  * MIT License
  * Lana
  * */
-
 package za.lana.signum.block;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
