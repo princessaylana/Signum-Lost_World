@@ -30,7 +30,7 @@ public class ModPlacedFeatures {
         register(context, MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MANGANESE_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(10,
-                        HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
+                        HeightRangePlacementModifier.uniform(YOffset.fixed(-64), YOffset.fixed(128))));
 
         register(context, NETHERRACK_MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.NETHERRACK_MANGANESE_ORE_KEY),

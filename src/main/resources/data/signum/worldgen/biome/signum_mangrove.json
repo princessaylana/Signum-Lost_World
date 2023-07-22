@@ -1,13 +1,14 @@
 {
-  "temperature": 0.7,
-  "downfall": 0.8,
+  "temperature": 0.8,
+  "downfall": 0.9,
   "has_precipitation": true,
   "effects": {
-    "sky_color": 7972607,
+    "sky_color": 7907327,
     "fog_color": 12638463,
-    "water_color": 4159204,
-    "water_fog_color": 329011,
-    "grass_color_modifier": "dark_forest",
+    "water_color": 3832426,
+    "water_fog_color": 5077600,
+    "foliage_color": 9285927,
+    "grass_color_modifier": "swamp",
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
@@ -15,7 +16,7 @@
       "offset": 2
     },
     "music": {
-      "sound": "minecraft:music.overworld.forest",
+      "sound": "minecraft:music.overworld.swamp",
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": false
@@ -33,28 +34,10 @@
     "axolotls": [],
     "creature": [
       {
-        "type": "minecraft:sheep",
-        "weight": 12,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:pig",
+        "type": "minecraft:frog",
         "weight": 10,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:chicken",
-        "weight": 10,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:cow",
-        "weight": 8,
-        "minCount": 4,
-        "maxCount": 4
+        "minCount": 2,
+        "maxCount": 5
       }
     ],
     "misc": [],
@@ -106,9 +89,22 @@
         "weight": 5,
         "minCount": 1,
         "maxCount": 1
+      },
+      {
+        "type": "minecraft:slime",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
       }
     ],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "minecraft:tropical_fish",
+        "weight": 25,
+        "minCount": 8,
+        "maxCount": 8
+      }
+    ],
     "water_creature": []
   },
   "spawn_costs": {},
@@ -123,11 +119,14 @@
     [],
     [],
     [],
-    [],
+    [
+      "minecraft:fossil_upper"
+    ],
     [],
     [],
     [
       "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
       "minecraft:ore_granite_upper",
       "minecraft:ore_granite_lower",
       "minecraft:ore_diorite_upper",
@@ -149,6 +148,8 @@
       "minecraft:ore_lapis",
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
+      "minecraft:disk_grass",
+      "minecraft:disk_clay",
       "signum:manganese_ore_placed"
     ],
     [],
@@ -157,14 +158,11 @@
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:dark_forest_vegetation",
-      "minecraft:forest_flowers",
-      "minecraft:flower_default",
-      "minecraft:patch_grass_forest",
-      "minecraft:brown_mushroom_normal",
-      "minecraft:red_mushroom_normal",
-      "minecraft:patch_sugar_cane",
-      "minecraft:patch_pumpkin"
+      "minecraft:trees_mangrove",
+      "minecraft:patch_grass_normal",
+      "minecraft:patch_dead_bush",
+      "minecraft:patch_waterlily",
+      "minecraft:seagrass_swamp"
     ],
     [
       "minecraft:freeze_top_layer"

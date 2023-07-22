@@ -156,10 +156,9 @@
       "minecraft:ore_lapis",
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
-      "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel"
+      "signum:manganese_ore_placed"
     ],
     [],
     [
@@ -170,10 +169,11 @@
       "minecraft:flower_forest_flowers",
       "minecraft:trees_flower_forest",
       "minecraft:flower_flower_forest",
+      "minecraft:flower_cherry",
+      "minecraft:trees_cherry",
       "minecraft:patch_grass_badlands",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
-      "minecraft:patch_sugar_cane",
       "minecraft:patch_pumpkin"
     ],
     [

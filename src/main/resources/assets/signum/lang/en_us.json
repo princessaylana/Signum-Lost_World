@@ -29,6 +29,7 @@
   "entity.signum.toxicball": "Toxic Ball",
 
   "itemgroup.signum": "Signum Mod Items",
-  "dimension.signum_dim": "SkyLand"
+  "dimension.signum_dim": "SkyLand",
+  "biome.signum.signum_mangrove": "Mangrove Forest"
 
 }

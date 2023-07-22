@@ -1,3 +1,8 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
 package za.lana.signum.world.dimension;
 
 import net.minecraft.registry.RegistryKey;

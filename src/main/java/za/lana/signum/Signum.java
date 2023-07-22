@@ -18,6 +18,7 @@ import za.lana.signum.item.ModItemGroups;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.recipe.ModRecipes;
 import za.lana.signum.screen.ModScreenHandlers;
+import za.lana.signum.world.biomes.SignumBioKeys;
 import za.lana.signum.world.dimension.ModDimensions;
 import za.lana.signum.world.gen.ModWorldGeneration;
 
@@ -30,13 +31,20 @@ public class Signum implements ModInitializer {
 
 		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
+
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();
+
 		ModRecipes.registerRecipes();
 		ModScreenHandlers.registerScreenHandler();
+
 		ModDimensions.register();
 		ModWorldGeneration.generateModWorldGeneration();
+
+		SignumBioKeys.registerModBiomes();
 		ModEntities.registerModEntities();
+
+
 
 
 

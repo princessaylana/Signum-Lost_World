@@ -43,9 +43,9 @@
       "shift_z": "minecraft:shift_z"
     },
     "continents": 1,
-    "erosion": 0.2,
+    "erosion": 0.72,
     "depth": 0.2,
-    "ridges": 0.2,
+    "ridges": 0.72,
     "initial_density_without_jaggedness": 0.2,
     "final_density": {
       "type": "minecraft:squeeze",
@@ -64,9 +64,9 @@
                 "argument1": {
                   "type": "minecraft:y_clamped_gradient",
                   "from_y": 256,
-                  "to_y": 290,
-                  "from_value": 0.01,
-                  "to_value": 1.5
+                  "to_y": 272,
+                  "from_value": 0.15,
+                  "to_value": 0.73
                 },
                 "argument2": {
                   "type": "minecraft:add",
@@ -1391,7 +1391,7 @@
                         "then_run": {
                           "type": "minecraft:block",
                           "result_state": {
-                            "Name": "minecraft:mud"
+                            "Name": "minecraft:air"
                           }
                         }
                       },

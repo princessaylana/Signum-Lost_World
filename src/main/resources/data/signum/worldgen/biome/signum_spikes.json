@@ -142,15 +142,12 @@
       "minecraft:ore_lapis",
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
-      "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
       "minecraft:ore_emerald"
     ],
     [],
-    [
-      "minecraft:spring_water"
-    ],
+    [],
     [
       "minecraft:glow_lichen",
       "minecraft:trees_snowy",

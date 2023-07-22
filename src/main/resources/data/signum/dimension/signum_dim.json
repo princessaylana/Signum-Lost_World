@@ -175,7 +175,7 @@
           }
         },
         {
-          "biome": "minecraft:mangrove_swamp",
+          "biome": "signum:signum_mangrove",
           "parameters": {
             "temperature": 0.2,
             "humidity": 0.7,
