@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "moissanite",
+  "ingredient": {
+    "item": "signum:raw_moissanite"
+  },
+  "result": "signum:moissanite"
+}

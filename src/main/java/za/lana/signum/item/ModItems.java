@@ -30,6 +30,9 @@ public class ModItems {
     public static final Item MANGANESE_INGOT = registerItem("manganese_ingot", new Item(new FabricItemSettings()));
     public static final Item MANGANESE_NUGGET = registerItem("manganese_nugget", new Item(new FabricItemSettings()));
 
+    public static final Item RAW_MOISSANITE = registerItem("raw_moissanite", new Item(new FabricItemSettings()));
+    public static final Item MOISSANITE = registerItem("moissanite", new Item(new FabricItemSettings()));
+
     public static final Item TOXICBALL_ITEM = registerItem("toxicball_item", new ToxicBallItem(new FabricItemSettings()));
     public static final Item BPISTOL_ITEM = registerItem("bpistol_item", new BPistolItem(new FabricItemSettings()));
     public static final Item LASERBOLT_ITEM = registerItem("laserbolt_item", new LaserBoltItem(new FabricItemSettings()));
@@ -43,13 +46,16 @@ public class ModItems {
     public static void addItemsToIngredientGroup(FabricItemGroupEntries entries) {
         entries.add(QUARTZ_CRYSTAL);
         entries.add(RAW_QUARTZ_CRYSTAL);
+        entries.add(MOISSANITE);
+        entries.add(RAW_MOISSANITE);
+        entries.add(MANGANESE_INGOT);
+        entries.add(MANGANESE_NUGGET);
         entries.add(TOXICBALL_ITEM);
         entries.add(BPISTOL_ITEM);
         entries.add(LASERBOLT_ITEM);
         entries.add(TOXICGUN);
-        entries.add(MANGANESE_INGOT);
-        entries.add(MANGANESE_NUGGET);
         entries.add(GLASS_SHARD);
+
 
     }
 

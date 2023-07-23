@@ -6,7 +6,15 @@
     "signum:netherrack_manganese_ore",
     "signum:endstone_manganese_ore",
     "signum:manganese_block",
+
+    "signum:moissanite_ore",
+    "signum:deepslate_moissanite_ore",
+    "signum:moissanite_block",
+
     "signum:razorwire_block",
-    "signum:skyforge"
+    "signum:skyforge",
+    "signum:assembly_station_block",
+
+    "minecraft:glass_pane"
   ]
 }

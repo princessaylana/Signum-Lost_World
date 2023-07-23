@@ -24,11 +24,20 @@
                   }
                 }
               ],
-              "name": "signum:netherrack_manganese_ore"
+              "name": "signum:nether_manganese_ore"
             },
             {
               "type": "minecraft:item",
               "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 6.0,
+                    "min": 3.0
+                  },
+                  "function": "minecraft:set_count"
+                },
                 {
                   "enchantment": "minecraft:fortune",
                   "formula": "minecraft:ore_drops",
@@ -45,5 +54,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "signum:blocks/netherrack_manganese_ore"
 }

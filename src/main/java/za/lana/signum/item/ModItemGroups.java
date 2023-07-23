@@ -42,8 +42,12 @@ public class ModItemGroups {
                         entries.add(ModBlocks.DEEPSLATE_MANGANESE_ORE);
                         entries.add(ModBlocks.NETHERRACK_MANGANESE_ORE);
                         entries.add(ModBlocks.ENDSTONE_MANGANESE_ORE);
-
                         entries.add(ModBlocks.MANGANESE_BLOCK);
+
+                        entries.add(ModBlocks.MOISSANITE_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
+                        entries.add(ModBlocks.MOISSANITE_BLOCK);
+
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
                         entries.add(ModBlocks.SKYFORGE);
                         entries.add(ModBlocks.ASSEMBLY_STATION_BLOCK);

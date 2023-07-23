@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "signum:manganese_ore"
+              "name": "signum:moissanite_ore"
             },
             {
               "type": "minecraft:item",
@@ -33,7 +33,7 @@
                   "add": false,
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 5.0,
+                    "max": 3.0,
                     "min": 2.0
                   },
                   "function": "minecraft:set_count"
@@ -47,7 +47,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "signum:raw_manganese"
+              "name": "signum:raw_moissanite"
             }
           ]
         }

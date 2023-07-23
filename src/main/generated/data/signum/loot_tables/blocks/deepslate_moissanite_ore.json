@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "signum:manganese_ore"
+              "name": "signum:deepslate_moissanite_ore"
             },
             {
               "type": "minecraft:item",
@@ -33,8 +33,8 @@
                   "add": false,
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 5.0,
-                    "min": 2.0
+                    "max": 6.0,
+                    "min": 3.0
                   },
                   "function": "minecraft:set_count"
                 },
@@ -47,7 +47,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "signum:raw_manganese"
+              "name": "signum:raw_moissanite"
             }
           ]
         }
@@ -55,5 +55,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "signum:blocks/manganese_ore"
+  "random_sequence": "signum:blocks/deepslate_moissanite_ore"
 }
