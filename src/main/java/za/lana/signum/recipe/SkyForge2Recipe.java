@@ -22,13 +22,13 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
-public class SkyForgeRecipe implements Recipe<SimpleInventory> {
+public class SkyForge2Recipe implements Recipe<SimpleInventory> {
     public static final Object INSTANCE = Serializer.INSTANCE;
     private final Identifier id;
     private final ItemStack output;
     private final DefaultedList<Ingredient> recipeItems;
 
-    public SkyForgeRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
+    public SkyForge2Recipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -78,19 +78,19 @@ public class SkyForgeRecipe implements Recipe<SimpleInventory> {
         return this.recipeItems;
     }
 
-    public static class Type implements RecipeType<SkyForgeRecipe> {
+    public static class Type implements RecipeType<SkyForge2Recipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
         public static final String ID = "skyforge_craft";
     }
 
-    public static class Serializer implements RecipeSerializer<SkyForgeRecipe> {
+    public static class Serializer implements RecipeSerializer<SkyForge2Recipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "skyforge_craft";
         // this is the name given in the json file
 
         @Override
-        public SkyForgeRecipe read(Identifier id, JsonObject json) {
+        public SkyForge2Recipe read(Identifier id, JsonObject json) {
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
 
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
@@ -100,11 +100,11 @@ public class SkyForgeRecipe implements Recipe<SimpleInventory> {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new SkyForgeRecipe(id, output, inputs);
+            return new SkyForge2Recipe(id, output, inputs);
         }
 
         @Override
-        public SkyForgeRecipe read(Identifier id, PacketByteBuf buf) {
+        public SkyForge2Recipe read(Identifier id, PacketByteBuf buf) {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
@@ -112,11 +112,11 @@ public class SkyForgeRecipe implements Recipe<SimpleInventory> {
             }
 
             ItemStack output = buf.readItemStack();
-            return new SkyForgeRecipe(id, output, inputs);
+            return new SkyForge2Recipe(id, output, inputs);
         }
 
         @Override
-        public void write(PacketByteBuf buf, SkyForgeRecipe recipe) {
+        public void write(PacketByteBuf buf, SkyForge2Recipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.write(buf);

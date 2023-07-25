@@ -1,6 +1,12 @@
 /**
- * Registers the mod blocks
+ * SkyForge Block Entity
+ * (WIP)
  * SIGNUM
+ * This is a machine to smelt alloys and other stuff
+ * it should have three inputs and one output
+ * having trouble with that part of the code and also
+ * the custom recipes for this.
+ * needs work
  * MIT License
  * Lana
  * */
@@ -24,16 +30,17 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import za.lana.signum.recipe.SkyForgeRecipe;
+import za.lana.signum.recipe.SkyForge2Recipe;
 import za.lana.signum.screen.SkyForgeScreenHandler;
 import za.lana.signum.util.ImplementedInventory;
 
 import java.util.Optional;
 
-public class SkyForgeBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
+public class SkyForgeBlockEntity2 extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     //amount of inventory slots
     private final DefaultedList<ItemStack> inventory =
             DefaultedList.ofSize(4, ItemStack.EMPTY);
+    //final int[] INPUT_SLOT = new int[]{0, 1};
 
     private static final int INPUT_SLOT = 1;
     //private static final int FLUID_ITEM_SLOT = 1;
@@ -44,14 +51,14 @@ public class SkyForgeBlockEntity extends BlockEntity implements ExtendedScreenHa
     private int progress = 0;
     private int maxProgress = 72;
 
-    public SkyForgeBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SKYFORGE, pos, state);
+    public SkyForgeBlockEntity2(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.SKYFORGE2, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> SkyForgeBlockEntity.this.progress;
-                    case 1 -> SkyForgeBlockEntity.this.maxProgress;
+                    case 0 -> SkyForgeBlockEntity2.this.progress;
+                    case 1 -> SkyForgeBlockEntity2.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -59,8 +66,8 @@ public class SkyForgeBlockEntity extends BlockEntity implements ExtendedScreenHa
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0: SkyForgeBlockEntity.this.progress = value;
-                    case 1: SkyForgeBlockEntity.this.maxProgress = value;
+                    case 0: SkyForgeBlockEntity2.this.progress = value;
+                    case 1: SkyForgeBlockEntity2.this.maxProgress = value;
                 }
             }
 
@@ -108,7 +115,7 @@ public class SkyForgeBlockEntity extends BlockEntity implements ExtendedScreenHa
         this.progress = 0;
     }
 
-    public void tick(World world, BlockPos pos, BlockState state, SkyForgeBlockEntity blockEntity) {
+    public void tick(World world, BlockPos pos, BlockState state, SkyForgeBlockEntity2 blockEntity) {
         //fillUpOnEnergy(); // until we have machines/other mods that give us Energy
 
         if(canInsertIntoOutputSlot() && hasRecipe()) {
@@ -127,7 +134,7 @@ public class SkyForgeBlockEntity extends BlockEntity implements ExtendedScreenHa
     }
 
     private void craftItem() {
-        Optional<SkyForgeRecipe> recipe = getCurrentRecipe();
+        Optional<SkyForge2Recipe> recipe = getCurrentRecipe();
 
         this.removeStack(INPUT_SLOT, 1);
 
@@ -145,7 +152,7 @@ public class SkyForgeBlockEntity extends BlockEntity implements ExtendedScreenHa
     }
 
     private boolean hasRecipe() {
-        Optional<SkyForgeRecipe> recipe = getCurrentRecipe();
+        Optional<SkyForge2Recipe> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) {
             return false;
@@ -165,13 +172,13 @@ public class SkyForgeBlockEntity extends BlockEntity implements ExtendedScreenHa
         return this.getStack(OUTPUT_SLOT).getMaxCount() >= this.getStack(OUTPUT_SLOT).getCount() + count;
     }
 
-    private Optional<SkyForgeRecipe> getCurrentRecipe() {
+    private Optional<SkyForge2Recipe> getCurrentRecipe() {
         SimpleInventory inventory = new SimpleInventory((this.size()));
         for(int i = 0; i < this.size(); i++) {
             inventory.setStack(i, this.getStack(i));
         }
 
-        return this.getWorld().getRecipeManager().getFirstMatch(SkyForgeRecipe.Type.INSTANCE, inventory, this.getWorld());
+        return this.getWorld().getRecipeManager().getFirstMatch(SkyForge2Recipe.Type.INSTANCE, inventory, this.getWorld());
     }
 
     private boolean canInsertIntoOutputSlot() {

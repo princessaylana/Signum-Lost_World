@@ -1,6 +1,8 @@
 /**
- * SIGNUM
  * Razorwire block, protects against monsters and other creatures.
+ * SIGNUM
+ * MIT License
+ * Lana
  * */
 package za.lana.signum.block.custom;
 

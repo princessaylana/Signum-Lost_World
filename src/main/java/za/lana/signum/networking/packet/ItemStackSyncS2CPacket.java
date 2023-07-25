@@ -7,7 +7,7 @@
 package za.lana.signum.networking.packet;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import za.lana.signum.block.entity.SkyForgeBlockEntity;
+import za.lana.signum.block.entity.SkyForgeBlockEntity2;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ public class ItemStackSyncS2CPacket {
         }
         BlockPos position = buf.readBlockPos();
 
-        if(client.world.getBlockEntity(position) instanceof SkyForgeBlockEntity blockEntity) {
+        if(client.world.getBlockEntity(position) instanceof SkyForgeBlockEntity2 blockEntity) {
             blockEntity.setInventory(list);
         }
     }

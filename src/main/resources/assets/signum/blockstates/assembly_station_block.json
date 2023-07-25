@@ -14,14 +14,6 @@
     "facing=east": {
       "model": "signum:block/assembly_station_block",
       "y": 90
-    },
-    "facing=down": {
-      "model": "signum:block/assembly_station_block",
-      "z": 90
-    },
-    "facing=up": {
-      "model": "signum:block/assembly_station_block",
-      "z": 180
     }
   }
 }

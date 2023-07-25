@@ -28,13 +28,13 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.Signum;
 import za.lana.signum.block.entity.ModBlockEntities;
-import za.lana.signum.block.entity.SkyForgeBlockEntity;
+import za.lana.signum.block.entity.SkyForgeBlockEntity2;
 
 import java.util.List;
 
-public class SkyForgeBlock extends BlockWithEntity implements BlockEntityProvider {
+public class SkyForgeBlock2 extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-    public SkyForgeBlock(Settings settings) {
+    public SkyForgeBlock2(Settings settings) {
         super(settings);
     }
 
@@ -76,7 +76,7 @@ public class SkyForgeBlock extends BlockWithEntity implements BlockEntityProvide
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new SkyForgeBlockEntity(pos, state);
+        return new SkyForgeBlockEntity2(pos, state);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class SkyForgeBlock extends BlockWithEntity implements BlockEntityProvide
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof SkyForgeBlockEntity) {
+            if (blockEntity instanceof SkyForgeBlockEntity2) {
                 ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
                 world.updateComparators(pos,this);
             }
@@ -97,7 +97,7 @@ public class SkyForgeBlock extends BlockWithEntity implements BlockEntityProvide
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = (SkyForgeBlockEntity) world.getBlockEntity(pos);
+            NamedScreenHandlerFactory screenHandlerFactory = (SkyForgeBlockEntity2) world.getBlockEntity(pos);
 
             if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);
@@ -112,6 +112,6 @@ public class SkyForgeBlock extends BlockWithEntity implements BlockEntityProvide
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.SKYFORGE, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1, blockEntity));
+        return checkType(type, ModBlockEntities.SKYFORGE2, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1, blockEntity));
     }
 }

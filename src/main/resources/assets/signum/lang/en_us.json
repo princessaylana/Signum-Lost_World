@@ -16,6 +16,8 @@
   "item.signum.toxicgun": "Toxic Gun",
   "item.signum.toxicgun.ammo": "Toxic Balls",
   "item.signum.glass_shard": "Glass Shard",
+  "item.signum.detector_item": "Ore Detector",
+  "item.signum.tiberium_shard": "Tiberium Shard",
 
 
   "block.signum.manganese_ore": "Manganese Ore",
@@ -28,11 +30,18 @@
   "block.signum.deepslate_moissanite_ore": "Deepslate Moissanite Ore",
   "block.signum.moissanite_block": "Moissanite Block",
 
-  "block.signum.skyforge": "Sky Forge",
-  "block.signum.skyforge.tooltip": "Very Powerful Furnace",
+  "block.signum.skyforge2": "Sky Forge",
+  "block.signum.skyforge2.tooltip": "Very Powerful Furnace",
 
   "block.signum.razorwire_block": "Razor Wire",
   "block.signum.razorwire.tooltip": "Very Sharp and Dangerous Wire",
+
+  "block.signum.tiberium_block": "Block of Tiberium",
+  "block.signum.budding_tiberium": "Tiberium Bud",
+  "block.signum.tiberium_cluster": "Tiberium Cluster",
+  "block.signum.large_tiberium_bud": "Large Tiberium Bud",
+  "block.signum.medium_tiberium_bud": "Medium Tiberium Bud",
+  "block.signum.small_tiberium_bud": "Small Tiberium Bud",
 
 
   "entity.signum.toxicball": "Toxic Ball",

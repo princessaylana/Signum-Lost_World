@@ -1,0 +1,11 @@
+{
+  "parent": "signum:item/tiberium_bud",
+  "textures": {
+    "layer0": "signum:block/crystal/medium_tiberium_bud"
+  },
+  "display": {
+    "fixed": {
+      "translation": [ 0, 6, 0 ]
+    }
+  }
+}

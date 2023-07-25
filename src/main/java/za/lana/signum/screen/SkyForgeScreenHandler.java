@@ -16,12 +16,12 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import za.lana.signum.block.entity.SkyForgeBlockEntity;
+import za.lana.signum.block.entity.SkyForgeBlockEntity2;
 
 public class SkyForgeScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
-    public final SkyForgeBlockEntity blockEntity;
+    public final SkyForgeBlockEntity2 blockEntity;
 
     public SkyForgeScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
@@ -34,7 +34,7 @@ public class SkyForgeScreenHandler extends ScreenHandler {
         checkSize(((Inventory) blockEntity), 4);
         this.inventory = (Inventory)blockEntity;
         this.propertyDelegate = arrayPropertyDelegate;
-        this.blockEntity = ((SkyForgeBlockEntity) blockEntity);
+        this.blockEntity = ((SkyForgeBlockEntity2) blockEntity);
 
         //input slots 1-3
         //output slot 0

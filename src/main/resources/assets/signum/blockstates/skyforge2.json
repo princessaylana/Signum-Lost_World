@@ -1,26 +1,26 @@
 {
   "variants": {
     "facing=north": {
-      "model": "signum:block/skyforge"
+      "model": "signum:block/skyforge2"
     },
     "facing=south": {
-      "model": "signum:block/skyforge",
+      "model": "signum:block/skyforge2",
       "y": 180
     },
     "facing=west": {
-      "model": "signum:block/skyforge",
+      "model": "signum:block/skyforge2",
       "y": 270
     },
     "facing=east": {
-      "model": "signum:block/skyforge",
+      "model": "signum:block/skyforge2",
       "y": 90
     },
     "facing=down": {
-      "model": "signum:block/skyforge",
+      "model": "signum:block/skyforge2",
       "z": 90
     },
     "facing=up": {
-      "model": "signum:block/skyforge",
+      "model": "signum:block/skyforge2",
       "z": 180
     }
   }

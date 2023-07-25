@@ -160,9 +160,7 @@
       "minecraft:glow_lichen",
       "minecraft:trees_mangrove",
       "minecraft:patch_grass_normal",
-      "minecraft:patch_dead_bush",
-      "minecraft:patch_waterlily",
-      "minecraft:seagrass_swamp"
+      "minecraft:patch_dead_bush"
     ],
     [
       "minecraft:freeze_top_layer"

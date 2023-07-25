@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "signum:block/skyforge_texture",
-		"particle": "signum:block/skyforge_texture"
+		"0": "signum:block/skyforge2_texture",
+		"particle": "signum:block/skyforge2_texture"
 	},
 	"elements": [
 		{

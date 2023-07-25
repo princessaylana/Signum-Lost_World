@@ -17,10 +17,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
-import za.lana.signum.item.custom.BPistolItem;
-import za.lana.signum.item.custom.LaserBoltItem;
-import za.lana.signum.item.custom.ToxicBallItem;
-import za.lana.signum.item.custom.ToxicGunItem;
+import za.lana.signum.item.custom.*;
 
 public class ModItems {
     public static final Item QUARTZ_CRYSTAL = registerItem("quartz_crystal", new Item(new FabricItemSettings()));
@@ -38,6 +35,8 @@ public class ModItems {
     public static final Item LASERBOLT_ITEM = registerItem("laserbolt_item", new LaserBoltItem(new FabricItemSettings()));
     public static final ToxicGunItem TOXICGUN = (ToxicGunItem) registerItem("toxicgun", new ToxicGunItem());
     public static final Item GLASS_SHARD = registerItem("glass_shard", new Item(new FabricItemSettings()));
+    public static final Item DETECTOR_ITEM = registerItem("detector_item", new OreDetectorItem(new FabricItemSettings().maxDamage(64)));
+    public static final Item TIBERIUM_SHARD = registerItem("tiberium_shard", new Item(new FabricItemSettings()));
 
 
 
@@ -55,6 +54,7 @@ public class ModItems {
         entries.add(LASERBOLT_ITEM);
         entries.add(TOXICGUN);
         entries.add(GLASS_SHARD);
+        entries.add(DETECTOR_ITEM);
 
 
     }
