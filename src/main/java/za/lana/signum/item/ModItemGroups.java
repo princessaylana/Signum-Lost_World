@@ -57,7 +57,6 @@ public class ModItemGroups {
                         entries.add(ModBlocks.MEDIUM_TIBERIUM_BUD);
                         entries.add(ModBlocks.SMALL_TIBERIUM_BUD);
 
-
                         entries.add(ModBlocks.MANGANESE_BLOCK);
                         entries.add(ModBlocks.MOISSANITE_BLOCK);
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);

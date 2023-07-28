@@ -27,6 +27,7 @@ repositories {
 			includeGroup "curse.maven"
 		}
 	}
+	maven {url = "https://maven.kyrptonaught.dev"}
 }
 
 def dataOutput = 'src/main/generated'
@@ -69,6 +70,9 @@ dependencies {
 	include modApi('teamreborn:energy:3.0.0') {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
+	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20'
+	include 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20'
+
 	//delete and rebuild to remove techreborn
 	modImplementation ("curse.maven:reborncore-237903:4608597")
 	modImplementation ("curse.maven:techreborn-233564:4608596")

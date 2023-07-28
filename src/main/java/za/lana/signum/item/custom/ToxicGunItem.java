@@ -15,28 +15,25 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.command.PlaySoundCommand;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.Signum;
 import za.lana.signum.client.ToxicGunRenderer;
 import za.lana.signum.constant.SignumAnimations;
 import za.lana.signum.entity.projectile.ToxicBallEntity;
+
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -46,7 +43,7 @@ public class ToxicGunItem extends Item implements GeoItem {
 	private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
 	public ToxicGunItem() {
-		super(new Settings().maxCount(1).maxDamage(201));
+		super(new Settings().maxCount(1).maxDamage(101));
 
 		// Register our item as server-side handled.
 		// This enables both animation data syncing and server-side animation triggering
@@ -79,18 +76,17 @@ public class ToxicGunItem extends Item implements GeoItem {
 		// We've marked the "shoot" animation as being triggerable from the server
 	}
 
-
 	// Start "using" the item once clicked
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		player.setCurrentHand(hand);
-
 		return TypedActionResult.consume(player.getStackInHand(hand));
 	}
 
 	// Fire an arrow and play the animation when releasing the mouse button
 	@Override
 	public void onStoppedUsing(ItemStack stack, World level, LivingEntity shooter, int ticksRemaining) {
+
 		if (shooter instanceof PlayerEntity player) {
 			if (stack.getDamage() >= stack.getMaxDamage() - 1)
 				return;
@@ -100,29 +96,26 @@ public class ToxicGunItem extends Item implements GeoItem {
 
 			if (!level.isClient) {
 				ToxicBallEntity arrow = new ToxicBallEntity(level, player);
-				arrow.age = 240;
+				//ItemStack istack = (stack.getItem() instanceof ArrowItem ? stack.getItem() : ModItems.TOXICBALL_ITEM).getDefaultStack();
 
-				arrow.setVelocity(player, player.getPitch(), player.getYaw(), 0, 1, 1);
+				arrow.setVelocity(player, player.getPitch(), player.getYaw(), 0, 3, 1);
 				arrow.setDamage();
 				arrow.hasNoGravity();
 
 				stack.damage(1, shooter, p -> p.sendToolBreakStatus(shooter.getActiveHand()));
 				level.spawnEntity(arrow);
+				arrow.age = 240;
 
-				// Trigger our animation
-				// We could trigger this outside of the client-side check if only wanted the animation to play for the shooter
-				// But we'll fire it on the server so all nearby players can see it
 				triggerAnim(player, GeoItem.getOrAssignId(stack, (ServerWorld)level), "shoot_controller", "shoot");
+				/***
+				istack.decrement(1);
+				if (stack.isEmpty()) {
+					((PlayerEntity) shooter).getInventory().removeOne(istack);
+				}
+				 **/
 			}
-				//triggerAnim(player, GeoItem.getOrAssignId(stack, (ServerWorld)level), "idle_controller", "animation.toxicgun.idle");
+			}
 		}
-	}
-
-	// Use vanilla animation to 'pull back' the pistol while charging it
-	//@Override
-	//public UseAction getUseAction(ItemStack stack) {
-	//return UseAction.BOW;
-	//}
 
 	@Override
 	public boolean hasGlint(ItemStack stack) {

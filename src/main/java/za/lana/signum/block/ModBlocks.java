@@ -58,13 +58,6 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)
                     .strength(10.0f, 600.0f)));
 
-    public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
-            new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(8.0f,100.0f)));
-    public static final Block SKYFORGE2 = registerBlock("skyforge2",
-            new SkyForgeBlock2(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,200.0f).nonOpaque()));
-    public static final Block ASSEMBLY_STATION_BLOCK = registerBlock("assembly_station_block",
-            new AssemblyStationBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,200.0f).nonOpaque()));
-
     public static final Block TIBERIUM_BLOCK = registerBlock("tiberium_block",
             new TiberiumBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.LIME)
                     .strength(1.5f, 100.0f)
@@ -74,6 +67,13 @@ public class ModBlocks {
     public static final Block LARGE_TIBERIUM_BUD = registerBlock("large_tiberium_bud", new TiberiumClusterBlock(5, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.LARGE_AMETHYST_BUD).solid().luminance(state -> 5).pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block MEDIUM_TIBERIUM_BUD = registerBlock("medium_tiberium_bud", new TiberiumClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.MEDIUM_AMETHYST_BUD).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block SMALL_TIBERIUM_BUD = registerBlock("small_tiberium_bud", new TiberiumClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.SMALL_AMETHYST_BUD).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
+
+    public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
+            new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(8.0f,100.0f)));
+    public static final Block SKYFORGE2 = registerBlock("skyforge2",
+            new SkyForgeBlock2(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,200.0f).nonOpaque()));
+    public static final Block ASSEMBLY_STATION_BLOCK = registerBlock("assembly_station_block",
+            new AssemblyStationBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,200.0f).nonOpaque()));
 
 
 
