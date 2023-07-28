@@ -20,11 +20,6 @@ Adds a few unique things to Minecraft:
 ![](https://images2.imgbox.com/32/bf/OLGNCVFM_o.png)
 
 (New Additions added regularly)
-- Quartz Crystal - Future use
-- Razorwire Block - Keeps entities out, and does damage.
-- ToxicGun - Shoots Toxicballs
-- Manganese Ores (For creating Stainless Steel)
-- SkyForge 
 - New Dimension WIP
 - New Biomes WIP
 
@@ -32,6 +27,7 @@ Dependancies:
 - Geckolib4
 - RebornEnergy 3.0.0
   (TechReborn)
+- CustomPortalApi
 
 
 
