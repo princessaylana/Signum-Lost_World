@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "signum:block/skyforge_front",
+    "side": "signum:block/skyforge_side",
+    "top": "signum:block/skyforge_top"
+  }
+}

@@ -20,7 +20,7 @@ public class ModBlockLootGenerator extends FabricBlockLootTableProvider {
     public void generate() {
         addDrop(ModBlocks.MANGANESE_BLOCK);
         addDrop(ModBlocks.RAZORWIRE_BLOCK);
-        addDrop(ModBlocks.SKYFORGE2);
+        addDrop(ModBlocks.SKYFORGE);
 
         addDrop(ModBlocks.MANGANESE_ORE, oreDrops(ModBlocks.MANGANESE_ORE, ModItems.RAW_MANGANESE));
         addDrop(ModBlocks.DEEPSLATE_MANGANESE_ORE, oreDrops(ModBlocks.DEEPSLATE_MANGANESE_ORE, ModItems.RAW_MANGANESE));

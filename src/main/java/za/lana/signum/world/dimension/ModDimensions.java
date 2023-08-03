@@ -23,11 +23,13 @@ public class ModDimensions {
     public static RegistryKey<World> WORLD_KEY =
             RegistryKey.of(RegistryKeys.WORLD, DIMENSION_KEY.getValue());
 
-
+    //.setReturnPortalSearchYRange(256, 320)
     public static void register() {
         WORLD_KEY = RegistryKey.of(RegistryKeys.WORLD, new Identifier(Signum.MOD_ID, PATH));
         Signum.LOGGER.debug("Registering ModDimensions for " + Signum.MOD_ID);
         CustomPortalBuilder.beginPortal()
+                .setReturnPortalSearchYRange(256, 320)
+                //.setPortalSearchYRange(-64,256)
                 .frameBlock(ModBlocks.MANGANESE_BLOCK)
                 .destDimID(WORLD_KEY.getValue())
                 .tintColor(240, 255, 240)

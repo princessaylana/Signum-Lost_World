@@ -2,6 +2,7 @@
  * SIGNUM
  * MIT License
  * Lana
+ * item used to test world generation of custom ores
  * */
 package za.lana.signum.item.custom;
 
@@ -50,8 +51,15 @@ public class OreDetectorItem extends Item {
         player.sendMessage(Text.literal("Found " + block.asItem().getName().getString() + " at " +
                 "(" + blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ() + ")"), false);
     }
+    //list of oreblocks to check for
     private boolean isValuableBlock(BlockState state) {
-        return state.isOf(Blocks.IRON_ORE) || state.isOf(Blocks.DIAMOND_ORE) || state.isOf(ModBlocks.MANGANESE_ORE);
+        return
+                state.isOf(ModBlocks.ELEMENT_ZERO_ORE) ||
+                state.isOf(ModBlocks.MOISSANITE_ORE) ||
+                state.isOf(ModBlocks.DEEPSLATE_MOISSANITE_ORE) ||
+                state.isOf(ModBlocks.DEEPSLATE_MANGANESE_ORE) ||
+                state.isOf(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE) ||
+                state.isOf(ModBlocks.MANGANESE_ORE);
     }
 }
 

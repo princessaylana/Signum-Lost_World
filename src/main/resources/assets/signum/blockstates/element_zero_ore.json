@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=false": {"model": "signum:block/element_zero_ore"},
+    "lit=true": {"model": "signum:block/element_zero_ore_on"}
+  }
+}

@@ -1,6 +1,9 @@
 /**
  * SIGNUM
  * This is the DataGenerator EntryPoint
+ * Always first make a backup of the genetrated and the original assets
+ * and data folder before this is run.
+ * datagen breaks geo models and some worldgen.
  * MIT License
  * Lana
  * */
@@ -21,11 +24,14 @@ public class SignumDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+		/**
+		 * READ TOP NOTE
+		 * */
 
-		pack.addProvider(ModBlockLootGenerator::new);
-		pack.addProvider(ModModelProvider::new);
-		pack.addProvider(ModRecipesGenerator::new);
-		pack.addProvider(ModWorldGenerator::new);
+		//pack.addProvider(ModBlockLootGenerator::new);
+		//pack.addProvider(ModModelProvider::new);
+		//pack.addProvider(ModRecipesGenerator::new);
+		//pack.addProvider(ModWorldGenerator::new);
 
 	}
 

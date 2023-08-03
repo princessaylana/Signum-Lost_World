@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "X": {
+      "item": "minecraft:blast_furnace"
+    },
+    "Y": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "#Y#",
+    "#X#",
+    "#Y#"
+  ],
+  "result": {
+    "count": 8,
+    "item": "signum:skyforge"
+  },
+  "show_notification": true
+}

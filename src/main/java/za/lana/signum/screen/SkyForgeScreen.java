@@ -1,8 +1,8 @@
 /**
  * SIGNUM
  * MIT License
- * the skyforge gui
  * Lana
+ * 2023
  * */
 package za.lana.signum.screen;
 
@@ -30,13 +30,22 @@ public class SkyForgeScreen extends HandledScreen<SkyForgeScreenHandler> {
         int y = (height - backgroundHeight) / 2;
 
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
-
-        renderProgressArrow(context, x, y);
-    }
-
-    private void renderProgressArrow(DrawContext context, int x, int y) {
+        // arrow
         if(handler.isCrafting()) {
-            context.drawTexture(TEXTURE, x + 98, y + 31, 176, 0, 16, handler.getScaledProgress());
+            //where the textures are animated
+            context.drawTexture(TEXTURE, x + 80, y + 34, 176, 14, handler.getScaledProgress(), 16);
+        }
+        // fire
+        if(handler.hasFuel()) {
+            context.drawTexture(TEXTURE, x + 56, y + 36 + 14 - handler.getScaledFuelProgress(), 176,
+                    14 - handler.getScaledFuelProgress(), 14, handler.getScaledFuelProgress());
         }
     }
+    @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        drawMouseoverTooltip(context, mouseX, mouseY);
+    }
+
 }

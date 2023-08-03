@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "signum:block/props/blight_block"
+      },
+      {
+        "model": "signum:block/props/blight_block",
+        "y": 90
+      },
+      {
+        "model": "signum:block/props/blight_block",
+        "y": 180
+      },
+      {
+        "model": "signum:block/props/blight_block",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "signum:block/props/blight_block_snow"
+    }
+  }
+}

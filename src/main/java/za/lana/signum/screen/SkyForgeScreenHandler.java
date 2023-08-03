@@ -1,66 +1,82 @@
 /**
  * SIGNUM
  * MIT License
- * the skyforge screengui code
  * Lana
+ * 2023
  * */
+
 package za.lana.signum.screen;
 
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import za.lana.signum.block.entity.SkyForgeBlockEntity2;
+import za.lana.signum.screen.slot.ModFuelSlot;
+import za.lana.signum.screen.slot.ModResultSlot;
 
 public class SkyForgeScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
-    public final SkyForgeBlockEntity2 blockEntity;
-
-    public SkyForgeScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
-                new ArrayPropertyDelegate(2));
+    // has
+    public SkyForgeScreenHandler(int syncId, PlayerInventory playerInventory) {
+        this(syncId, playerInventory, new SimpleInventory(4), new ArrayPropertyDelegate(4));
     }
-
-    public SkyForgeScreenHandler(int syncId, PlayerInventory playerInventory,
-                                      BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
+    public SkyForgeScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
         super(ModScreenHandlers.SKYFORGE_SCREENHANDLER, syncId);
-        checkSize(((Inventory) blockEntity), 4);
-        this.inventory = (Inventory)blockEntity;
-        this.propertyDelegate = arrayPropertyDelegate;
-        this.blockEntity = ((SkyForgeBlockEntity2) blockEntity);
+        checkSize(inventory, 4);
+        this.inventory = inventory;
+        inventory.onOpen(playerInventory.player);
+        this.propertyDelegate = delegate;
+        // slots index must go up as slots
+        this.addSlot(new ModFuelSlot(inventory, 0, 56, 53));
+        this.addSlot(new Slot(inventory, 1, 47, 17));
+        this.addSlot(new Slot(inventory, 2, 65, 17));
+        this.addSlot(new ModResultSlot(inventory, 3, 119, 35));
 
-        //input slots 1-3
-        //output slot 0
-        this.addSlot(new Slot(inventory, 0, 98, 68));
-        this.addSlot(new Slot(inventory, 1, 80, 14));
-        this.addSlot(new Slot(inventory, 2, 98, 14));
-        this.addSlot(new Slot(inventory, 3, 116, 14));
 
-        addPlayerInventory(playerInventory);
+
         addPlayerHotbar(playerInventory);
+        addPlayerInventory(playerInventory);
+        addProperties(delegate);
 
-        addProperties(arrayPropertyDelegate);
     }
-
+    //
     public boolean isCrafting() {
         return propertyDelegate.get(0) > 0;
+    }
+
+    public boolean hasFuel() {
+        return propertyDelegate.get(2) > 0;
     }
 
     public int getScaledProgress() {
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1);  // Max Progress
-        int progressArrowSize = 36; // This is the width in pixels of your arrow
+        int progressArrowSize = 26; // This is the width in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
+    public int getScaledFuelProgress() {
+        int fuelProgress = this.propertyDelegate.get(2);
+        int maxFuelProgress = this.propertyDelegate.get(3);
+        int fuelProgressSize = 14;
+
+        return maxFuelProgress != 0 ? (int)(((float)fuelProgress / (float)maxFuelProgress) * fuelProgressSize) : 0;
+    }
+
+
+    //
+    @Override
+    public boolean canUse(PlayerEntity player) {
+        return this.inventory.canPlayerUse(player);
+    }
+    // shiftclick move
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;
@@ -72,7 +88,7 @@ public class SkyForgeScreenHandler extends ScreenHandler {
                 if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(originalStack, 2, this.inventory.size(), false)) {
+            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -84,11 +100,6 @@ public class SkyForgeScreenHandler extends ScreenHandler {
         }
 
         return newStack;
-    }
-
-    @Override
-    public boolean canUse(PlayerEntity player) {
-        return this.inventory.canPlayerUse(player);
     }
 
     private void addPlayerInventory(PlayerInventory playerInventory) {

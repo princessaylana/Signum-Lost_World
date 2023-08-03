@@ -1,0 +1,17 @@
+{
+  "type": "signum:skyforge",
+  "experience": 0.7,
+  "ingredients": [
+    {
+      "item": "signum:raw_manganese"
+    },
+    {
+      "item": "signum:raw_manganese"
+    }
+  ],
+  "output": {
+    "count": 2,
+    "item": "signum:manganese_ingot"
+  },
+  "show_notification": true
+}

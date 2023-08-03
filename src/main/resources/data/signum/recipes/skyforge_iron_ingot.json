@@ -1,0 +1,17 @@
+{
+  "type": "signum:skyforge",
+  "experience": 0.7,
+  "ingredients": [
+    {
+      "item": "minecraft:raw_iron"
+    },
+    {
+      "item": "minecraft:raw_iron"
+    }
+  ],
+  "output": {
+    "count": 2,
+    "item": "minecraft:iron_ingot"
+  },
+  "show_notification": true
+}

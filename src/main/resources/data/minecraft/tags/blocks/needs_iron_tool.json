@@ -11,8 +11,11 @@
     "signum:deepslate_moissanite_ore",
     "signum:moissanite_block",
 
+    "signum:element_zero_ore",
+    "signum:deepslate_element_zero_ore",
+
     "signum:razorwire_block",
-    "signum:skyforge2",
+    "signum:skyforge",
     "signum:assembly_station_block",
 
     "signum:tiberium_block",

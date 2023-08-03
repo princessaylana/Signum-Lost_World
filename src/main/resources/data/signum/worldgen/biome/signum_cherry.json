@@ -150,7 +150,9 @@
       "minecraft:disk_clay",
       "minecraft:disk_gravel",
       "minecraft:ore_emerald",
-      "signum:manganese_ore_placed"
+      "signum:moissanite_ore_placed",
+      "signum:manganese_ore_placed",
+      "signum:element_zero_ore_placed"
     ],
     [
       "minecraft:ore_infested"

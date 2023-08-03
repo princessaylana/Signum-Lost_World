@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "manganese",
+  "ingredient": {
+    "item": "signum:raw_manganese"
+  },
+  "result": "signum:manganese_ingot",
+  "show_notification": true
+}

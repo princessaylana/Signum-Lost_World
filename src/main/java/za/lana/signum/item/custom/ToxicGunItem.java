@@ -15,6 +15,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -30,9 +31,10 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.Signum;
-import za.lana.signum.client.ToxicGunRenderer;
+import za.lana.signum.client.renderer.item.ToxicGunRenderer;
 import za.lana.signum.constant.SignumAnimations;
 import za.lana.signum.entity.projectile.ToxicBallEntity;
+import za.lana.signum.item.ModItems;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -135,6 +137,11 @@ public class ToxicGunItem extends Item implements GeoItem {
 				stack.getMaxDamage() - 1)
 				.formatted(Formatting.ITALIC));
 	}
+	public Ingredient getRepairIngredient () {
+		return Ingredient.ofItems(ModItems.TIBERIUM_CRYSTAL);
+
+	}
+
 
 	@Override
 	public AnimatableInstanceCache getAnimatableInstanceCache() {

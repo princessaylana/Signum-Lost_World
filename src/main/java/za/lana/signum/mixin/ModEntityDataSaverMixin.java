@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * 2023
+ * */
 package za.lana.signum.mixin;
 
 import za.lana.signum.util.IEntityDataSaver;

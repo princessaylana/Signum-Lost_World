@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "signum:block/props/blight_block_front",
+    "side": "signum:block/props/blight_block_side",
+    "top": "signum:block/props/blight_block_top",
+    "bottom": "signum:block/props/blight_block_bottom"
+  }
+}

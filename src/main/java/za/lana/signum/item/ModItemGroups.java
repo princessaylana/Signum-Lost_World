@@ -22,33 +22,54 @@ public class ModItemGroups {
             new Identifier(Signum.MOD_ID, "signum_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.signum"))
                     .icon(() -> new ItemStack(ModItems.QUARTZ_CRYSTAL)).entries((displayContext, entries) -> {
-                        //items
+
+                        entries.add(ModItems.RAW_ELEMENT_ZERO);
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
                         entries.add(ModItems.RAW_MANGANESE);
                         entries.add(ModItems.RAW_MOISSANITE);
 
+                        entries.add(ModItems.COKECOAL);
+                        entries.add(ModItems.TIBERIUMCOAL);
+                        entries.add(ModItems.ELEMENTZEROCOAL);
+
+                        entries.add(ModItems.TIBERIUM_SHARD);
+                        entries.add(ModItems.GLASS_SHARD);
+
                         entries.add(ModItems.MANGANESE_INGOT);
+                        entries.add(ModItems.SIGSTEEL_INGOT);
+                        entries.add(ModItems.SIGSTAINSTEEL_INGOT);
                         entries.add(ModItems.MANGANESE_NUGGET);
 
                         entries.add(ModItems.MOISSANITE);
+                        entries.add(ModItems.ELEMENT_ZERO);
                         entries.add(ModItems.QUARTZ_CRYSTAL);
-                        entries.add(ModItems.GLASS_SHARD);
-                        entries.add(ModItems.TIBERIUM_SHARD);
+                        entries.add(ModItems.TIBERIUM_CRYSTAL);
+                        entries.add(ModItems.TIBERIUM_DUST);
 
-                        entries.add(ModItems.LASERBOLT_ITEM);
                         entries.add(ModItems.TOXICBALL_ITEM);
+                        entries.add(ModItems.BPISTOL_ITEM);
+                        entries.add(ModItems.LASERBOLT_ITEM);
+                        entries.add(ModItems.E0ROD);
+                        entries.add(ModItems.FIRESTAFF);
+                        entries.add(ModItems.SLAYER_STAFF);
                         entries.add(ModItems.TOXICGUN);
 
-                        entries.add(ModItems.BPISTOL_ITEM);
                         entries.add(ModItems.DETECTOR_ITEM);
+                        entries.add(ModItems.TIBERIUM_WORM_SPAWN_EGG);
+                        entries.add(ModItems.AIRDRONE_SPAWN_EGG);
+                        entries.add(ModItems.SIGALIEN_SPAWN_EGG);
+                        entries.add(ModItems.SKYCAR_SPAWN_EGG);
 
                         //blocks
+                        entries.add(ModBlocks.BLIGHT_BLOCK);
                         entries.add(ModBlocks.MANGANESE_ORE);
                         entries.add(ModBlocks.DEEPSLATE_MANGANESE_ORE);
                         entries.add(ModBlocks.NETHERRACK_MANGANESE_ORE);
                         entries.add(ModBlocks.MOISSANITE_ORE);
                         entries.add(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
                         entries.add(ModBlocks.ENDSTONE_MANGANESE_ORE);
+                        entries.add(ModBlocks.ELEMENT_ZERO_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE);
 
                         entries.add(ModBlocks.TIBERIUM_BLOCK);
                         entries.add(ModBlocks.BUDDING_TIBERIUM);
@@ -61,7 +82,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.MOISSANITE_BLOCK);
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
 
-                        entries.add(ModBlocks.SKYFORGE2);
+                        entries.add(ModBlocks.SKYFORGE);
                         entries.add(ModBlocks.ASSEMBLY_STATION_BLOCK);
 
                     }).build());

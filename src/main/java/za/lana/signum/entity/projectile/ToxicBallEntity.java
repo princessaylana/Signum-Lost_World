@@ -8,6 +8,7 @@
  **/
 package za.lana.signum.entity.projectile;
 
+import net.minecraft.client.util.ParticleUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
@@ -21,14 +22,20 @@ import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
+import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.hostile.AirDroneEntity;
 import za.lana.signum.item.ModItems;
 
 import java.util.List;
@@ -44,9 +51,9 @@ public class ToxicBallEntity
         super(type, world);
     }
     public ToxicBallEntity(World world, LivingEntity owner) {
-
         super(TOXICBALL, owner, world);
     }
+
     @Override
     protected Item getDefaultItem() {
 
@@ -55,8 +62,6 @@ public class ToxicBallEntity
     public void initFromStack(ItemStack stack){
 
     }
-
-
     protected void age() {
         ++this.life;
         if (this.life >= 2400) {
@@ -88,10 +93,12 @@ public class ToxicBallEntity
 
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
+        World world = getWorld();
+        BlockPos pos = getBlockPos();
         int i = entity instanceof EndermanEntity ? 6 : 0;
         List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, this.getBoundingBox().expand(4.0, 2.0, 4.0));
         // AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(this.getWorld(), this.getX(), this.getY(), this.getZ());
-
+        // world.getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(8.0), e->true).forEach(e->e.setOnFireFor(5));
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
         if (entity instanceof LivingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
 
@@ -99,7 +106,12 @@ public class ToxicBallEntity
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.BLINDNESS, 20 * 3, 0))); // applies a status effect
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.POISON, 20 * 6, 6))); // applies a status effect
             entity.playSound(SoundEvents.BLOCK_GLASS_HIT, 2F, 2F); // plays a sound for the entity hit only
-            entity.damage(getWorld().getDamageSources().cactus(), 6.0f * 2);
+            //entity.damage(getWorld().getDamageSources().cactus(), 6.0f * 2);
+
+            getWorld().getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(8.0), e->true).forEach(e->e.setOnFireFor(5));
+            ParticleUtil.spawnParticle((World)this.getWorld(), pos, ParticleTypes.CAMPFIRE_COSY_SMOKE, UniformIntProvider.create(3, 5));
+            entity.damage(getWorld().getDamageSources().magic(), 6.0f * 2);
+
            /**
             * //need to adjust this for green toxic clouds
             areaEffectCloudEntity.setParticleType(ParticleTypes.DRAGON_BREATH);
@@ -122,7 +134,6 @@ public class ToxicBallEntity
             **/
             this.discard();
             }
-
         }
 
 
@@ -159,6 +170,16 @@ public class ToxicBallEntity
     public void setDamage() {
 
 
+    }
+
+    private void spawnSparkParticles(ItemUsageContext pContext, BlockPos positionClicked) {
+        for(int i = 0; i < 360; i++) {
+            if(i % 20 == 0) {
+                pContext.getWorld().addParticle(ParticleTypes.ELECTRIC_SPARK,
+                        positionClicked.getX() + 0.5d, positionClicked.getY() + 1, positionClicked.getZ() + 0.5d,
+                        Math.cos(i) * 0.25d, 0.15d, Math.sin(i) * 0.25d);
+            }
+        }
     }
 
 }

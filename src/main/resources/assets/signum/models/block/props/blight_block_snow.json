@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "signum:block/props/blight_block_bottom",
+    "particle": "signum:block/props/blight_block_bottom",
+    "side": "signum:block/props/blight_block_snow",
+    "top": "signum:block/props/blight_block_top"
+  }
+}

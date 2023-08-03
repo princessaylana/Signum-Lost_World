@@ -1,23 +1,41 @@
 {
-
   "item.signum.raw_manganese": "Raw Manganese",
   "item.signum.manganese_ingot": "Manganese Ingot",
+  "item.signum.sigsteel_ingot": "Steel Ingot",
+  "item.signum.sigstainsteel_ingot": "Stainless Steel Ingot",
   "item.signum.manganese_nugget": "Manganese Nugget",
 
   "item.signum.raw_moissanite": "Raw Moissanite",
   "item.signum.moissanite": "Moissanite Crystal",
+  "item.signum.raw_element_zero": "Raw Element Zero",
+  "item.signum.element_zero": "Element Zero",
+
+  "item.signum.cokecoal": "Coke Coal",
+  "item.signum.tiberiumcoal": "Tiberium Coal",
+  "item.signum.elementzerocoal": "Element Zero Coal",
 
   "item.signum.quartz_crystal": "Quartz Crystal",
   "item.signum.raw_quartz_crystal": "Raw Quartz",
+  "item.signum.glass_shard": "Glass Shard",
+  "item.signum.tiberium_shard": "Tiberium Shard",
+  "item.signum.tiberium_crystal": "Tiberium Crystal",
+  "item.signum.tiberium_dust": "Tiberium Dust",
+
   "item.signum.bpistol_item": "Baretta Pistol",
   "item.signum.bpistol_item.ammo": "Ammo",
   "item.signum.laserbolt_item": "Laser Bolt",
   "item.signum.toxicball_item": "Toxic Ball",
   "item.signum.toxicgun": "Toxic Gun",
   "item.signum.toxicgun.ammo": "Toxic Balls",
-  "item.signum.glass_shard": "Glass Shard",
+
   "item.signum.detector_item": "Ore Detector",
-  "item.signum.tiberium_shard": "Tiberium Shard",
+  "item.signum.e0rod": "E0Elemental Rod",
+  "item.signum.firestaff": "Fire Staff",
+
+  "item.signum.tiberium_worm_spawn_egg": "Tiberium Worm Spawn Egg",
+  "item.signum.airdrone_spawn_egg": "Airdrone Spawn Egg",
+  "item.signum.sigalien_spawn_egg": "Alien Spawn Egg",
+  "item.signum.skycar_spawn_egg": "Skycar Spawn Egg",
 
 
   "block.signum.manganese_ore": "Manganese Ore",
@@ -29,12 +47,16 @@
   "block.signum.moissanite_ore": "Moissanite Ore",
   "block.signum.deepslate_moissanite_ore": "Deepslate Moissanite Ore",
   "block.signum.moissanite_block": "Moissanite Block",
+  "block.signum.element_zero_ore": "Element Zero Ore",
+  "block.signum.deepslate_element_zero_ore": "Deepslate Element Zero Ore",
 
-  "block.signum.skyforge2": "Sky Forge",
-  "block.signum.skyforge2.tooltip": "Very Powerful Furnace",
+  "block.signum.skyforge": "Sky Forge",
+  "block.signum.skyforge.tooltip": "Very Powerful Alloy Furnace",
 
   "block.signum.razorwire_block": "Razor Wire",
   "block.signum.razorwire.tooltip": "Very Sharp and Dangerous Wire",
+
+  "block.signum.assembly_station_block": "Razor Wire",
 
   "block.signum.tiberium_block": "Block of Tiberium",
   "block.signum.budding_tiberium": "Tiberium Bud",
