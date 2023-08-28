@@ -39,11 +39,11 @@ This Mod is still in very early development, and some things might change.
 This mod is a Hobby of mine, will regularly improve and update this.
 Basic Models are used for testing, will update in time.
 
-[Contents]()
+[Contents](https://github.com/princessaylana/Signum-1.20/blob/master/docs/Contents.md)
 
-[RoadMap]()
+[RoadMap](https://github.com/princessaylana/Signum-1.20/blob/master/docs/Roadmap.md)
 
-[Credits]()
+[Credits](https://github.com/princessaylana/Signum-1.20/blob/master/docs/Credits.md)
 
 Lana
 2023
