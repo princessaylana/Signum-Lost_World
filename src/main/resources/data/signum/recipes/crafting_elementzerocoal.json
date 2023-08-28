@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "coal",
+  "key": {
+    "#": {
+      "item": "signum:element_zero_dust"
+    },
+    "X": {
+      "item": "minecraft:coal"
+    }
+  },
+  "pattern": [
+    "###",
+    " X "
+  ],
+  "result": {
+    "count": 2,
+    "item": "signum:elementzerocoal"
+  },
+  "show_notification": true
+}

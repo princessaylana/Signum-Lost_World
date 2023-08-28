@@ -1,0 +1,37 @@
+{
+  "tiberium_ambient": {
+    "subtitle": "sounds.signum.tiberium_ambient",
+    "sounds": [
+      "signum:tiberium_ambient"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_walk": {
+    "subtitle": "sounds.signum.tiberium_walk",
+    "sounds": [
+      "signum:tiberium_walk"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_break": {
+    "subtitle": "sounds.signum.tiberium_break",
+    "sounds": [
+      "signum:tiberium_break"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_place": {
+    "subtitle": "sounds.signum.tiberium_place",
+    "sounds": [
+      "signum:tiberium_place"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_hit": {
+    "subtitle": "sounds.signum.tiberium_hit",
+    "sounds": [
+      "signum:tiberium_hit"
+    ],
+    "volume":"0.15"
+  }
+}

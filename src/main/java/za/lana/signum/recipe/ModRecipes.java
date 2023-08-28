@@ -15,10 +15,6 @@ public class ModRecipes {
 
 
     public static void registerRecipes() {
-        Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(Signum.MOD_ID, SkyForge2Recipe.Serializer.ID),
-                SkyForge2Recipe.Serializer.INSTANCE);
-        Registry.register(Registries.RECIPE_TYPE, new Identifier(Signum.MOD_ID, SkyForge2Recipe.Type.ID),
-                SkyForge2Recipe.Type.INSTANCE);
         Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(Signum.MOD_ID, SkyForgeRecipe.Serializer.ID),
                 SkyForgeRecipe.Serializer.INSTANCE);
         Registry.register(Registries.RECIPE_TYPE, new Identifier(Signum.MOD_ID, SkyForgeRecipe.Type.ID),

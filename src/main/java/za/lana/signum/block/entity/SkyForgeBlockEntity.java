@@ -25,8 +25,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import reborncore.common.crafting.RebornRecipe;
-import techreborn.config.TechRebornConfig;
 import za.lana.signum.recipe.SkyForgeRecipe;
 import za.lana.signum.screen.SkyForgeScreenHandler;
 import za.lana.signum.util.ImplementedInventory;

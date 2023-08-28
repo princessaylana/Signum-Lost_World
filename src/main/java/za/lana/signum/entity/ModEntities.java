@@ -19,10 +19,12 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import za.lana.signum.entity.hostile.AirDroneEntity;
+import za.lana.signum.entity.hostile.GhostEntity;
 import za.lana.signum.entity.hostile.SigAlienEntity;
 import za.lana.signum.entity.hostile.TiberiumWormEntity;
 import za.lana.signum.entity.projectile.LaserBoltEntity;
 import za.lana.signum.entity.projectile.ToxicBallEntity;
+import za.lana.signum.entity.transport.AirBalloonEntity;
 import za.lana.signum.entity.transport.SkyCarEntity;
 
 public class ModEntities {
@@ -42,6 +44,10 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_worm"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, TiberiumWormEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+    public static final EntityType<GhostEntity> GHOST = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ghost"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, GhostEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
     public static final EntityType<SigAlienEntity> SIGALIEN = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "sig_alien_worm"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, SigAlienEntity::new)
@@ -54,6 +60,10 @@ public class ModEntities {
     public static final EntityType<SkyCarEntity> SKYCAR = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "skycar"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, SkyCarEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
+    public static final EntityType<AirBalloonEntity> AIRBALLOON = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "airballoon"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, AirBalloonEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
 
     public static void registerModEntities() {

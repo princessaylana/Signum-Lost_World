@@ -5,15 +5,21 @@
  * these worms should be addicted to tiberium
  * they are mutations from tiberium and should go into a
  * frenzy when get close to tiberium
+ * they infest blightblocks in tiberium biome
  *
  * Lana
  * */
 package za.lana.signum.entity.hostile;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
@@ -21,20 +27,35 @@ import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.GameRules;
+import net.minecraft.world.LightType;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import za.lana.signum.block.custom.props.BlightBlock;
+import za.lana.signum.constant.SignumAnimations;
 import za.lana.signum.entity.ModEntities;
+import za.lana.signum.item.ModItems;
 
-public class TiberiumWormEntity extends AnimalEntity implements GeoEntity {
+import java.util.EnumSet;
+
+public class TiberiumWormEntity extends HostileEntity implements GeoEntity {
 	private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-	public TiberiumWormEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+	public TiberiumWormEntity(EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
+		this.experiencePoints = 5;
 	}
 
 	public static DefaultAttributeContainer.Builder setAttributes() {
@@ -49,8 +70,8 @@ public class TiberiumWormEntity extends AnimalEntity implements GeoEntity {
 	protected void initGoals() {
 		this.goalSelector.add(1, new SwimGoal(this));
 		this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2D, false));
-		this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.75f, 1));
-
+		this.goalSelector.add(3, new WanderAndInfestGoal(this));
+		//this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.75f, 1));
 		this.goalSelector.add(4, new LookAroundGoal(this));
 
 		this.targetSelector.add(2, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
@@ -59,9 +80,7 @@ public class TiberiumWormEntity extends AnimalEntity implements GeoEntity {
 		this.targetSelector.add(3, new ActiveTargetGoal<>(this, ChickenEntity.class, true));
 	}
 
-	@Nullable
-	@Override
-	public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+	public TiberiumWormEntity createChild(ServerWorld world, PassiveEntity entity) {
 		return ModEntities.TIBERIUM_WORM.create(world);
 	}
 
@@ -70,17 +89,84 @@ public class TiberiumWormEntity extends AnimalEntity implements GeoEntity {
 			tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.tworm.walk", Animation.LoopType.LOOP));
 			return PlayState.CONTINUE;
 		}
+
 		tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.tworm.idle", Animation.LoopType.LOOP));
 		return PlayState.CONTINUE;
 	}
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-		controllerRegistrar.add(new AnimationController(this, "controller", 0, this::predicate));
+		controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
 	}
 
 	@Override
 	public AnimatableInstanceCache getAnimatableInstanceCache() {
 		return cache;
 	}
+
+	static class WanderAndInfestGoal
+			extends WanderAroundGoal {
+		@Nullable
+		private Direction direction;
+		private boolean canInfest;
+
+		public WanderAndInfestGoal(TiberiumWormEntity tiberiumWorm) {
+			super(tiberiumWorm, 1.0, 10);
+			this.setControls(EnumSet.of(Goal.Control.MOVE));
+		}
+
+		@Override
+		public boolean canStart() {
+			if (this.mob.getTarget() != null) {
+				return false;
+			}
+			if (!this.mob.getNavigation().isIdle()) {
+				return false;
+			}
+			Random random = this.mob.getRandom();
+			if (this.mob.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING) && random.nextInt(TiberiumWormEntity.WanderAndInfestGoal.toGoalTicks(10)) == 0) {
+				this.direction = Direction.random(random);
+				BlockPos blockPos = BlockPos.ofFloored(this.mob.getX(), this.mob.getY() + 0.5, this.mob.getZ()).offset(this.direction);
+				BlockState blockState = this.mob.getWorld().getBlockState(blockPos);
+				if (BlightBlock.isInfestable(blockState)) {
+					this.canInfest = true;
+					return true;
+				}
+			}
+			this.canInfest = false;
+			return super.canStart();
+		}
+
+		@Override
+		public boolean shouldContinue() {
+			if (this.canInfest) {
+				return false;
+			}
+			return super.shouldContinue();
+		}
+
+		@Override
+		public void start() {
+			BlockPos blockPos;
+			if (!this.canInfest) {
+				super.start();
+				return;
+			}
+			World worldAccess = this.mob.getWorld();
+			BlockState blockState = worldAccess.getBlockState(blockPos = BlockPos.ofFloored(this.mob.getX(), this.mob.getY() + 0.5, this.mob.getZ()).offset(this.direction));
+			if (BlightBlock.isInfestable(blockState)) {
+				worldAccess.setBlockState(blockPos, BlightBlock.fromRegularState(blockState), Block.NOTIFY_ALL);
+				this.mob.playSpawnEffects();
+				this.mob.discard();
+			}
+		}
+	}
+	@Override
+	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
+		TiberiumWormEntity tiberiumWormEntity;
+		super.dropEquipment(source, lootingMultiplier, allowDrops);
+		Entity entity = source.getAttacker();
+		this.dropItem(ModItems.TIBERIUM_DUST);
+	}
+
 }

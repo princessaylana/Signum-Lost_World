@@ -4,7 +4,7 @@
  * Lana
  * 2023
  * */
-package za.lana.signum.block.custom.ModOre;
+package za.lana.signum.block.custom.modore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -14,17 +14,12 @@
     "signum:element_zero_ore",
     "signum:deepslate_element_zero_ore",
 
-    "signum:razorwire_block",
-    "signum:skyforge",
-    "signum:assembly_station_block",
-
     "signum:tiberium_block",
     "signum:budding_tiberium",
     "signum:large_tiberium_bud",
     "signum:medium_tiberium_bud",
     "signum:small_tiberium_bud",
-    "signum:tiberium_cluster",
+    "signum:tiberium_cluster"
 
-    "minecraft:glass_pane"
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "elemement_zero",
+  "key": {
+    "#": {
+      "item": "signum:element_zero"
+    }
+  },
+  "pattern": [
+    "# #",
+    " # "
+  ],
+  "result": {
+    "item": "signum:element_zero_crystal"
+  },
+  "show_notification": true
+}

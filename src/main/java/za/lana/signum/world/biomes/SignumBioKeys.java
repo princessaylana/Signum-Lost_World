@@ -38,7 +38,7 @@ public class SignumBioKeys extends BiomeKeys {
         return RegistryKey.of(RegistryKeys.BIOME, new Identifier(Signum.MOD_ID, name));
     }
     public static void registerModBiomes() {
-        Signum.LOGGER.debug("Registering Biomes for " + Signum.MOD_ID);
+        Signum.LOGGER.debug("Registering ModBiomes for " + Signum.MOD_ID);
     }
 
 }

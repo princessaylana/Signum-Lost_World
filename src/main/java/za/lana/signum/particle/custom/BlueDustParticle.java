@@ -13,7 +13,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 
 public class BlueDustParticle extends SpriteBillboardParticle {
-    protected BlueDustParticle(ClientWorld level, double xCoord, double yCoord, double zCoord,
+    private BlueDustParticle(ClientWorld level, double xCoord, double yCoord, double zCoord,
                               SpriteProvider spriteSet, double xd, double yd, double zd) {
         super(level, xCoord, yCoord, zCoord, xd, yd, zd);
 

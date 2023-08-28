@@ -1,15 +1,22 @@
 {
   "type": "minecraft:jigsaw",
-  "biomes":"#signum:has_structure/signum_temple_biomes",
+  "biomes": "#signum:has_structure/signum_temple_biomes",
   "step": "surface_structures",
   "spawn_overrides": {},
-  "terrain_adaptation": "beard_thin",
+  "terrain_adaptation": "beard_box",
   "start_pool": "signum:signum_temple/start_pool",
   "size": 1,
   "start_height": {
-    "absolute": 321
+    "type": "minecraft:trapezoid",
+    "min_inclusive": {
+      "above_bottom": 256
+    },
+    "max_inclusive": {
+      "absolute": 356
+    },
+    "plateau": 320
   },
-  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "project_start_to_heightmap": "WORLD_SURFACE",
   "max_distance_from_center": 80,
   "use_expansion_hack": false
 }

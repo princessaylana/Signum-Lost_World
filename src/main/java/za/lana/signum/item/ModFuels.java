@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * 2023
+ * */
 package za.lana.signum.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;

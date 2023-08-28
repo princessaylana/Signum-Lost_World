@@ -16,11 +16,7 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
-	//Geckolib4 added
-	    maven {
-        name = 'GeckoLib'
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-    }
+
 	maven {
 		url "https://cursemaven.com"
 		content{
@@ -28,6 +24,15 @@ repositories {
 		}
 	}
 	maven {url = "https://maven.kyrptonaught.dev"}
+	maven {
+		name = 'CottonMC'
+		url "https://server.bbkr.space/artifactory/libs-release"
+	}
+	//Geckolib4 added
+	maven {
+		name = 'GeckoLib'
+		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+	}
 }
 
 def dataOutput = 'src/main/generated'
@@ -65,17 +70,12 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.20:4.2'
-
-	include modApi('teamreborn:energy:3.0.0') {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
 	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20'
 	include 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20'
+	modImplementation include("io.github.cottonmc:LibGui:8.0.2+1.20")
 
-	//delete and rebuild to remove techreborn
-	modImplementation ("curse.maven:reborncore-237903:4690483")
-	modImplementation ("curse.maven:techreborn-233564:4690484")
+	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.20.1:4.2.2'
+
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

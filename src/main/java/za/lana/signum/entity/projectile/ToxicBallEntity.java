@@ -108,7 +108,7 @@ public class ToxicBallEntity
             entity.playSound(SoundEvents.BLOCK_GLASS_HIT, 2F, 2F); // plays a sound for the entity hit only
             //entity.damage(getWorld().getDamageSources().cactus(), 6.0f * 2);
 
-            getWorld().getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(8.0), e->true).forEach(e->e.setOnFireFor(5));
+            //getWorld().getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(8.0), e->true).forEach(e->e.setOnFireFor(5));
             ParticleUtil.spawnParticle((World)this.getWorld(), pos, ParticleTypes.CAMPFIRE_COSY_SMOKE, UniformIntProvider.create(3, 5));
             entity.damage(getWorld().getDamageSources().magic(), 6.0f * 2);
 

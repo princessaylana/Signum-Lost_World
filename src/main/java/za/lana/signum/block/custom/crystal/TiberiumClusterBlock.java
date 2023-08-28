@@ -7,6 +7,11 @@
 package za.lana.signum.block.custom.crystal;
 
 import net.minecraft.block.*;
+import net.minecraft.entity.AreaEffectCloudEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -18,12 +23,17 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.particle.ModParticles;
+
+import java.awt.*;
+import java.util.Collection;
 
 public class TiberiumClusterBlock
         extends TiberiumBlock
@@ -39,7 +49,7 @@ public class TiberiumClusterBlock
 
     public TiberiumClusterBlock(int height, int xzOffset, AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.getDefaultState().with(WATERLOGGED, false)).with(FACING, Direction.UP));
+        this.setDefaultState((BlockState) ((BlockState) this.getDefaultState().with(WATERLOGGED, false)).with(FACING, Direction.UP));
         this.upShape = Block.createCuboidShape(xzOffset, 0.0, xzOffset, 16 - xzOffset, height, 16 - xzOffset);
         this.downShape = Block.createCuboidShape(xzOffset, 16 - height, xzOffset, 16 - xzOffset, 16.0, 16 - xzOffset);
         this.northShape = Block.createCuboidShape(xzOffset, xzOffset, 16 - height, 16 - xzOffset, 16 - xzOffset, 16.0);
@@ -94,12 +104,12 @@ public class TiberiumClusterBlock
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         World worldAccess = ctx.getWorld();
         BlockPos blockPos = ctx.getBlockPos();
-        return (BlockState)((BlockState)this.getDefaultState().with(WATERLOGGED, worldAccess.getFluidState(blockPos).getFluid() == Fluids.WATER)).with(FACING, ctx.getSide());
+        return (BlockState) ((BlockState) this.getDefaultState().with(WATERLOGGED, worldAccess.getFluidState(blockPos).getFluid() == Fluids.WATER)).with(FACING, ctx.getSide());
     }
 
     @Override
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate(state.get(FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     @Override
@@ -118,6 +128,36 @@ public class TiberiumClusterBlock
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(WATERLOGGED, FACING);
+    }
+
+    // Ion Storm work in progress
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+
+        double d = (double) pos.getX() + random.nextDouble();
+        double e = (double) pos.getY() + 0.8;
+        double f = (double) pos.getZ() + random.nextDouble();
+        world.addParticle(ModParticles.TIBERIUM_PARTICLE, d, e, f, 0.0F, 2.5F, 0.0F);
+
+        if (random.nextDouble() < 0.2) {
+            int rgb = new Color(148, 253, 141).getRGB();
+            AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(world, d, e, f);
+            areaEffectCloudEntity.setParticleType(ModParticles.TIBERIUM_PARTICLE);
+            areaEffectCloudEntity.setWaitTime(600);
+            areaEffectCloudEntity.setDuration(100);
+            areaEffectCloudEntity.setRadius(5.0f);
+            areaEffectCloudEntity.setColor(rgb);
+            areaEffectCloudEntity.addEffect(new StatusEffectInstance(StatusEffects.POISON, 2, 5));
+            areaEffectCloudEntity.setRadiusGrowth((3.0f - areaEffectCloudEntity.getRadius()) / (float) areaEffectCloudEntity.getDuration());
+            areaEffectCloudEntity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+            world.spawnEntity(areaEffectCloudEntity);
+            }
+
+        else if (random.nextDouble() < 0.1) {
+            LightningEntity lightningBolt = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
+            lightningBolt.setPosition(pos.getX(), pos.getY(), pos.getZ());
+            world.spawnEntity(lightningBolt);
+        }
     }
 }
 

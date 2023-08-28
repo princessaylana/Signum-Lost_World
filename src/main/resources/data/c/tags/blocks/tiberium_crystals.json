@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "signum:budding_tiberium",
+    "signum:large_tiberium_bud",
+    "signum:medium_tiberium_bud",
+    "signum:small_tiberium_bud",
+    "signum:tiberium_cluster"
+  ]
+}

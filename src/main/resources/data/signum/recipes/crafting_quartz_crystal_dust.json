@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "quartz_crystal",
+  "ingredients": [
+    {
+      "item": "signum:quartz_crystal"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "signum:quartz_crystal_dust"
+  },
+  "show_notification": true
+}

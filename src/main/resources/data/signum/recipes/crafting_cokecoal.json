@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "coal",
+  "key": {
+    "#": {
+      "item": "signum:fire_crystal_dust"
+    },
+    "X": {
+      "item": "minecraft:coal"
+    }
+  },
+  "pattern": [
+    "###",
+    " X "
+  ],
+  "result": {
+    "count": 2,
+    "item": "signum:cokecoal"
+  },
+  "show_notification": true
+}

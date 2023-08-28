@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "tiberium_shard",
+  "group": "tiberium",
   "ingredients": [
     {
       "item": "signum:tiberium_cluster"

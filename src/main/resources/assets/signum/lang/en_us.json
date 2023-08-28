@@ -1,4 +1,7 @@
 {
+  "item.signum.cokecoal": "Coke Coal",
+  "item.signum.element_zero": "Element Zero",
+
   "item.signum.raw_manganese": "Raw Manganese",
   "item.signum.manganese_ingot": "Manganese Ingot",
   "item.signum.sigsteel_ingot": "Steel Ingot",
@@ -8,9 +11,7 @@
   "item.signum.raw_moissanite": "Raw Moissanite",
   "item.signum.moissanite": "Moissanite Crystal",
   "item.signum.raw_element_zero": "Raw Element Zero",
-  "item.signum.element_zero": "Element Zero",
 
-  "item.signum.cokecoal": "Coke Coal",
   "item.signum.tiberiumcoal": "Tiberium Coal",
   "item.signum.elementzerocoal": "Element Zero Coal",
 
@@ -19,7 +20,23 @@
   "item.signum.glass_shard": "Glass Shard",
   "item.signum.tiberium_shard": "Tiberium Shard",
   "item.signum.tiberium_crystal": "Tiberium Crystal",
+  "item.signum.element_zero_crystal": "Element Zero Crystal",
+  "item.signum.fire_crystal": "Fire Crystal",
+  "item.signum.moissanite_crystal": "Moissanite Crystal",
+
+  "item.signum.element_zero_dust": "Element Zero Dust",
+  "item.signum.fire_crystal_dust": "Fire Crystal Dust",
+  "item.signum.manganese_dust": "Manganese Dust",
+  "item.signum.moissanite_dust": "Moissanite Dust",
+  "item.signum.quartz_crystal_dust": "Manganese Dust",
   "item.signum.tiberium_dust": "Tiberium Dust",
+
+  "item.signum.manganese_axe": "Manganese Axe",
+  "item.signum.manganese_hoe": "Manganese Hoe",
+  "item.signum.manganese_pickaxe": "Manganese Pickaxe",
+  "item.signum.manganese_shovel": "Manganese Shovel",
+  "item.signum.manganese_sword": "Manganese Sword",
+
 
   "item.signum.bpistol_item": "Baretta Pistol",
   "item.signum.bpistol_item.ammo": "Ammo",
@@ -31,12 +48,13 @@
   "item.signum.detector_item": "Ore Detector",
   "item.signum.e0rod": "E0Elemental Rod",
   "item.signum.firestaff": "Fire Staff",
+  "item.signum.slayer_staff": "Slayer Staff",
 
   "item.signum.tiberium_worm_spawn_egg": "Tiberium Worm Spawn Egg",
   "item.signum.airdrone_spawn_egg": "Airdrone Spawn Egg",
   "item.signum.sigalien_spawn_egg": "Alien Spawn Egg",
   "item.signum.skycar_spawn_egg": "Skycar Spawn Egg",
-
+  "item.signum.ghost_spawn_egg": "Ghost Spawn Egg",
 
   "block.signum.manganese_ore": "Manganese Ore",
   "block.signum.deepslate_manganese_ore": "Deepslate Manganese Ore",
@@ -52,10 +70,8 @@
 
   "block.signum.skyforge": "Sky Forge",
   "block.signum.skyforge.tooltip": "Very Powerful Alloy Furnace",
-
   "block.signum.razorwire_block": "Razor Wire",
   "block.signum.razorwire.tooltip": "Very Sharp and Dangerous Wire",
-
   "block.signum.assembly_station_block": "Razor Wire",
 
   "block.signum.tiberium_block": "Block of Tiberium",
@@ -65,11 +81,16 @@
   "block.signum.medium_tiberium_bud": "Medium Tiberium Bud",
   "block.signum.small_tiberium_bud": "Small Tiberium Bud",
 
+  "block.signum.example_block": "Example Block",
 
   "entity.signum.toxicball": "Toxic Ball",
-
   "itemgroup.signum": "Signum Mod Items",
   "dimension.signum_dim": "SkyLand",
-  "biome.signum.signum_mangrove": "Mangrove Forest"
+  "biome.signum.signum_mangrove": "Tiberium Wastes",
+  "biome.signum.signum_badlands": "Badlands",
+  "biome.signum.signum_bamboo": "Bamboo",
+  "biome.signum.signum_birch": "Birch",
+  "biome.signum.signum_cherry": "Cherry",
+  "effect.signum.sigteleport": "Teleport"
 
 }

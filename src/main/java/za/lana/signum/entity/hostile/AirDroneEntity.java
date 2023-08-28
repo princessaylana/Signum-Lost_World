@@ -375,7 +375,7 @@ public class AirDroneEntity extends FlyingEntity implements GeoEntity {
 					if (!this.airDrone.isSilent()) {
 						world.syncWorldEvent(null, WorldEvents.GHAST_SHOOTS, this.airDrone.getBlockPos(), 0);
 					}
-					FireballEntity fireballEntity = new FireballEntity(world, (LivingEntity)this.airDrone, f, g, h, this.airDrone.getFireballStrength());
+					FireballEntity fireballEntity = new FireballEntity(world, this.airDrone, f, g, h, this.airDrone.getFireballStrength());
 					fireballEntity.setPosition(this.airDrone.getX() + vec3d.x * 4.0, this.airDrone.getBodyY(0.5) + 0.5, fireballEntity.getZ() + vec3d.z * 4.0);
 					world.spawnEntity(fireballEntity);
 					this.cooldown = -40;

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "ingredient",
+  "group": "tiberium",
+  "pattern":  [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "signum:tiberium_dust"
+    }
+  },
+  "result": {
+    "item": "signum:tiberium_crystal"
+  },
+  "show_notification": true
+}

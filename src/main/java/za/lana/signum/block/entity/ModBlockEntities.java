@@ -23,8 +23,6 @@ public class ModBlockEntities {
                 FabricBlockEntityTypeBuilder.create(SkyForgeBlockEntity::new,
                         ModBlocks.SKYFORGE).build(null));
 
-
-
     }
 
 }

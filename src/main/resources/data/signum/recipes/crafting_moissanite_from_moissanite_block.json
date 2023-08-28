@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "manganese_ingot",
+  "group": "moissanite",
   "ingredients": [
     {
       "item": "signum:moissanite_block"

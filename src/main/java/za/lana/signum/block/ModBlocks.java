@@ -22,14 +22,15 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import za.lana.signum.Signum;
 import za.lana.signum.block.custom.AssemblyStationBlock;
-import za.lana.signum.block.custom.ModOre.ElementZeroOreBlock;
+import za.lana.signum.block.custom.ExampleBlock;
 import za.lana.signum.block.custom.RazorWireBlock;
 import za.lana.signum.block.custom.SkyForgeBlock;
 import za.lana.signum.block.custom.crystal.BuddingTiberiumBlock;
 import za.lana.signum.block.custom.crystal.TiberiumBlock;
 import za.lana.signum.block.custom.crystal.TiberiumClusterBlock;
+import za.lana.signum.block.custom.modore.ElementZeroOreBlock;
 import za.lana.signum.block.custom.props.BlightBlock;
-import za.lana.signum.item.ModItemGroups;
+import za.lana.signum.sound.ModSounds;
 
 //obsidian hardness (50.0f, 1200.0f)
 //iron hardness (5.0f, 6.0f)
@@ -37,6 +38,7 @@ import za.lana.signum.item.ModItemGroups;
 //the names here needs to match the json files
 
 public class ModBlocks {
+
 
     public static final Block MANGANESE_ORE = registerBlock("manganese_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.STONE).sounds(BlockSoundGroup.STONE)
@@ -54,8 +56,8 @@ public class ModBlocks {
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).sounds(BlockSoundGroup.DEEPSLATE)
                     .strength(15.0f, 20.0f).requiresTool(), UniformIntProvider.create(3, 9)));
     public static final Block DEEPSLATE_ELEMENT_ZERO_ORE = registerBlock("deepslate_element_zero_ore",
-            new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).sounds(BlockSoundGroup.DEEPSLATE)
-                    .strength(15.0f, 20.0f).requiresTool(), UniformIntProvider.create(3, 7)));
+            new ElementZeroOreBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).sounds(BlockSoundGroup.DEEPSLATE)
+                    .strength(15.0f, 20.0f).requiresTool()));
 
     public static final Block NETHERRACK_MANGANESE_ORE = registerBlock("netherrack_manganese_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.NETHERRACK).sounds(BlockSoundGroup.NETHER_ORE)
@@ -73,16 +75,17 @@ public class ModBlocks {
     public static final Block TIBERIUM_BLOCK = registerBlock("tiberium_block",
             new TiberiumBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.LIME)
                     .strength(30.0f, 100.0f)
-                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).requiresTool()));
+                    .sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).requiresTool()));
     public static final Block BLIGHT_BLOCK = registerBlock("blight_block",
-            new BlightBlock(FabricBlockSettings.copyOf(Blocks.DIRT).mapColor(MapColor.LIME)
-                    .strength(10.0f, 100.0f)
+            new BlightBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).mapColor(MapColor.LIME)
+                    .strength(5.0f, 5.0f)
                     .sounds(BlockSoundGroup.ROOTED_DIRT).requiresTool()));
-    public static final Block BUDDING_TIBERIUM = registerBlock("budding_tiberium", new BuddingTiberiumBlock(FabricBlockSettings.copyOf(Blocks.BUDDING_AMETHYST).mapColor(MapColor.LIME).ticksRandomly().strength(1.5f).sounds(BlockSoundGroup.AMETHYST_BLOCK).luminance(state -> 3).requiresTool().pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block TIBERIUM_CLUSTER = registerBlock("tiberium_cluster", new TiberiumClusterBlock(7, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.LIME).solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5f).luminance(state -> 7).pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block LARGE_TIBERIUM_BUD = registerBlock("large_tiberium_bud", new TiberiumClusterBlock(5, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.LARGE_AMETHYST_BUD).solid().luminance(state -> 5).pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block MEDIUM_TIBERIUM_BUD = registerBlock("medium_tiberium_bud", new TiberiumClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.MEDIUM_AMETHYST_BUD).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block SMALL_TIBERIUM_BUD = registerBlock("small_tiberium_bud", new TiberiumClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.SMALL_AMETHYST_BUD).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block BUDDING_TIBERIUM = registerBlock("budding_tiberium", new BuddingTiberiumBlock(FabricBlockSettings.copyOf(Blocks.BUDDING_AMETHYST).mapColor(MapColor.LIME).ticksRandomly().strength(1.5f).sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).luminance(state -> 3).requiresTool().pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block TIBERIUM_CLUSTER = registerBlock("tiberium_cluster", new TiberiumClusterBlock(7, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.LIME).solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.AMETHYST_BLOCK).strength(1.5f).luminance(state -> 7).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block LARGE_TIBERIUM_BUD = registerBlock("large_tiberium_bud", new TiberiumClusterBlock(5, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 5).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block MEDIUM_TIBERIUM_BUD = registerBlock("medium_tiberium_bud",
+            new TiberiumClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block SMALL_TIBERIUM_BUD = registerBlock("small_tiberium_bud", new TiberiumClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
 
     public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
             new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(8.0f,100.0f)));
@@ -91,12 +94,14 @@ public class ModBlocks {
     public static final Block ASSEMBLY_STATION_BLOCK = registerBlock("assembly_station_block",
             new AssemblyStationBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,200.0f).nonOpaque()));
 
+    public static final Block EXAMPLE_BLOCK = registerBlock("example_block",
+            new ExampleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
 
 
 
 
     //registering blocks
-    private static Block registerBlockWithoutBlockItem(String name, Block block) {
+    private static Block registerBlockWithoutItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, new Identifier(Signum.MOD_ID, name), block);
     }
 

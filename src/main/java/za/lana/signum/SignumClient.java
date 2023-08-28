@@ -6,6 +6,7 @@
  * */
 package za.lana.signum;
 
+import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -19,15 +20,20 @@ import software.bernie.example.client.renderer.entity.ParasiteRenderer;
 import software.bernie.example.registry.EntityRegistry;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.client.renderer.entity.AirDroneRenderer;
+import za.lana.signum.client.renderer.entity.GhostRenderer;
 import za.lana.signum.client.renderer.entity.SigAlienRenderer;
 import za.lana.signum.client.renderer.entity.TiberiumWormRenderer;
+import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
 import za.lana.signum.client.renderer.transport.SkyCarRenderer;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.networking.ModMessages;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.particle.custom.BlueDustParticle;
+import za.lana.signum.particle.custom.TiberiumParticle;
 import za.lana.signum.screen.ModScreenHandlers;
 import za.lana.signum.screen.SkyForgeScreen;
+import za.lana.signum.screen.gui.ExampleBlockScreen;
+import za.lana.signum.screen.gui.ExampleDescription;
 
 
 public class SignumClient implements ClientModInitializer {
@@ -47,15 +53,23 @@ public class SignumClient implements ClientModInitializer {
                 new FlyingItemEntityRenderer<>(context));
 
         EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);
+        EntityRendererRegistry.register(ModEntities.GHOST, GhostRenderer::new);
         EntityRendererRegistry.register(ModEntities.SIGALIEN, SigAlienRenderer::new);
         EntityRendererRegistry.register(ModEntities.AIRDRONE, AirDroneRenderer::new);
         EntityRendererRegistry.register(ModEntities.SKYCAR, SkyCarRenderer::new);
+        EntityRendererRegistry.register(ModEntities.AIRBALLOON, AirBalloonRenderer::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.BlUE_DUST_PARTICLE, BlueDustParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TIBERIUM_PARTICLE, TiberiumParticle.Factory::new);
 
         ModMessages.registerS2CPackets();
         HandledScreens.register(ModScreenHandlers.SKYFORGE_SCREENHANDLER, SkyForgeScreen::new);
-        //ScreenRegistry.register(ModScreenHandlers.SKYFORGE_SCREENHANDLER, SkyForgeScreen::new);
+
+        HandledScreens.<ExampleDescription, CottonInventoryScreen<ExampleDescription>>register(
+               Signum.EXAMPLE_GUI, CottonInventoryScreen::new);
+
+       // HandledScreens.<ExampleDescription, ExampleBlockScreen>register(Signum.EXAMPLE_GUI, (gui, inventory, title) ->
+       //         new ExampleBlockScreen(gui, inventory.player, title));
 
         Signum.LOGGER.info("Client Initialized " + Signum.MOD_ID);
     }
