@@ -144,7 +144,10 @@
       "minecraft:ore_copper",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:ore_emerald"
+      "minecraft:ore_emerald",
+      "signum:moissanite_ore_placed",
+      "signum:manganese_ore_placed",
+      "signum:element_zero_ore_placed"
     ],
     [],
     [],

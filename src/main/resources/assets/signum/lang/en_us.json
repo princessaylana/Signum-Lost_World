@@ -91,6 +91,8 @@
   "biome.signum.signum_bamboo": "Bamboo",
   "biome.signum.signum_birch": "Birch",
   "biome.signum.signum_cherry": "Cherry",
-  "effect.signum.sigteleport": "Teleport"
+  "effect.signum.sigteleport": "Teleport",
+
+  "example_gui.signum.examplebutton":"Test Button"
 
 }

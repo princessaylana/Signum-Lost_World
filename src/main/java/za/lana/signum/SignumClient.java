@@ -11,13 +11,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
-import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.gui.screen.ingame.HandledScreens;
-import software.bernie.example.client.renderer.entity.ParasiteRenderer;
-import software.bernie.example.registry.EntityRegistry;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.client.renderer.entity.AirDroneRenderer;
 import za.lana.signum.client.renderer.entity.GhostRenderer;
@@ -32,8 +28,7 @@ import za.lana.signum.particle.custom.BlueDustParticle;
 import za.lana.signum.particle.custom.TiberiumParticle;
 import za.lana.signum.screen.ModScreenHandlers;
 import za.lana.signum.screen.SkyForgeScreen;
-import za.lana.signum.screen.gui.ExampleBlockScreen;
-import za.lana.signum.screen.gui.ExampleDescription;
+import za.lana.signum.screen.gui.*;
 
 
 public class SignumClient implements ClientModInitializer {
@@ -47,10 +42,11 @@ public class SignumClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MEDIUM_TIBERIUM_BUD, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SMALL_TIBERIUM_BUD, RenderLayer.getCutout());
 
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.EXAMPLE_BLOCK, RenderLayer.getCutout());
+
         EntityRendererRegistry.register(ModEntities.TOXICBALL, (context) ->
                 new FlyingItemEntityRenderer<>(context));
-        EntityRendererRegistry.register(ModEntities.LASERBOLT, (context) ->
-                new FlyingItemEntityRenderer<>(context));
+        EntityRendererRegistry.register(ModEntities.LASERBOLT, FlyingItemEntityRenderer::new);
 
         EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);
         EntityRendererRegistry.register(ModEntities.GHOST, GhostRenderer::new);
@@ -65,11 +61,14 @@ public class SignumClient implements ClientModInitializer {
         ModMessages.registerS2CPackets();
         HandledScreens.register(ModScreenHandlers.SKYFORGE_SCREENHANDLER, SkyForgeScreen::new);
 
-        HandledScreens.<ExampleDescription, CottonInventoryScreen<ExampleDescription>>register(
-               Signum.EXAMPLE_GUI, CottonInventoryScreen::new);
+        HandledScreens.<ExampleDescription, CottonInventoryScreen<ExampleDescription>>register(GuiScreens.EXAMPLE_GUI, ExampleBlockScreen::new);
+        HandledScreens.<AirBalloonDescription, CottonInventoryScreen<AirBalloonDescription>>register(GuiScreens.AB_GUI, AirBalloonScreen::new);
 
-       // HandledScreens.<ExampleDescription, ExampleBlockScreen>register(Signum.EXAMPLE_GUI, (gui, inventory, title) ->
-       //         new ExampleBlockScreen(gui, inventory.player, title));
+        //HandledScreens.<TestDescription, CottonInventoryScreen<TestDescription>>register(LibGuiTest.GUI_SCREEN_HANDLER_TYPE, CottonInventoryScreen::new);
+
+        // this method?
+        //HandledScreens.register(ModScreenHandlers.EXAMPLE_GUI, (gui, inventory, title) -> new ExampleBlockScreen(gui, inventory.player.getInventory(), title));
+        //HandledScreens.register(ModScreenHandlers.AB_GUI, (gui, inventory, title) -> new AirBalloonScreen(gui, inventory.player.getInventory(), title));
 
         Signum.LOGGER.info("Client Initialized " + Signum.MOD_ID);
     }

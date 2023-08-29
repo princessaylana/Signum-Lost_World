@@ -6,6 +6,7 @@
 package za.lana.signum.entity.transport;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.*;
@@ -25,14 +26,21 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -43,10 +51,15 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.item.ModItems;
+import za.lana.signum.particle.ModParticles;
+import za.lana.signum.screen.gui.AirBalloonDescription;
+import za.lana.signum.screen.gui.ExampleDescription;
 import za.lana.signum.util.ImplementedInventory;
 
 
-public class AirBalloonEntity extends AnimalEntity implements GeoEntity, ImplementedInventory {
+public class AirBalloonEntity
+        extends AnimalEntity
+        implements GeoEntity, ImplementedInventory, NamedScreenHandlerFactory {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     private static final TrackedData<Boolean> LIT = DataTracker.registerData(AirBalloonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -60,12 +73,11 @@ public class AirBalloonEntity extends AnimalEntity implements GeoEntity, Impleme
     // Average particle gravity 0.06f
 
     private static final Ingredient ACCEPTABLE_FUEL = Ingredient.ofItems(
-            Items.COAL,
             Items.CHARCOAL,
+            Items.COAL,
             ModItems.COKECOAL,
             ModItems.ELEMENTZEROCOAL,
             ModItems.TIBERIUMCOAL);
-    private final boolean pressingJump = this.jumping;
 
     public AirBalloonEntity(EntityType<? extends AnimalEntity> entityType, World level) {
         super(entityType, level);
@@ -83,18 +95,23 @@ public class AirBalloonEntity extends AnimalEntity implements GeoEntity, Impleme
 
     // Let the player ride the entity
     // need to add slow falling ?
-    // need to add a screen and inventory to load fuel
+    // need to add a screen with fuelslot inventory to load and burn fuel
+
+
+
+
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
-
         if (!this.hasPassengers()) {
             player.startRiding(this);
 
+            //player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
             return super.interactMob(player, hand);
         }
         return super.interactMob(player, hand);
     }
+
 
     private void consumeFuel() {
         if (ACCEPTABLE_FUEL.test(getStack(0)) && this.fuel + 3600 <= 32000) {
@@ -136,17 +153,22 @@ public class AirBalloonEntity extends AnimalEntity implements GeoEntity, Impleme
             this.setLit(this.fuel > 0);
         }
         if (this.isLit() && this.random.nextInt(4) == 0) {
-            this.getWorld().addParticle(ParticleTypes.FLAME, this.getX(), this.getY() + 1.2F, this.getZ(),
+            this.getWorld().addParticle(ParticleTypes.FLAME, this.getX(), this.getY() + 0.9F, this.getZ(),
                     0.0, 0.6F, 0.0);
             return true;
         }
-        if (this.fuel < 0){
-            this.setLit(false);
-            return false;
+       else if (this.fuel < 0){
+            return this.setLit(false);
+
         }
         return true;
     }
 
+    // Controls the balloon, airballoon control simulation wip
+    // need to add a float when the fuelslot is burning
+    // having trouble adding a key to -y velocity of entity, see below
+    // need to add fake gravity
+    // when the fuel is up
     @Override
     public void travel(Vec3d pos) {
         if (this.isAlive()) {
@@ -164,33 +186,42 @@ public class AirBalloonEntity extends AnimalEntity implements GeoEntity, Impleme
                 this.bodyYaw = this.getYaw();
                 this.headYaw = this.bodyYaw;
                 float x = passenger.sidewaysSpeed * 0.3F;
-                float y = passenger.upwardSpeed * 0.7F;
+                float y = passenger.upwardSpeed * 0.3F;
                 float z = passenger.forwardSpeed * 0.3F;
 
                 if (y <= 0)
-                    y *= 0.24f;
-                this.setMovementSpeed(0.3f);
+                    y *= 0.25f;
                 if (MinecraftClient.getInstance().options.jumpKey.isPressed()){
-                    y = 3f;
+                    y = 0.5f;
+                    //for testing will be removed
+                    spawnParticles(getWorld(),getBlockPos());
                 }
-                /**
-                if ((MinecraftClient.getInstance().options.sprintKey.isPressed())){
-                        y = -1f;
-                    }
-                 **/
+                else if ((MinecraftClient.getInstance().options.sprintKey.isPressed())){
+                    y = -0.6f;
+                }
                 else{
-                    y = -0.24f;
+                    y = -0.30f;
                     this.fallDistance = 1.0f;
                     this.onLanding();{
                         this.bounce(this);
-                    };
+                    }
                 }
+                this.setMovementSpeed(0.3f);
                 super.travel(new Vec3d(x, y, z));
                 }
             }
         }
     }
 
+
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
+        World world = this.getWorld();
+        BlockPos pos = getBlockPos();
+        return new AirBalloonDescription(syncId, inventory, ScreenHandlerContext.create(world, pos));
+    }
+
+    //this is added so the airballoon doesnt break on landing.
     private void bounce(Entity entity) {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0.0) {
@@ -199,8 +230,10 @@ public class AirBalloonEntity extends AnimalEntity implements GeoEntity, Impleme
         }
     }
 
-    public boolean createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return false;
+    @Override
+    public Text getDisplayName() {
+        // Using the block name as the screen title
+        return Text.literal("airballoon");
     }
     public DefaultedList<ItemStack> getItems() {
         return inventory;
@@ -221,10 +254,8 @@ public class AirBalloonEntity extends AnimalEntity implements GeoEntity, Impleme
     @Override
     public void updatePassengerPosition(Entity entity, PositionUpdater moveFunction) {
         super.updatePassengerPosition(entity, moveFunction);
-
         if (entity instanceof LivingEntity passenger) {
             moveFunction.accept(entity, getX(), getY() - 0.1f, getZ());
-
             this.prevPitch = passenger.prevPitch;
         }
     }
@@ -301,4 +332,23 @@ public class AirBalloonEntity extends AnimalEntity implements GeoEntity, Impleme
     public boolean hasNoGravity() {
         return true;
     }
+
+    //
+    private static void spawnParticles(World world, BlockPos pos) {
+
+        // need to enable it when state is LIT only
+        double d = 0.5625;
+        Random random = world.random;
+        for (Direction direction : Direction.values()) {
+            BlockPos blockPos = pos.offset(direction);
+            //if (world.getBlockState(blockPos).isOpaqueFullCube(world, blockPos)) continue;
+            Direction.Axis axis = direction.getAxis();
+            double e = axis == Direction.Axis.X ? 0.5 + 0.5625 * (double)direction.getOffsetX() : (double)random.nextFloat();
+            double f = axis == Direction.Axis.Y ? 0.5 + 0.5625 * (double)direction.getOffsetY() : (double)random.nextFloat();
+            double g = axis == Direction.Axis.Z ? 0.5 + 0.5625 * (double)direction.getOffsetZ() : (double)random.nextFloat();
+            world.playSound(d, e, f, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0f, 1.0f, false);
+            world.addParticle(ModParticles.BlUE_DUST_PARTICLE, (double)pos.getX() + e, (double)pos.getY() + f, (double)pos.getZ() + g, 0.5F, 1.0F, 0.5F);
+        }
+    }
+
 }

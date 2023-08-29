@@ -22,8 +22,9 @@ import za.lana.signum.Signum;
 import za.lana.signum.screen.gui.ExampleDescription;
 import za.lana.signum.util.ImplementedInventory;
 
-public class ExampleBlockEntity extends BlockEntity implements ImplementedInventory, NamedScreenHandlerFactory {
-    //public static final int INVENTORY_SIZE = 1;
+public class ExampleBlockEntity
+        extends BlockEntity
+        implements ImplementedInventory, NamedScreenHandlerFactory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public ExampleBlockEntity(BlockPos pos, BlockState state) {
         super(Signum.EXAMPLE_BLOCK_ENTITY, pos, state);

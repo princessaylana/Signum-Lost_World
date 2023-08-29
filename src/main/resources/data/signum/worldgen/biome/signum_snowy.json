@@ -137,6 +137,9 @@
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
       "minecraft:ore_emerald",
+      "signum:moissanite_ore_placed",
+      "signum:manganese_ore_placed",
+      "signum:element_zero_ore_placed",
       "minecraft:mega_spruce_checked",
       "minecraft:mega_pine_checked"
     ],

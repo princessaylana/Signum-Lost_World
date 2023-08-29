@@ -16,12 +16,15 @@ import za.lana.signum.block.ModBlocks;
 
 public class ModBlockEntities {
     public static BlockEntityType<SkyForgeBlockEntity> SKYFORGE;
+   // public static BlockEntityType<ExampleBlockEntity> EXAMPLE_BLOCK_ENTITY;
 
     public static void registerBlockEntities(){
         SKYFORGE = Registry.register(Registries.BLOCK_ENTITY_TYPE,
                 new Identifier(Signum.MOD_ID, "skyforge"),
                 FabricBlockEntityTypeBuilder.create(SkyForgeBlockEntity::new,
                         ModBlocks.SKYFORGE).build(null));
+
+
 
     }
 

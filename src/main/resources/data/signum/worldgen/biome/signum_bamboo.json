@@ -172,7 +172,9 @@
       "minecraft:ore_lapis",
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
-      "signum:manganese_ore_placed"
+      "signum:moissanite_ore_placed",
+      "signum:manganese_ore_placed",
+      "signum:element_zero_ore_placed"
     ],
     [],
     [

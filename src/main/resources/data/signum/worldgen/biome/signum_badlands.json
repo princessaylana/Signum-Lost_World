@@ -134,7 +134,10 @@
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
       "minecraft:ore_gold_extra",
-      "minecraft:disk_sand"
+      "minecraft:disk_sand",
+      "signum:moissanite_ore_placed",
+      "signum:manganese_ore_placed",
+      "signum:element_zero_ore_placed"
     ],
     [],
     [
