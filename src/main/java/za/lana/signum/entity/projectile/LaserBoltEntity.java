@@ -64,6 +64,8 @@ public class LaserBoltEntity
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.BLINDNESS, 20 * 3, 0))); // applies a status effect
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.POISON, 20 * 3, 1))); // applies a status effect
             entity.playSound(SoundEvents.BLOCK_GLASS_HIT, 2F, 2F); // plays a sound for the entity hit only
+            entity.damage(getWorld().getDamageSources().magic(), 6.0f * 2); // Applies Damage
+
         }
     }
 
@@ -87,9 +89,14 @@ public class LaserBoltEntity
         super.onCollision(hitResult);
         if (!this.getWorld().isClient) {
             //this.getWorld().sendEntityStatus(this, EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES);
+            // world.getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(8.0), e->true).forEach(e->e.setOnFireFor(5));
 
             this.discard();
         }
+    }
+    private void transmute(){
+        // kill target entity
+        // respawn something else
     }
 
 }

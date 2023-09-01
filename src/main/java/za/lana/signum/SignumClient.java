@@ -22,6 +22,7 @@ import za.lana.signum.client.renderer.entity.TiberiumWormRenderer;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
 import za.lana.signum.client.renderer.transport.SkyCarRenderer;
 import za.lana.signum.entity.ModEntities;
+import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.networking.ModMessages;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.particle.custom.BlueDustParticle;
@@ -35,6 +36,9 @@ public class SignumClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+
+        KeyInputHandler.register();
+        ModMessages.registerS2CPackets();
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TIBERIUM_CLUSTER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BUDDING_TIBERIUM, RenderLayer.getCutout());
@@ -57,18 +61,15 @@ public class SignumClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.BlUE_DUST_PARTICLE, BlueDustParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.TIBERIUM_PARTICLE, TiberiumParticle.Factory::new);
-
+        // Network packets
         ModMessages.registerS2CPackets();
+        // Fabric screen
         HandledScreens.register(ModScreenHandlers.SKYFORGE_SCREENHANDLER, SkyForgeScreen::new);
-
-        HandledScreens.<ExampleDescription, CottonInventoryScreen<ExampleDescription>>register(GuiScreens.EXAMPLE_GUI, ExampleBlockScreen::new);
-        HandledScreens.<AirBalloonDescription, CottonInventoryScreen<AirBalloonDescription>>register(GuiScreens.AB_GUI, AirBalloonScreen::new);
-
-        //HandledScreens.<TestDescription, CottonInventoryScreen<TestDescription>>register(LibGuiTest.GUI_SCREEN_HANDLER_TYPE, CottonInventoryScreen::new);
-
-        // this method?
-        //HandledScreens.register(ModScreenHandlers.EXAMPLE_GUI, (gui, inventory, title) -> new ExampleBlockScreen(gui, inventory.player.getInventory(), title));
-        //HandledScreens.register(ModScreenHandlers.AB_GUI, (gui, inventory, title) -> new AirBalloonScreen(gui, inventory.player.getInventory(), title));
+        // LibGui screens
+        HandledScreens.<ExampleDescription, CottonInventoryScreen<ExampleDescription>>register(
+                GuiScreens.EXAMPLE_GUI, ExampleBlockScreen::new);
+        HandledScreens.<AirBalloonDescription, CottonInventoryScreen<AirBalloonDescription>>register(
+                GuiScreens.AB_GUI, AirBalloonScreen::new);
 
         Signum.LOGGER.info("Client Initialized " + Signum.MOD_ID);
     }

@@ -53,6 +53,7 @@ public class AirBalloonDescription extends SyncedGuiDescription {
         });
         // Widget, X, Y, Width, Height
         root.add(button, 9, 3, 6, 2);
+
         /**
          * WItemSlot mySlot = ...;
          * mySlot.setFilter(stack -> stack.isOf(myFuel));

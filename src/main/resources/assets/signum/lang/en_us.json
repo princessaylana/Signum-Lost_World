@@ -93,6 +93,11 @@
   "biome.signum.signum_cherry": "Cherry",
   "effect.signum.sigteleport": "Teleport",
 
-  "example_gui.signum.examplebutton":"Test Button"
+  "example_gui.signum.examplebutton":"Test Button",
+
+  "key.category.signum.modkeys":"Signum ModKeys",
+  "key.signum.openinventory":"Vehcile Inventory",
+  "key.signum.flyup":"Fly Up",
+  "key.signum.flydown":"Fly Down"
 
 }

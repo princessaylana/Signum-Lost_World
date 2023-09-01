@@ -30,6 +30,7 @@ import za.lana.signum.entity.transport.SkyCarEntity;
 import za.lana.signum.item.ModFuels;
 import za.lana.signum.item.ModItemGroups;
 import za.lana.signum.item.ModItems;
+import za.lana.signum.networking.ModMessages;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.recipe.ModRecipes;
 import za.lana.signum.screen.ModScreenHandlers;
@@ -67,6 +68,9 @@ public class Signum implements ModInitializer {
 
 		ModEffects.RegisterEffects();
 		ModSounds.registerModSounds();
+
+		ModMessages.registerC2SPackets();
+
 
 		GuiScreens.registerGuiScreens();
 

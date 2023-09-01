@@ -118,6 +118,8 @@ public class ToxicGunItem extends Item implements GeoItem {
 			}
 			}
 		}
+		// need to add the reload
+	// max damage - (count the amount of projectiles shot) = remove from stack in inventory and repair gun
 
 	@Override
 	public boolean hasGlint(ItemStack stack) {
