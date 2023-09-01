@@ -26,11 +26,16 @@ public class KeyInputHandler {
     public static KeyBinding inventKey;
     public static KeyBinding flyUpKey;
     public static KeyBinding flyDownkey;
+
+
     public static void registerKeyInputs(){
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (inventKey.wasPressed()) {
-                client.player.sendMessage(Text.literal("InventoryKey was pressed!"), false);
-                //ClientPlayNetworking.send(ModMessages.AIRBALLOON_INVENTORY, PacketByteBufs.create());
+
+            if (inventKey.wasPressed()) {
+                //client.player.sendMessage(Text.literal("InventoryKey was pressed!"), false);
+                ClientPlayNetworking.send(ModMessages.AIRBALLOON_INVENTORY, PacketByteBufs.create());
+
+
             }
             while (flyUpKey.wasPressed()) {
                 //client.player.sendMessage(Text.literal("Fly Up was pressed!"), false);
@@ -66,3 +71,12 @@ public class KeyInputHandler {
         registerKeyInputs();
     }
 }
+
+// should Open the screen?
+/**
+ * client.player.isRiding() && vehicle instanceof AirBalloonEntity
+ *
+ if (client.player.isRiding()){
+ ClientPlayNetworking.send(ModMessages.AIRBALLOON_INVENTORY, PacketByteBufs.create());
+ }
+ **/

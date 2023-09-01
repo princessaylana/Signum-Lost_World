@@ -27,7 +27,7 @@ public class SignumDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModLootTableProvider::new);
 
 		// disabled below
-		//pack.addProvider(ModModelProvider::new);
+		pack.addProvider(ModModelProvider::new);
 		//pack.addProvider(ModRecipeProvider::new);
 		//pack.addProvider(ModWorldGenerator::new);
 

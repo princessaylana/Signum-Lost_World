@@ -1,0 +1,5 @@
+// 1.20.1	2023-09-01T20:29:47.076991446	Signum/Tags for minecraft:block
+3eb6d5d9b1587af74406f1408273280394e2de1a data/minecraft/tags/blocks/needs_iron_tool.json
+98eafe9b43a4f0984c489e170d20468987e71672 data/minecraft/tags/blocks/needs_stone_tool.json
+3eb6d5d9b1587af74406f1408273280394e2de1a data/minecraft/tags/blocks/mineable/pickaxe.json
+98eafe9b43a4f0984c489e170d20468987e71672 data/minecraft/tags/blocks/mineable/shovel.json

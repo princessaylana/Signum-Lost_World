@@ -22,26 +22,29 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BLIGHT_BLOCK);
+        //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BLIGHT_BLOCK);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MOISSANITE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MOISSANITE_BLOCK);
 
-        BlockStateModelGenerator.BlockTexturePool manganesePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.MANGANESE_BLOCK);
+        //BlockStateModelGenerator.BlockTexturePool manganesePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.MANGANESE_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MANGANESE_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MANGANESE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_MANGANESE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.NETHERRACK_MANGANESE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ENDSTONE_MANGANESE_ORE);
 
-        BlockStateModelGenerator.BlockTexturePool tiberiumPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.TIBERIUM_BLOCK);
+
+        //BlockStateModelGenerator.BlockTexturePool tiberiumPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.TIBERIUM_BLOCK);
+        /**
         blockStateModelGenerator.registerAmethyst(ModBlocks.BUDDING_TIBERIUM);
         blockStateModelGenerator.registerAmethyst(ModBlocks.LARGE_TIBERIUM_BUD);
         blockStateModelGenerator.registerAmethyst(ModBlocks.MEDIUM_TIBERIUM_BUD);
         blockStateModelGenerator.registerAmethyst(ModBlocks.SMALL_TIBERIUM_BUD);
         blockStateModelGenerator.registerAmethyst(ModBlocks.TIBERIUM_CLUSTER);
         blockStateModelGenerator.registerAmethyst(ModBlocks.TIBERIUM_BLOCK);
+         **/
     }
 
     @Override

@@ -12,5 +12,6 @@ import net.minecraft.text.Text;
 public class AirBalloonScreen extends CottonInventoryScreen<AirBalloonDescription> {
     public AirBalloonScreen(AirBalloonDescription gui, PlayerInventory playerInventory, Text title) {
         super(gui, playerInventory, title);
+
     }
 }

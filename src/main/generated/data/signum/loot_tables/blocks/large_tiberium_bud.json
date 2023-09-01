@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "signum:netherrack_manganese_ore"
+              "name": "signum:large_tiberium_bud"
             },
             {
               "type": "minecraft:item",
@@ -33,8 +33,8 @@
                   "add": false,
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 7.0,
-                    "min": 4.0
+                    "max": 3.0,
+                    "min": 1.0
                   },
                   "function": "minecraft:set_count"
                 },
@@ -47,7 +47,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "signum:raw_manganese"
+              "name": "signum:tiberium_shard"
             }
           ]
         }

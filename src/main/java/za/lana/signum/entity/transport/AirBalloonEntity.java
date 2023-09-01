@@ -106,13 +106,7 @@ public class AirBalloonEntity
             player.startRiding(this);
             player.sendMessage(Text.literal("Press Y to go Up, B to go Down, and H for Inventory"), false);
 
-            if (!this.getWorld().isClient()) {
-            while ((KeyInputHandler.inventKey.isPressed())){
-                ClientPlayNetworking.send(ModMessages.AIRBALLOON_INVENTORY,
-                        PacketByteBufs.create());
             }
-            }
-        }
         return super.interactMob(player, hand);
     }
 
@@ -218,7 +212,7 @@ public class AirBalloonEntity
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
         World world = this.getWorld();
-        BlockPos pos = getBlockPos();
+        BlockPos pos = this.getBlockPos();
         return new AirBalloonDescription(syncId, inventory, ScreenHandlerContext.create(world, pos));
     }
 
@@ -233,8 +227,7 @@ public class AirBalloonEntity
 
     @Override
     public Text getDisplayName() {
-        // Using the block name as the screen title
-        return Text.literal("airballoon");
+        return Text.literal("Air Balloon");
     }
     public DefaultedList<ItemStack> getItems() {
         return inventory;

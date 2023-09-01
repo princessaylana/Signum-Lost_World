@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "signum:item/glass_shard"
+    "layer0": "signum:item/dust/quartz_crystal_dust"
   }
 }

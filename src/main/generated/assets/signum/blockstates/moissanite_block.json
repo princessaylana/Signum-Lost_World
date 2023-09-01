@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model": "signum:block/moissanite_block"}
+    "": {
+      "model": "signum:block/moissanite_block"
+    }
   }
 }
