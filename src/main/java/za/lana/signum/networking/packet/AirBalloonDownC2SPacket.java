@@ -1,3 +1,8 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
 package za.lana.signum.networking.packet;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;

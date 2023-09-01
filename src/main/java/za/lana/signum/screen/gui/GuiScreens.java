@@ -1,3 +1,8 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
 package za.lana.signum.screen.gui;
 
 import net.minecraft.registry.Registries;

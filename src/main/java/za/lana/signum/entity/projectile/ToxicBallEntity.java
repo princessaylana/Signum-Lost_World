@@ -13,6 +13,8 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.passive.FrogEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -100,18 +102,13 @@ public class ToxicBallEntity
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
         if (entity instanceof LivingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
 
-            /**
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.GLOWING, 10, 0)));
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.BLINDNESS, 20 * 3, 0))); // applies a status effect
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.POISON, 20 * 6, 6))); // applies a status effect
-             **/
-
-            this.transMutate(entityHitResult);
 
             entity.playSound(SoundEvents.BLOCK_GLASS_HIT, 2F, 2F); // plays a sound for the entity hit only
             ParticleUtil.spawnParticle(this.getWorld(), pos, ParticleTypes.ENTITY_EFFECT, UniformIntProvider.create(3, 5));
             //entity.damage(getWorld().getDamageSources().magic(), 6.0f * 2);
-
 
             this.discard();
             }
@@ -147,7 +144,7 @@ public class ToxicBallEntity
         }
     }
 
-    //I am not sure how this is used below
+    // Amount of damage the projectile does
     public void setDamage() {
         damage(getWorld().getDamageSources().magic(), 6.0f * 2);
     }
@@ -162,21 +159,5 @@ public class ToxicBallEntity
         }
     }
 
-    // Transforms target into a frog WIP
-    protected void transMutate(EntityHitResult entityHitResult){
-        World world = this.getWorld();
-        if (world instanceof ServerWorld) {
-
-            ServerWorld serverWorld = (ServerWorld)world;
-            FrogEntity entity3 = EntityType.FROG.create(this.getWorld());
-            Entity target = entityHitResult.getEntity();
-            //BlockPos spawnPos = entityHitResult.getEntity().getBlockPos();
-            //Entity entity3 = new FrogEntity(EntityType.FROG, getEntityWorld());
-
-            serverWorld.spawnEntity(entity3);
-            target.discard();
-
-        }
-    }
 
 }
