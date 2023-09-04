@@ -35,6 +35,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
+import za.lana.signum.effect.ModEffects;
 import za.lana.signum.item.ModItems;
 
 import java.util.List;
@@ -89,7 +90,6 @@ public class ToxicBallEntity
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult){
-
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         World world = getWorld();
@@ -97,23 +97,15 @@ public class ToxicBallEntity
         int i = entity instanceof EndermanEntity ? 6 : 0;
         List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, this.getBoundingBox().expand(4.0, 2.0, 4.0));
 
-        // AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(this.getWorld(), this.getX(), this.getY(), this.getZ());
-
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
         if (entity instanceof LivingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
-
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.GLOWING, 10, 0)));
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.BLINDNESS, 20 * 3, 0))); // applies a status effect
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.POISON, 20 * 6, 6))); // applies a status effect
-
+            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
             entity.playSound(SoundEvents.BLOCK_GLASS_HIT, 2F, 2F); // plays a sound for the entity hit only
-            ParticleUtil.spawnParticle(this.getWorld(), pos, ParticleTypes.ENTITY_EFFECT, UniformIntProvider.create(3, 5));
-            //entity.damage(getWorld().getDamageSources().magic(), 6.0f * 2);
-
+            entity.damage(getWorld().getDamageSources().magic(), 1.5f * 2);
             this.discard();
             }
         }
-
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
@@ -143,10 +135,8 @@ public class ToxicBallEntity
 
         }
     }
-
-    // Amount of damage the projectile does
+    // this seems to be needed?
     public void setDamage() {
-        damage(getWorld().getDamageSources().magic(), 6.0f * 2);
     }
     // will add a custom particle here in future
     private void spawnSparkParticle(ItemUsageContext pContext, BlockPos positionClicked) {

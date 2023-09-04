@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -26,6 +27,8 @@ import za.lana.signum.item.ModItems;
 
 public class AirBalloonDescription extends SyncedGuiDescription {
     private static final int INVENTORY_SIZE = 1;
+    protected PropertyDelegate propertyDelegate;
+
     private static final Ingredient ACCEPTABLE_FUEL = Ingredient.ofItems(
             Items.CHARCOAL,
             Items.COAL,
@@ -34,7 +37,7 @@ public class AirBalloonDescription extends SyncedGuiDescription {
             ModItems.TIBERIUMCOAL);
 
     public AirBalloonDescription(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-        super(GuiScreens.AB_GUI, syncId, playerInventory, getBlockInventory(context, INVENTORY_SIZE), getBlockPropertyDelegate(context));
+        super(GuiScreens.AB_GUI, syncId, playerInventory, getBlockInventory(context, INVENTORY_SIZE), getBlockPropertyDelegate(context, 2));
         this.world = playerInventory.player.getWorld();
 
         WGridPanel root = new WGridPanel();
@@ -56,5 +59,11 @@ public class AirBalloonDescription extends SyncedGuiDescription {
 
         root.add(this.createPlayerInventoryPanel(), 0, 3);
         root.validate(this);
+    }
+    public int getScaledFuelProgress() {
+        int fuelProgress = this.propertyDelegate.get(0);
+        int maxFuelProgress = this.propertyDelegate.get(1);
+        int fuelProgressSize = 14;
+        return maxFuelProgress != 0 ? (int)(((float)fuelProgress / (float)maxFuelProgress) * fuelProgressSize) : 0;
     }
 }

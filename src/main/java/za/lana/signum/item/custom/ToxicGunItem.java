@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -34,7 +35,9 @@ import za.lana.signum.Signum;
 import za.lana.signum.client.renderer.item.ToxicGunRenderer;
 import za.lana.signum.constant.SignumAnimations;
 import za.lana.signum.entity.projectile.ToxicBallEntity;
+import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.item.ModItems;
+import za.lana.signum.sound.ModSounds;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -92,9 +95,8 @@ public class ToxicGunItem extends Item implements GeoItem {
 		if (shooter instanceof PlayerEntity player) {
 			if (stack.getDamage() >= stack.getMaxDamage() - 1)
 				return;
-
-			// Add a cooldown so you can't fire rapidly
-			player.getItemCooldownManager().set(this, 5);
+			player.getItemCooldownManager().set(this, 60);
+			shooter.playSound(ModSounds.TIBERIUM_BREAK, 2F, 2F);
 
 			if (!level.isClient) {
 				ToxicBallEntity arrow = new ToxicBallEntity(level, player);
@@ -109,6 +111,12 @@ public class ToxicGunItem extends Item implements GeoItem {
 				arrow.age = 240;
 
 				triggerAnim(player, GeoItem.getOrAssignId(stack, (ServerWorld)level), "shoot_controller", "shoot");
+				// will assign a proper reload keybind, this is just for testing
+				if (KeyInputHandler.inventKey.isPressed()){
+					//need to reload/repair the item
+					player.sendMessage(Text.literal("Reloading Key"));
+				}
+
 				/***
 				istack.decrement(1);
 				if (stack.isEmpty()) {
