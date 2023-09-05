@@ -208,9 +208,7 @@ public class AirBalloonEntity
     public DefaultedList<ItemStack> getItems() {
         return inventory;
     }
-    private static ToIntFunction<State> createLightLevelFromBlockState(int litLevel) {
-        return (State) -> (Boolean)State.get(Properties.LIT) ? litLevel : 0;
-    }
+
 
     // FUEL
     private void consumeFuel() {
