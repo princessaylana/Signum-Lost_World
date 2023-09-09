@@ -70,8 +70,6 @@ public class Signum implements ModInitializer {
 		ModSounds.registerModSounds();
 
 		ModMessages.registerC2SPackets();
-
-
 		GuiScreens.registerGuiScreens();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormEntity.setAttributes());

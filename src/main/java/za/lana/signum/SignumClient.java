@@ -27,6 +27,7 @@ import za.lana.signum.networking.ModMessages;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.particle.custom.BlueDustParticle;
 import za.lana.signum.particle.custom.TiberiumParticle;
+import za.lana.signum.screen.AirBalloonVScreen;
 import za.lana.signum.screen.ModScreenHandlers;
 import za.lana.signum.screen.SkyForgeScreen;
 import za.lana.signum.screen.gui.*;
@@ -65,6 +66,7 @@ public class SignumClient implements ClientModInitializer {
         ModMessages.registerS2CPackets();
         // Fabric screen
         HandledScreens.register(ModScreenHandlers.SKYFORGE_SCREENHANDLER, SkyForgeScreen::new);
+        HandledScreens.register(ModScreenHandlers.AIRBALLOON_SCREENHANDLER, AirBalloonVScreen::new);
         // LibGui screens
         HandledScreens.<ExampleDescription, CottonInventoryScreen<ExampleDescription>>register(
                 GuiScreens.EXAMPLE_GUI, ExampleBlockScreen::new);

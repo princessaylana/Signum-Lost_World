@@ -17,7 +17,6 @@ import za.lana.signum.networking.packet.SignumTestC2SPacket;
 import java.time.format.TextStyle;
 
 public class ModMessages {
-    //public static final Identifier ITEM_SYNC = new Identifier(Signum.MOD_ID, "item_sync");
     public static final Identifier AIRBALLOON_UP = new Identifier(Signum.MOD_ID, "airballoon_up");
     public static final Identifier AIRBALLOON_DOWN = new Identifier(Signum.MOD_ID, "airballoon_down");
     public static final Identifier AIRBALLOON_INVENTORY = new Identifier(Signum.MOD_ID, "airballoon_inventory");

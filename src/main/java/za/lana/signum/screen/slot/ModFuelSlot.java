@@ -6,6 +6,7 @@
  * */
 package za.lana.signum.screen.slot;
 
+import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;

@@ -7,64 +7,53 @@
 
 package za.lana.signum.screen;
 
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import org.jetbrains.annotations.Nullable;
 import za.lana.signum.screen.slot.ModFuelSlot;
 import za.lana.signum.screen.slot.ModResultSlot;
 
-public class SkyForgeScreenHandler extends ScreenHandler {
+public class AirBalloonScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     // has
-    public SkyForgeScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(4), new ArrayPropertyDelegate(4));
+    public AirBalloonScreenHandler(int syncId, PlayerInventory playerInventory) {
+        this(syncId, playerInventory, new SimpleInventory(2), new ArrayPropertyDelegate(2));
     }
-    public SkyForgeScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
-        super(ModScreenHandlers.SKYFORGE_SCREENHANDLER, syncId);
-        checkSize(inventory, 4);
+    public AirBalloonScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
+        super(ModScreenHandlers.AIRBALLOON_SCREENHANDLER, syncId);
+        checkSize(inventory, 2);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;
-        // slots index must go up as slots
         this.addSlot(new ModFuelSlot(inventory, 0, 56, 53));
-        this.addSlot(new Slot(inventory, 1, 47, 17));
-        this.addSlot(new Slot(inventory, 2, 65, 17));
-        this.addSlot(new ModResultSlot(inventory, 3, 119, 35));
+        this.addSlot(new Slot(inventory, 1, 72, 53));
 
         addPlayerHotbar(playerInventory);
         addPlayerInventory(playerInventory);
         addProperties(delegate);
-
-    }
-    //
-    public boolean isCrafting() {
-        return propertyDelegate.get(0) > 0;
     }
 
     public boolean hasFuel() {
-        return propertyDelegate.get(2) > 0;
-    }
-
-    public int getScaledProgress() {
-        int progress = this.propertyDelegate.get(0);
-        int maxProgress = this.propertyDelegate.get(1);  // Max Progress
-        int progressArrowSize = 26; // This is the width in pixels of your arrow
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+        return propertyDelegate.get(1) > 0;
     }
 
     public int getScaledFuelProgress() {
-        int fuelProgress = this.propertyDelegate.get(2);
-        int maxFuelProgress = this.propertyDelegate.get(3);
+        int fuelProgress = this.propertyDelegate.get(0);
+        int maxFuelProgress = this.propertyDelegate.get(1);
         int fuelProgressSize = 14;
-
         return maxFuelProgress != 0 ? (int)(((float)fuelProgress / (float)maxFuelProgress) * fuelProgressSize) : 0;
     }
 
@@ -112,4 +101,6 @@ public class SkyForgeScreenHandler extends ScreenHandler {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
+
+
 }

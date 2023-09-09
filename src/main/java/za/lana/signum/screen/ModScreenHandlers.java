@@ -18,6 +18,9 @@ public class ModScreenHandlers {
     public static ScreenHandlerType<SkyForgeScreenHandler> SKYFORGE_SCREENHANDLER =
             ScreenHandlerRegistry.registerSimple(new Identifier(Signum.MOD_ID, "skyforge"),
                     SkyForgeScreenHandler::new);
+    public static ScreenHandlerType<AirBalloonScreenHandler> AIRBALLOON_SCREENHANDLER =
+            ScreenHandlerRegistry.registerSimple(new Identifier(Signum.MOD_ID, "airballoon"),
+                    AirBalloonScreenHandler::new);
 
     public static void registerScreenHandler() {
         Signum.LOGGER.info("Registering Screen Handlers for " + Signum.MOD_ID);

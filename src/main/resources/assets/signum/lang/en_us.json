@@ -37,7 +37,6 @@
   "item.signum.manganese_shovel": "Manganese Shovel",
   "item.signum.manganese_sword": "Manganese Sword",
 
-
   "item.signum.bpistol_item": "Baretta Pistol",
   "item.signum.bpistol_item.ammo": "Ammo",
   "item.signum.laserbolt_item": "Laser Bolt",
@@ -55,6 +54,7 @@
   "item.signum.sigalien_spawn_egg": "Alien Spawn Egg",
   "item.signum.skycar_spawn_egg": "Skycar Spawn Egg",
   "item.signum.ghost_spawn_egg": "Ghost Spawn Egg",
+  "item.signum.airballoon_spawn_egg": "Airballoon",
 
   "block.signum.manganese_ore": "Manganese Ore",
   "block.signum.deepslate_manganese_ore": "Deepslate Manganese Ore",
@@ -94,9 +94,10 @@
   "effect.signum.sigteleport": "Teleport",
 
   "example_gui.signum.examplebutton":"Test Button",
+  "message.signum.airballoon.mount":"Press Y to go up, B to go down, H for Airballoon Inventory",
 
   "key.category.signum.modkeys":"Signum ModKeys",
-  "key.signum.openinventory":"Vehcile Inventory",
+  "key.signum.openinventory":"AirBalloon Inventory",
   "key.signum.flyup":"Fly Up",
   "key.signum.flydown":"Fly Down"
 

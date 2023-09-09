@@ -24,6 +24,7 @@ public class AirBalloonInvenC2SPacket {
     public static void recieve(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                       PacketByteBuf buf, PacketSender responseSender) {
 
+
         // below only happens on the server side
         if (player != null) {
         Entity vehicle = player.getVehicle();
