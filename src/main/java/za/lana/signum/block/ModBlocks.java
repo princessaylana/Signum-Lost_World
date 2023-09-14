@@ -8,10 +8,7 @@ package za.lana.signum.block;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ExperienceDroppingBlock;
-import net.minecraft.block.MapColor;
+import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -25,11 +22,10 @@ import za.lana.signum.block.custom.AssemblyStationBlock;
 import za.lana.signum.block.custom.ExampleBlock;
 import za.lana.signum.block.custom.RazorWireBlock;
 import za.lana.signum.block.custom.SkyForgeBlock;
-import za.lana.signum.block.custom.crystal.BuddingTiberiumBlock;
-import za.lana.signum.block.custom.crystal.TiberiumBlock;
-import za.lana.signum.block.custom.crystal.TiberiumClusterBlock;
+import za.lana.signum.block.custom.crystal.*;
 import za.lana.signum.block.custom.modore.ElementZeroOreBlock;
 import za.lana.signum.block.custom.props.BlightBlock;
+import za.lana.signum.block.custom.props.TiberiumFireBlock;
 import za.lana.signum.sound.ModSounds;
 
 //obsidian hardness (50.0f, 1200.0f)
@@ -72,20 +68,42 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)
                     .strength(10.0f, 600.0f)));
 
-    public static final Block TIBERIUM_BLOCK = registerBlock("tiberium_block",
-            new TiberiumBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.LIME)
-                    .strength(30.0f, 100.0f)
-                    .sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).requiresTool()));
     public static final Block BLIGHT_BLOCK = registerBlock("blight_block",
             new BlightBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).mapColor(MapColor.LIME)
                     .strength(5.0f, 5.0f)
                     .sounds(BlockSoundGroup.ROOTED_DIRT).requiresTool()));
+    public static final Block TIBERIUM_FIRE = registerBlock("tiberium_fire",
+            new TiberiumFireBlock(FabricBlockSettings.copyOf(Blocks.FIRE).mapColor(MapColor.LIME).replaceable().noCollision().breakInstantly()
+                    .luminance(state -> 15).sounds(BlockSoundGroup.WOOL).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block TIBERIUM_BLOCK = registerBlock("tiberium_block", new TiberiumBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(30.0f, 100.0f).sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).requiresTool()));
     public static final Block BUDDING_TIBERIUM = registerBlock("budding_tiberium", new BuddingTiberiumBlock(FabricBlockSettings.copyOf(Blocks.BUDDING_AMETHYST).mapColor(MapColor.LIME).ticksRandomly().strength(1.5f).sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).luminance(state -> 3).requiresTool().pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block TIBERIUM_CLUSTER = registerBlock("tiberium_cluster", new TiberiumClusterBlock(7, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.LIME).solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.AMETHYST_BLOCK).strength(1.5f).luminance(state -> 7).pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block LARGE_TIBERIUM_BUD = registerBlock("large_tiberium_bud", new TiberiumClusterBlock(5, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 5).pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block MEDIUM_TIBERIUM_BUD = registerBlock("medium_tiberium_bud",
-            new TiberiumClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block MEDIUM_TIBERIUM_BUD = registerBlock("medium_tiberium_bud", new TiberiumClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block SMALL_TIBERIUM_BUD = registerBlock("small_tiberium_bud", new TiberiumClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
+
+    public static final Block FIRE_CRYSTAL_BLOCK = registerBlock("fire_crystal_block",
+            new FireCrystalBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.BRIGHT_RED)
+                    .strength(30.0f, 100.0f)
+                    .sounds(BlockSoundGroup.AMETHYST_CLUSTER).requiresTool()));
+    public static final Block BUDDING_FIRE_CRYSTAL = registerBlock("budding_fire_crystal",
+            new BuddingFireCrystalBlock(FabricBlockSettings.copyOf(Blocks.BUDDING_AMETHYST).mapColor(MapColor.BRIGHT_RED)
+                    .ticksRandomly().strength(1.5f).sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).luminance(state -> 3)
+                    .requiresTool().pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block FIRE_CRYSTAL_CLUSTER = registerBlock("fire_crystal_cluster",
+            new FireCrystalClusterBlock(7, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.BRIGHT_RED)
+                    .solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.AMETHYST_BLOCK).strength(1.5f).luminance(state -> 7)
+                    .pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block LARGE_FIRE_CRYSTAL_BUD = registerBlock("large_fire_crystal_bud",
+            new FireCrystalClusterBlock(5, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 5).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block MEDIUM_FIRE_CRYSTAL_BUD = registerBlock("medium_fire_crystal_bud",
+            new FireCrystalClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block SMALL_FIRE_CRYSTAL_BUD = registerBlock("small_fire_crystal_bud",
+            new FireCrystalClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
+
 
     public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
             new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(8.0f,100.0f)));
@@ -96,9 +114,6 @@ public class ModBlocks {
 
     public static final Block EXAMPLE_BLOCK = registerBlock("example_block",
             new ExampleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
-
-
-
 
     //registering blocks
     private static Block registerBlockWithoutItem(String name, Block block) {

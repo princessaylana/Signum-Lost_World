@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "fire_crystal",
+  "pattern": [
+    "X",
+    "#"
+  ],
+  "key": {
+    "X": {
+      "item": "signum:fire_crystal_cluster"
+    },
+    "#": [
+      {
+        "item": "signum:fire_crystal_block"
+      }
+    ]
+  },
+  "result": {
+    "item": "signum:budding_fire_crystal",
+    "count": 1
+  }
+}

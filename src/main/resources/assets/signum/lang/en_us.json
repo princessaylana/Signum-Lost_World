@@ -37,6 +37,15 @@
   "item.signum.manganese_shovel": "Manganese Shovel",
   "item.signum.manganese_sword": "Manganese Sword",
 
+  "item.signum.tiberium_staff": "Tiberium Staff",
+  "item.signum.tiberium_staff.info": "Magic Staff that Poisons Targets",
+  "item.signum.freeze_staff": "Ice Staff",
+  "item.signum.freeze_staff.info": "Magic Staff that Freezes Targets",
+  "item.signum.transmute_staff": "Transmute Staff",
+  "item.signum.transmute_staff.info": "Magic Staff that Transmute Targets",
+  "item.signum.fire_staff": "Fire Staff",
+  "item.signum.fire_staff.info": "Magic Staff that Burns Targets",
+
   "item.signum.bpistol_item": "Baretta Pistol",
   "item.signum.bpistol_item.ammo": "Ammo",
   "item.signum.laserbolt_item": "Laser Bolt",
@@ -45,8 +54,8 @@
   "item.signum.toxicgun.ammo": "Toxic Balls",
 
   "item.signum.detector_item": "Ore Detector",
+  "item.signum.detector_item.info": "Item Used to Test Ore WorldGen",
   "item.signum.e0rod": "E0Elemental Rod",
-  "item.signum.firestaff": "Fire Staff",
   "item.signum.slayer_staff": "Slayer Staff",
 
   "item.signum.tiberium_worm_spawn_egg": "Tiberium Worm Spawn Egg",
@@ -95,6 +104,7 @@
 
   "example_gui.signum.examplebutton":"Test Button",
   "message.signum.airballoon.mount":"Press Y to go up, B to go down, H for Airballoon Inventory",
+  "message.signum.airballoon.empty":"Out of Fuel, Refuel to Avoid Crash",
 
   "key.category.signum.modkeys":"Signum ModKeys",
   "key.signum.openinventory":"AirBalloon Inventory",

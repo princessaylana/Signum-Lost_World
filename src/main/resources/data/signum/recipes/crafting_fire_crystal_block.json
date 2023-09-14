@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "fire_crystal",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "signum:fire_crystal"
+    }
+  },
+  "result": {
+    "item": "signum:fire_crystal_block"
+  }
+}

@@ -11,7 +11,6 @@ import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -29,7 +28,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.effect.ModEffects;
 import za.lana.signum.particle.ModParticles;
 
 import java.awt.*;
@@ -104,7 +105,7 @@ public class TiberiumClusterBlock
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         World worldAccess = ctx.getWorld();
         BlockPos blockPos = ctx.getBlockPos();
-        return (BlockState) ((BlockState) this.getDefaultState().with(WATERLOGGED, worldAccess.getFluidState(blockPos).getFluid() == Fluids.WATER)).with(FACING, ctx.getSide());
+        return this.getDefaultState().with(WATERLOGGED, worldAccess.getFluidState(blockPos).getFluid() == Fluids.WATER).with(FACING, ctx.getSide());
     }
 
     @Override
@@ -130,34 +131,48 @@ public class TiberiumClusterBlock
         builder.add(WATERLOGGED, FACING);
     }
 
+    /**
     // Ion Storm work in progress
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-
+        super.randomDisplayTick(state, world, pos, random);
+        if (random.nextInt(25) != 0) {
+            return;
+        }
         double d = (double) pos.getX() + random.nextDouble();
-        double e = (double) pos.getY() + 0.8;
+        double e = (double) pos.getY() + 2.0; // 0.8f
         double f = (double) pos.getZ() + random.nextDouble();
         world.addParticle(ModParticles.TIBERIUM_PARTICLE, d, e, f, 0.0F, 2.5F, 0.0F);
 
-        if (random.nextDouble() < 0.2) {
-            int rgb = new Color(148, 253, 141).getRGB();
-            AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(world, d, e, f);
-            areaEffectCloudEntity.setParticleType(ModParticles.TIBERIUM_PARTICLE);
-            areaEffectCloudEntity.setWaitTime(600);
-            areaEffectCloudEntity.setDuration(100);
-            areaEffectCloudEntity.setRadius(5.0f);
-            areaEffectCloudEntity.setColor(rgb);
-            areaEffectCloudEntity.addEffect(new StatusEffectInstance(StatusEffects.POISON, 2, 5));
-            areaEffectCloudEntity.setRadiusGrowth((3.0f - areaEffectCloudEntity.getRadius()) / (float) areaEffectCloudEntity.getDuration());
-            areaEffectCloudEntity.setPosition(pos.getX(), pos.getY(), pos.getZ());
-            world.spawnEntity(areaEffectCloudEntity);
-            }
-
-        else if (random.nextDouble() < 0.1) {
-            LightningEntity lightningBolt = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
-            lightningBolt.setPosition(pos.getX(), pos.getY(), pos.getZ());
-            world.spawnEntity(lightningBolt);
+        if (random.nextInt(50) != 0) {
+            return;
         }
+        AreaEffectCloudEntity areaEffectCloudEntity = getAreaEffectCloudEntity(world, pos);
+        world.spawnEntity(areaEffectCloudEntity);
     }
+
+    @NotNull
+    private static AreaEffectCloudEntity getAreaEffectCloudEntity(World world, BlockPos pos) {
+        AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(world, pos.getX(), pos.getY(), pos.getZ());
+        areaEffectCloudEntity.setColor(4456006); // check effects for rgb color
+        areaEffectCloudEntity.setRadius(2.5f);
+        areaEffectCloudEntity.setRadiusOnUse(-0.5f);
+        areaEffectCloudEntity.setWaitTime(10);
+        areaEffectCloudEntity.setVelocity(0.0f,5.0f,0.0f);
+        areaEffectCloudEntity.setParticleType(ModParticles.TIBERIUM_PARTICLE);
+        areaEffectCloudEntity.setDuration(areaEffectCloudEntity.getDuration() / 2);
+        areaEffectCloudEntity.setRadiusGrowth(-areaEffectCloudEntity.getRadius() / (float)areaEffectCloudEntity.getDuration());
+        return areaEffectCloudEntity;
+    }
+    **/
+    /**
+    else if (random.nextDouble() < 0.8) {
+        LightningEntity lightningBolt = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
+        lightningBolt.setPosition(pos.getX(), pos.getY(), pos.getZ());
+        world.spawnEntity(lightningBolt);
+        }
+     **/
+
 }
+
 

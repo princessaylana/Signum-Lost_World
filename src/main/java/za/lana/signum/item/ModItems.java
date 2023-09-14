@@ -31,6 +31,7 @@ public class ModItems {
     public static final Item ELEMENTZEROCOAL = registerItem("elementzerocoal", new Item(new FabricItemSettings()));
 
     public static final Item TIBERIUM_SHARD = registerItem("tiberium_shard", new Item(new FabricItemSettings()));
+    public static final Item FIRE_CRYSTAL_SHARD = registerItem("fire_crystal_shard", new Item(new FabricItemSettings()));
     public static final Item GLASS_SHARD = registerItem("glass_shard", new Item(new FabricItemSettings()));
 
     public static final Item MANGANESE_INGOT = registerItem("manganese_ingot", new Item(new FabricItemSettings()));
@@ -43,6 +44,7 @@ public class ModItems {
 
     public static final Item ELEMENT_ZERO_CRYSTAL = registerItem("element_zero_crystal", new Item(new FabricItemSettings()));
     public static final Item FIRE_CRYSTAL = registerItem("fire_crystal", new Item(new FabricItemSettings()));
+    public static final Item ICE_CRYSTAL = registerItem("ice_crystal", new Item(new FabricItemSettings()));
     public static final Item MOISSANITE_CRYSTAL = registerItem("moissanite_crystal", new Item(new FabricItemSettings()));
     public static final Item QUARTZ_CRYSTAL = registerItem("quartz_crystal", new Item(new FabricItemSettings()));
     public static final Item TIBERIUM_CRYSTAL = registerItem("tiberium_crystal", new Item(new FabricItemSettings()));
@@ -67,16 +69,37 @@ public class ModItems {
     public static final Item PLASMA_SWORD = registerItem("plasma_sword",
             new SwordItem(ModToolMaterial.ELEMENT_ZERO, 10,6f, new FabricItemSettings()));
 
+    public static final Item TIBERIUM_STAFF = registerItem("tiberium_staff",
+            new TiberiumStaff(ModToolMaterial.TIBERIUM, new FabricItemSettings()));
+    public static final Item FREEZE_STAFF = registerItem("freeze_staff",
+            new IceStaff(ModToolMaterial.ICE_CRYSTAL, new FabricItemSettings()));
+    public static final Item TRANSMUTE_STAFF = registerItem("transmute_staff",
+            new TransmuteStaff(ModToolMaterial.ICE_CRYSTAL, new FabricItemSettings()));
+    public static final Item FIRE_STAFF = registerItem("fire_staff",
+            new FireStaff(ModToolMaterial.FIRE_CRYSTAL, new FabricItemSettings()));
+    public static final Item LIGHTNING_STAFF = registerItem("lightning_staff",
+            new ToolItem(ModToolMaterial.QUARTZ_CRYSTAL, new FabricItemSettings()));
+    public static final Item HEALING_STAFF = registerItem("healing_staff",
+            new ToolItem(ModToolMaterial.MOISSANITE_CRYSTAL, new FabricItemSettings()));
+    public static final Item TELEPORT_STAFF = registerItem("teleport_staff",
+            new Item(new FabricItemSettings()));
+    public static final Item GRAVITY_STAFF = registerItem("gravity_staff",
+            new ToolItem(ModToolMaterial.ELEMENT_ZERO, new FabricItemSettings()));
+    public static final Item PETRIFY_STAFF = registerItem("petrify_staff",
+            new Item(new FabricItemSettings()));
+    public static final Item WATER_STAFF = registerItem("water_staff",
+            new Item(new FabricItemSettings()));
+
     public static final Item TOXICBALL_ITEM = registerItem("toxicball_item", new ToxicBallItem(new FabricItemSettings()));
     public static final Item BPISTOL_ITEM = registerItem("bpistol_item", new BPistolItem(new FabricItemSettings()));
     public static final Item LASERBOLT_ITEM = registerItem("laserbolt_item", new LaserBoltItem(new FabricItemSettings()));
     public static final Item E0ROD = registerItem("e0rod", new E0RodItem(new FabricItemSettings()));
-    public static final Item FIRESTAFF = registerItem("firestaff", new FireStaffItem(new FabricItemSettings()));
-    public static final Item SLAYER_STAFF = registerItem("slayer_staff", new FireStaffItem(new FabricItemSettings()));
 
+    public static final Item SLAYER_STAFF = registerItem("slayer_staff",
+            new ToolItem(ModToolMaterial.FIRE_CRYSTAL, new FabricItemSettings()));
     public static final ToxicGunItem TOXICGUN = (ToxicGunItem) registerItem("toxicgun", new ToxicGunItem());
-
     public static final Item DETECTOR_ITEM = registerItem("detector_item", new OreDetectorItem(new FabricItemSettings().maxDamage(64)));
+    //
     public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_WORM, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
     public static final Item GHOST_SPAWN_EGG = registerItem("ghost_spawn_egg", new SpawnEggItem(
@@ -101,6 +124,7 @@ public class ModItems {
         entries.add(TIBERIUMCOAL);
 
         entries.add(TIBERIUM_SHARD);
+        entries.add(FIRE_CRYSTAL_SHARD);
         entries.add(GLASS_SHARD);
 
         entries.add(MANGANESE_INGOT);
@@ -113,6 +137,7 @@ public class ModItems {
 
         entries.add(ELEMENT_ZERO_CRYSTAL);
         entries.add(FIRE_CRYSTAL);
+        entries.add(ICE_CRYSTAL);
         entries.add(MOISSANITE_CRYSTAL);
         entries.add(QUARTZ_CRYSTAL);
         entries.add(TIBERIUM_CRYSTAL);
@@ -125,9 +150,19 @@ public class ModItems {
         entries.add(TIBERIUM_DUST);
 
         entries.add(E0ROD);
-        entries.add(FIRESTAFF);
         entries.add(SLAYER_STAFF);
         entries.add(PLASMA_SWORD);
+
+        entries.add(TIBERIUM_STAFF);
+        entries.add(FREEZE_STAFF);
+        entries.add(TRANSMUTE_STAFF);
+        entries.add(FIRE_STAFF);
+        entries.add(LIGHTNING_STAFF);
+        entries.add(HEALING_STAFF);
+        entries.add(TELEPORT_STAFF);
+        entries.add(GRAVITY_STAFF);
+        entries.add(PETRIFY_STAFF);
+        entries.add(WATER_STAFF);
 
         entries.add(TOXICBALL_ITEM);
         entries.add(BPISTOL_ITEM);

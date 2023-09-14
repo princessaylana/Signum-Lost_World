@@ -17,6 +17,12 @@
     "signum:small_tiberium_bud",
     "signum:tiberium_cluster",
     "signum:tiberium_block",
+    "signum:budding_fire_crystal",
+    "signum:large_fire_crystal_bud",
+    "signum:medium_fire_crystal_bud",
+    "signum:small_fire_crystal_bud",
+    "signum:fire_crystal_cluster",
+    "signum:fire_crystal_block",
     "signum:assembly_station_block",
     "signum:razorwire_block",
     "signum:skyforge"

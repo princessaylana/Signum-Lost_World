@@ -42,6 +42,13 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                     .add(ModBlocks.TIBERIUM_CLUSTER)
                     .add(ModBlocks.TIBERIUM_BLOCK)
 
+                    .add(ModBlocks.BUDDING_FIRE_CRYSTAL)
+                    .add(ModBlocks.LARGE_FIRE_CRYSTAL_BUD)
+                    .add(ModBlocks.MEDIUM_FIRE_CRYSTAL_BUD)
+                    .add(ModBlocks.SMALL_FIRE_CRYSTAL_BUD)
+                    .add(ModBlocks.FIRE_CRYSTAL_CLUSTER)
+                    .add(ModBlocks.FIRE_CRYSTAL_BLOCK)
+
                     .add(ModBlocks.ASSEMBLY_STATION_BLOCK)
                     .add(ModBlocks.RAZORWIRE_BLOCK)
                     .add(ModBlocks.SKYFORGE);
@@ -69,6 +76,13 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.SMALL_TIBERIUM_BUD)
                 .add(ModBlocks.TIBERIUM_CLUSTER)
                 .add(ModBlocks.TIBERIUM_BLOCK)
+
+                .add(ModBlocks.BUDDING_FIRE_CRYSTAL)
+                .add(ModBlocks.LARGE_FIRE_CRYSTAL_BUD)
+                .add(ModBlocks.MEDIUM_FIRE_CRYSTAL_BUD)
+                .add(ModBlocks.SMALL_FIRE_CRYSTAL_BUD)
+                .add(ModBlocks.FIRE_CRYSTAL_CLUSTER)
+                .add(ModBlocks.FIRE_CRYSTAL_BLOCK)
 
                 .add(ModBlocks.ASSEMBLY_STATION_BLOCK)
                 .add(ModBlocks.RAZORWIRE_BLOCK)

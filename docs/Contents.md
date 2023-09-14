@@ -12,11 +12,16 @@
 - Budding Tiberium (Toxic)
 - Sky Forge (Alloy Smelter)
 - Razorwire (Hurts Mobs)
+- Tiberium Fire
 
 ### Ores:
 - Element Zero (Gravity version of Redstone)
 - Manganse 
 - Moissanite 
+
+### Crystal Blocks:
+- Tiberium Crystals
+- Fire Crystals
 
 ### Fuels:
 - Coke Coal
@@ -34,6 +39,12 @@
 - Nuggets
 - Dusts
 
+### Weapons:
+- Tiberium Staff
+- Ice Staff
+- Fire Staff
+- Transmute Staff
+
 ### Mobs:
 - Ghost (50%)
 - Alien (50%)
@@ -41,7 +52,7 @@
 - Airdrone (50%)
 
 ### Transport:
-- Air Balloon (80%)
+- Air Balloon (90%)
 - Skycar (60%)
 
 
@@ -50,6 +61,9 @@
 
 ### Custom Effects:
 - Tiberium Poison
+- Freeze
+- Fire
+- Transmute 
 
 [Back](https://github.com/princessaylana/Signum-1.20/blob/master/README.md)
 

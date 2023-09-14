@@ -24,6 +24,7 @@ public class FreezeEffect extends StatusEffect {
 
             pLivingEntity.teleport(x, y, z);
             pLivingEntity.setVelocity(0, 0, 0);
+            pLivingEntity.setInPowderSnow(true);
         }
 
         super.applyUpdateEffect(pLivingEntity, pAmplifier);

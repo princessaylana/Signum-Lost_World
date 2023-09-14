@@ -26,7 +26,6 @@ public class TiberiumBlock
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
         if (!world.isClient) {
             BlockPos blockPos = hit.getBlockPos();
-            world.playSound(null, blockPos, ModSounds.TIBERIUM_HIT, SoundCategory.BLOCKS, 1.0f, 0.5f + world.random.nextFloat() * 1.2f);
             world.playSound(null, blockPos, ModSounds.TIBERIUM_AMBIENT, SoundCategory.BLOCKS, 1.0f, 0.5f + world.random.nextFloat() * 1.2f);
         }
     }

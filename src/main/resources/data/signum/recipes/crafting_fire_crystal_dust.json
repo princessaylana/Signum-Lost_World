@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "fire_crystal",
   "ingredients": [
     {
@@ -8,8 +7,7 @@
     }
   ],
   "result": {
-    "count": 9,
-    "item": "signum:fire_crystal_dust"
-  },
-  "show_notification": true
+    "item": "signum:fire_crystal_dust",
+    "count": 9
+  }
 }

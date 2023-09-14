@@ -34,6 +34,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.MOISSANITE_BLOCK);
         addDrop(ModBlocks.TIBERIUM_BLOCK);
         addDrop(ModBlocks.BUDDING_TIBERIUM);
+        addDrop(ModBlocks.FIRE_CRYSTAL_BLOCK);
+        addDrop(ModBlocks.BUDDING_FIRE_CRYSTAL);
 
         addDrop(ModBlocks.ASSEMBLY_STATION_BLOCK);
         addDrop(ModBlocks.RAZORWIRE_BLOCK);
@@ -50,10 +52,16 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(ModBlocks.MOISSANITE_ORE, rareOreDrops(ModBlocks.MOISSANITE_ORE, ModItems.RAW_MOISSANITE));
         addDrop(ModBlocks.DEEPSLATE_MOISSANITE_ORE, uncommonOreDrops(ModBlocks.DEEPSLATE_MOISSANITE_ORE, ModItems.RAW_MOISSANITE));
+
         addDrop(ModBlocks.SMALL_TIBERIUM_BUD, rareOreDrops(ModBlocks.SMALL_TIBERIUM_BUD, ModItems.TIBERIUM_SHARD));
         addDrop(ModBlocks.MEDIUM_TIBERIUM_BUD, rareOreDrops(ModBlocks.MEDIUM_TIBERIUM_BUD, ModItems.TIBERIUM_SHARD));
-        addDrop(ModBlocks.LARGE_TIBERIUM_BUD, rareOreDrops(ModBlocks.LARGE_TIBERIUM_BUD, ModItems.TIBERIUM_SHARD));
-        addDrop(ModBlocks.TIBERIUM_CLUSTER, uncommonOreDrops(ModBlocks.TIBERIUM_CLUSTER, ModItems.TIBERIUM_SHARD));
+        addDrop(ModBlocks.LARGE_TIBERIUM_BUD, lesscommonOreDrops(ModBlocks.LARGE_TIBERIUM_BUD, ModItems.TIBERIUM_SHARD));
+        addDrop(ModBlocks.TIBERIUM_CLUSTER, commonOreDrops(ModBlocks.TIBERIUM_CLUSTER, ModItems.TIBERIUM_SHARD));
+
+        addDrop(ModBlocks.SMALL_FIRE_CRYSTAL_BUD, rareOreDrops(ModBlocks.SMALL_FIRE_CRYSTAL_BUD, ModItems.FIRE_CRYSTAL_SHARD));
+        addDrop(ModBlocks.MEDIUM_FIRE_CRYSTAL_BUD, rareOreDrops(ModBlocks.MEDIUM_FIRE_CRYSTAL_BUD, ModItems.FIRE_CRYSTAL_SHARD));
+        addDrop(ModBlocks.LARGE_FIRE_CRYSTAL_BUD, lesscommonOreDrops(ModBlocks.LARGE_FIRE_CRYSTAL_BUD, ModItems.FIRE_CRYSTAL_SHARD));
+        addDrop(ModBlocks.FIRE_CRYSTAL_CLUSTER, commonOreDrops(ModBlocks.FIRE_CRYSTAL_CLUSTER, ModItems.FIRE_CRYSTAL_SHARD));
 
     }
     public LootTable.Builder commonOreDrops(Block drop, Item item) {

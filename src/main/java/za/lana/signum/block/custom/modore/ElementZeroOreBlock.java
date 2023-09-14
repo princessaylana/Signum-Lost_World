@@ -110,11 +110,14 @@ public class ElementZeroOreBlock
             BlockPos blockPos = pos.offset(direction);
             if (world.getBlockState(blockPos).isOpaqueFullCube(world, blockPos)) continue;
             Direction.Axis axis = direction.getAxis();
-            double e = axis == Direction.Axis.X ? 0.5 + 0.5625 * (double)direction.getOffsetX() : (double)random.nextFloat();
-            double f = axis == Direction.Axis.Y ? 0.5 + 0.5625 * (double)direction.getOffsetY() : (double)random.nextFloat();
-            double g = axis == Direction.Axis.Z ? 0.5 + 0.5625 * (double)direction.getOffsetZ() : (double)random.nextFloat();
-            world.addParticle(ModParticles.BlUE_DUST_PARTICLE, (double)pos.getX() + e, (double)pos.getY() + f, (double)pos.getZ() + g, 0.5F, 1.0F, 0.5F);
+            double e = axis == Direction.Axis.X ? 0.5 + 0.5625 * (double) direction.getOffsetX() : (double) random.nextFloat();
+            double f = axis == Direction.Axis.Y ? 0.5 + 0.5625 * (double) direction.getOffsetY() : (double) random.nextFloat();
+            double g = axis == Direction.Axis.Z ? 0.5 + 0.5625 * (double) direction.getOffsetZ() : (double) random.nextFloat();
+            int y = pos.getY();
+            world.addParticle(ModParticles.BlUE_DUST_PARTICLE, (double) pos.getX() + e, (double) pos.getY() + f, (double) pos.getZ() + g, 0.5f, Math.cos(y * 20) * 0.15d, 0.5F);
+
         }
+
     }
 
 

@@ -9,9 +9,6 @@ package za.lana.signum.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.world.World;
-import software.bernie.example.entity.CoolKidEntity;
-import software.bernie.geckolib.GeckoLib;
 import za.lana.signum.Signum;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -22,8 +19,7 @@ import za.lana.signum.entity.hostile.AirDroneEntity;
 import za.lana.signum.entity.hostile.GhostEntity;
 import za.lana.signum.entity.hostile.SigAlienEntity;
 import za.lana.signum.entity.hostile.TiberiumWormEntity;
-import za.lana.signum.entity.projectile.LaserBoltEntity;
-import za.lana.signum.entity.projectile.ToxicBallEntity;
+import za.lana.signum.entity.projectile.*;
 import za.lana.signum.entity.transport.AirBalloonEntity;
 import za.lana.signum.entity.transport.SkyCarEntity;
 
@@ -65,6 +61,26 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "airballoon"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, AirBalloonEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
+    public static final EntityType<TiberiumBoltEntity> TIBERIUM_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "tiberium_projectile"),
+            FabricEntityTypeBuilder.<TiberiumBoltEntity>create(SpawnGroup.MISC, TiberiumBoltEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
+    public static final EntityType<IceBoltEntity> ICE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "ice_projectile"),
+            FabricEntityTypeBuilder.<IceBoltEntity>create(SpawnGroup.MISC, IceBoltEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
+    public static final EntityType<TransmuteBoltEntity> TRANSMUTE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "transmute_projectile"),
+            FabricEntityTypeBuilder.<TransmuteBoltEntity>create(SpawnGroup.MISC, TransmuteBoltEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
+    public static final EntityType<FireBoltEntity> FIRE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "fire_projectile"),
+            FabricEntityTypeBuilder.<FireBoltEntity>create(SpawnGroup.MISC, FireBoltEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
 
     public static void registerModEntities() {
         Signum.LOGGER.info("Registering ModEntities for " + Signum.MOD_ID);

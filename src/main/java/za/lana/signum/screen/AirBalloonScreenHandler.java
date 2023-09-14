@@ -39,7 +39,7 @@ public class AirBalloonScreenHandler extends ScreenHandler {
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;
         this.addSlot(new ModFuelSlot(inventory, 0, 56, 53));
-        this.addSlot(new Slot(inventory, 1, 72, 53));
+        this.addSlot(new Slot(inventory, 1, 73, 53));
 
         addPlayerHotbar(playerInventory);
         addPlayerInventory(playerInventory);
@@ -47,7 +47,7 @@ public class AirBalloonScreenHandler extends ScreenHandler {
     }
 
     public boolean hasFuel() {
-        return propertyDelegate.get(1) > 0;
+        return propertyDelegate.get(0) > 0;
     }
 
     public int getScaledFuelProgress() {

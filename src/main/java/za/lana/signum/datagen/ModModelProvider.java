@@ -54,8 +54,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ELEMENT_ZERO_CRYSTAL, Models.GENERATED);
         itemModelGenerator.register(ModItems.ELEMENT_ZERO_DUST, Models.GENERATED);
         itemModelGenerator.register(ModItems.ELEMENTZEROCOAL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.FIRE_CRYSTAL_DUST, Models.GENERATED);
         itemModelGenerator.register(ModItems.FIRE_CRYSTAL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FIRE_CRYSTAL_DUST, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FIRE_CRYSTAL_SHARD, Models.GENERATED);
         itemModelGenerator.register(ModItems.GLASS_SHARD, Models.GENERATED);
         itemModelGenerator.register(ModItems.MANGANESE_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.MANGANESE_NUGGET, Models.GENERATED);

@@ -94,10 +94,10 @@ public class ToxicBallEntity
         Entity entity = entityHitResult.getEntity();
         World world = getWorld();
         BlockPos pos = getBlockPos();
-        int i = entity instanceof EndermanEntity ? 6 : 0;
-        List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, this.getBoundingBox().expand(4.0, 2.0, 4.0));
 
-        entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
+        int i = entity instanceof EndermanEntity ? 6 : 0;
+        //List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, this.getBoundingBox().expand(4.0, 2.0, 4.0));
+       // entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
         if (entity instanceof LivingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.GLOWING, 10, 0)));
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
@@ -113,6 +113,7 @@ public class ToxicBallEntity
         if (!this.getWorld().isClient) {
             this.bounce();
             this.getWorld().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5, this.getZ(), 0.5, 0.5, 0.5);
+            // world.getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(8.0), e->true).forEach(e->e.setOnFireFor(5));
         }
     }
 
@@ -134,6 +135,7 @@ public class ToxicBallEntity
             this.discard();
 
         }
+
     }
     // this seems to be needed?
     public void setDamage() {

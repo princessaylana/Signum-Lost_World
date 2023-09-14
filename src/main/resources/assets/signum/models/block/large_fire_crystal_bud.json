@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "signum:block/crystal/large_fire_crystal_bud"
+  }
+}

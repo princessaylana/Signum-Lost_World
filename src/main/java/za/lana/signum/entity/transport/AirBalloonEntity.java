@@ -7,7 +7,7 @@ package za.lana.signum.entity.transport;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -20,20 +20,15 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.State;
-import net.minecraft.state.property.Properties;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -41,6 +36,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
@@ -57,15 +53,10 @@ import software.bernie.geckolib.core.animation.Animation;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
-import za.lana.signum.block.entity.SkyForgeBlockEntity;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.screen.AirBalloonScreenHandler;
-import za.lana.signum.screen.SkyForgeScreenHandler;
-import za.lana.signum.screen.gui.AirBalloonDescription;
 import za.lana.signum.util.ImplementedInventory;
-
-import java.util.function.ToIntFunction;
 
 public class AirBalloonEntity
         extends AnimalEntity
@@ -75,21 +66,19 @@ public class AirBalloonEntity
     private int fuel;
     private int fuelTime = 0;
     private int maxFuelTime = 4;
-    public double U = 0.5f / 16; // entity attribute speed
+    public double U = 0.05f;
     public double V = 0.25f;
-    public double W = V + U;
+    public double W = V + U; // 0.30f
+    /** QUICK CALC
+     U = 0.05f;
+     V = 0.25f;
+     W = 0.30f;
+     **/
     private float lastIntensity;
     private int lastAge;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    private static final Ingredient ACCEPTABLE_FUEL = Ingredient.ofItems(
-            Items.CHARCOAL,
-            Items.COAL,
-            ModItems.COKECOAL,
-            ModItems.ELEMENTZEROCOAL,
-            ModItems.TIBERIUMCOAL);
 
-    private static final VoxelShape SHAPE = makeShape();
     private static VoxelShape makeShape(){
         VoxelShape shape = VoxelShapes.empty();
         shape = VoxelShapes.union(shape, VoxelShapes.cuboid(2, 6.53125, -0.484375, 2.03125, 7.03125, 2.50625));
@@ -115,14 +104,16 @@ public class AirBalloonEntity
 
         return shape;
     }
-
+    private static final VoxelShape SHAPE = makeShape();
+    private final Box voxelShape = VoxelShapes.cuboid(SHAPE.getBoundingBox()).getBoundingBox();;
     private final boolean isInAir;
     public static final String AIRBALLOON_MOUNT = "message.signum.airballoon.mount";
-
+    public static final String AIRBALLOON_EMPTY = "message.signum.airballoon.empty";
     //todo I cannot get the voxelshape/bounding box to work
     public
     AirBalloonEntity(EntityType<? extends AnimalEntity> entityType, World level) {
         super(entityType, level);
+        makeShape();
         Box boundingBox = SHAPE.getBoundingBox();
         this.setBoundingBox(boundingBox);
         this.setStepHeight(0.1f);
@@ -170,72 +161,6 @@ public class AirBalloonEntity
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
     }
-
-    // SHAPE
-    public static boolean canCollide(Entity entity, Entity other) {
-        return (other.isCollidable() || other.isPushable()) && !entity.isConnectedThroughVehicle(other);
-    }
-    public boolean isPushable() {
-        return true;
-    }
-    public boolean collidesWith(Entity other) {
-        return canCollide(this, other);
-    }
-
-    // DATA
-    @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
-        nbt.putDouble("airballoon.V", this.V);
-        nbt.putDouble("airballoon.W", this.W);
-        nbt.putShort("airballoon.fuel", (short)this.fuel);
-        nbt.putInt("airballoon.fuelTime", fuelTime);
-        nbt.putInt("airballoon.maxFuelTime", maxFuelTime);
-    }
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        Inventories.readNbt(nbt, inventory);
-        this.V = nbt.getDouble("airballoon.V");
-        this.W = nbt.getDouble("airballoon.W");
-        this.fuel = nbt.getShort("airballoon.fuel");
-        fuelTime = nbt.getShort("airballoon.fueltime");
-        maxFuelTime = nbt.getShort("airballoon.maxfueltime");
-    }
-
-    // INVENTORY / STORAGE
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return inventory;
-    }
-    @Override
-    public void markDirty() {
-    }
-
-    // FUEL
-
-    private void consumeFuel() {
-
-        if (ACCEPTABLE_FUEL.test(getStack(0)) && this.fuel + 3600 <= 32000) {
-            if(!getStack(0).isEmpty()) {
-                this.fuel += 3600;
-                this.fuelTime = FuelRegistry.INSTANCE.get(this.removeStack(0, 1).getItem());
-                this.maxFuelTime = this.fuelTime;
-            }
-        }
-    }
-    private static boolean hasFuel(AirBalloonEntity vehicle) {
-        return !vehicle.getStack(0).isEmpty();
-    }
-    private static boolean burningFuel(AirBalloonEntity vehicle) {
-        return vehicle.fuelTime > 0;
-    }
-    private void resetProgress() {
-        this.fuelTime = 0;
-    }
-
-    // TRAVEL & CONTROLS
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (!this.hasPassengers()) {
@@ -251,81 +176,169 @@ public class AirBalloonEntity
         return super.interactMob(player, hand);
     }
 
-    // todo fuel burning not working, cant find the error below:
-    @Override
-    public void travel(Vec3d pos) {
-        if (this.isAlive()) {
-            if (this.hasPassengers()) {
-                if (burningFuel(this)) {
-                    this.fuelTime--;
-                    if(this.fuelTime > 0) {
-                        //this.move(MovementType.SELF, this.getVelocity());
-                        this.setMovementSpeed((float) ((float) V + W));
-                        LivingEntity passenger = getControllingPassenger();
-                        this.prevYaw = getYaw();
-                        this.prevPitch = getPitch();
-                        assert passenger != null;
-                        setYaw(passenger.getYaw());
-                        setPitch(passenger.getPitch() * 0.1f);
-                        setRotation(getYaw(), getPitch());
-                        this.bodyYaw = this.getYaw();
-                        this.headYaw = this.bodyYaw;
-                        float x = (float) (passenger.sidewaysSpeed * V / 2);
-                        float y = (float) (passenger.upwardSpeed * V / 3);
-                        float z = (float) (passenger.forwardSpeed * V / 1.5);
-                        if (y <= 0)
-                            y *= 0.25f;
-                        // Fly Up
-                        if (KeyInputHandler.flyUpKey.isPressed()) {
-                            y = 0.5f;
-                            fuelFlameIncrease(getWorld(), getBlockPos());
-                            // should we only use fuel here?
-                            //this.fuelTime--;
-                                }
-                        // Fly Down
-                        else if ((KeyInputHandler.flyDownkey.isPressed())) {
-                            y = -0.3f;
-                            fuelFlameDecrease(getWorld(), getBlockPos());
-                        }
-                        // Float Air
-                        else {
-                            // floating down
-                            this.fallDistance = (float) (-1.2f + V);
-                            y = -0.48f * 2.5f;
-                            this.onLanding();
-                            this.bounce(this);
-                        }
-                        super.travel(new Vec3d(x, y, z));
+    // SHAPE
 
-                        }
-                    else {
-                        // Use Fuel
-                        if (this.fuelTime < 0) {
-                            this.consumeFuel();
-                        }
-                        // Empty Fuel
-                        else {
-                            // No fuel in slots falls down from the sky and crashes
-                            if (!hasFuel(this)) {
-                                //this.resetProgress();
-                                this.setVelocity(this.getVelocity().add(0.0, -0.3f, 0.0));
-                                this.fallDistance = (float) (1.0f + V);
-                                this.onLanding();
-                                //this.bounce(this);
-                            }
-                            // when the fuel is finished
-                        }
-                    }
-                    this.setMovementSpeed((float) ((float) V + W - 0.5f));
-                }
-            }
+    public Box getVisibilityBoundingBox() {
+        return this.voxelShape;
+    }
+    /** DEPRECIATED
+    public boolean collidesWithStateAtPos(BlockPos pos, BlockState state) {
+        VoxelShape voxelShape = state.getCollisionShape(this.getWorld(), pos, ShapeContext.of(this));
+        VoxelShape voxelShape2 = voxelShape.offset(pos.getX(), pos.getY(), pos.getZ());
+        return VoxelShapes.matchesAnywhere(voxelShape2, VoxelShapes.cuboid(this.getBoundingBox()), BooleanBiFunction.AND);
+    }
+    **/
+    public static boolean canCollide(Entity entity, Entity other) {
+        return (other.isCollidable() || other.isPushable()) && !entity.isConnectedThroughVehicle(other);
+    }
+    public boolean isPushable() {
+        return true;
+    }
+    public boolean collidesWith(Entity other) {
+        return canCollide(this, other);
+    }
+
+    // DATA
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        Inventories.writeNbt(nbt, inventory);
+        nbt.putDouble("airballoon.V", V);
+        nbt.putDouble("airballoon.W", W);
+        nbt.putInt("airballoon.fuel", fuel);
+        nbt.putInt("airballoon.fuelTime", fuelTime);
+        nbt.putInt("airballoon.maxFuelTime", maxFuelTime);
+    }
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        Inventories.readNbt(nbt, inventory);
+        this.V = nbt.getDouble("airballoon.V");
+        this.W = nbt.getDouble("airballoon.W");
+        fuel = nbt.getInt("airballoon.fuel");
+        fuelTime = nbt.getInt("airballoon.fueltime");
+        maxFuelTime = nbt.getInt("airballoon.maxfueltime");
+    }
+
+    // INVENTORY / STORAGE
+    @Override
+    public DefaultedList<ItemStack> getItems() {
+        return inventory;
+    }
+
+    // FUEL
+    private static boolean hasFuel(AirBalloonEntity vehicle) {
+        return !vehicle.getStack(0).isEmpty();
+    }
+
+    private void consumeFuel(AirBalloonEntity airBalloon) {
+        if(!getStack(0).isEmpty()) {
+            this.fuelTime = FuelRegistry.INSTANCE.get(this.removeStack(0, 1).getItem());
+            this.maxFuelTime = this.fuelTime;
+            this.fuel = this.fuelTime;
         }
     }
 
+    private static boolean burningFuel(AirBalloonEntity vehicle) {
+        return vehicle.fuelTime > 0;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (!this.getWorld().isClient()) {
+            // balloon needs to fly when burning fuel
+            if (burningFuel(this)){
+                --this.fuelTime;
+
+                //Vec3d vec3d = this.getVelocity();
+                super.travel(this.getVelocity());
+                //this.move(MovementType.SELF, this.getVelocity());
+            }
+            // balloon needs to refuel
+            else if (hasFuel(this) && !burningFuel(this)){
+                consumeFuel(this);
+            }
+            // Balloon needs to fall without fuel
+            else if (this.fuelTime < 0){
+                this.setVelocity(this.getX(), -1.25f,this.getZ());
+                //this.move(MovementType.SELF, this.getVelocity());
+                super.travel(this.getVelocity());
+                this.fallDistance = 1.0f;
+                this.onLanding();
+
+                /**
+                 World world = this.getWorld();
+                 if(world.isClient){
+                 PlayerEntity player = (PlayerEntity) this.getControllingPassenger();
+                 assert player != null;
+                 player.sendMessage(Text.translatable(AIRBALLOON_EMPTY).fillStyle(
+                 Style.EMPTY.withColor(Formatting.RED)), false);
+                 }
+                 **/
+
+            }
+        }
+    }
+    @Override
+    public void travel(Vec3d pos) {
+        if (isAlive()) {
+            //should add serverworld?
+            if (hasPassengers()) {
+                this.setMovementSpeed((float) ((float) V + W)); // 0.55f
+                //this.move(MovementType.SELF, this.getVelocity());
+                LivingEntity passenger = getControllingPassenger();
+                this.prevYaw = getYaw();
+                this.prevPitch = getPitch();
+                assert passenger != null;
+                setYaw(passenger.getYaw());
+                setPitch(passenger.getPitch() * 0.1f);
+                setRotation(getYaw(), getPitch());
+                this.bodyYaw = this.getYaw();
+                this.headYaw = this.bodyYaw;
+                float x = (float) (passenger.sidewaysSpeed * V / 2.0f);
+                float y = (float) (passenger.upwardSpeed * V / 2.5f);
+                float z = (float) (passenger.forwardSpeed * V / 0.25f);
+                if (y <= 0)
+                    y *= 0.25f;
+                // Fly Up
+                if (KeyInputHandler.flyUpKey.isPressed()) {
+                    y = 0.5f;
+                    fuelFlameIncrease(getWorld(), getBlockPos());
+                }
+                // Fly Down
+                else if ((KeyInputHandler.flyDownkey.isPressed())) {
+                    y = -1.0f;
+                    fuelFlameDecrease(getWorld(), getBlockPos());
+                }
+                // Float Air
+                else {
+                    // floating down
+                    this.fallDistance = 0.25f;
+                    y = -0.48f * 2.5f;
+                    this.onLanding();
+                    this.bounce(this);
+                }
+                super.travel(new Vec3d(x, y, z));
+            }
+            if (!hasPassengers()) {
+                this.setVelocity(this.getX(), -0.25f,this.getZ());
+                this.onLanding();
+                this.fallDistance = 0.0f;
+                //this.bounce(this);
+
+            }
+
+        }
+    }
+
+    // LANDING
+    // should we add gravity ? 0.8f?
     @Override
     public boolean hasNoGravity() {
         return true;
     }
+
     private void bounce(Entity entity) {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0.0) {
@@ -335,6 +348,8 @@ public class AirBalloonEntity
     }
 
     // PASSENGERS
+    public void onPassengerLookAround(Entity passenger) {
+    }
     @Nullable
     @Override
     public LivingEntity getControllingPassenger() {

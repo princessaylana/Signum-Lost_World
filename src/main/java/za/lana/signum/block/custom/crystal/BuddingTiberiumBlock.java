@@ -10,6 +10,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -24,7 +25,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import za.lana.signum.block.ModBlocks;
+import za.lana.signum.block.custom.modore.ElementZeroOreBlock;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
@@ -32,7 +35,8 @@ import za.lana.signum.sound.ModSounds;
 public class BuddingTiberiumBlock
         extends TiberiumBlock {
     public static final int GROW_CHANCE = 5;
-
+    public static final int DURATION_EFFECT = 100;
+    public static final int DISPLAY_CHANCE = GROW_CHANCE * DURATION_EFFECT;
 
     public BuddingTiberiumBlock(AbstractBlock.Settings settings) {
         super(settings);
@@ -64,6 +68,11 @@ public class BuddingTiberiumBlock
                     .with(TiberiumClusterBlock.WATERLOGGED, blockState.getFluidState().getFluid() == Fluids.WATER);
             world.setBlockState(blockPos, blockState2);
         }
+        for(int x = 0; x < 2; ++x) {
+            for(int y = 0; y < 24; ++y) {
+                world.addParticle(ModParticles.TIBERIUM_PARTICLE, pos.getX(), pos.getY(), pos.getZ(),
+                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d);}
+        }
     }
 
     public static boolean canGrowIn(BlockState state) {
@@ -74,26 +83,32 @@ public class BuddingTiberiumBlock
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 20, 3));
-            BuddingTiberiumBlock.spawnParticles(world, pos);
-            //world.playSound(null, pos, ModSounds.TIBERIUM_WALK, SoundCategory.BLOCKS, 1.0f, 0.5f);
+            // BuddingTiberiumBlock.spawnParticles(world, pos);
+            // world.playSound(null, pos, ModSounds.TIBERIUM_WALK, SoundCategory.BLOCKS, 1.0f, 0.5f);
         }
         super.onSteppedOn(world, pos, state, entity);
     }
-
-    private static void spawnParticles(World world, BlockPos pos) {
-        double d = 0.5625;
-        Random random = world.random;
-        for (Direction direction : Direction.values()) {
-            BlockPos blockPos = pos.offset(direction);
-            Direction.Axis axis = direction.getAxis();
-            double e = axis == Direction.Axis.X ? 0.5 + 0.5625 * (double) direction.getOffsetX() : (double) random.nextFloat();
-            double f = axis == Direction.Axis.Y ? 0.5 + 0.5625 * (double) direction.getOffsetY() : (double) random.nextFloat();
-            double g = axis == Direction.Axis.Z ? 0.5 + 0.5625 * (double) direction.getOffsetZ() : (double) random.nextFloat();
-            world.addParticle(ModParticles.TIBERIUM_PARTICLE, (double) pos.getX() + e, (double) pos.getY() + f, (double) pos.getZ() + g, 0.5F, 1.5F, 0.5F);
-
-            //world.playSound(null, blockPos, ModSounds.TIBERIUM_AMBIENT, SoundCategory.BLOCKS, 1.0f, 0.5f);
-            //world.playSound(null, blockPos, ModSounds.TIBERIUM_AMBIENT, SoundCategory.BLOCKS, 1.0f, 0.5f + world.random.nextFloat() * 0.5f);
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        //super.randomDisplayTick(state, world, pos, random);
+        if (random.nextInt(DISPLAY_CHANCE) != 0) {
+            double d = (double) pos.getX() + random.nextDouble();
+            double e = (double) pos.getY() + 1.5f; // 0.8f
+            double f = (double) pos.getZ() + random.nextDouble();
+            world.addParticle(ModParticles.TIBERIUM_PARTICLE, d, e, f, 0.0F, 2.5F, 0.0F);
+            //world.playSound(d, e, f, ModSounds.TIBERIUM_AMBIENT, SoundCategory.BLOCKS, 0.2f + random.nextFloat() * 0.2f, 0.9f + random.nextFloat() * 0.15f, false);
+            //world.playSound(d, e, f, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2f + random.nextFloat() * 0.2f, 0.9f + random.nextFloat() * 0.15f, false);
         }
+        /**
+         * // spawn cloud
+         while (random.nextInt(50) != 0) {
+         double d = (double) pos.getX() + random.nextDouble();
+         double e = (double) pos.getY() + 2.5f ; // 0.8f
+         double f = (double) pos.getZ() + random.nextDouble();
+         AreaEffectCloudEntity areaEffectCloudEntity = getAreaEffectCloudEntity(world, pos);
+         world.spawnEntity(areaEffectCloudEntity);
+         world.playSound(d, e, f, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2f + random.nextFloat() * 0.2f, 0.9f + random.nextFloat() * 0.15f, false);}
+         **/
     }
 
 }

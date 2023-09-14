@@ -16,12 +16,21 @@ import za.lana.signum.Signum;
 public class ModParticles {
     public static final DefaultParticleType BlUE_DUST_PARTICLE = FabricParticleTypes.simple();
     public static final DefaultParticleType TIBERIUM_PARTICLE = FabricParticleTypes.simple();
-
+    public static final DefaultParticleType FREEZE_PARTICLE = FabricParticleTypes.simple();
+    public static final DefaultParticleType TRANSMUTE_PARTICLE = FabricParticleTypes.simple();
+    public static final DefaultParticleType FLAME_PARTICLE = FabricParticleTypes.simple();
     public static void registerParticles() {
         Registry.register(Registries.PARTICLE_TYPE, new Identifier(Signum.MOD_ID, "blue_dust_particle"),
                 BlUE_DUST_PARTICLE);
         Registry.register(Registries.PARTICLE_TYPE, new Identifier(Signum.MOD_ID, "tiberium_particle"),
                 TIBERIUM_PARTICLE);
+        Registry.register(Registries.PARTICLE_TYPE, new Identifier(Signum.MOD_ID, "freeze_particle"),
+                FREEZE_PARTICLE);
+        Registry.register(Registries.PARTICLE_TYPE, new Identifier(Signum.MOD_ID, "transmute_particle"),
+                TRANSMUTE_PARTICLE);
+        Registry.register(Registries.PARTICLE_TYPE, new Identifier(Signum.MOD_ID, "flame_particle"),
+                FLAME_PARTICLE);
+
 
         Signum.LOGGER.info("Registering ModParticles for " + Signum.MOD_ID);
     }

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "tiberium",
   "ingredients": [
     {
@@ -8,8 +7,7 @@
     }
   ],
   "result": {
-    "count": 9,
-    "item": "signum:tiberium_dust"
-  },
-  "show_notification": true
+    "item": "signum:tiberium_dust",
+    "count": 9
+  }
 }

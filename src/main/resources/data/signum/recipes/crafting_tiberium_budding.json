@@ -1,7 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
   "group": "tiberium",
+  "pattern": [
+    "X",
+    "#"
+  ],
   "key": {
     "X": {
       "item": "signum:tiberium_cluster"
@@ -12,13 +15,8 @@
       }
     ]
   },
-  "pattern": [
-    "X",
-    "#"
-  ],
   "result": {
-    "count": 1,
-    "item": "signum:budding_tiberium"
-  },
-  "show_notification": true
+    "item": "signum:budding_tiberium",
+    "count": 1
+  }
 }

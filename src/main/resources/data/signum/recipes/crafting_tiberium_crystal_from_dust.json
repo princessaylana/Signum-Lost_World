@@ -1,8 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "ingredient",
   "group": "tiberium",
-  "pattern":  [
+  "pattern": [
     "###",
     "###",
     "###"
@@ -14,6 +13,5 @@
   },
   "result": {
     "item": "signum:tiberium_crystal"
-  },
-  "show_notification": true
+  }
 }

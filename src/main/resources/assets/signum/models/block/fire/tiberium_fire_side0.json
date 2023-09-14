@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_fire_side",
+  "textures": {
+    "fire": "signum:block/fire/tiberium_fire_0"
+  }
+}

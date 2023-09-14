@@ -1,19 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
   "group": "tiberium",
-  "key": {
-    "#": {
-      "item": "signum:tiberium_shard"
-    }
-  },
   "pattern": [
     "###",
     "###",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "signum:tiberium_shard"
+    }
+  },
   "result": {
     "item": "signum:tiberium_block"
-  },
-  "show_notification": true
+  }
 }
