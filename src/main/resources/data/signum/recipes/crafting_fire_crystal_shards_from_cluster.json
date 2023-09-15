@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "fire_crystal",
+  "ingredients": [
+    {
+      "item": "signum:fire_crystal_cluster"
+    }
+  ],
+  "result": {
+    "item": "signum:fire_crystal_shard",
+    "count": 3
+  }
+}

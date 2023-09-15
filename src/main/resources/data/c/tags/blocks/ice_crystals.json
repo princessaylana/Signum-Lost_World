@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "signum:budding_ice_crystal",
+    "signum:large_ice_crystal_bud",
+    "signum:medium_ice_crystal_bud",
+    "signum:small_ice_crystal_bud",
+    "signum:ice_crystal_cluster"
+  ]
+}

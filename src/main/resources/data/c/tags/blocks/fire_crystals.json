@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "signum:budding_fire_crystal",
+    "signum:large_fire_crystal_bud",
+    "signum:medium_fire_crystal_bud",
+    "signum:small_fire_crystal_bud",
+    "signum:fire_crystal_cluster"
+  ]
+}

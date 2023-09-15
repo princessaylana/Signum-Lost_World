@@ -75,6 +75,7 @@ public class ModBlocks {
     public static final Block TIBERIUM_FIRE = registerBlock("tiberium_fire",
             new TiberiumFireBlock(FabricBlockSettings.copyOf(Blocks.FIRE).mapColor(MapColor.LIME).replaceable().noCollision().breakInstantly()
                     .luminance(state -> 15).sounds(BlockSoundGroup.WOOL).pistonBehavior(PistonBehavior.DESTROY)));
+    //tiberium
     public static final Block TIBERIUM_BLOCK = registerBlock("tiberium_block", new TiberiumBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(30.0f, 100.0f).sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).requiresTool()));
     public static final Block BUDDING_TIBERIUM = registerBlock("budding_tiberium", new BuddingTiberiumBlock(FabricBlockSettings.copyOf(Blocks.BUDDING_AMETHYST).mapColor(MapColor.LIME).ticksRandomly().strength(1.5f).sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).luminance(state -> 3).requiresTool().pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block TIBERIUM_CLUSTER = registerBlock("tiberium_cluster", new TiberiumClusterBlock(7, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.LIME).solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.AMETHYST_BLOCK).strength(1.5f).luminance(state -> 7).pistonBehavior(PistonBehavior.DESTROY)));
@@ -82,6 +83,7 @@ public class ModBlocks {
     public static final Block MEDIUM_TIBERIUM_BUD = registerBlock("medium_tiberium_bud", new TiberiumClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block SMALL_TIBERIUM_BUD = registerBlock("small_tiberium_bud", new TiberiumClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
 
+    //fire
     public static final Block FIRE_CRYSTAL_BLOCK = registerBlock("fire_crystal_block",
             new FireCrystalBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.BRIGHT_RED)
                     .strength(30.0f, 100.0f)
@@ -103,7 +105,75 @@ public class ModBlocks {
     public static final Block SMALL_FIRE_CRYSTAL_BUD = registerBlock("small_fire_crystal_bud",
             new FireCrystalClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
                     .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
+    // ice
+    public static final Block ICE_CRYSTAL_BLOCK = registerBlock("ice_crystal_block",
+            new IceCrystalBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.DIAMOND_BLUE)
+                    .strength(30.0f, 100.0f)
+                    .sounds(BlockSoundGroup.AMETHYST_CLUSTER).requiresTool()));
+    public static final Block BUDDING_ICE_CRYSTAL = registerBlock("budding_ice_crystal",
+            new BuddingIceCrystalBlock(FabricBlockSettings.copyOf(Blocks.BUDDING_AMETHYST).mapColor(MapColor.DIAMOND_BLUE)
+                    .ticksRandomly().strength(1.5f).sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).luminance(state -> 3)
+                    .requiresTool().pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block ICE_CRYSTAL_CLUSTER = registerBlock("ice_crystal_cluster",
+            new IceCrystalClusterBlock(7, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.DIAMOND_BLUE)
+                    .solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.AMETHYST_BLOCK).strength(1.5f).luminance(state -> 7)
+                    .pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block LARGE_ICE_CRYSTAL_BUD = registerBlock("large_ice_crystal_bud",
+            new IceCrystalClusterBlock(5, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 5).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block MEDIUM_ICE_CRYSTAL_BUD = registerBlock("medium_ice_crystal_bud",
+            new IceCrystalClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block SMALL_ICE_CRYSTAL_BUD = registerBlock("small_ice_crystal_bud",
+            new IceCrystalClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
+    //exotic
+    public static final Block EXOTIC_CRYSTAL_BLOCK = registerBlock("exotic_crystal_block",
+            new ExoticCrystalBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.GOLD)
+                    .strength(30.0f, 100.0f)
+                    .sounds(BlockSoundGroup.AMETHYST_CLUSTER).requiresTool()));
+    public static final Block BUDDING_EXOTIC_CRYSTAL = registerBlock("budding_exotic_crystal",
+            new BuddingExoticCrystalBlock(FabricBlockSettings.copyOf(Blocks.BUDDING_AMETHYST).mapColor(MapColor.GOLD)
+                    .ticksRandomly().strength(1.5f).sounds(ModSounds.TIBERIUM_BLOCK_SOUNDS).luminance(state -> 3)
+                    .requiresTool().pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block EXOTIC_CRYSTAL_CLUSTER = registerBlock("exotic_crystal_cluster",
+            new ExoticCrystalClusterBlock(7, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.GOLD)
+                    .solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.AMETHYST_BLOCK).strength(1.5f).luminance(state -> 7)
+                    .pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block LARGE_EXOTIC_CRYSTAL_BUD = registerBlock("large_exotic_crystal_bud",
+            new ExoticCrystalClusterBlock(5, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 5).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block MEDIUM_EXOTIC_CRYSTAL_BUD = registerBlock("medium_exotic_crystal_bud",
+            new ExoticCrystalClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block SMALL_EXOTIC_CRYSTAL_BUD = registerBlock("small_exotic_crystal_bud",
+            new ExoticCrystalClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
+    //quartz
+    public static final Block QUARTZ_CRYSTAL_BLOCK = registerBlock("quartz_crystal_block",
+            new QuartzCrystalBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).mapColor(MapColor.WHITE)
+                    .strength(30.0f, 100.0f)
+                    .sounds(BlockSoundGroup.AMETHYST_CLUSTER).requiresTool()));
+    public static final Block BUDDING_QUARTZ_CRYSTAL = registerBlock("budding_quartz_crystal",
+            new BuddingQuartzCrystalBlock(FabricBlockSettings.copyOf(Blocks.BUDDING_AMETHYST).mapColor(MapColor.WHITE)
+                    .ticksRandomly().strength(1.5f).sounds(BlockSoundGroup.AMETHYST_CLUSTER).luminance(state -> 3)
+                    .requiresTool().pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block QUARTZ_CRYSTAL_CLUSTER = registerBlock("quartz_crystal_cluster",
+            new QuartzCrystalClusterBlock(7, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.WHITE)
+                    .solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5f).luminance(state -> 7)
+                    .pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block LARGE_QUARTZ_CRYSTAL_BUD = registerBlock("large_quartz_crystal_bud",
+            new QuartzCrystalClusterBlock(5, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 5).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block MEDIUM_QUARTZ_CRYSTAL_BUD = registerBlock("medium_quartz_crystal_bud",
+            new QuartzCrystalClusterBlock(4, 3, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 3).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block SMALL_QUARTZ_CRYSTAL_BUD = registerBlock("small_quartz_crystal_bud",
+            new QuartzCrystalClusterBlock(3, 4, FabricBlockSettings.copyOf(Blocks.AMETHYST_CLUSTER)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK).solid().luminance(state -> 1).pistonBehavior(PistonBehavior.DESTROY)));
+    // ender crystal
 
+    // water crystal
 
     public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
             new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(8.0f,100.0f)));

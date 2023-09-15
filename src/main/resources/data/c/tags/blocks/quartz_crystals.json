@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "signum:budding_quartz_crystal",
+    "signum:large_quartz_crystal_bud",
+    "signum:medium_quartz_crystal_bud",
+    "signum:small_quartz_crystal_bud",
+    "signum:quartz_crystal_cluster"
+  ]
+}

@@ -20,6 +20,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.EggEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.hit.BlockHitResult;
@@ -73,11 +74,14 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
                 // spawn a frog #3
                 EntityType.FROG.spawn(((ServerWorld) entity.getWorld()), entity.getBlockPos(), SpawnReason.TRIGGERED);
                 //
-            entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+
             entity.damage(getWorld().getDamageSources().magic(), dam);
             // damage and destroy the entity
             entity.discard();
             this.discard();
+            }
+            if (this.getWorld().isClient){
+                entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             }
         }
         if (entity instanceof PlayerEntity){
@@ -91,22 +95,18 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
             //need to remove the frog entity as well
             this.discard();
         }
-        // spawn particles
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.TRANSMUTE_PARTICLE, this.getX(), this.getY(), this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);
-            }
+        //client
+        if (this.getWorld().isClient){
+            level.addParticle(ModParticles.TRANSMUTE_PARTICLE, getX(), getY(), getZ(), 0.0, 2.0, 0.0);
+            this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
         }
     }
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
+        // EFFECT
         if (!this.getWorld().isClient) {
-
-            this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
-            //this.getWorld().addParticle(ModParticles.TRANSMUTE_PARTICLE, this.getX(), this.getY() + 0.5, this.getZ(), 0.5, 0.5 * 0.25d * 0.5f, 0.5);
             //transmute blocks
             Entity entity = this.getOwner();
             if (!(entity instanceof MobEntity) || this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
@@ -117,11 +117,14 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
                 this.discard();
             }
         }
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.TRANSMUTE_PARTICLE, this.getX(), this.getY() + 0.5, this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);
-            }
+        // PARTICLES AND SOUND
+        if (this.getWorld().isClient()){
+            this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            World world = this.getWorld();
+            world.addParticle(ModParticles.TRANSMUTE_PARTICLE, this.getX() + 0.5, this.getY() + 2.0, this.getZ() + 0.5,
+                    (double)((float)this.getX() + random.nextFloat()) - 0.5,
+                    (float)this.getY() - random.nextFloat() - 1.0f,
+                    (double)((float)this.getZ() + random.nextFloat()) - 0.5);
         }
     }
     private void bounce() {

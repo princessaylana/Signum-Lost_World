@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "signum:block/crystal/quartz_crystal_block"
+  }
+}

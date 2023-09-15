@@ -1,8 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "fire_crystal",
   "pattern": [
-    "# #",
-    " # "
+    " # ",
+    "# #"
   ],
   "key": {
     "#": {

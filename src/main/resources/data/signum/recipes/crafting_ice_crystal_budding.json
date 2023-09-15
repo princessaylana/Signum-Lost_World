@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ice_crystal",
+  "pattern": [
+    " X ",
+    "X#X",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "signum:ice_crystal_cluster"
+    },
+    "#": [
+      {
+        "item": "signum:ice_crystal_block"
+      }
+    ]
+  },
+  "result": {
+    "item": "signum:budding_ice_crystal",
+    "count": 1
+  }
+}

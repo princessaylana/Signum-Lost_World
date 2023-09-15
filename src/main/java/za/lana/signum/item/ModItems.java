@@ -32,6 +32,9 @@ public class ModItems {
 
     public static final Item TIBERIUM_SHARD = registerItem("tiberium_shard", new Item(new FabricItemSettings()));
     public static final Item FIRE_CRYSTAL_SHARD = registerItem("fire_crystal_shard", new Item(new FabricItemSettings()));
+    public static final Item ICE_CRYSTAL_SHARD = registerItem("ice_crystal_shard", new Item(new FabricItemSettings()));
+    public static final Item EXOTIC_CRYSTAL_SHARD = registerItem("exotic_crystal_shard", new Item(new FabricItemSettings()));
+    public static final Item QUARTZ_CRYSTAL_SHARD = registerItem("quartz_crystal_shard", new Item(new FabricItemSettings()));
     public static final Item GLASS_SHARD = registerItem("glass_shard", new Item(new FabricItemSettings()));
 
     public static final Item MANGANESE_INGOT = registerItem("manganese_ingot", new Item(new FabricItemSettings()));
@@ -42,19 +45,22 @@ public class ModItems {
     public static final Item MOISSANITE = registerItem("moissanite", new Item(new FabricItemSettings()));
     public static final Item ELEMENT_ZERO = registerItem("element_zero", new Item(new FabricItemSettings()));
 
-    public static final Item ELEMENT_ZERO_CRYSTAL = registerItem("element_zero_crystal", new Item(new FabricItemSettings()));
+    public static final Item TIBERIUM_CRYSTAL = registerItem("tiberium_crystal", new Item(new FabricItemSettings()));
     public static final Item FIRE_CRYSTAL = registerItem("fire_crystal", new Item(new FabricItemSettings()));
     public static final Item ICE_CRYSTAL = registerItem("ice_crystal", new Item(new FabricItemSettings()));
-    public static final Item MOISSANITE_CRYSTAL = registerItem("moissanite_crystal", new Item(new FabricItemSettings()));
+    public static final Item EXOTIC_CRYSTAL = registerItem("exotic_crystal", new Item(new FabricItemSettings()));
     public static final Item QUARTZ_CRYSTAL = registerItem("quartz_crystal", new Item(new FabricItemSettings()));
-    public static final Item TIBERIUM_CRYSTAL = registerItem("tiberium_crystal", new Item(new FabricItemSettings()));
+    public static final Item MOISSANITE_CRYSTAL = registerItem("moissanite_crystal", new Item(new FabricItemSettings()));
+    public static final Item ELEMENT_ZERO_CRYSTAL = registerItem("element_zero_crystal", new Item(new FabricItemSettings()));
 
-    public static final Item ELEMENT_ZERO_DUST = registerItem("element_zero_dust", new Item(new FabricItemSettings()));
-    public static final Item FIRE_CRYSTAL_DUST = registerItem("fire_crystal_dust", new Item(new FabricItemSettings()));
     public static final Item MANGANESE_DUST = registerItem("manganese_dust", new Item(new FabricItemSettings()));
-    public static final Item MOISSANITE_DUST = registerItem("moissanite_dust", new Item(new FabricItemSettings()));
-    public static final Item QUARTZ_CRYSTAL_DUST = registerItem("quartz_crystal_dust", new Item(new FabricItemSettings()));
     public static final Item TIBERIUM_DUST = registerItem("tiberium_dust", new Item(new FabricItemSettings()));
+    public static final Item FIRE_CRYSTAL_DUST = registerItem("fire_crystal_dust", new Item(new FabricItemSettings()));
+    public static final Item EXOTIC_CRYSTAL_DUST = registerItem("exotic_crystal_dust", new Item(new FabricItemSettings()));
+    public static final Item ICE_CRYSTAL_DUST = registerItem("ice_crystal_dust", new Item(new FabricItemSettings()));
+    public static final Item QUARTZ_CRYSTAL_DUST = registerItem("quartz_crystal_dust", new Item(new FabricItemSettings()));
+    public static final Item MOISSANITE_DUST = registerItem("moissanite_dust", new Item(new FabricItemSettings()));
+    public static final Item ELEMENT_ZERO_DUST = registerItem("element_zero_dust", new Item(new FabricItemSettings()));
 
     public static final Item MANGANESE_PICKAXE = registerItem("manganese_pickaxe",
             new PickaxeItem(ModToolMaterial.MANGANESE, 2,3f, new FabricItemSettings()));
@@ -125,6 +131,9 @@ public class ModItems {
 
         entries.add(TIBERIUM_SHARD);
         entries.add(FIRE_CRYSTAL_SHARD);
+        entries.add(EXOTIC_CRYSTAL_SHARD);
+        entries.add(ICE_CRYSTAL_SHARD);
+        entries.add(QUARTZ_CRYSTAL_SHARD);
         entries.add(GLASS_SHARD);
 
         entries.add(MANGANESE_INGOT);
@@ -135,19 +144,22 @@ public class ModItems {
         entries.add(MOISSANITE);
         entries.add(ELEMENT_ZERO);
 
-        entries.add(ELEMENT_ZERO_CRYSTAL);
-        entries.add(FIRE_CRYSTAL);
-        entries.add(ICE_CRYSTAL);
-        entries.add(MOISSANITE_CRYSTAL);
-        entries.add(QUARTZ_CRYSTAL);
         entries.add(TIBERIUM_CRYSTAL);
+        entries.add(ICE_CRYSTAL);
+        entries.add(EXOTIC_CRYSTAL);
+        entries.add(FIRE_CRYSTAL);
+        entries.add(QUARTZ_CRYSTAL);
+        entries.add(MOISSANITE_CRYSTAL);
+        entries.add(ELEMENT_ZERO_CRYSTAL);
 
-        entries.add(ELEMENT_ZERO_DUST);
-        entries.add(FIRE_CRYSTAL_DUST);
-        entries.add(MOISSANITE_DUST);
         entries.add(MANGANESE_DUST);
-        entries.add(QUARTZ_CRYSTAL_DUST);
         entries.add(TIBERIUM_DUST);
+        entries.add(ICE_CRYSTAL_DUST);
+        entries.add(EXOTIC_CRYSTAL_DUST);
+        entries.add(FIRE_CRYSTAL_DUST);
+        entries.add(QUARTZ_CRYSTAL_DUST);
+        entries.add(MOISSANITE_DUST);
+        entries.add(ELEMENT_ZERO_DUST);
 
         entries.add(E0ROD);
         entries.add(SLAYER_STAFF);

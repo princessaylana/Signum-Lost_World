@@ -1,0 +1,11 @@
+{
+  "parent": "signum:item/ice_crystal_bud",
+  "textures": {
+    "layer0": "signum:block/crystal/large_quartz_crystal_bud"
+  },
+  "display": {
+    "fixed": {
+      "translation": [ 0, 4, 0 ]
+    }
+  }
+}

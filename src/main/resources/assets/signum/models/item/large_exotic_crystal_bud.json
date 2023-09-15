@@ -1,0 +1,11 @@
+{
+  "parent": "signum:item/exotic_crystal_bud",
+  "textures": {
+    "layer0": "signum:block/crystal/large_exotic_crystal_bud"
+  },
+  "display": {
+    "fixed": {
+      "translation": [ 0, 4, 0 ]
+    }
+  }
+}

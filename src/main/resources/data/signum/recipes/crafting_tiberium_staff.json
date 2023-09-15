@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "staff",
+  "group": "tiberium",
   "pattern": [
     "W#W",
     " # ",

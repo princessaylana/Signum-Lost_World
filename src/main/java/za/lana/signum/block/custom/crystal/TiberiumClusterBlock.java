@@ -7,10 +7,6 @@
 package za.lana.signum.block.custom.crystal;
 
 import net.minecraft.block.*;
-import net.minecraft.entity.AreaEffectCloudEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -22,19 +18,12 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import za.lana.signum.effect.ModEffects;
-import za.lana.signum.particle.ModParticles;
-
-import java.awt.*;
-import java.util.Collection;
 
 public class TiberiumClusterBlock
         extends TiberiumBlock
@@ -62,24 +51,14 @@ public class TiberiumClusterBlock
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction direction = state.get(FACING);
-        switch (direction) {
-            case NORTH: {
-                return this.northShape;
-            }
-            case SOUTH: {
-                return this.southShape;
-            }
-            case EAST: {
-                return this.eastShape;
-            }
-            case WEST: {
-                return this.westShape;
-            }
-            case DOWN: {
-                return this.downShape;
-            }
-        }
-        return this.upShape;
+        return switch (direction) {
+            case NORTH -> this.northShape;
+            case SOUTH -> this.southShape;
+            case EAST -> this.eastShape;
+            case WEST -> this.westShape;
+            case DOWN -> this.downShape;
+            default -> this.upShape;
+        };
     }
 
     @Override

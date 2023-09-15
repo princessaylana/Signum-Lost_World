@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "signum:budding_exotic_crystal",
+    "signum:large_exotic_crystal_bud",
+    "signum:medium_exotic_crystal_bud",
+    "signum:small_exotic_crystal_bud",
+    "signum:exotic_crystal_cluster"
+  ]
+}

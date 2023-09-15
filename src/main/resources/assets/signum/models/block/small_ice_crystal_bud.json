@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "signum:block/crystal/small_ice_crystal_bud"
+  }
+}

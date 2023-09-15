@@ -1,4 +1,5 @@
 {
+  "itemgroup.signum": "Signum",
   "item.signum.cokecoal": "Coke Coal",
   "item.signum.element_zero": "Element Zero",
 
@@ -45,6 +46,8 @@
   "item.signum.transmute_staff.info": "Magic Staff that Transmute Targets",
   "item.signum.fire_staff": "Fire Staff",
   "item.signum.fire_staff.info": "Magic Staff that Burns Targets",
+  "item.signum.lightning_staff": "Lightning Staff",
+  "item.signum.lightning_staff.info": "Magic Staff that Electrocutes Targets",
 
   "item.signum.bpistol_item": "Baretta Pistol",
   "item.signum.bpistol_item.ammo": "Ammo",
@@ -91,9 +94,8 @@
   "block.signum.small_tiberium_bud": "Small Tiberium Bud",
 
   "block.signum.example_block": "Example Block",
-
   "entity.signum.toxicball": "Toxic Ball",
-  "itemgroup.signum": "Signum Mod Items",
+
   "dimension.signum_dim": "SkyLand",
   "biome.signum.signum_mangrove": "Tiberium Wastes",
   "biome.signum.signum_badlands": "Badlands",

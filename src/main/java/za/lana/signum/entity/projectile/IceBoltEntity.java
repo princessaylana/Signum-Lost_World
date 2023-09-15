@@ -62,6 +62,7 @@ public class IceBoltEntity extends ThrownItemEntity {
             entity.damage(getWorld().getDamageSources().magic(), dam);
             this.discard();
         }
+
         for(int x = 0; x < 18; ++x) {
             for(int y = 0; y < 18; ++y) {
                 this.getWorld().addParticle(ModParticles.FREEZE_PARTICLE, this.getX(), this.getY(), this.getZ(),

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exotic_crystal",
+  "pattern": [
+    "W#W",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "signum:sigstainsteel_ingot"
+    },
+    "W": {
+      "item": "signum:exotic_crystal"
+    }
+  },
+  "result": {
+    "item": "signum:exotic_staff",
+    "count": 1
+  }
+}

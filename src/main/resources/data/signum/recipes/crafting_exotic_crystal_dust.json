@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "exotic_crystal",
+  "ingredients": [
+    {
+      "item": "signum:exotic_crystal"
+    }
+  ],
+  "result": {
+    "item": "signum:exotic_crystal_dust",
+    "count": 9
+  }
+}
+
+

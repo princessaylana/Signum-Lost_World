@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "exotic_crystal",
+  "ingredients": [
+    {
+      "item": "signum:exotic_crystal_block"
+    }
+  ],
+  "result": {
+    "item": "signum:exotic_crystal_shard",
+    "count": 9
+  }
+}

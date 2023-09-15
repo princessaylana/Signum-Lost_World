@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "quartz_crystal",
+  "pattern": [
+    "W#W",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "signum:sigstainsteel_ingot"
+    },
+    "W": {
+      "item": "signum:quartz_crystal"
+    }
+  },
+  "result": {
+    "item": "signum:quartz_staff",
+    "count": 1
+  }
+}

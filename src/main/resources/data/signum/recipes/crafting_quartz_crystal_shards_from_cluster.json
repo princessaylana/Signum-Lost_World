@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "quartz_crystal",
+  "ingredients": [
+    {
+      "item": "signum:quartz_crystal_cluster"
+    }
+  ],
+  "result": {
+    "item": "signum:quartz_crystal_shard",
+    "count": 3
+  }
+}

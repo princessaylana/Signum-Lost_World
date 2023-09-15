@@ -49,30 +49,48 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        itemModelGenerator.register(ModItems.ELEMENTZEROCOAL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.TIBERIUMCOAL, Models.GENERATED);
         itemModelGenerator.register(ModItems.COKECOAL, Models.GENERATED);
 
-        itemModelGenerator.register(ModItems.ELEMENT_ZERO_CRYSTAL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ELEMENT_ZERO_DUST, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ELEMENTZEROCOAL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.FIRE_CRYSTAL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.FIRE_CRYSTAL_DUST, Models.GENERATED);
-        itemModelGenerator.register(ModItems.FIRE_CRYSTAL_SHARD, Models.GENERATED);
         itemModelGenerator.register(ModItems.GLASS_SHARD, Models.GENERATED);
         itemModelGenerator.register(ModItems.MANGANESE_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.MANGANESE_NUGGET, Models.GENERATED);
         itemModelGenerator.register(ModItems.MOISSANITE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.MOISSANITE_CRYSTAL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.QUARTZ_CRYSTAL_DUST, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.RAW_MANGANESE, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_ELEMENT_ZERO, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_MOISSANITE, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_QUARTZ_CRYSTAL, Models.GENERATED);
         itemModelGenerator.register(ModItems.SIGSTEEL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.SIGSTAINSTEEL_INGOT, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.TIBERIUM_SHARD, Models.GENERATED);
         itemModelGenerator.register(ModItems.TIBERIUM_CRYSTAL, Models.GENERATED);
         itemModelGenerator.register(ModItems.TIBERIUM_DUST, Models.GENERATED);
-        itemModelGenerator.register(ModItems.TIBERIUM_SHARD, Models.GENERATED);
-        itemModelGenerator.register(ModItems.TIBERIUMCOAL, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.FIRE_CRYSTAL_SHARD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FIRE_CRYSTAL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FIRE_CRYSTAL_DUST, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.ICE_CRYSTAL_SHARD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ICE_CRYSTAL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ICE_CRYSTAL_DUST, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.EXOTIC_CRYSTAL_SHARD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.EXOTIC_CRYSTAL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.EXOTIC_CRYSTAL_DUST, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.QUARTZ_CRYSTAL_SHARD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.QUARTZ_CRYSTAL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.QUARTZ_CRYSTAL_DUST, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.MOISSANITE_CRYSTAL, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.ELEMENT_ZERO_CRYSTAL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ELEMENT_ZERO_DUST, Models.GENERATED);
+
+
 
     }
 }

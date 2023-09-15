@@ -22,8 +22,8 @@ public class FreezeEffect extends StatusEffect {
             double y = pLivingEntity.getY();
             double z = pLivingEntity.getZ();
 
-            pLivingEntity.teleport(x, y, z);
-            pLivingEntity.setVelocity(0, 0, 0);
+            //pLivingEntity.teleport(x, y, z);
+            //pLivingEntity.setVelocity(0, 0, 0);
             pLivingEntity.setInPowderSnow(true);
         }
 

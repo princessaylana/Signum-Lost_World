@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exotic_crystal",
+  "pattern": [
+    " X ",
+    "X#X",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "signum:exotic_crystal_cluster"
+    },
+    "#": [
+      {
+        "item": "signum:exotic_crystal_block"
+      }
+    ]
+  },
+  "result": {
+    "item": "signum:budding_exotic_crystal",
+    "count": 1
+  }
+}

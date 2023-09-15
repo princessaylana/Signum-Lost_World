@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "quartz_crystal",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "signum:quartz_crystal_dust"
+    }
+  },
+  "result": {
+    "item": "signum:quartz_crystal"
+  }
+}

@@ -49,6 +49,27 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                     .add(ModBlocks.FIRE_CRYSTAL_CLUSTER)
                     .add(ModBlocks.FIRE_CRYSTAL_BLOCK)
 
+                    .add(ModBlocks.BUDDING_ICE_CRYSTAL)
+                    .add(ModBlocks.LARGE_ICE_CRYSTAL_BUD)
+                    .add(ModBlocks.MEDIUM_ICE_CRYSTAL_BUD)
+                    .add(ModBlocks.SMALL_ICE_CRYSTAL_BUD)
+                    .add(ModBlocks.ICE_CRYSTAL_CLUSTER)
+                    .add(ModBlocks.ICE_CRYSTAL_BLOCK)
+
+                    .add(ModBlocks.BUDDING_EXOTIC_CRYSTAL)
+                    .add(ModBlocks.LARGE_EXOTIC_CRYSTAL_BUD)
+                    .add(ModBlocks.MEDIUM_EXOTIC_CRYSTAL_BUD)
+                    .add(ModBlocks.SMALL_EXOTIC_CRYSTAL_BUD)
+                    .add(ModBlocks.EXOTIC_CRYSTAL_CLUSTER)
+                    .add(ModBlocks.EXOTIC_CRYSTAL_BLOCK)
+
+                    .add(ModBlocks.BUDDING_QUARTZ_CRYSTAL)
+                    .add(ModBlocks.LARGE_QUARTZ_CRYSTAL_BUD)
+                    .add(ModBlocks.MEDIUM_QUARTZ_CRYSTAL_BUD)
+                    .add(ModBlocks.SMALL_QUARTZ_CRYSTAL_BUD)
+                    .add(ModBlocks.QUARTZ_CRYSTAL_CLUSTER)
+                    .add(ModBlocks.QUARTZ_CRYSTAL_BLOCK)
+
                     .add(ModBlocks.ASSEMBLY_STATION_BLOCK)
                     .add(ModBlocks.RAZORWIRE_BLOCK)
                     .add(ModBlocks.SKYFORGE);
@@ -83,6 +104,27 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.SMALL_FIRE_CRYSTAL_BUD)
                 .add(ModBlocks.FIRE_CRYSTAL_CLUSTER)
                 .add(ModBlocks.FIRE_CRYSTAL_BLOCK)
+
+                .add(ModBlocks.BUDDING_ICE_CRYSTAL)
+                .add(ModBlocks.LARGE_ICE_CRYSTAL_BUD)
+                .add(ModBlocks.MEDIUM_ICE_CRYSTAL_BUD)
+                .add(ModBlocks.SMALL_ICE_CRYSTAL_BUD)
+                .add(ModBlocks.ICE_CRYSTAL_CLUSTER)
+                .add(ModBlocks.ICE_CRYSTAL_BLOCK)
+
+                .add(ModBlocks.BUDDING_EXOTIC_CRYSTAL)
+                .add(ModBlocks.LARGE_EXOTIC_CRYSTAL_BUD)
+                .add(ModBlocks.MEDIUM_EXOTIC_CRYSTAL_BUD)
+                .add(ModBlocks.SMALL_EXOTIC_CRYSTAL_BUD)
+                .add(ModBlocks.EXOTIC_CRYSTAL_CLUSTER)
+                .add(ModBlocks.EXOTIC_CRYSTAL_BLOCK)
+
+                .add(ModBlocks.BUDDING_QUARTZ_CRYSTAL)
+                .add(ModBlocks.LARGE_QUARTZ_CRYSTAL_BUD)
+                .add(ModBlocks.MEDIUM_QUARTZ_CRYSTAL_BUD)
+                .add(ModBlocks.SMALL_QUARTZ_CRYSTAL_BUD)
+                .add(ModBlocks.QUARTZ_CRYSTAL_CLUSTER)
+                .add(ModBlocks.QUARTZ_CRYSTAL_BLOCK)
 
                 .add(ModBlocks.ASSEMBLY_STATION_BLOCK)
                 .add(ModBlocks.RAZORWIRE_BLOCK)

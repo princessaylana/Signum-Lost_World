@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ice_crystal",
+  "pattern": [
+    "W#W",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "signum:sigstainsteel_ingot"
+    },
+    "W": {
+      "item": "signum:ice_crystal"
+    }
+  },
+  "result": {
+    "item": "signum:ice_staff",
+    "count": 1
+  }
+}

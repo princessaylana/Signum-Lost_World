@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ice_crystal",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "signum:ice_crystal_shard"
+    }
+  },
+  "result": {
+    "item": "signum:ice_crystal_block"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "ice_crystal",
+  "ingredients": [
+    {
+      "item": "signum:ice_crystal_block"
+    }
+  ],
+  "result": {
+    "item": "signum:ice_crystal_shard",
+    "count": 9
+  }
+}
