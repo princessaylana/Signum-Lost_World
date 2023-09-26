@@ -54,7 +54,6 @@ public class ModItemGroups {
                         entries.add(ModItems.MOISSANITE_CRYSTAL);
                         entries.add(ModItems.ELEMENT_ZERO_CRYSTAL);
                         // DUSTS
-
                         entries.add(ModItems.MANGANESE_DUST);
                         entries.add(ModItems.TIBERIUM_DUST);
                         entries.add(ModItems.ICE_CRYSTAL_DUST);
@@ -63,7 +62,6 @@ public class ModItemGroups {
                         entries.add(ModItems.QUARTZ_CRYSTAL_DUST);
                         entries.add(ModItems.MOISSANITE_DUST);
                         entries.add(ModItems.ELEMENT_ZERO_DUST);
-
                         // TOOLS
                         entries.add(ModItems.MANGANESE_AXE);
                         entries.add(ModItems.MANGANESE_HOE);
@@ -87,6 +85,7 @@ public class ModItemGroups {
                         entries.add(ModItems.WATER_STAFF);
                         // SPAWN EGGS
                         entries.add(ModItems.TIBERIUM_WORM_SPAWN_EGG);
+                        entries.add(ModItems.TIBERIUM_SKELETON_SPAWN_EGG);
                         entries.add(ModItems.GHOST_SPAWN_EGG);
                         entries.add(ModItems.AIRDRONE_SPAWN_EGG);
                         entries.add(ModItems.SIGALIEN_SPAWN_EGG);
@@ -106,40 +105,40 @@ public class ModItemGroups {
                         entries.add(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE);
                         // CRYSTAL BLOCKS
                         entries.add(ModBlocks.TIBERIUM_BLOCK);
-                        entries.add(ModBlocks.BUDDING_TIBERIUM);
-                        entries.add(ModBlocks.TIBERIUM_CLUSTER);
-                        entries.add(ModBlocks.LARGE_TIBERIUM_BUD);
-                        entries.add(ModBlocks.MEDIUM_TIBERIUM_BUD);
-                        entries.add(ModBlocks.SMALL_TIBERIUM_BUD);
-
                         entries.add(ModBlocks.FIRE_CRYSTAL_BLOCK);
-                        entries.add(ModBlocks.BUDDING_FIRE_CRYSTAL);
-                        entries.add(ModBlocks.FIRE_CRYSTAL_CLUSTER);
-                        entries.add(ModBlocks.LARGE_FIRE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.MEDIUM_FIRE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.SMALL_FIRE_CRYSTAL_BUD);
-
                         entries.add(ModBlocks.EXOTIC_CRYSTAL_BLOCK);
-                        entries.add(ModBlocks.BUDDING_EXOTIC_CRYSTAL);
-                        entries.add(ModBlocks.EXOTIC_CRYSTAL_CLUSTER);
-                        entries.add(ModBlocks.LARGE_EXOTIC_CRYSTAL_BUD);
-                        entries.add(ModBlocks.MEDIUM_EXOTIC_CRYSTAL_BUD);
-                        entries.add(ModBlocks.SMALL_EXOTIC_CRYSTAL_BUD);
-
                         entries.add(ModBlocks.ICE_CRYSTAL_BLOCK);
-                        entries.add(ModBlocks.BUDDING_ICE_CRYSTAL);
-                        entries.add(ModBlocks.ICE_CRYSTAL_CLUSTER);
-                        entries.add(ModBlocks.LARGE_ICE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.MEDIUM_ICE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.SMALL_ICE_CRYSTAL_BUD);
-
                         entries.add(ModBlocks.QUARTZ_CRYSTAL_BLOCK);
-                        entries.add(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
-                        entries.add(ModBlocks.QUARTZ_CRYSTAL_CLUSTER);
-                        entries.add(ModBlocks.LARGE_QUARTZ_CRYSTAL_BUD);
-                        entries.add(ModBlocks.MEDIUM_QUARTZ_CRYSTAL_BUD);
-                        entries.add(ModBlocks.SMALL_QUARTZ_CRYSTAL_BUD);
 
+                        entries.add(ModBlocks.BUDDING_TIBERIUM);
+                        entries.add(ModBlocks.BUDDING_FIRE_CRYSTAL);
+                        entries.add(ModBlocks.BUDDING_EXOTIC_CRYSTAL);
+                        entries.add(ModBlocks.BUDDING_ICE_CRYSTAL);
+                        entries.add(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
+
+                        entries.add(ModBlocks.TIBERIUM_CLUSTER);
+                        entries.add(ModBlocks.FIRE_CRYSTAL_CLUSTER);
+                        entries.add(ModBlocks.EXOTIC_CRYSTAL_CLUSTER);
+                        entries.add(ModBlocks.ICE_CRYSTAL_CLUSTER);
+                        entries.add(ModBlocks.QUARTZ_CRYSTAL_CLUSTER);
+
+                        entries.add(ModBlocks.LARGE_TIBERIUM_BUD);
+                        entries.add(ModBlocks.LARGE_FIRE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.LARGE_EXOTIC_CRYSTAL_BUD);
+                        entries.add(ModBlocks.LARGE_ICE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.LARGE_QUARTZ_CRYSTAL_BUD);
+
+                        entries.add(ModBlocks.MEDIUM_TIBERIUM_BUD);
+                        entries.add(ModBlocks.MEDIUM_FIRE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.MEDIUM_EXOTIC_CRYSTAL_BUD);
+                        entries.add(ModBlocks.MEDIUM_ICE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.MEDIUM_QUARTZ_CRYSTAL_BUD);
+
+                        entries.add(ModBlocks.SMALL_TIBERIUM_BUD);
+                        entries.add(ModBlocks.SMALL_FIRE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.SMALL_EXOTIC_CRYSTAL_BUD);
+                        entries.add(ModBlocks.SMALL_ICE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.SMALL_QUARTZ_CRYSTAL_BUD);
                         // BUIDLING BLOCKS
                         entries.add(ModBlocks.MANGANESE_BLOCK);
                         entries.add(ModBlocks.MOISSANITE_BLOCK);
@@ -147,8 +146,8 @@ public class ModItemGroups {
                         // BLOCKENTITIES
                         entries.add(ModBlocks.SKYFORGE);
                         entries.add(ModBlocks.ASSEMBLY_STATION_BLOCK);
-                        entries.add(ModBlocks.EXAMPLE_BLOCK);
                         //TO BE REMOVED - TESTING ONLY
+                        entries.add(ModBlocks.EXAMPLE_BLOCK);
                         entries.add(ModItems.TOXICBALL_ITEM);
                         entries.add(ModItems.BPISTOL_ITEM);
                         entries.add(ModItems.LASERBOLT_ITEM);

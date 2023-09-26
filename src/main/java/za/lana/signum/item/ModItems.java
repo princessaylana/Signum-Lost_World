@@ -108,6 +108,8 @@ public class ModItems {
     //
     public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_WORM, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
+    public static final Item TIBERIUM_SKELETON_SPAWN_EGG = registerItem("tiberium_skeleton_spawn_egg", new SpawnEggItem(
+            ModEntities.TIBERIUM_SKELETON, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
     public static final Item GHOST_SPAWN_EGG = registerItem("ghost_spawn_egg", new SpawnEggItem(
             ModEntities.GHOST, 0xD57E36, 0x1CED00, new FabricItemSettings()));
     public static final Item AIRDRONE_SPAWN_EGG = registerItem("airdrone_spawn_egg", new SpawnEggItem(
@@ -184,6 +186,7 @@ public class ModItems {
         entries.add(DETECTOR_ITEM);
 
         entries.add(TIBERIUM_WORM_SPAWN_EGG);
+        entries.add(TIBERIUM_SKELETON_SPAWN_EGG);
         entries.add(GHOST_SPAWN_EGG);
         entries.add(AIRDRONE_SPAWN_EGG);
         //entries.add(SKYCAR_SPAWN_EGG);

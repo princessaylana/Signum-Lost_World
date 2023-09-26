@@ -18,12 +18,6 @@ public class FreezeEffect extends StatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity pLivingEntity, int pAmplifier) {
         if (!pLivingEntity.getWorld().isClient()) {
-            double x = pLivingEntity.getX();
-            double y = pLivingEntity.getY();
-            double z = pLivingEntity.getZ();
-
-            //pLivingEntity.teleport(x, y, z);
-            //pLivingEntity.setVelocity(0, 0, 0);
             pLivingEntity.setInPowderSnow(true);
         }
 

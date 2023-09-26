@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.hostile.TiberiumWormEntity;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 
@@ -57,10 +58,14 @@ public class TiberiumBoltEntity extends ThrownItemEntity {
 
         int i = entity instanceof EndermanEntity ? 6 : 0;
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
+
+        if (entity instanceof TiberiumWormEntity){
+            entity.damage(getWorld().getDamageSources().magic(), dam / 4);
+            this.discard();
+
+        }
         if (entity instanceof LivingEntity) {
-            // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
-            // plays a sound for the entity hit only
             entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             entity.damage(getWorld().getDamageSources().magic(), dam);
             this.discard();
@@ -88,25 +93,6 @@ public class TiberiumBoltEntity extends ThrownItemEntity {
                 }   this.discard();
             }
 
-        }
-    }
-    private void bounce() {
-        Vec3d vec3d = this.getVelocity();
-
-        if (vec3d.y < 0.0) {
-            double d = 0.5;
-            this.setVelocity(vec3d.x, -vec3d.y * d, vec3d.z);
-        }
-        if (vec3d.x < 0.0) {
-            double d = 1.0;
-            this.setVelocity(-vec3d.x * d, vec3d.y, vec3d.z);
-        }
-        if (vec3d.z < 0.0) {
-            double d = 1.0;
-            this.setVelocity(vec3d.x, vec3d.y, -vec3d.z *d);
-        }
-        if (this.age >= age1) {
-            this.remove(RemovalReason.DISCARDED);
         }
     }
 

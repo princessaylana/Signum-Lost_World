@@ -22,6 +22,9 @@
 ### Crystal Blocks:
 - Tiberium Crystals
 - Fire Crystals
+- Ice Crystals
+- Exotic Crystals
+- Quartz Crystals
 
 ### Fuels:
 - Coke Coal

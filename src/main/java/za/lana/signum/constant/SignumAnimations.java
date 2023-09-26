@@ -18,6 +18,10 @@ public final class SignumAnimations {
     public static final RawAnimation TIBERIUMWORM_ATTACK = RawAnimation.begin().thenPlay("animation.tworm.attack");
     public static final RawAnimation TIBERIUMWORM_WALK = RawAnimation.begin().thenPlay("animation.tworm.walk");
 
+    public static final RawAnimation TIBERIUM_SKELETON_WALK = RawAnimation.begin().thenPlay("animation.tskeleton.walk");
+    public static final RawAnimation TIBERIUM_SKELETON_IDLE = RawAnimation.begin().thenPlay("animation.tskeleton.idle");
+    public static final RawAnimation TIBERIUM_SKELETON_ATTACK = RawAnimation.begin().thenPlay("animation.tskeleton.attack");
+
 
 
 }

@@ -7,7 +7,6 @@ package za.lana.signum.entity.transport;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -36,12 +35,8 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -79,33 +74,6 @@ public class AirBalloonEntity
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
 
-    private static VoxelShape makeShape(){
-        VoxelShape shape = VoxelShapes.empty();
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(2, 6.53125, -0.484375, 2.03125, 7.03125, 2.50625));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.984375, 6.53125, 2.49375, 2.015625, 7.03125, 2.525));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-1, 6.53125, -0.490625, -0.96875, 7.03125, 2.503125));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.984375, 6.53125, -0.5, 2.00625, 7.03125, -0.46875));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-1, 6.5, 2.515625, 2.03125, 6.53125, 2.984375));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-1, 6.5, -0.96875, 2.03125, 6.53125, -0.5));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-1.484375, 6.5, -0.96875, -0.984375, 6.53125, 2.984375));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.9875, 7.0125, -0.46875, 2.003125, 7.04375, 2.5));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(2.015625, 6.5, -0.96875, 2.515625, 6.53125, 2.984375));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(2.5, 4.59375, -0.9375, 2.53125, 6.515625, 2.96875));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-1.46875, 4.59375, 2.96875, 2.5, 6.515625, 3));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-1.5, 4.59375, -0.953125, -1.46875, 6.515625, 2.984375));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-1.46875, 4.59375, -0.9750000000000001, 2.515625, 6.515625, -0.9437500000000001));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.03125, 0.4375, 0, 1.03125, 0.5, 2));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.03125, 0.08125, -0.35624999999999996, 1.03125, 0.14375, 0.14375000000000004));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.03125, 1.43125, -1.0625, 1.03125, 1.49375, -0.5625));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.875, 0.0625, 0, 1.375, 0.125, 2));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.375, 0.0625, 0, 0.125, 0.125, 2));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.09375, 0.125, 0.25, 0.03125, 0.1875, 1.75));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.96875, 0.125, 0.25, 1.09375, 0.1875, 1.75));
-
-        return shape;
-    }
-    private static final VoxelShape SHAPE = makeShape();
-    private final Box voxelShape = VoxelShapes.cuboid(SHAPE.getBoundingBox()).getBoundingBox();;
     private final boolean isInAir;
     public static final String AIRBALLOON_MOUNT = "message.signum.airballoon.mount";
     public static final String AIRBALLOON_EMPTY = "message.signum.airballoon.empty";
@@ -113,9 +81,6 @@ public class AirBalloonEntity
     public
     AirBalloonEntity(EntityType<? extends AnimalEntity> entityType, World level) {
         super(entityType, level);
-        makeShape();
-        Box boundingBox = SHAPE.getBoundingBox();
-        this.setBoundingBox(boundingBox);
         this.setStepHeight(0.1f);
         this.isInAir = isFallFlying();
         this.propertyDelegate = new PropertyDelegate() {
@@ -177,17 +142,6 @@ public class AirBalloonEntity
     }
 
     // SHAPE
-
-    public Box getVisibilityBoundingBox() {
-        return this.voxelShape;
-    }
-    /** DEPRECIATED
-    public boolean collidesWithStateAtPos(BlockPos pos, BlockState state) {
-        VoxelShape voxelShape = state.getCollisionShape(this.getWorld(), pos, ShapeContext.of(this));
-        VoxelShape voxelShape2 = voxelShape.offset(pos.getX(), pos.getY(), pos.getZ());
-        return VoxelShapes.matchesAnywhere(voxelShape2, VoxelShapes.cuboid(this.getBoundingBox()), BooleanBiFunction.AND);
-    }
-    **/
     public static boolean canCollide(Entity entity, Entity other) {
         return (other.isCollidable() || other.isPushable()) && !entity.isConnectedThroughVehicle(other);
     }
@@ -247,46 +201,19 @@ public class AirBalloonEntity
     public void tick() {
         super.tick();
         if (!this.getWorld().isClient()) {
-            // balloon needs to fly when burning fuel
             if (burningFuel(this)){
                 --this.fuelTime;
-
-                //Vec3d vec3d = this.getVelocity();
-                super.travel(this.getVelocity());
-                //this.move(MovementType.SELF, this.getVelocity());
             }
-            // balloon needs to refuel
             else if (hasFuel(this) && !burningFuel(this)){
                 consumeFuel(this);
-            }
-            // Balloon needs to fall without fuel
-            else if (this.fuelTime < 0){
-                this.setVelocity(this.getX(), -1.25f,this.getZ());
-                //this.move(MovementType.SELF, this.getVelocity());
-                super.travel(this.getVelocity());
-                this.fallDistance = 1.0f;
-                this.onLanding();
-
-                /**
-                 World world = this.getWorld();
-                 if(world.isClient){
-                 PlayerEntity player = (PlayerEntity) this.getControllingPassenger();
-                 assert player != null;
-                 player.sendMessage(Text.translatable(AIRBALLOON_EMPTY).fillStyle(
-                 Style.EMPTY.withColor(Formatting.RED)), false);
-                 }
-                 **/
-
             }
         }
     }
     @Override
     public void travel(Vec3d pos) {
         if (isAlive()) {
-            //should add serverworld?
             if (hasPassengers()) {
-                this.setMovementSpeed((float) ((float) V + W)); // 0.55f
-                //this.move(MovementType.SELF, this.getVelocity());
+                this.setMovementSpeed((float) V);
                 LivingEntity passenger = getControllingPassenger();
                 this.prevYaw = getYaw();
                 this.prevPitch = getPitch();
@@ -301,44 +228,39 @@ public class AirBalloonEntity
                 float z = (float) (passenger.forwardSpeed * V / 0.25f);
                 if (y <= 0)
                     y *= 0.25f;
-                // Fly Up
-                if (KeyInputHandler.flyUpKey.isPressed()) {
-                    y = 0.5f;
-                    fuelFlameIncrease(getWorld(), getBlockPos());
-                }
-                // Fly Down
-                else if ((KeyInputHandler.flyDownkey.isPressed())) {
-                    y = -1.0f;
+                if ((KeyInputHandler.flyDownkey.isPressed())) {
+                    y = -5.0f * 2;
                     fuelFlameDecrease(getWorld(), getBlockPos());
+                }
+                else if (fuelTime > 0) {
+                    if (KeyInputHandler.flyUpKey.isPressed()) {
+                        y = 1.0f;
+                        fuelFlameIncrease(getWorld(), getBlockPos());
+                    }
                 }
                 // Float Air
                 else {
-                    // floating down
-                    this.fallDistance = 0.25f;
                     y = -0.48f * 2.5f;
                     this.onLanding();
                     this.bounce(this);
                 }
                 super.travel(new Vec3d(x, y, z));
             }
-            if (!hasPassengers()) {
-                this.setVelocity(this.getX(), -0.25f,this.getZ());
-                this.onLanding();
-                this.fallDistance = 0.0f;
-                //this.bounce(this);
-
+            else if (!hasPassengers()) {
+                Vec3d vec3d2 = this.getVelocity();
+                super.travel(new Vec3d(vec3d2.x, vec3d2.y - 0.08f, vec3d2.z));
             }
-
         }
+        this.onLanding();
+        this.bounce(this);
     }
 
     // LANDING
-    // should we add gravity ? 0.8f?
+    // gravity seems to break the dynamics.
     @Override
     public boolean hasNoGravity() {
         return true;
     }
-
     private void bounce(Entity entity) {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0.0) {
@@ -442,7 +364,6 @@ public class AirBalloonEntity
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new AirBalloonScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
-
 
     // todo having trouble getting the correct position for the particles to spawn
     // ENTITY FX

@@ -1355,6 +1355,7 @@
                                 "Name": "signum:budding_tiberium"
                               }
                             },
+
                             {
                               "type": "minecraft:condition",
                               "if_true": {

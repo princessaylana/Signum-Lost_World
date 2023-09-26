@@ -19,11 +19,11 @@ public class AirBalloonRenderer extends GeoEntityRenderer<AirBalloonEntity> {
 	public AirBalloonRenderer(EntityRendererFactory.Context renderManager) {
 		super(renderManager, new AirBalloonModel());
 		//addRenderLayer(new AutoGlowingGeoLayer<>(this));
-		this.shadowRadius = 0.50f;
+		this.shadowRadius = 1.5f;
 	}
 	@Override
 	public Identifier getTextureLocation(AirBalloonEntity animatable) {
-		return new Identifier(Signum.MOD_ID, "textures/transport/airballoon_texture.png");
+		return new Identifier(Signum.MOD_ID, "textures/transport/airballoon_texture_01.png");
 	}
 
 }

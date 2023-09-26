@@ -21,7 +21,7 @@ public class AirBalloonModel extends GeoModel<AirBalloonEntity> {
 	}
 	@Override
 	public Identifier getTextureResource(AirBalloonEntity animatable) {
-		return new Identifier(Signum.MOD_ID, "textures/transport/airballoon_texture.png");
+		return new Identifier(Signum.MOD_ID, "textures/transport/airballoon_texture_01.png");
 	}
 	@Override
 	public Identifier getAnimationResource(AirBalloonEntity animatable) {

@@ -93,6 +93,8 @@ public class SignumClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.LASERBOLT, FlyingItemEntityRenderer::new);
         // MOBS
         EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);
+        EntityRendererRegistry.register(ModEntities.TIBERIUM_SKELETON, TiberiumSkeletonRenderer::new);
+
         EntityRendererRegistry.register(ModEntities.GHOST, GhostRenderer::new);
         EntityRendererRegistry.register(ModEntities.SIGALIEN, SigAlienRenderer::new);
         EntityRendererRegistry.register(ModEntities.AIRDRONE, AirDroneRenderer::new);

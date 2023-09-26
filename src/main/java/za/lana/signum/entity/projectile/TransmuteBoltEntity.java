@@ -4,16 +4,15 @@ import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
+import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.FrogEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -64,6 +63,10 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
 
         int i = entity instanceof EndermanEntity ? 6 : 0;
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
+        if (entity instanceof EnderDragonEntity || entity instanceof WitherEntity || entity instanceof GhastEntity || entity instanceof FrogEntity || entity instanceof PlayerEntity ){
+            entity.damage(getWorld().getDamageSources().magic(), dam * 2);
+            this.discard();
+        }
         if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
             if (!this.getWorld().isClient) {
@@ -74,7 +77,6 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
                 // spawn a frog #3
                 EntityType.FROG.spawn(((ServerWorld) entity.getWorld()), entity.getBlockPos(), SpawnReason.TRIGGERED);
                 //
-
             entity.damage(getWorld().getDamageSources().magic(), dam);
             // damage and destroy the entity
             entity.discard();
@@ -83,17 +85,6 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
             if (this.getWorld().isClient){
                 entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             }
-        }
-        if (entity instanceof PlayerEntity){
-            //
-            ((PlayerEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
-            this.discard();
-        }
-        if (entity instanceof FrogEntity){
-            //
-            ((FrogEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
-            //need to remove the frog entity as well
-            this.discard();
         }
         //client
         if (this.getWorld().isClient){
@@ -125,25 +116,6 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
                     (double)((float)this.getX() + random.nextFloat()) - 0.5,
                     (float)this.getY() - random.nextFloat() - 1.0f,
                     (double)((float)this.getZ() + random.nextFloat()) - 0.5);
-        }
-    }
-    private void bounce() {
-        Vec3d vec3d = this.getVelocity();
-
-        if (vec3d.y < 0.0) {
-            double d = 0.5;
-            this.setVelocity(vec3d.x, -vec3d.y * d, vec3d.z);
-        }
-        if (vec3d.x < 0.0) {
-            double d = 1.0;
-            this.setVelocity(-vec3d.x * d, vec3d.y, vec3d.z);
-        }
-        if (vec3d.z < 0.0) {
-            double d = 1.0;
-            this.setVelocity(vec3d.x, vec3d.y, -vec3d.z *d);
-        }
-        if (this.age >= age1) {
-            this.remove(RemovalReason.DISCARDED);
         }
     }
 

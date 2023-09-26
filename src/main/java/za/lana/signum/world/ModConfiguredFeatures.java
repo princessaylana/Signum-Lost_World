@@ -33,7 +33,12 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_MANGANESE_ORE_KEY = registerKey("deepslate_manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_MIOSSANITE_ORE_KEY = registerKey("deepslate_manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_ELEMENT_ZERO_ORE_KEY = registerKey("deepslate_manganese_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> BUDDING_EXOTIC_CRYSTAL_KEY = registerKey("budding_exotic_crystal");
+    //nether
     public static final RegistryKey<ConfiguredFeature<?, ?>> NETHERRACK_MANGANESE_ORE_KEY = registerKey("netherrack_manganese_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> BUDDING_FIRE_CRYSTAL_KEY = registerKey("budding_fire_crystal");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> BUDDING_QUARTZ_CRYSTAL_KEY = registerKey("budding_quartz_crystal");
+    // end
     public static final RegistryKey<ConfiguredFeature<?, ?>> ENDSTONE_MANGANESE_ORE_KEY = registerKey("endstone_manganese_ore");
 
 
@@ -49,27 +54,40 @@ public class ModConfiguredFeatures {
         List<OreFeatureConfig.Target> overworldManganeseOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplaceables, ModBlocks.MANGANESE_ORE.getDefaultState()),
                         OreFeatureConfig.createTarget(deepslateReplaceables, ModBlocks.DEEPSLATE_MANGANESE_ORE.getDefaultState()));
-        List<OreFeatureConfig.Target> overwolrdMoissaniteOres =
+        List<OreFeatureConfig.Target> overworldMoissaniteOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplaceables, ModBlocks.MOISSANITE_ORE.getDefaultState()),
                         OreFeatureConfig.createTarget(deepslateReplaceables, ModBlocks.DEEPSLATE_MOISSANITE_ORE.getDefaultState()));
-        List<OreFeatureConfig.Target> overwolrdElementZeroOres =
+        List<OreFeatureConfig.Target> overworldElementZeroOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplaceables, ModBlocks.ELEMENT_ZERO_ORE.getDefaultState()),
                         OreFeatureConfig.createTarget(deepslateReplaceables, ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE.getDefaultState()));
+        List<OreFeatureConfig.Target> overworldExoticCrystals =
+                List.of(OreFeatureConfig.createTarget(stoneReplaceables, ModBlocks.BUDDING_EXOTIC_CRYSTAL.getDefaultState()),
+                        OreFeatureConfig.createTarget(deepslateReplaceables, ModBlocks.BUDDING_EXOTIC_CRYSTAL.getDefaultState()));
 
         List<OreFeatureConfig.Target> netherManganeseOres =
                 List.of(OreFeatureConfig.createTarget(netherReplaceables, ModBlocks.NETHERRACK_MANGANESE_ORE.getDefaultState()));
+        List<OreFeatureConfig.Target> netherFireCrystals =
+                List.of(OreFeatureConfig.createTarget(netherReplaceables, ModBlocks.BUDDING_FIRE_CRYSTAL.getDefaultState()));
+        List<OreFeatureConfig.Target> netherQuartZCrystals =
+                List.of(OreFeatureConfig.createTarget(netherReplaceables, ModBlocks.BUDDING_QUARTZ_CRYSTAL.getDefaultState()));
+
         List<OreFeatureConfig.Target> endManganeseOres =
                 List.of(OreFeatureConfig.createTarget(endReplaceables, ModBlocks.ENDSTONE_MANGANESE_ORE.getDefaultState()));
 
         //register and ore sizes
         register(context, MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldManganeseOres, 7));
         register(context, DEEPSLATE_MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldManganeseOres, 7));
-        register(context, MIOSSANITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overwolrdMoissaniteOres, 5));
-        register(context, DEEPSLATE_MIOSSANITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overwolrdMoissaniteOres, 5));
-        register(context, ELEMENT_ZERO_ORE_KEY, Feature.ORE, new OreFeatureConfig(overwolrdElementZeroOres, 3));
-        register(context, DEEPSLATE_ELEMENT_ZERO_ORE_KEY, Feature.ORE, new OreFeatureConfig(overwolrdElementZeroOres, 3));
+        register(context, MIOSSANITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldMoissaniteOres, 5));
+        register(context, DEEPSLATE_MIOSSANITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldMoissaniteOres, 5));
+        register(context, ELEMENT_ZERO_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldElementZeroOres, 3));
+        register(context, DEEPSLATE_ELEMENT_ZERO_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldElementZeroOres, 3));
+        register(context, BUDDING_EXOTIC_CRYSTAL_KEY, Feature.ORE, new OreFeatureConfig(overworldExoticCrystals, 5));
 
         register(context, NETHERRACK_MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherManganeseOres, 9));
+        register(context, BUDDING_FIRE_CRYSTAL_KEY, Feature.ORE, new OreFeatureConfig(netherFireCrystals, 9));
+        register(context, BUDDING_QUARTZ_CRYSTAL_KEY, Feature.ORE, new OreFeatureConfig(netherQuartZCrystals, 9));
+
+
         register(context, ENDSTONE_MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(endManganeseOres, 9));
     }
 

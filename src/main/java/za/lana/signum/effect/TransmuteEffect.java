@@ -6,33 +6,22 @@
 package za.lana.signum.effect;
 
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import org.jetbrains.annotations.Nullable;
 
 public class TransmuteEffect extends StatusEffect {
     public TransmuteEffect(StatusEffectCategory statusEffectCategory, int color) {
         super(statusEffectCategory, color);
     }
 
-    @Override
-    public void applyUpdateEffect(LivingEntity pLivingEntity, int pAmplifier) {
-        if (!pLivingEntity.getWorld().isClient()) {
-            //need to change it to transmute
-            double x = pLivingEntity.getX();
-            double y = pLivingEntity.getY();
-            double z = pLivingEntity.getZ();
-
-            pLivingEntity.teleport(x, y, z);
-            pLivingEntity.setVelocity(0, 0, 0);
-            //pLivingEntity.spaw
+    public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
+        if (this == ModEffects.TRANSMUTE_EFFECT) {
+            int i = (int)(proximity * (double)(6 << amplifier) + 0.5);
+            target.damage(target.getDamageSources().magic(), i);
+            // target.heal(i);
         }
-
-        super.applyUpdateEffect(pLivingEntity, pAmplifier);
-    }
-
-    @Override
-    public boolean canApplyUpdateEffect(int pDuration, int pAmplifier) {
-        return true;
     }
 }

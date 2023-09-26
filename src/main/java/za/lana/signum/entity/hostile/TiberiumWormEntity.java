@@ -31,20 +31,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.LightType;
-import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.block.custom.props.BlightBlock;
-import za.lana.signum.constant.SignumAnimations;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.item.ModItems;
 
@@ -60,10 +54,10 @@ public class TiberiumWormEntity extends HostileEntity implements GeoEntity {
 
 	public static DefaultAttributeContainer.Builder setAttributes() {
 		return AnimalEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0f)
-				.add(EntityAttributes.GENERIC_ATTACK_SPEED, 2.0f)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4f);
+				.add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0f)
+				.add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.250);
 	}
 
 	@Override
@@ -71,7 +65,6 @@ public class TiberiumWormEntity extends HostileEntity implements GeoEntity {
 		this.goalSelector.add(1, new SwimGoal(this));
 		this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2D, false));
 		this.goalSelector.add(3, new WanderAndInfestGoal(this));
-		//this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.75f, 1));
 		this.goalSelector.add(4, new LookAroundGoal(this));
 
 		this.targetSelector.add(2, new ActiveTargetGoal<>(this, ZombieEntity.class, true));

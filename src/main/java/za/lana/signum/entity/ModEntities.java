@@ -15,10 +15,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import za.lana.signum.entity.hostile.AirDroneEntity;
-import za.lana.signum.entity.hostile.GhostEntity;
-import za.lana.signum.entity.hostile.SigAlienEntity;
-import za.lana.signum.entity.hostile.TiberiumWormEntity;
+import za.lana.signum.entity.hostile.*;
 import za.lana.signum.entity.projectile.*;
 import za.lana.signum.entity.transport.AirBalloonEntity;
 import za.lana.signum.entity.transport.SkyCarEntity;
@@ -40,6 +37,10 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_worm"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, TiberiumWormEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+    public static final EntityType<TiberiumSkeletonEntity> TIBERIUM_SKELETON = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_skeleton"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, TiberiumSkeletonEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
     public static final EntityType<GhostEntity> GHOST = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ghost"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, GhostEntity::new)
