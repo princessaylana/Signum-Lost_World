@@ -19,6 +19,7 @@ import za.lana.signum.block.ModBlocks;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.FireBoltEntityModel;
 import za.lana.signum.client.model.IceBoltEntityModel;
+import za.lana.signum.client.model.ShockBoltEntityModel;
 import za.lana.signum.client.model.TiberiumBoltEntityModel;
 import za.lana.signum.client.renderer.entity.*;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
@@ -88,6 +89,9 @@ public class SignumClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.FIRE_BOLT, FireBoltEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.FIRE_PROJECTILE, FireBoltRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SHOCK_BOLT, ShockBoltEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.SHOCK_PROJECTILE, ShockBoltRenderer::new);
         //
         EntityRendererRegistry.register(ModEntities.TOXICBALL, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASERBOLT, FlyingItemEntityRenderer::new);

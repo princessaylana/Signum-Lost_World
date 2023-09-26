@@ -35,11 +35,11 @@ public class ModEntities {
     //hostiles
     public static final EntityType<TiberiumWormEntity> TIBERIUM_WORM = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_worm"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, TiberiumWormEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TiberiumWormEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
     public static final EntityType<TiberiumSkeletonEntity> TIBERIUM_SKELETON = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_skeleton"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, TiberiumSkeletonEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TiberiumSkeletonEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
     public static final EntityType<GhostEntity> GHOST = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ghost"),
@@ -80,6 +80,11 @@ public class ModEntities {
     public static final EntityType<FireBoltEntity> FIRE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(Signum.MOD_ID, "fire_projectile"),
             FabricEntityTypeBuilder.<FireBoltEntity>create(SpawnGroup.MISC, FireBoltEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
+    public static final EntityType<ShockBoltEntity> SHOCK_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "shock_projectile"),
+            FabricEntityTypeBuilder.<ShockBoltEntity>create(SpawnGroup.MISC, ShockBoltEntity::new)
                     .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
                     .trackedUpdateRate(10).build());
 

@@ -161,7 +161,8 @@
       "minecraft:disk_gravel",
       "signum:moissanite_ore_placed",
       "signum:manganese_ore_placed",
-      "signum:element_zero_ore_placed"
+      "signum:element_zero_ore_placed",
+      "signum:quartz_crystal_placed"
     ],
     [],
     [

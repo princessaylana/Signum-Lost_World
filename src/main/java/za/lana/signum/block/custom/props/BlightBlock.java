@@ -9,18 +9,23 @@ package za.lana.signum.block.custom.props;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Property;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.GameRules;
+import za.lana.signum.Signum;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.TiberiumWormEntity;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -95,6 +100,12 @@ public class BlightBlock
         tiberiumWormEntity.playSpawnEffects();
 
 
+    }
+    @Override
+    public void appendTooltip(ItemStack stack, BlockView blockGetter, List<Text> tooltip, TooltipContext tooltipFlag) {
+        tooltip.add(Text.translatable("block." + Signum.MOD_ID + ".blight_block.tooltip"));
+
+        super.appendTooltip(stack, blockGetter, tooltip, tooltipFlag);
     }
 }
 

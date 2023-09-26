@@ -31,14 +31,13 @@ public class SignumDataGenerator implements DataGeneratorEntrypoint {
 		// pack.addProvider(ModRecipeProvider::new);
 		// pack.addProvider(ModWorldGenerator::new);
 
+
 	}
 
-	/**
-	 * DATAGEN KEEPS FAILING IF THIS IS ENABLED
 	@Override
 	public void buildRegistry(RegistryBuilder registryBuilder) {
 		registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
 		registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
 	}
-	***/
+
 }

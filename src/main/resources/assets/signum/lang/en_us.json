@@ -16,27 +16,42 @@
   "item.signum.tiberiumcoal": "Tiberium Coal",
   "item.signum.elementzerocoal": "Element Zero Coal",
 
-  "item.signum.quartz_crystal": "Quartz Crystal",
-  "item.signum.raw_quartz_crystal": "Raw Quartz",
   "item.signum.glass_shard": "Glass Shard",
-  "item.signum.tiberium_shard": "Tiberium Shard",
+  "item.signum.tiberium_shard": "Raw Tiberium Shard",
+  "item.signum.fire_crystal_shard": "Raw Fire Shard",
+  "item.signum.exotic_crystal_shard": "Raw Exotic Shard",
+  "item.signum.ice_crystal_shard": "Raw Ice Shard",
+  "item.signum.quartz_crystal_shard": "Raw Quartz Shard",
+  "item.signum.raw_quartz_crystal": "Raw Quartz Crystal",
+
   "item.signum.tiberium_crystal": "Tiberium Crystal",
-  "item.signum.element_zero_crystal": "Element Zero Crystal",
   "item.signum.fire_crystal": "Fire Crystal",
+  "item.signum.exotic_crystal": "Exotic Crystal",
+  "item.signum.ice_crystal": "Ice Crystal",
+  "item.signum.quartz_crystal": "Quartz Crystal",
+
+  "item.signum.element_zero_crystal": "Element Zero Crystal",
   "item.signum.moissanite_crystal": "Moissanite Crystal",
 
-  "item.signum.element_zero_dust": "Element Zero Dust",
-  "item.signum.fire_crystal_dust": "Fire Crystal Dust",
   "item.signum.manganese_dust": "Manganese Dust",
-  "item.signum.moissanite_dust": "Moissanite Dust",
-  "item.signum.quartz_crystal_dust": "Manganese Dust",
   "item.signum.tiberium_dust": "Tiberium Dust",
+  "item.signum.fire_crystal_dust": "Fire Crystal Dust",
+  "item.signum.exotic_crystal_dust": "Exotic Crystal Dust",
+  "item.signum.ice_crystal_dust": "Ice Crystal Dust",
+  "item.signum.quartz_crystal_dust": "Quartz Crystal Dust",
+
+  "item.signum.element_zero_dust": "Element Zero Dust",
+  "item.signum.moissanite_dust": "Moissanite Dust",
 
   "item.signum.manganese_axe": "Manganese Axe",
   "item.signum.manganese_hoe": "Manganese Hoe",
   "item.signum.manganese_pickaxe": "Manganese Pickaxe",
   "item.signum.manganese_shovel": "Manganese Shovel",
   "item.signum.manganese_sword": "Manganese Sword",
+
+  "item.signum.plasma_sword": "Plasma Sword",
+
+
 
   "item.signum.tiberium_staff": "Tiberium Staff",
   "item.signum.tiberium_staff.info": "Magic Staff that Poisons Targets",
@@ -48,6 +63,12 @@
   "item.signum.fire_staff.info": "Magic Staff that Burns Targets",
   "item.signum.lightning_staff": "Lightning Staff",
   "item.signum.lightning_staff.info": "Magic Staff that Electrocutes Targets",
+
+  "item.signum.healing_staff": "Healing Staff",
+  "item.signum.teleport_staff": "Teleport Staff",
+  "item.signum.gravity_staff": "Gravity Staff",
+  "item.signum.petrify_staff": "Petrify Staff",
+  "item.signum.water_staff": "Water Staff",
 
   "item.signum.bpistol_item": "Baretta Pistol",
   "item.signum.bpistol_item.ammo": "Ammo",
@@ -61,6 +82,7 @@
   "item.signum.e0rod": "E0Elemental Rod",
   "item.signum.slayer_staff": "Slayer Staff",
 
+  "item.signum.tiberium_skeleton_spawn_egg": "Tiberium Skeleton Spawn Egg",
   "item.signum.tiberium_worm_spawn_egg": "Tiberium Worm Spawn Egg",
   "item.signum.airdrone_spawn_egg": "Airdrone Spawn Egg",
   "item.signum.sigalien_spawn_egg": "Alien Spawn Egg",
@@ -80,18 +102,48 @@
   "block.signum.element_zero_ore": "Element Zero Ore",
   "block.signum.deepslate_element_zero_ore": "Deepslate Element Zero Ore",
 
-  "block.signum.skyforge": "Sky Forge",
-  "block.signum.skyforge.tooltip": "Very Powerful Alloy Furnace",
-  "block.signum.razorwire_block": "Razor Wire",
-  "block.signum.razorwire.tooltip": "Very Sharp and Dangerous Wire",
-  "block.signum.assembly_station_block": "Razor Wire",
-
   "block.signum.tiberium_block": "Block of Tiberium",
   "block.signum.budding_tiberium": "Tiberium Bud",
   "block.signum.tiberium_cluster": "Tiberium Cluster",
   "block.signum.large_tiberium_bud": "Large Tiberium Bud",
   "block.signum.medium_tiberium_bud": "Medium Tiberium Bud",
   "block.signum.small_tiberium_bud": "Small Tiberium Bud",
+
+  "block.signum.fire_crystal_block": "Block of Fire Crystal",
+  "block.signum.budding_fire_crystal": "Fire Crystal Bud",
+  "block.signum.fire_crystal_cluster": "Fire Crystal Cluster",
+  "block.signum.large_fire_crystal_bud": "Large Fire Crystal Bud",
+  "block.signum.medium_fire_crystal_bud": "Medium Fire Crystal Bud",
+  "block.signum.small_fire_crystal_bud": "Small Fire Crystal Bud",
+
+  "block.signum.exotic_crystal_block": "Block of Exotic Crystal",
+  "block.signum.budding_exotic_crystal": "Exotic Crystal Bud",
+  "block.signum.exotic_crystal_cluster": "Exotic Crystal Cluster",
+  "block.signum.large_exotic_crystal_bud": "Large Exotic Crystal Bud",
+  "block.signum.medium_exotic_crystal_bud": "Medium Exotic Crystal Bud",
+  "block.signum.small_exotic_crystal_bud": "Small Exotic Crystal Bud",
+
+  "block.signum.ice_crystal_block": "Block of Ice Crystal",
+  "block.signum.budding_ice_crystal": "Ice Crystal Bud",
+  "block.signum.ice_crystal_cluster": "Ice Crystal Cluster",
+  "block.signum.large_ice_crystal_bud": "Large Ice Crystal Bud",
+  "block.signum.medium_ice_crystal_bud": "Medium Ice Crystal Bud",
+  "block.signum.small_ice_crystal_bud": "Small Ice Crystal Bud",
+
+  "block.signum.quartz_crystal_block": "Block of Quartz Crystal",
+  "block.signum.budding_quartz_crystal": "Quartz Crystal Bud",
+  "block.signum.quartz_crystal_cluster": "Quartz Crystal Cluster",
+  "block.signum.large_quartz_crystal_bud": "Large Quartz Crystal Bud",
+  "block.signum.medium_quartz_crystal_bud": "Medium Quartz Crystal Bud",
+  "block.signum.small_quartz_crystal_bud": "Small Quartz Crystal Bud",
+
+  "block.signum.blight_block": "Blight Block",
+  "block.signum.blight_block.tooltip": "Tiberium infested dirt",
+  "block.signum.skyforge": "Sky Forge",
+  "block.signum.skyforge.tooltip": "Very Powerful Alloy Furnace",
+  "block.signum.razorwire_block": "Razor Wire",
+  "block.signum.razorwire.tooltip": "Very Sharp and Dangerous Wire",
+  "block.signum.assembly_station_block": "Razor Wire",
 
   "block.signum.example_block": "Example Block",
   "entity.signum.toxicball": "Toxic Ball",
@@ -102,12 +154,11 @@
   "biome.signum.signum_bamboo": "Bamboo",
   "biome.signum.signum_birch": "Birch",
   "biome.signum.signum_cherry": "Cherry",
-  "effect.signum.sigteleport": "Teleport",
 
+  "effect.signum.sigteleport": "Teleport",
   "example_gui.signum.examplebutton":"Test Button",
   "message.signum.airballoon.mount":"Press Y to go up, B to go down, H for Airballoon Inventory",
   "message.signum.airballoon.empty":"Out of Fuel, Refuel to Avoid Crash",
-
   "key.category.signum.modkeys":"Signum ModKeys",
   "key.signum.openinventory":"AirBalloon Inventory",
   "key.signum.flyup":"Fly Up",

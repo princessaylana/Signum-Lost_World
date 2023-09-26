@@ -15,6 +15,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -44,17 +45,16 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ToxicGunItem extends Item implements GeoItem {
+	private final ToolMaterial material;
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
-	public ToxicGunItem() {
-		super(new Settings().maxCount(1).maxDamage(101));
-
-		// Register our item as server-side handled.
-		// This enables both animation data syncing and server-side animation triggering
+	public ToxicGunItem(ToolMaterial material, Item.Settings settings) {
+		super(settings);
+		//super(settings.maxDamageIfAbsent(material.getDurability()).maxCount(1).maxDamage(101));
+		this.material = material;
 		SingletonGeoAnimatable.registerSyncedAnimatable(this);
 	}
-
 	// Utilise our own render hook to define our custom renderer
 	@Override
 	public void createRenderer(Consumer<Object> consumer) {
@@ -147,11 +147,10 @@ public class ToxicGunItem extends Item implements GeoItem {
 				stack.getMaxDamage() - 1)
 				.formatted(Formatting.ITALIC));
 	}
-	public Ingredient getRepairIngredient () {
-		return Ingredient.ofItems(ModItems.TIBERIUM_CRYSTAL);
-
+	@Override
+	public boolean canRepair(ItemStack stack, ItemStack ingredient) {
+		return this.material.getRepairIngredient().test(ingredient) || super.canRepair(stack, ingredient);
 	}
-
 
 	@Override
 	public AnimatableInstanceCache getAnimatableInstanceCache() {

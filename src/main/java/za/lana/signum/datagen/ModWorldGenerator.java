@@ -28,7 +28,6 @@ public class ModWorldGenerator extends FabricDynamicRegistryProvider {
 
     @Override
     public String getName() {
-        return Signum.MOD_ID;
+        return "World Gen";
     }
-
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-15T21:12:30.080451266	Signum/Block Loot Tables
+// 1.20.1	2023-09-26T17:11:03.253600983	Signum/Block Loot Tables
 f7ad6ac6847db3d4e20a75c16daa34ad6fa24c22 data/signum/loot_tables/blocks/tiberium_cluster.json
 9b4b0c04e0e301625b8989f2773871324e69455b data/signum/loot_tables/blocks/moissanite_ore.json
 bd4c385dc2938f91ef24a6d49fe6a584df76f017 data/signum/loot_tables/blocks/medium_tiberium_bud.json
@@ -11,8 +11,8 @@ c56c42b1e609dc829ef418f1161242a70fc129ab data/signum/loot_tables/blocks/deepslat
 4264423e3efa66fda98e91ac0b817bc5b8cfdd59 data/signum/loot_tables/blocks/small_tiberium_bud.json
 a445674d566b2608b041bffc312bd935924ed15e data/signum/loot_tables/blocks/medium_quartz_crystal_bud.json
 09ef9489a63be5731ba43d88c7bd8f7a8e0792c7 data/signum/loot_tables/blocks/endstone_manganese_ore.json
-6cd2190ef1c74216edb198973f8e3f5e9a958e7a data/signum/loot_tables/blocks/exotic_crystal_block.json
 7daf1c997581adda3c36e948f1e3c1aa3b875db7 data/signum/loot_tables/blocks/small_ice_crystal_bud.json
+6cd2190ef1c74216edb198973f8e3f5e9a958e7a data/signum/loot_tables/blocks/exotic_crystal_block.json
 7600b400c306e50f2a13010cf2d825c8d2efc23c data/signum/loot_tables/blocks/element_zero_ore.json
 5544789c6aec38a0bfb193e6dd8db9c47d4df048 data/signum/loot_tables/blocks/quartz_crystal_cluster.json
 2a0f9f63c73ae885cae6e2f9452f970a38786449 data/signum/loot_tables/blocks/medium_ice_crystal_bud.json

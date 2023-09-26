@@ -18,35 +18,35 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import za.lana.signum.Signum;
 import za.lana.signum.client.layer.ModModelLayers;
-import za.lana.signum.client.model.IceBoltEntityModel;
-import za.lana.signum.client.model.TiberiumBoltEntityModel;
-import za.lana.signum.entity.projectile.IceBoltEntity;
-import za.lana.signum.entity.projectile.TiberiumBoltEntity;
+import za.lana.signum.client.model.FireBoltEntityModel;
+import za.lana.signum.client.model.ShockBoltEntityModel;
+import za.lana.signum.entity.projectile.FireBoltEntity;
+import za.lana.signum.entity.projectile.ShockBoltEntity;
 
-public class IceBoltRenderer extends EntityRenderer<IceBoltEntity> {
-    public static final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/projectile/ice_bolt_texture.png");
-    protected IceBoltEntityModel model;
+public class ShockBoltRenderer extends EntityRenderer<ShockBoltEntity> {
+    public static final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/projectile/shock_bolt_texture.png");
+    protected ShockBoltEntityModel model;
 
-    public IceBoltRenderer(EntityRendererFactory.Context ctx) {
+    public ShockBoltRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);
-        model = new IceBoltEntityModel(ctx.getPart(ModModelLayers.ICE_BOLT));
+        model = new ShockBoltEntityModel(ctx.getPart(ModModelLayers.SHOCK_BOLT));
     }
 
     @Override
-    public void render(IceBoltEntity entity, float yaw, float tickDelta, MatrixStack matrices,
+    public void render(ShockBoltEntity entity, float yaw, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw()) - 90.0F));
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevPitch, entity.getPitch()) + 90.0F));
         VertexConsumer vertexconsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, this.model.getLayer(TEXTURE), false, false);
-        this.model.render(matrices, vertexconsumer, light, OverlayTexture.DEFAULT_UV, 0.9F, 0.9F, 1.0F, 1.0F);
+        this.model.render(matrices, vertexconsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 
         matrices.pop();
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }
 
     @Override
-    public Identifier getTexture(IceBoltEntity entity) {
+    public Identifier getTexture(ShockBoltEntity entity) {
         return TEXTURE;
     }
 

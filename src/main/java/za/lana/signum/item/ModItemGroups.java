@@ -22,22 +22,42 @@ public class ModItemGroups {
             new Identifier(Signum.MOD_ID, "signum_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.signum"))
                     .icon(() -> new ItemStack(ModItems.ELEMENT_ZERO_CRYSTAL)).entries((displayContext, entries) -> {
+                        // BUIDLING BLOCKS
+                        entries.add(ModBlocks.MANGANESE_BLOCK);
+                        entries.add(ModBlocks.MOISSANITE_BLOCK);
+                        entries.add(ModBlocks.RAZORWIRE_BLOCK);
+                        entries.add(ModBlocks.BLIGHT_BLOCK);
+                        //entries.add(ModBlocks.TIBERIUM_FIRE);
+                        // ORES
+                        entries.add(ModBlocks.MANGANESE_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_MANGANESE_ORE);
+                        entries.add(ModBlocks.NETHERRACK_MANGANESE_ORE);
+                        entries.add(ModBlocks.MOISSANITE_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
+                        entries.add(ModBlocks.ENDSTONE_MANGANESE_ORE);
+                        entries.add(ModBlocks.ELEMENT_ZERO_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE);
+                        // MAIN CRYSTAL BLOCKS
+                        entries.add(ModBlocks.TIBERIUM_BLOCK);
+                        entries.add(ModBlocks.FIRE_CRYSTAL_BLOCK);
+                        entries.add(ModBlocks.EXOTIC_CRYSTAL_BLOCK);
+                        entries.add(ModBlocks.ICE_CRYSTAL_BLOCK);
+                        entries.add(ModBlocks.QUARTZ_CRYSTAL_BLOCK);
+
+                        entries.add(ModBlocks.BUDDING_TIBERIUM);
+                        entries.add(ModBlocks.BUDDING_FIRE_CRYSTAL);
+                        entries.add(ModBlocks.BUDDING_EXOTIC_CRYSTAL);
+                        entries.add(ModBlocks.BUDDING_ICE_CRYSTAL);
+                        entries.add(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
+
+                        // BLOCKENTITIES
+                        entries.add(ModBlocks.SKYFORGE);
+                        entries.add(ModBlocks.ASSEMBLY_STATION_BLOCK);
                         // RAW ITEMS
                         entries.add(ModItems.RAW_ELEMENT_ZERO);
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
                         entries.add(ModItems.RAW_MANGANESE);
                         entries.add(ModItems.RAW_MOISSANITE);
-                        // FUEL ITEMS
-                        entries.add(ModItems.COKECOAL);
-                        entries.add(ModItems.TIBERIUMCOAL);
-                        entries.add(ModItems.ELEMENTZEROCOAL);
-                        //SHARDS
-                        entries.add(ModItems.TIBERIUM_SHARD);
-                        entries.add(ModItems.FIRE_CRYSTAL_SHARD);
-                        entries.add(ModItems.EXOTIC_CRYSTAL_SHARD);
-                        entries.add(ModItems.ICE_CRYSTAL_SHARD);
-                        entries.add(ModItems.QUARTZ_CRYSTAL_SHARD);
-                        entries.add(ModItems.GLASS_SHARD);
                         // INGOTS AND EQUIVALENT CRYSTALS
                         entries.add(ModItems.MANGANESE_INGOT);
                         entries.add(ModItems.SIGSTEEL_INGOT);
@@ -45,6 +65,41 @@ public class ModItemGroups {
                         entries.add(ModItems.MANGANESE_NUGGET);
                         entries.add(ModItems.MOISSANITE);
                         entries.add(ModItems.ELEMENT_ZERO);
+                        // FUEL ITEMS
+                        entries.add(ModItems.COKECOAL);
+                        entries.add(ModItems.TIBERIUMCOAL);
+                        // CRYSTAL BLOCKS
+                        entries.add(ModItems.ELEMENTZEROCOAL);
+                        entries.add(ModBlocks.TIBERIUM_CLUSTER);
+                        entries.add(ModBlocks.FIRE_CRYSTAL_CLUSTER);
+                        entries.add(ModBlocks.EXOTIC_CRYSTAL_CLUSTER);
+                        entries.add(ModBlocks.ICE_CRYSTAL_CLUSTER);
+                        entries.add(ModBlocks.QUARTZ_CRYSTAL_CLUSTER);
+
+                        entries.add(ModBlocks.LARGE_TIBERIUM_BUD);
+                        entries.add(ModBlocks.LARGE_FIRE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.LARGE_EXOTIC_CRYSTAL_BUD);
+                        entries.add(ModBlocks.LARGE_ICE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.LARGE_QUARTZ_CRYSTAL_BUD);
+
+                        entries.add(ModBlocks.MEDIUM_TIBERIUM_BUD);
+                        entries.add(ModBlocks.MEDIUM_FIRE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.MEDIUM_EXOTIC_CRYSTAL_BUD);
+                        entries.add(ModBlocks.MEDIUM_ICE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.MEDIUM_QUARTZ_CRYSTAL_BUD);
+
+                        entries.add(ModBlocks.SMALL_TIBERIUM_BUD);
+                        entries.add(ModBlocks.SMALL_FIRE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.SMALL_EXOTIC_CRYSTAL_BUD);
+                        entries.add(ModBlocks.SMALL_ICE_CRYSTAL_BUD);
+                        entries.add(ModBlocks.SMALL_QUARTZ_CRYSTAL_BUD);
+                        //SHARDS
+                        entries.add(ModItems.TIBERIUM_SHARD);
+                        entries.add(ModItems.FIRE_CRYSTAL_SHARD);
+                        entries.add(ModItems.EXOTIC_CRYSTAL_SHARD);
+                        entries.add(ModItems.ICE_CRYSTAL_SHARD);
+                        entries.add(ModItems.QUARTZ_CRYSTAL_SHARD);
+                        entries.add(ModItems.GLASS_SHARD);
                         // CRYSTALS
                         entries.add(ModItems.TIBERIUM_CRYSTAL);
                         entries.add(ModItems.FIRE_CRYSTAL);
@@ -91,64 +146,9 @@ public class ModItemGroups {
                         entries.add(ModItems.SIGALIEN_SPAWN_EGG);
                         entries.add(ModItems.SKYCAR_SPAWN_EGG);
                         entries.add(ModItems.AIRBALOON_SPAWN_EGG);
-                        // BLOCKS
-                        entries.add(ModBlocks.BLIGHT_BLOCK);
-                        entries.add(ModBlocks.TIBERIUM_FIRE);
-                        // ORES
-                        entries.add(ModBlocks.MANGANESE_ORE);
-                        entries.add(ModBlocks.DEEPSLATE_MANGANESE_ORE);
-                        entries.add(ModBlocks.NETHERRACK_MANGANESE_ORE);
-                        entries.add(ModBlocks.MOISSANITE_ORE);
-                        entries.add(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
-                        entries.add(ModBlocks.ENDSTONE_MANGANESE_ORE);
-                        entries.add(ModBlocks.ELEMENT_ZERO_ORE);
-                        entries.add(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE);
-                        // CRYSTAL BLOCKS
-                        entries.add(ModBlocks.TIBERIUM_BLOCK);
-                        entries.add(ModBlocks.FIRE_CRYSTAL_BLOCK);
-                        entries.add(ModBlocks.EXOTIC_CRYSTAL_BLOCK);
-                        entries.add(ModBlocks.ICE_CRYSTAL_BLOCK);
-                        entries.add(ModBlocks.QUARTZ_CRYSTAL_BLOCK);
 
-                        entries.add(ModBlocks.BUDDING_TIBERIUM);
-                        entries.add(ModBlocks.BUDDING_FIRE_CRYSTAL);
-                        entries.add(ModBlocks.BUDDING_EXOTIC_CRYSTAL);
-                        entries.add(ModBlocks.BUDDING_ICE_CRYSTAL);
-                        entries.add(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
-
-                        entries.add(ModBlocks.TIBERIUM_CLUSTER);
-                        entries.add(ModBlocks.FIRE_CRYSTAL_CLUSTER);
-                        entries.add(ModBlocks.EXOTIC_CRYSTAL_CLUSTER);
-                        entries.add(ModBlocks.ICE_CRYSTAL_CLUSTER);
-                        entries.add(ModBlocks.QUARTZ_CRYSTAL_CLUSTER);
-
-                        entries.add(ModBlocks.LARGE_TIBERIUM_BUD);
-                        entries.add(ModBlocks.LARGE_FIRE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.LARGE_EXOTIC_CRYSTAL_BUD);
-                        entries.add(ModBlocks.LARGE_ICE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.LARGE_QUARTZ_CRYSTAL_BUD);
-
-                        entries.add(ModBlocks.MEDIUM_TIBERIUM_BUD);
-                        entries.add(ModBlocks.MEDIUM_FIRE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.MEDIUM_EXOTIC_CRYSTAL_BUD);
-                        entries.add(ModBlocks.MEDIUM_ICE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.MEDIUM_QUARTZ_CRYSTAL_BUD);
-
-                        entries.add(ModBlocks.SMALL_TIBERIUM_BUD);
-                        entries.add(ModBlocks.SMALL_FIRE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.SMALL_EXOTIC_CRYSTAL_BUD);
-                        entries.add(ModBlocks.SMALL_ICE_CRYSTAL_BUD);
-                        entries.add(ModBlocks.SMALL_QUARTZ_CRYSTAL_BUD);
-                        // BUIDLING BLOCKS
-                        entries.add(ModBlocks.MANGANESE_BLOCK);
-                        entries.add(ModBlocks.MOISSANITE_BLOCK);
-                        entries.add(ModBlocks.RAZORWIRE_BLOCK);
-                        // BLOCKENTITIES
-                        entries.add(ModBlocks.SKYFORGE);
-                        entries.add(ModBlocks.ASSEMBLY_STATION_BLOCK);
-                        //TO BE REMOVED - TESTING ONLY
+                        //TODO: BELOW TO BE REMOVED - FOR TESTING ONLY
                         entries.add(ModBlocks.EXAMPLE_BLOCK);
-                        entries.add(ModItems.TOXICBALL_ITEM);
                         entries.add(ModItems.BPISTOL_ITEM);
                         entries.add(ModItems.LASERBOLT_ITEM);
                         entries.add(ModItems.E0ROD);

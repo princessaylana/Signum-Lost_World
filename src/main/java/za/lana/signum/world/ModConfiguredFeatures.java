@@ -34,16 +34,15 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_MIOSSANITE_ORE_KEY = registerKey("deepslate_manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_ELEMENT_ZERO_ORE_KEY = registerKey("deepslate_manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> BUDDING_EXOTIC_CRYSTAL_KEY = registerKey("budding_exotic_crystal");
-    //nether
+    // NETHER ORES
     public static final RegistryKey<ConfiguredFeature<?, ?>> NETHERRACK_MANGANESE_ORE_KEY = registerKey("netherrack_manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> BUDDING_FIRE_CRYSTAL_KEY = registerKey("budding_fire_crystal");
     public static final RegistryKey<ConfiguredFeature<?, ?>> BUDDING_QUARTZ_CRYSTAL_KEY = registerKey("budding_quartz_crystal");
-    // end
+    //  END ORES
     public static final RegistryKey<ConfiguredFeature<?, ?>> ENDSTONE_MANGANESE_ORE_KEY = registerKey("endstone_manganese_ore");
 
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
-        //
         RuleTest stoneReplaceables = new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         RuleTest netherReplaceables = new TagMatchRuleTest(BlockTags.BASE_STONE_NETHER);
@@ -64,13 +63,17 @@ public class ModConfiguredFeatures {
                 List.of(OreFeatureConfig.createTarget(stoneReplaceables, ModBlocks.BUDDING_EXOTIC_CRYSTAL.getDefaultState()),
                         OreFeatureConfig.createTarget(deepslateReplaceables, ModBlocks.BUDDING_EXOTIC_CRYSTAL.getDefaultState()));
 
+        // NETHER ORES
         List<OreFeatureConfig.Target> netherManganeseOres =
                 List.of(OreFeatureConfig.createTarget(netherReplaceables, ModBlocks.NETHERRACK_MANGANESE_ORE.getDefaultState()));
+
         List<OreFeatureConfig.Target> netherFireCrystals =
                 List.of(OreFeatureConfig.createTarget(netherReplaceables, ModBlocks.BUDDING_FIRE_CRYSTAL.getDefaultState()));
-        List<OreFeatureConfig.Target> netherQuartZCrystals =
+
+        List<OreFeatureConfig.Target> netherSQuartZCrystals =
                 List.of(OreFeatureConfig.createTarget(netherReplaceables, ModBlocks.BUDDING_QUARTZ_CRYSTAL.getDefaultState()));
 
+        // END ORES
         List<OreFeatureConfig.Target> endManganeseOres =
                 List.of(OreFeatureConfig.createTarget(endReplaceables, ModBlocks.ENDSTONE_MANGANESE_ORE.getDefaultState()));
 
@@ -83,10 +86,9 @@ public class ModConfiguredFeatures {
         register(context, DEEPSLATE_ELEMENT_ZERO_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldElementZeroOres, 3));
         register(context, BUDDING_EXOTIC_CRYSTAL_KEY, Feature.ORE, new OreFeatureConfig(overworldExoticCrystals, 5));
 
-        register(context, NETHERRACK_MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherManganeseOres, 9));
-        register(context, BUDDING_FIRE_CRYSTAL_KEY, Feature.ORE, new OreFeatureConfig(netherFireCrystals, 9));
-        register(context, BUDDING_QUARTZ_CRYSTAL_KEY, Feature.ORE, new OreFeatureConfig(netherQuartZCrystals, 9));
-
+        register(context, NETHERRACK_MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherManganeseOres, 15));
+        register(context, BUDDING_FIRE_CRYSTAL_KEY, Feature.ORE, new OreFeatureConfig(netherFireCrystals, 10));
+        register(context, BUDDING_QUARTZ_CRYSTAL_KEY, Feature.ORE, new OreFeatureConfig(netherSQuartZCrystals, 11));
 
         register(context, ENDSTONE_MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(endManganeseOres, 9));
     }

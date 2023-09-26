@@ -5,12 +5,15 @@
  * */
 package za.lana.signum.effect;
 
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.hostile.TiberiumSkeletonEntity;
 import za.lana.signum.entity.hostile.TiberiumWormEntity;
 
 public class TiberiumPoison extends StatusEffect {
@@ -26,8 +29,11 @@ public class TiberiumPoison extends StatusEffect {
             if (entity.getHealth() > 1.0f) {
                 entity.damage(entity.getDamageSources().magic(), 2.0f);
             }
-            if (entity instanceof TiberiumWormEntity){
-                entity.heal(2.0f);
+            if (entity instanceof TiberiumWormEntity ){
+                entity.heal(6.0f);
+            }
+            if (entity instanceof TiberiumSkeletonEntity){
+                entity.heal(6.0f);
             }
             if (!entity.getWorld().isClient()) {
                 World level = entity.getWorld();
@@ -59,4 +65,5 @@ public class TiberiumPoison extends StatusEffect {
                     .addStatusEffect(new StatusEffectInstance(ModEffects.TIBERIUM_POISON, DURATION_TPOISON, 1), victim));
         }
     }
+
 }

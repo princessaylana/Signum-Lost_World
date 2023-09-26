@@ -62,21 +62,14 @@ public class ModItems {
     public static final Item MOISSANITE_DUST = registerItem("moissanite_dust", new Item(new FabricItemSettings()));
     public static final Item ELEMENT_ZERO_DUST = registerItem("element_zero_dust", new Item(new FabricItemSettings()));
 
-    public static final Item MANGANESE_PICKAXE = registerItem("manganese_pickaxe",
-            new PickaxeItem(ModToolMaterial.MANGANESE, 2,3f, new FabricItemSettings()));
-    public static final Item MANGANESE_AXE = registerItem("manganese_axe",
-            new AxeItem(ModToolMaterial.MANGANESE, 3,2.5f, new FabricItemSettings()));
-    public static final Item MANGANESE_SHOVEL = registerItem("manganese_shovel",
-            new ShovelItem(ModToolMaterial.MANGANESE, 2,3f, new FabricItemSettings()));
-    public static final Item MANGANESE_HOE = registerItem("manganese_hoe",
-            new HoeItem(ModToolMaterial.MANGANESE, 1,3f, new FabricItemSettings()));
-    public static final Item MANGANESE_SWORD = registerItem("manganese_sword",
-            new SwordItem(ModToolMaterial.MANGANESE, 7,7f, new FabricItemSettings()));
-    public static final Item PLASMA_SWORD = registerItem("plasma_sword",
-            new SwordItem(ModToolMaterial.ELEMENT_ZERO, 10,6f, new FabricItemSettings()));
+    public static final Item MANGANESE_PICKAXE = registerItem("manganese_pickaxe", new PickaxeItem(ModToolMaterial.MANGANESE, 2,3f, new FabricItemSettings()));
+    public static final Item MANGANESE_AXE = registerItem("manganese_axe", new AxeItem(ModToolMaterial.MANGANESE, 3,2.5f, new FabricItemSettings()));
+    public static final Item MANGANESE_SHOVEL = registerItem("manganese_shovel", new ShovelItem(ModToolMaterial.MANGANESE, 2,3f, new FabricItemSettings()));
+    public static final Item MANGANESE_HOE = registerItem("manganese_hoe", new HoeItem(ModToolMaterial.MANGANESE, 1,3f, new FabricItemSettings()));
+    public static final Item MANGANESE_SWORD = registerItem("manganese_sword", new SwordItem(ModToolMaterial.MANGANESE, 7,7f, new FabricItemSettings()));
+    public static final Item PLASMA_SWORD = registerItem("plasma_sword", new SwordItem(ModToolMaterial.ELEMENT_ZERO, 10,6f, new FabricItemSettings()));
 
-    public static final Item TIBERIUM_STAFF = registerItem("tiberium_staff",
-            new TiberiumStaff(ModToolMaterial.TIBERIUM, new FabricItemSettings()));
+    public static final Item TIBERIUM_STAFF = registerItem("tiberium_staff", new TiberiumStaff(ModToolMaterial.TIBERIUM, new FabricItemSettings()));
     public static final Item FREEZE_STAFF = registerItem("freeze_staff",
             new IceStaff(ModToolMaterial.ICE_CRYSTAL, new FabricItemSettings()));
     public static final Item TRANSMUTE_STAFF = registerItem("transmute_staff",
@@ -84,7 +77,7 @@ public class ModItems {
     public static final Item FIRE_STAFF = registerItem("fire_staff",
             new FireStaff(ModToolMaterial.FIRE_CRYSTAL, new FabricItemSettings()));
     public static final Item LIGHTNING_STAFF = registerItem("lightning_staff",
-            new ToolItem(ModToolMaterial.QUARTZ_CRYSTAL, new FabricItemSettings()));
+            new LightningStaff(ModToolMaterial.QUARTZ_CRYSTAL, new FabricItemSettings()));
     public static final Item HEALING_STAFF = registerItem("healing_staff",
             new ToolItem(ModToolMaterial.MOISSANITE_CRYSTAL, new FabricItemSettings()));
     public static final Item TELEPORT_STAFF = registerItem("teleport_staff",
@@ -101,13 +94,11 @@ public class ModItems {
     public static final Item LASERBOLT_ITEM = registerItem("laserbolt_item", new LaserBoltItem(new FabricItemSettings()));
     public static final Item E0ROD = registerItem("e0rod", new E0RodItem(new FabricItemSettings()));
 
-    public static final Item SLAYER_STAFF = registerItem("slayer_staff",
-            new ToolItem(ModToolMaterial.FIRE_CRYSTAL, new FabricItemSettings()));
-    public static final ToxicGunItem TOXICGUN = (ToxicGunItem) registerItem("toxicgun", new ToxicGunItem());
+    public static final Item SLAYER_STAFF = registerItem("slayer_staff", new ToolItem(ModToolMaterial.FIRE_CRYSTAL, new FabricItemSettings()));
+    public static final ToxicGunItem TOXICGUN = (ToxicGunItem) registerItem("toxicgun", new ToxicGunItem(ModToolMaterial.TIBERIUM, new FabricItemSettings()));
     public static final Item DETECTOR_ITEM = registerItem("detector_item", new OreDetectorItem(new FabricItemSettings().maxDamage(64)));
     //
-    public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(
-            ModEntities.TIBERIUM_WORM, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
+    public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(ModEntities.TIBERIUM_WORM, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
     public static final Item TIBERIUM_SKELETON_SPAWN_EGG = registerItem("tiberium_skeleton_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_SKELETON, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
     public static final Item GHOST_SPAWN_EGG = registerItem("ghost_spawn_egg", new SpawnEggItem(
@@ -116,10 +107,8 @@ public class ModItems {
             ModEntities.AIRDRONE, 0xD5B756, 0x1B0C83, new FabricItemSettings()));
     public static final Item SIGALIEN_SPAWN_EGG = registerItem("sigalien_spawn_egg", new SpawnEggItem(
             ModEntities.SIGALIEN, 0xD54446, 0x1B0C83, new FabricItemSettings()));
-    public static final Item SKYCAR_SPAWN_EGG = registerItem("skycar_spawn_egg", new SpawnEggItem(
-            ModEntities.SKYCAR, 0xD30E36, 0x1D0550, new FabricItemSettings()));
-    public static final Item AIRBALOON_SPAWN_EGG = registerItem("airballoon_spawn_egg", new SpawnEggItem(
-            ModEntities.AIRBALLOON, 0xD83E36, 0x1D0550, new FabricItemSettings()));
+    public static final Item SKYCAR_SPAWN_EGG = registerItem("skycar_spawn_egg", new SpawnEggItem(ModEntities.SKYCAR, 0xD30E36, 0x1D0550, new FabricItemSettings()));
+    public static final Item AIRBALOON_SPAWN_EGG = registerItem("airballoon_spawn_egg", new SpawnEggItem(ModEntities.AIRBALLOON, 0xD83E36, 0x1D0550, new FabricItemSettings()));
 
 
     public static void addItemsToIngredientGroup(FabricItemGroupEntries entries) {

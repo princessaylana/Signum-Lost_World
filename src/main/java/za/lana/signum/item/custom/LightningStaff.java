@@ -7,6 +7,8 @@
 package za.lana.signum.item.custom;
 
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,9 +18,11 @@ import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.entity.projectile.IceBoltEntity;
+import za.lana.signum.entity.projectile.ShockBoltEntity;
 import za.lana.signum.sound.ModSounds;
 
 import java.util.List;
@@ -36,9 +40,9 @@ public class LightningStaff
         world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.TIBERIUM_HIT, SoundCategory.NEUTRAL,1.5F, 1F);
         user.getItemCooldownManager().set(this, 40);
         if (!world.isClient()) {
-            IceBoltEntity projectile = new IceBoltEntity(world, user);
-            projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0, 3, 1);
-            world.spawnEntity(projectile);
+            ShockBoltEntity shockBoltEntity = new ShockBoltEntity(world, user);
+            shockBoltEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0, 3, 1);
+            world.spawnEntity(shockBoltEntity);
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         // BREAK TOOL

@@ -20,4 +20,6 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "transmute_bolt"), "main");
     public static final EntityModelLayer FIRE_BOLT =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "fire_bolt"), "main");
+    public static final EntityModelLayer SHOCK_BOLT =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "shock_bolt"), "main");
 }

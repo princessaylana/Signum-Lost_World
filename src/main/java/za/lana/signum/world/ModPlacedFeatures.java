@@ -77,6 +77,7 @@ public class ModPlacedFeatures {
          * we will spawn manganese in the nether, so players can only access our dimension
          * only after they have reached the nether
          * */
+
         register(context, NETHERRACK_MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.NETHERRACK_MANGANESE_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(10,
@@ -86,6 +87,7 @@ public class ModPlacedFeatures {
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BUDDING_FIRE_CRYSTAL_KEY),
                 ModOrePlacement.modifiersWithCount(10,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
+
         register(context, QUARTZ_CRYSTAL_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BUDDING_QUARTZ_CRYSTAL_KEY),
                 ModOrePlacement.modifiersWithCount(10,
@@ -101,13 +103,10 @@ public class ModPlacedFeatures {
     public static RegistryKey<PlacedFeature> registerKey(String name) {
         return RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(Signum.MOD_ID, name));
     }
-
-    private static void register(Registerable<PlacedFeature> context, RegistryKey<PlacedFeature> key,
-                                 RegistryEntry<ConfiguredFeature<?, ?>> configuration,
+    private static void register(Registerable<PlacedFeature> context, RegistryKey<PlacedFeature> key, RegistryEntry<ConfiguredFeature<?, ?>> configuration,
                                  List<PlacementModifier> modifiers) {
         context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }
-
     private static <FC extends FeatureConfig, F extends Feature<FC>> void register(Registerable<PlacedFeature> context, RegistryKey<PlacedFeature> key,
                                                                                    RegistryEntry<ConfiguredFeature<?, ?>> configuration,
                                                                                    PlacementModifier... modifiers) {

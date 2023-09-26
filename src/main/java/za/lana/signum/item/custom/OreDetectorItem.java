@@ -65,7 +65,10 @@ public class OreDetectorItem extends Item {
                 state.isOf(ModBlocks.DEEPSLATE_MOISSANITE_ORE) ||
                 state.isOf(ModBlocks.DEEPSLATE_MANGANESE_ORE) ||
                 state.isOf(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE) ||
-                state.isOf(ModBlocks.MANGANESE_ORE);
+                state.isOf(ModBlocks.MANGANESE_ORE) ||
+                state.isOf(ModBlocks.BUDDING_QUARTZ_CRYSTAL) ||
+                state.isOf(ModBlocks.BUDDING_FIRE_CRYSTAL) ||
+                state.isOf(ModBlocks.NETHERRACK_MANGANESE_ORE);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class ModEffects {
     public static final StatusEffect TRANSMUTE_EFFECT = new TransmuteEffect(StatusEffectCategory.HARMFUL,16700995);
     public static final StatusEffect BURN_EFFECT = new BurnEffect(StatusEffectCategory.HARMFUL,16684867);
 
-    // public static final StatusEffect SHOCK_EFFECT = new LightningEffect(StatusEffectCategory.HARMFUL,13234936);
+    public static final StatusEffect SHOCK_EFFECT = new ShockEffect(StatusEffectCategory.HARMFUL,13234936);
     // public static final StatusEffect CURE_EFFECT = new CureEffect(StatusEffectCategory.BENEFICIAL,13234936);
     public static final StatusEffect TELEPORT_EFFECT = new TeleportEffect(StatusEffectCategory.NEUTRAL,12796926);
     // public static final StatusEffect GRAVITY_EFFECT = new GravityEffect(StatusEffectCategory.HARMFUL,7334395);
