@@ -25,6 +25,7 @@ Adds a few unique things to Minecraft:
 
 
 Dependancies:
+- Fabric Loader 0.14.22
 - Fabric API 0.89.3
 - Geckolib 4.2.3
 
