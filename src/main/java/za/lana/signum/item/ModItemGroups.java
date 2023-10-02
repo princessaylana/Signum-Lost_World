@@ -21,12 +21,15 @@ public class ModItemGroups {
     public static final ItemGroup SIGNUM_GROUP = Registry.register(Registries.ITEM_GROUP,
             new Identifier(Signum.MOD_ID, "signum_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.signum"))
-                    .icon(() -> new ItemStack(ModItems.ELEMENT_ZERO_CRYSTAL)).entries((displayContext, entries) -> {
+                    .icon(() -> new ItemStack(ModBlocks.EXAMPLE_BLOCK)).entries((displayContext, entries) -> {
                         // BUIDLING BLOCKS
                         entries.add(ModBlocks.MANGANESE_BLOCK);
                         entries.add(ModBlocks.MOISSANITE_BLOCK);
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
                         entries.add(ModBlocks.BLIGHT_BLOCK);
+                        entries.add(ModBlocks.SKY_ICE_BLOCK);
+                        entries.add(ModBlocks.FROSTED_SKY_ICE_BLOCK);
+
                         //entries.add(ModBlocks.TIBERIUM_FIRE);
                         // ORES
                         entries.add(ModBlocks.MANGANESE_ORE);

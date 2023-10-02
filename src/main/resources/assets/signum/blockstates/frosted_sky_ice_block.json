@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "signum:block/props/frosted_sky_ice_block_0"
+    },
+    "age=1": {
+      "model": "signum:block/props/frosted_sky_ice_block_1"
+    },
+    "age=2": {
+      "model": "signum:block/props/frosted_sky_ice_block_2"
+    },
+    "age=3": {
+      "model": "signum:block/props/frosted_sky_ice_block_3"
+    }
+  }
+}

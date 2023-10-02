@@ -153,7 +153,8 @@
       "signum:moissanite_ore_placed",
       "signum:manganese_ore_placed",
       "signum:element_zero_ore_placed",
-      "signum:exotic_crystal_placed"
+      "signum:exotic_crystal_placed",
+      "signum:quartz_crystal_placed"
     ],
     [
       "minecraft:ore_infested"

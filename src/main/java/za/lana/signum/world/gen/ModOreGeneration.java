@@ -16,18 +16,19 @@ public class ModOreGeneration {
     public static void generateOres() {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
                 GenerationStep.Feature.UNDERGROUND_ORES, MANGANESE_ORE_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
+                GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.EXOTIC_CRYSTAL_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
+                GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.QUARTZ_CRYSTAL_PLACED_KEY);
+
 
         BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
                 GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.NETHERRACK_MANGANESE_ORE_PLACED_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
                 GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.FIRE_CRYSTAL_PLACED_KEY);
-        BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
-                GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.EXOTIC_CRYSTAL_PLACED_KEY);
 
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(),
                 GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.ENDSTONE_MANGANESE_ORE_PLACED_KEY);
 
-        //BiomeModifications.addFeature(BiomeSelectors.all(),
-        //        GenerationStep.Feature.UNDERGROUND_ORES, MANGANESE_ORE_PLACED_KEY);
     }
 }

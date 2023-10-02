@@ -72,7 +72,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
                     .add(ModBlocks.ASSEMBLY_STATION_BLOCK)
                     .add(ModBlocks.RAZORWIRE_BLOCK)
-                    .add(ModBlocks.SKYFORGE);
+                    .add(ModBlocks.SKYFORGE)
+                    .add(ModBlocks.SKY_ICE_BLOCK)
+                    .add(ModBlocks.FROSTED_SKY_ICE_BLOCK);
+
 
         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE)
                 .add(ModBlocks.BLIGHT_BLOCK);
@@ -128,7 +131,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
                 .add(ModBlocks.ASSEMBLY_STATION_BLOCK)
                 .add(ModBlocks.RAZORWIRE_BLOCK)
-                .add(ModBlocks.SKYFORGE);
+                .add(ModBlocks.SKYFORGE)
+                .add(ModBlocks.SKY_ICE_BLOCK)
+                .add(ModBlocks.FROSTED_SKY_ICE_BLOCK);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.BLIGHT_BLOCK);
