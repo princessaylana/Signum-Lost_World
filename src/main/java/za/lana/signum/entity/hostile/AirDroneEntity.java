@@ -363,18 +363,14 @@ public class AirDroneEntity extends FlyingEntity implements GeoEntity {
 			if (livingEntity.squaredDistanceTo(this.airDrone) < 4096.0 && this.airDrone.canSee(livingEntity)) {
 				World world = this.airDrone.getWorld();
 				++this.cooldown;
-				if (this.cooldown == 10 && !this.airDrone.isSilent()) {
-					world.syncWorldEvent(null, WorldEvents.GHAST_WARNS, this.airDrone.getBlockPos(), 0);
-				}
+				//if (this.cooldown == 10 && !this.airDrone.isSilent()) {world.syncWorldEvent(null, WorldEvents.GHAST_WARNS, this.airDrone.getBlockPos(), 0);}
 				if (this.cooldown == 20) {
 					double e = 4.0;
 					Vec3d vec3d = this.airDrone.getRotationVec(1.0f);
 					double f = livingEntity.getX() - (this.airDrone.getX() + vec3d.x * 4.0);
 					double g = livingEntity.getBodyY(0.5) - (0.5 + this.airDrone.getBodyY(0.5));
 					double h = livingEntity.getZ() - (this.airDrone.getZ() + vec3d.z * 4.0);
-					if (!this.airDrone.isSilent()) {
-						world.syncWorldEvent(null, WorldEvents.GHAST_SHOOTS, this.airDrone.getBlockPos(), 0);
-					}
+					//if (!this.airDrone.isSilent()) {world.syncWorldEvent(null, WorldEvents.GHAST_SHOOTS, this.airDrone.getBlockPos(), 0);}
 					FireballEntity fireballEntity = new FireballEntity(world, this.airDrone, f, g, h, this.airDrone.getFireballStrength());
 					fireballEntity.setPosition(this.airDrone.getX() + vec3d.x * 4.0, this.airDrone.getBodyY(0.5) + 0.5, fireballEntity.getZ() + vec3d.z * 4.0);
 					world.spawnEntity(fireballEntity);

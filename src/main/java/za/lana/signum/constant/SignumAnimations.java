@@ -22,6 +22,8 @@ public final class SignumAnimations {
     public static final RawAnimation TIBERIUM_SKELETON_IDLE = RawAnimation.begin().thenPlay("animation.tskeleton.idle");
     public static final RawAnimation TIBERIUM_SKELETON_ATTACK = RawAnimation.begin().thenPlay("animation.tskeleton.attack");
 
+    public static final RawAnimation UTAH_ATTACK = RawAnimation.begin().thenPlay("animation.utah.attack");
+
 
 
 }

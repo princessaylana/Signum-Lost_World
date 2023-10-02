@@ -33,7 +33,7 @@ public class ModDimensions {
                 .frameBlock(ModBlocks.MANGANESE_BLOCK)
                 .destDimID(WORLD_KEY.getValue())
                 .tintColor(240, 255, 240)
-                .lightWithItem(ModItems.QUARTZ_CRYSTAL)
+                .lightWithItem(ModItems.FIRE_CRYSTAL)
                 .registerPortal();
     }
 }

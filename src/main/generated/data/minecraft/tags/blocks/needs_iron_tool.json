@@ -43,6 +43,8 @@
     "signum:quartz_crystal_block",
     "signum:assembly_station_block",
     "signum:razorwire_block",
-    "signum:skyforge"
+    "signum:skyforge",
+    "signum:sky_ice_block",
+    "signum:frosted_sky_ice_block"
   ]
 }

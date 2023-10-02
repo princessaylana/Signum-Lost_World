@@ -25,6 +25,8 @@ import za.lana.signum.block.custom.SkyForgeBlock;
 import za.lana.signum.block.custom.crystal.*;
 import za.lana.signum.block.custom.modore.ElementZeroOreBlock;
 import za.lana.signum.block.custom.props.BlightBlock;
+import za.lana.signum.block.custom.props.FrostedSkyIceBlock;
+import za.lana.signum.block.custom.props.SkyIceBlock;
 import za.lana.signum.block.custom.props.TiberiumFireBlock;
 import za.lana.signum.sound.ModSounds;
 
@@ -72,6 +74,15 @@ public class ModBlocks {
             new BlightBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).mapColor(MapColor.LIME)
                     .strength(5.0f, 5.0f)
                     .sounds(BlockSoundGroup.ROOTED_DIRT).requiresTool()));
+    public static final Block SKY_ICE_BLOCK = registerBlock("sky_ice_block",
+            new SkyIceBlock(FabricBlockSettings.copyOf(Blocks.ICE).mapColor(MapColor.WHITE)
+                    .strength(5.0f, 5.0f)
+                    .sounds(BlockSoundGroup.GLASS).requiresTool()));
+    public static final Block FROSTED_SKY_ICE_BLOCK = registerBlock("frosted_sky_ice_block",
+            new FrostedSkyIceBlock(FabricBlockSettings.copyOf(Blocks.FROSTED_ICE).mapColor(MapColor.WHITE)
+                    .strength(5.0f, 5.0f)
+                    .sounds(BlockSoundGroup.GLASS).requiresTool()));
+
     public static final Block TIBERIUM_FIRE = registerBlock("tiberium_fire",
             new TiberiumFireBlock(FabricBlockSettings.copyOf(Blocks.FIRE).mapColor(MapColor.LIME).replaceable().noCollision().breakInstantly()
                     .luminance(state -> 15).sounds(BlockSoundGroup.WOOL).pistonBehavior(PistonBehavior.DESTROY)));

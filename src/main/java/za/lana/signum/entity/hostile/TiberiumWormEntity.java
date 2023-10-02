@@ -15,19 +15,20 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -41,11 +42,11 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.block.custom.props.BlightBlock;
-import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.item.ModItems;
 
 import java.util.EnumSet;
+import java.util.List;
 
 public class TiberiumWormEntity extends HostileEntity implements GeoEntity {
 	private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -66,10 +67,14 @@ public class TiberiumWormEntity extends HostileEntity implements GeoEntity {
 	@Override
 	protected void initGoals() {
 		this.goalSelector.add(1, new SwimGoal(this));
-		this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2D, false));
-		this.goalSelector.add(3, new WanderAndInfestGoal(this));
-		this.goalSelector.add(4, new LookAroundGoal(this));
+		this.goalSelector.add(2, new AvoidSunlightGoal(this));
+		this.goalSelector.add(3, new MeleeAttackGoal(this, 1.2D, false));
+		this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
+		this.goalSelector.add(5, new WanderAndInfestGoal(this));
+		this.goalSelector.add(6, new LookAroundGoal(this));
 
+		this.targetSelector.add(1, new TiberiumWormEntity.TiberiumWormRevengeGoal());
+		this.targetSelector.add(2, new TiberiumWormEntity.ProtectHordeGoal());
 		this.targetSelector.add(2, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
 		this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.add(2, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
@@ -157,6 +162,54 @@ public class TiberiumWormEntity extends HostileEntity implements GeoEntity {
 			}
 		}
 	}
+
+	class TiberiumWormRevengeGoal
+			extends RevengeGoal {
+		public TiberiumWormRevengeGoal() {
+			super(TiberiumWormEntity.this, new Class[0]);
+		}
+
+		@Override
+		public void start() {
+			super.start();
+			if (TiberiumWormEntity.this.isAttacking()) {
+				this.callSameTypeForRevenge();
+				this.stop();
+			}
+		}
+
+		@Override
+		protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
+			if (mob instanceof SkeletonEntity) {
+				super.setMobEntityTarget(mob, target);
+			}
+		}
+	}
+
+	class ProtectHordeGoal
+			extends ActiveTargetGoal<PlayerEntity> {
+		public ProtectHordeGoal() {
+			super(TiberiumWormEntity.this, PlayerEntity.class, 20, true, true, null);
+		}
+
+		@Override
+		public boolean canStart() {
+			if (super.canStart()) {
+				List<TiberiumWormEntity> list = TiberiumWormEntity.this.getWorld().getNonSpectatingEntities(TiberiumWormEntity.class, TiberiumWormEntity.this.getBoundingBox().expand(8.0, 4.0, 8.0));
+				for (TiberiumWormEntity tiberiumWormEntity : list) {
+					if (!tiberiumWormEntity.isBaby()) continue;
+					return true;
+				}
+			}
+			return false;
+		}
+
+		@Override
+		protected double getFollowRange() {
+			return super.getFollowRange() * 0.5;
+		}
+	}
+
 	@Override
 	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
 		TiberiumWormEntity tiberiumWormEntity;

@@ -18,7 +18,8 @@ import za.lana.signum.Signum;
 
 /**IMPORTANT README
  * ores are placed high, so they will spawn on our sky dimension,
- * and possibly very rare in the overworld if a mountian exceeds 144 height
+ * and possibly very rare in the overworld if a mountian exceeds 144 height,
+ * except for future water Crystals?
  * make sure this corresponds with the datagen files
  * sky dimension ores are higher in concentration due to less surface area
  * than the actual overworld see placed feature json files
@@ -44,19 +45,23 @@ public class ModPlacedFeatures {
 
         register(context, MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MANGANESE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(8,
+                ModOrePlacement.modifiersWithCount(9,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
         register(context, MOISSANITE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MIOSSANITE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(6,
+                ModOrePlacement.modifiersWithCount(7,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
         register(context, ELEMENT_ZERO_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ELEMENT_ZERO_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(10,
+                ModOrePlacement.modifiersWithCount(7,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
         register(context, EXOTIC_CRYSTAL_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BUDDING_EXOTIC_CRYSTAL_KEY),
-                ModOrePlacement.modifiersWithCount(10,
+                ModOrePlacement.modifiersWithCount(7,
+                        HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
+        register(context, QUARTZ_CRYSTAL_PLACED_KEY,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BUDDING_QUARTZ_CRYSTAL_KEY),
+                ModOrePlacement.modifiersWithCount(7,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
 
         register(context, DEEPSLATE_MANGANESE_ORE_PLACED_KEY,
@@ -65,37 +70,32 @@ public class ModPlacedFeatures {
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
         register(context, DEEPSLATE_MOISSANITE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.DEEPSLATE_MIOSSANITE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(8,
+                ModOrePlacement.modifiersWithCount(9,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
         register(context, DEEPSLATE_ELEMENT_ZERO_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ELEMENT_ZERO_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(10,
+                ModOrePlacement.modifiersWithCount(9,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
 
         /**
          * TECHNOLOGY TREE FOR PORTAL
-         * we will spawn manganese in the nether, so players can only access our dimension
+         * we will spawn FIRE_CRYSTAL in the nether, so players can only access our dimension
          * only after they have reached the nether
          * */
 
         register(context, NETHERRACK_MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.NETHERRACK_MANGANESE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(10,
+                ModOrePlacement.modifiersWithCount(12,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
 
         register(context, FIRE_CRYSTAL_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BUDDING_FIRE_CRYSTAL_KEY),
-                ModOrePlacement.modifiersWithCount(10,
-                        HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
-
-        register(context, QUARTZ_CRYSTAL_PLACED_KEY,
-                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BUDDING_QUARTZ_CRYSTAL_KEY),
-                ModOrePlacement.modifiersWithCount(10,
+                ModOrePlacement.modifiersWithCount(7,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
 
         register(context, ENDSTONE_MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ENDSTONE_MANGANESE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(10,
+                ModOrePlacement.modifiersWithCount(15,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
 
     }
