@@ -125,7 +125,8 @@
       "minecraft:glow_lichen",
       "minecraft:trees_mangrove",
       "minecraft:patch_grass_normal",
-      "minecraft:patch_dead_bush"
+      "minecraft:patch_dead_bush",
+      "minecraft:patch_dead_bush_2"
     ],
     [
       "minecraft:freeze_top_layer"

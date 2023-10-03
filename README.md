@@ -55,6 +55,8 @@ Hoping to expand and to maybe turn this into a community Project in the future.
 [![Github all releases](https://img.shields.io/github/downloads/princessaylana/Signum-1.20/total.svg)](https://GitHub.com/princessaylana/Signum-1.20/releases/)
 ![](https://img.shields.io/github/license/princessaylana/Signum-1.20)
 [![](https://img.shields.io/github/v/release/princessaylana/Signum-1.20)](https://GitHub.com/princessaylana/Signum-1.20releases/)
+![Discord](https://img.shields.io/discord/:serverId)
+
 
 ![Signum Poster](https://images2.imgbox.com/4e/f3/AKGqbLyZ_o.png "Signum Minecraft Fabric Mod")
 ...

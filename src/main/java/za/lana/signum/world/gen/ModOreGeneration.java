@@ -20,6 +20,8 @@ public class ModOreGeneration {
                 GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.EXOTIC_CRYSTAL_PLACED_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
                 GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.QUARTZ_CRYSTAL_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
+                GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.ICE_CRYSTAL_PLACED_KEY);
 
 
         BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),

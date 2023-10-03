@@ -33,6 +33,7 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> DEEPSLATE_MOISSANITE_ORE_PLACED_KEY = registerKey("deepslate_moissanite_ore_placed");
     public static final RegistryKey<PlacedFeature> DEEPSLATE_ELEMENT_ZERO_ORE_PLACED_KEY = registerKey("deepslate_moissanite_ore_placed");
     public static final RegistryKey<PlacedFeature> EXOTIC_CRYSTAL_PLACED_KEY = registerKey("exotic_crystal_placed");
+    public static final RegistryKey<PlacedFeature> ICE_CRYSTAL_PLACED_KEY = registerKey("ice_crystal_placed");
 
     public static final RegistryKey<PlacedFeature> NETHERRACK_MANGANESE_ORE_PLACED_KEY = registerKey("netherrack_manganese_ore_placed");
     public static final RegistryKey<PlacedFeature> FIRE_CRYSTAL_PLACED_KEY = registerKey("fire_crystal_placed");
@@ -45,36 +46,40 @@ public class ModPlacedFeatures {
 
         register(context, MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MANGANESE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(9,
+                ModOrePlacement.modifiersWithCount(19,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
         register(context, MOISSANITE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MIOSSANITE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(7,
+                ModOrePlacement.modifiersWithCount(17,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
         register(context, ELEMENT_ZERO_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ELEMENT_ZERO_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(7,
+                ModOrePlacement.modifiersWithCount(17,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
         register(context, EXOTIC_CRYSTAL_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BUDDING_EXOTIC_CRYSTAL_KEY),
-                ModOrePlacement.modifiersWithCount(7,
+                ModOrePlacement.modifiersWithCount(17,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
         register(context, QUARTZ_CRYSTAL_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BUDDING_QUARTZ_CRYSTAL_KEY),
-                ModOrePlacement.modifiersWithCount(7,
+                ModOrePlacement.modifiersWithCount(17,
+                        HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
+        register(context, ICE_CRYSTAL_PLACED_KEY,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BUDDING_ICE_CRYSTAL_KEY),
+                ModOrePlacement.modifiersWithCount(17,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
 
         register(context, DEEPSLATE_MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.DEEPSLATE_MANGANESE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(12,
+                ModOrePlacement.modifiersWithCount(22,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
         register(context, DEEPSLATE_MOISSANITE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.DEEPSLATE_MIOSSANITE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(9,
+                ModOrePlacement.modifiersWithCount(19,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
         register(context, DEEPSLATE_ELEMENT_ZERO_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ELEMENT_ZERO_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(9,
+                ModOrePlacement.modifiersWithCount(19,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
 
         /**
