@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "signum:block/manganese_slab"
+    },
+    "type=double": {
+      "model": "signum:block/manganese_block"
+    },
+    "type=top": {
+      "model": "signum:block/manganese_slab_top"
+    }
+  }
+}

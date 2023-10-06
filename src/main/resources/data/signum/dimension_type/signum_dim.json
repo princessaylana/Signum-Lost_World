@@ -4,7 +4,7 @@
   "coordinate_scale": 5.0,
   "effects": "minecraft:overworld",
   "has_ceiling": false,
-  "has_raids": false,
+  "has_raids": true,
   "has_skylight": true,
   "height": 512,
   "infiniburn": "#minecraft:infiniburn_overworld",
@@ -19,6 +19,7 @@
     }
   },
   "natural": true,
+  "getmoonphase": 1.00,
   "piglin_safe": false,
   "respawn_anchor_works": true,
   "ultrawarm": false

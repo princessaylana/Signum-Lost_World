@@ -60,6 +60,12 @@
         "maxCount": 4
       },
       {
+        "type": "minecraft:evoker",
+        "weight": 25,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
         "type": "minecraft:creeper",
         "weight": 100,
         "minCount": 4,
@@ -124,6 +130,7 @@
     [
       "minecraft:glow_lichen",
       "minecraft:trees_mangrove",
+      "signum:tiberium_vegetation",
       "minecraft:patch_grass_normal",
       "minecraft:patch_dead_bush",
       "minecraft:patch_dead_bush_2"

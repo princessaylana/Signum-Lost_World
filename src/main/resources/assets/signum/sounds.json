@@ -33,5 +33,12 @@
       "signum:tiberium_hit"
     ],
     "volume":"0.15"
+  },
+  "snowy_wind": {
+    "subtitle": "sounds.signum.snowy_wind",
+    "sounds": [
+      "signum:snowy_wind"
+    ],
+    "volume":"0.15"
   }
 }

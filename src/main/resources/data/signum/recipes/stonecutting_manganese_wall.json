@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "signum:manganese_block"
+  },
+  "result": "signum:manganese_wall",
+  "count": 1
+}

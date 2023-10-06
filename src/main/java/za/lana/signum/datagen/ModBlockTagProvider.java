@@ -138,5 +138,14 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.BLIGHT_BLOCK);
 
+        getOrCreateTagBuilder(BlockTags.FENCES)
+                .add(ModBlocks.MANGANESE_FENCE);
+        getOrCreateTagBuilder(BlockTags.FENCE_GATES)
+                .add(ModBlocks.MANGANESE_GATE);
+        getOrCreateTagBuilder(BlockTags.WALLS)
+                .add(ModBlocks.MANGANESE_WALL);
+        getOrCreateTagBuilder(BlockTags.WALLS)
+                .add(ModBlocks.MANGANESE_WALL);
+
     }
 }

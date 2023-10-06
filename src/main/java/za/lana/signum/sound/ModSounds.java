@@ -15,11 +15,13 @@ import za.lana.signum.Signum;
 
 public class ModSounds {
     //public static final RegistryEntry.Reference<SoundEvent> AMBIENT_CAVE = SoundEvents.registerReference("ambient.cave");
+    public static SoundEvent SNOWY_WIND = registerSoundEvent("snowy_wind");
     public static SoundEvent TIBERIUM_AMBIENT = registerSoundEvent("tiberium_ambient");
     public static SoundEvent TIBERIUM_BREAK = registerSoundEvent("tiberium_break");
     public static SoundEvent TIBERIUM_WALK = registerSoundEvent("tiberium_walk");
     public static SoundEvent TIBERIUM_PLACE = registerSoundEvent("tiberium_place");
     public static SoundEvent TIBERIUM_HIT = registerSoundEvent("tiberium_hit");
+
 
     public static final BlockSoundGroup TIBERIUM_BLOCK_SOUNDS = new BlockSoundGroup(1f, 1f,
             ModSounds.TIBERIUM_BREAK, ModSounds.TIBERIUM_WALK, ModSounds.TIBERIUM_PLACE,

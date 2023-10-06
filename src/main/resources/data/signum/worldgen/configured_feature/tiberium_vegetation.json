@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "features": [
+      {
+        "chance": 0.1,
+        "feature": {
+          "feature": "signum:huge_toxic_mushroom",
+          "placement": []
+        }
+      }
+    ],
+    "default": "minecraft:oak_checked"
+  }
+}

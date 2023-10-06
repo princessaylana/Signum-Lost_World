@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "signum:block/manganese_block",
+    "side": "signum:block/manganese_block",
+    "top": "signum:block/manganese_block"
+  }
+}

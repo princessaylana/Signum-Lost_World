@@ -29,6 +29,18 @@ public class ModItemGroups {
                         entries.add(ModBlocks.BLIGHT_BLOCK);
                         entries.add(ModBlocks.SKY_ICE_BLOCK);
                         entries.add(ModBlocks.FROSTED_SKY_ICE_BLOCK);
+                        entries.add(ModBlocks.MANGANESE_STAIRS);
+                        entries.add(ModBlocks.MANGANESE_WALL);
+                        entries.add(ModBlocks.MANGANESE_SLAB);
+                        entries.add(ModBlocks.MANGANESE_FENCE);
+                        entries.add(ModBlocks.MANGANESE_GATE);
+                        entries.add(ModBlocks.MANGANESE_DOOR);
+                        entries.add(ModBlocks.MANGANESE_TRAPDOOR);
+                        entries.add(ModBlocks.MANGANESE_BUTTON);
+                        entries.add(ModBlocks.MANGANESE_PRESSURE_PLATE);
+                        // disabled
+                        entries.add(ModBlocks.TOXIC_SHROOM_BLOCK);
+                        entries.add(ModBlocks.TOXIC_SHROOM_STEM);
 
                         //entries.add(ModBlocks.TIBERIUM_FIRE);
                         // ORES

@@ -15,6 +15,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
 import java.util.List;
 import za.lana.signum.Signum;
+import za.lana.signum.world.gen.ModFeatureGeneration;
 
 /**IMPORTANT README
  * ores are placed high, so they will spawn on our sky dimension,
@@ -25,6 +26,7 @@ import za.lana.signum.Signum;
  * than the actual overworld see placed feature json files
  * */
 public class ModPlacedFeatures {
+
     public static final RegistryKey<PlacedFeature> MANGANESE_ORE_PLACED_KEY = registerKey("manganese_ore_placed");
     public static final RegistryKey<PlacedFeature> MOISSANITE_ORE_PLACED_KEY = registerKey("moissanite_ore_placed");
     public static final RegistryKey<PlacedFeature> ELEMENT_ZERO_ORE_PLACED_KEY = registerKey("element_zero_ore_placed");
@@ -43,6 +45,7 @@ public class ModPlacedFeatures {
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
+
 
         register(context, MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MANGANESE_ORE_KEY),

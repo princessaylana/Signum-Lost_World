@@ -27,17 +27,19 @@ public class SignumDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModLootTableProvider::new);
 
 		// disabled below
-		// pack.addProvider(ModModelProvider::new);
+		pack.addProvider(ModModelProvider::new);
 		// pack.addProvider(ModRecipeProvider::new);
 		// pack.addProvider(ModWorldGenerator::new);
 
 
 	}
 
+	/**
 	@Override
 	public void buildRegistry(RegistryBuilder registryBuilder) {
 		registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
 		registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
 	}
+	**/
 
 }

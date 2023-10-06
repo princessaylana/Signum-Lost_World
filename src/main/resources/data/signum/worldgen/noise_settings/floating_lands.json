@@ -1414,7 +1414,7 @@
                                 "result_state": {
                                   "Name": "signum:frosted_sky_ice_block",
                                   "Properties": {
-                                    "snowy": "false"
+                                    "snowy": "true"
                                   }
                                 }
                               }
@@ -1422,8 +1422,6 @@
                           ]
                         }
                       },
-
-
 
                       {
                         "type": "minecraft:condition",

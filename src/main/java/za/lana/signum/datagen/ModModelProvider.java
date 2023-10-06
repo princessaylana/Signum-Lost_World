@@ -22,29 +22,33 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
 
-        //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BLIGHT_BLOCK);
+        BlockStateModelGenerator.BlockTexturePool manganesePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.MANGANESE_BLOCK);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MOISSANITE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MOISSANITE_BLOCK);
 
-        //BlockStateModelGenerator.BlockTexturePool manganesePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.MANGANESE_BLOCK);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MANGANESE_BLOCK);
+        //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MANGANESE_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MANGANESE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_MANGANESE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.NETHERRACK_MANGANESE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ENDSTONE_MANGANESE_ORE);
 
+        manganesePool.stairs(ModBlocks.MANGANESE_STAIRS);
+        manganesePool.fence(ModBlocks.MANGANESE_FENCE);
+        manganesePool.fenceGate(ModBlocks.MANGANESE_GATE);
+        manganesePool.wall(ModBlocks.MANGANESE_WALL);
+        manganesePool.pressurePlate(ModBlocks.MANGANESE_PRESSURE_PLATE);
+        manganesePool.slab(ModBlocks.MANGANESE_SLAB);
+        manganesePool.button(ModBlocks.MANGANESE_BUTTON);
+        blockStateModelGenerator.registerDoor(ModBlocks.MANGANESE_DOOR);
+        blockStateModelGenerator.registerTrapdoor(ModBlocks.MANGANESE_TRAPDOOR);
 
-        //BlockStateModelGenerator.BlockTexturePool tiberiumPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.TIBERIUM_BLOCK);
-        /**
-        blockStateModelGenerator.registerAmethyst(ModBlocks.BUDDING_TIBERIUM);
-        blockStateModelGenerator.registerAmethyst(ModBlocks.LARGE_TIBERIUM_BUD);
-        blockStateModelGenerator.registerAmethyst(ModBlocks.MEDIUM_TIBERIUM_BUD);
-        blockStateModelGenerator.registerAmethyst(ModBlocks.SMALL_TIBERIUM_BUD);
-        blockStateModelGenerator.registerAmethyst(ModBlocks.TIBERIUM_CLUSTER);
-        blockStateModelGenerator.registerAmethyst(ModBlocks.TIBERIUM_BLOCK);
-         **/
+        blockStateModelGenerator.registerMushroomBlock(ModBlocks.TOXIC_SHROOM_BLOCK);
+        blockStateModelGenerator.registerMushroomBlock(ModBlocks.TOXIC_SHROOM_STEM);
+
+
+
     }
 
     @Override
@@ -56,7 +60,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.GLASS_SHARD, Models.GENERATED);
         itemModelGenerator.register(ModItems.MANGANESE_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.MANGANESE_NUGGET, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MANGANESE_DUST, Models.GENERATED);
         itemModelGenerator.register(ModItems.MOISSANITE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MOISSANITE_DUST, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.RAW_MANGANESE, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_ELEMENT_ZERO, Models.GENERATED);

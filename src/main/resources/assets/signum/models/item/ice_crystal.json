@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "signum:item/crystals/ice_crystal"
-  }
-}

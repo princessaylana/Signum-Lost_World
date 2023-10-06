@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
@@ -83,6 +84,20 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.MEDIUM_QUARTZ_CRYSTAL_BUD, rareOreDrops(ModBlocks.MEDIUM_QUARTZ_CRYSTAL_BUD, ModItems.QUARTZ_CRYSTAL_SHARD));
         addDrop(ModBlocks.LARGE_QUARTZ_CRYSTAL_BUD, lesscommonOreDrops(ModBlocks.LARGE_QUARTZ_CRYSTAL_BUD, ModItems.QUARTZ_CRYSTAL_SHARD));
         addDrop(ModBlocks.QUARTZ_CRYSTAL_CLUSTER, commonOreDrops(ModBlocks.QUARTZ_CRYSTAL_CLUSTER, ModItems.QUARTZ_CRYSTAL_SHARD));
+
+        addDrop(ModBlocks.MANGANESE_STAIRS);
+        addDrop(ModBlocks.MANGANESE_FENCE);
+        addDrop(ModBlocks.MANGANESE_GATE);
+        addDrop(ModBlocks.MANGANESE_TRAPDOOR);
+        addDrop(ModBlocks.MANGANESE_WALL);
+        addDrop(ModBlocks.MANGANESE_PRESSURE_PLATE);
+        addDrop(ModBlocks.MANGANESE_BUTTON);
+        addDrop(ModBlocks.MANGANESE_DOOR, doorDrops(ModBlocks.MANGANESE_DOOR));
+        addDrop(ModBlocks.MANGANESE_DOOR, slabDrops(ModBlocks.MANGANESE_SLAB));
+
+        addDrop(ModBlocks.TOXIC_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.TOXIC_SHROOM_BLOCK, Items.RED_MUSHROOM_BLOCK));
+        addDrop(ModBlocks.TOXIC_SHROOM_STEM, mushroomBlockDrops(ModBlocks.TOXIC_SHROOM_STEM, Items.RED_MUSHROOM_BLOCK));
+
 
     }
     public LootTable.Builder commonOreDrops(Block drop, Item item) {

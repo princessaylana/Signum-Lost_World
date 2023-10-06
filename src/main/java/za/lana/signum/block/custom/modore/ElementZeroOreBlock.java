@@ -26,6 +26,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import za.lana.signum.particle.ModParticles;
@@ -34,7 +35,7 @@ public class ElementZeroOreBlock
         extends Block {
     public static final BooleanProperty LIT = BooleanProperty.of("lit");
 
-    public  ElementZeroOreBlock(Settings settings) {
+    public  ElementZeroOreBlock(Settings settings, UniformIntProvider uniformIntProvider) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(LIT, false));
     }

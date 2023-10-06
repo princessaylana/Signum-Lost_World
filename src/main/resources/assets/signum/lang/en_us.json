@@ -51,8 +51,6 @@
 
   "item.signum.plasma_sword": "Plasma Sword",
 
-
-
   "item.signum.tiberium_staff": "Tiberium Staff",
   "item.signum.tiberium_staff.info": "Magic Staff that Poisons Targets",
   "item.signum.freeze_staff": "Ice Staff",
@@ -96,6 +94,16 @@
   "block.signum.endstone_manganese_ore": "Endstone Manganese Ore",
   "block.signum.manganese_block": "Block of Manganese",
 
+  "block.signum.manganese_stairs": "Manganese Stairs",
+  "block.signum.manganese_slab": "Manganese Slab",
+  "block.signum.manganese_button": "Manganese Button",
+  "block.signum.manganese_pressure_plate": "Manganese Pressure Plate",
+  "block.signum.manganese_fence": "Manganese Fence",
+  "block.signum.manganese_gate": "Manganese Gate",
+  "block.signum.manganese_wall": "Manganese Wall",
+  "block.signum.manganese_door": "Manganese Door",
+  "block.signum.manganese_trapdoor": "Manganese Trapdoor",
+
   "block.signum.moissanite_ore": "Moissanite Ore",
   "block.signum.deepslate_moissanite_ore": "Deepslate Moissanite Ore",
   "block.signum.moissanite_block": "Moissanite Block",
@@ -137,6 +145,11 @@
   "block.signum.medium_quartz_crystal_bud": "Medium Quartz Crystal Bud",
   "block.signum.small_quartz_crystal_bud": "Small Quartz Crystal Bud",
 
+  "block.signum.toxic_shroom_block": "Toxic Mushroom",
+  "block.signum.toxic_shroom_stem": "Toxic Mushroom Stem",
+  "block.signum.sky_ice_block": "Sky Ice",
+  "block.signum.frosted_sky_ice_block": "Frosted Sky Ice",
+
   "block.signum.blight_block": "Blight Block",
   "block.signum.blight_block.tooltip": "Tiberium infested dirt",
   "block.signum.skyforge": "Sky Forge",
@@ -149,11 +162,12 @@
   "entity.signum.toxicball": "Toxic Ball",
 
   "dimension.signum_dim": "SkyLand",
-  "biome.signum.signum_mangrove": "Tiberium Wastes",
+  "biome.signum.signum_mangrove": "Tiberium Wasteland",
   "biome.signum.signum_badlands": "Badlands",
   "biome.signum.signum_bamboo": "Bamboo",
   "biome.signum.signum_birch": "Birch",
   "biome.signum.signum_cherry": "Cherry",
+  "biome.signum.signum_snowy": "Frozen Wasteland",
 
   "effect.signum.sigteleport": "Teleport",
   "example_gui.signum.examplebutton":"Test Button",
@@ -162,6 +176,8 @@
   "key.category.signum.modkeys":"Signum ModKeys",
   "key.signum.openinventory":"AirBalloon Inventory",
   "key.signum.flyup":"Fly Up",
-  "key.signum.flydown":"Fly Down"
+  "key.signum.flydown":"Fly Down",
+
+  "sounds.signum.snowy_wind": "Freezing Cold"
 
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_single_face",
+  "textures": {
+    "texture": "block/toxic_shroom_block_inside"
+  }
+}

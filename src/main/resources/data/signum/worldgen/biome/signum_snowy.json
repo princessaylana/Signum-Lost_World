@@ -1,6 +1,6 @@
 {
-  "temperature": -0.7,
-  "downfall": 0.9,
+  "temperature": -0.5,
+  "downfall": 1.0,
   "has_precipitation": true,
   "effects": {
     "sky_color": 8560639,
@@ -14,7 +14,7 @@
       "offset": 2
     },
     "music": {
-      "sound": "minecraft:music.overworld.snowy_slopes",
+      "sound": "signum:snowy_wind",
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": false
@@ -42,9 +42,22 @@
         "weight": 5,
         "minCount": 1,
         "maxCount": 3
+      },
+      {
+        "type": "minecraft:polar_bear",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 7
       }
     ],
-    "misc": [],
+    "misc": [
+      {
+        "type": "minecraft:area_effect_cloud",
+        "weight": 80,
+        "minCount": 2,
+        "maxCount": 4
+      }
+    ],
     "monster": [
       {
         "type": "minecraft:spider",
@@ -71,9 +84,21 @@
         "maxCount": 4
       },
       {
+        "type": "minecraft:stray",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 80
+      },
+      {
         "type": "minecraft:creeper",
         "weight": 100,
         "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:evoker",
+        "weight": 25,
+        "minCount": 2,
         "maxCount": 4
       },
       {
@@ -82,6 +107,7 @@
         "minCount": 4,
         "maxCount": 4
       },
+
       {
         "type": "minecraft:enderman",
         "weight": 10,
@@ -150,14 +176,11 @@
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:patch_large_fern",
-      "minecraft:trees_taiga",
-      "minecraft:patch_grass_taiga",
-      "minecraft:patch_dead_bush",
-      "minecraft:patch_dead_bush_2",
-      "minecraft:patch_sugar_cane",
-      "minecraft:patch_pumpkin",
+      "minecraft:trees_snowy",
+      "minecraft:mega_pine_checked",
+      "minecraft:mega_spruce_checked",
       "minecraft:patch_berry_common"
+
     ],
     [
       "minecraft:freeze_top_layer"
