@@ -5,9 +5,6 @@
  * */
 package za.lana.signum.world;
 
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MushroomBlock;
 import net.minecraft.registry.Registerable;
@@ -18,18 +15,16 @@ import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import za.lana.signum.Signum;
 import za.lana.signum.block.ModBlocks;
-import za.lana.signum.world.dimension.ModDimensions;
 
 import java.util.List;
 
 public class ModConfiguredFeatures {
    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_TOXIC_MUSHROOM_KEY = registerKey("huge_toxic_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_TOXIC_MUSHROOM_KEY = registerKey("patch_small_toxic_mushroom");
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> MANGANESE_ORE_KEY = registerKey("manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> MIOSSANITE_ORE_KEY = registerKey("moissanite_ore");
@@ -103,6 +98,9 @@ public class ModConfiguredFeatures {
         register(context, ENDSTONE_MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(endManganeseOres, 12));
 
         // register mushrooms
+        register(context, SMALL_TOXIC_MUSHROOM_KEY, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
+                new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.TOXIC_MUSHROOM))));
+
         register(context, HUGE_TOXIC_MUSHROOM_KEY, Feature.HUGE_RED_MUSHROOM,
                 new HugeMushroomFeatureConfig(BlockStateProvider.of(ModBlocks.TOXIC_SHROOM_BLOCK.getDefaultState().with(MushroomBlock.DOWN, false)),
                         BlockStateProvider.of(ModBlocks.TOXIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)

@@ -78,7 +78,7 @@ public class SignumClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MANGANESE_DOOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MANGANESE_TRAPDOOR, RenderLayer.getCutout());
 
-
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TOXIC_MUSHROOM, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SKY_ICE_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FROSTED_SKY_ICE_BLOCK, RenderLayer.getTranslucent());
 

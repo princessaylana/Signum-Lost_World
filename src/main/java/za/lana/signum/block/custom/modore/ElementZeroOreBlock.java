@@ -48,7 +48,7 @@ public class ElementZeroOreBlock
 
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if (!entity.bypassesSteppingEffects()) {
+        if (entity instanceof LivingEntity && !entity.bypassesSteppingEffects()) {
             ElementZeroOreBlock.light(state, world, pos);
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.LEVITATION, 8, 6)));
         }

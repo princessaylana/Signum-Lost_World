@@ -10,11 +10,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.TiberiumSkeletonEntity;
 import za.lana.signum.entity.hostile.TiberiumWormEntity;
+import za.lana.signum.util.ModEntityTypeTags;
+
+import static za.lana.signum.util.ModEntityTypeTags.TIBERIUM_TYPE;
 
 public class TiberiumPoison extends StatusEffect {
 
@@ -26,14 +30,13 @@ public class TiberiumPoison extends StatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (this == ModEffects.TIBERIUM_POISON) {
-            if (entity.getHealth() > 1.0f) {
+            if (entity.getHealth() > 1.0f && !entity.getType().isIn(ModEntityTypeTags.TIBERIUM_TYPE)) {
                 entity.damage(entity.getDamageSources().magic(), 2.0f);
-            }
-            if (entity instanceof TiberiumWormEntity ){
-                entity.heal(6.0f);
-            }
-            if (entity instanceof TiberiumSkeletonEntity){
-                entity.heal(6.0f);
+
+            } else if (entity.getType().isIn(ModEntityTypeTags.TIBERIUM_TYPE)){
+                if (entity.getHealth() < entity.getMaxHealth()) {
+                    entity.heal(2.0f);
+                }
             }
             if (!entity.getWorld().isClient()) {
                 World level = entity.getWorld();
@@ -58,12 +61,8 @@ public class TiberiumPoison extends StatusEffect {
             if (random.nextInt(CHANCE) != 0) {
                 return;
             }
-            if (victim instanceof TiberiumWormEntity){
-                victim.heal(2.0f);
-            }
             level.getEntitiesByClass(LivingEntity.class, victim.getBoundingBox().expand(3.0), e->true).forEach(e->e
                     .addStatusEffect(new StatusEffectInstance(ModEffects.TIBERIUM_POISON, DURATION_TPOISON, 1), victim));
         }
     }
-
 }

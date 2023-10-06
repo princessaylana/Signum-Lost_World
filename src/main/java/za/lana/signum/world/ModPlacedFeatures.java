@@ -5,6 +5,7 @@
  * */
 package za.lana.signum.world;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -14,6 +15,8 @@ import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
 import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
 import za.lana.signum.Signum;
 import za.lana.signum.world.gen.ModFeatureGeneration;
 
@@ -27,6 +30,7 @@ import za.lana.signum.world.gen.ModFeatureGeneration;
  * */
 public class ModPlacedFeatures {
 
+    public static final RegistryKey<PlacedFeature> SMALL_TOXIC_MUSHROOM_PLACED = registerKey("small_toxic_mushroom_placed");
     public static final RegistryKey<PlacedFeature> MANGANESE_ORE_PLACED_KEY = registerKey("manganese_ore_placed");
     public static final RegistryKey<PlacedFeature> MOISSANITE_ORE_PLACED_KEY = registerKey("moissanite_ore_placed");
     public static final RegistryKey<PlacedFeature> ELEMENT_ZERO_ORE_PLACED_KEY = registerKey("element_zero_ore_placed");
@@ -45,6 +49,10 @@ public class ModPlacedFeatures {
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
+
+        register(context, SMALL_TOXIC_MUSHROOM_PLACED,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MANGANESE_ORE_KEY),
+                ModPlacedFeatures.mushroomModifiers(64, null));
 
 
         register(context, MANGANESE_ORE_PLACED_KEY,
@@ -106,6 +114,19 @@ public class ModPlacedFeatures {
                 ModOrePlacement.modifiersWithCount(15,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
 
+    }
+    private static List<PlacementModifier> mushroomModifiers(int chance, @Nullable PlacementModifier modifier) {
+        ImmutableList.Builder builder = ImmutableList.builder();
+        if (modifier != null) {
+            builder.add(modifier);
+        }
+        if (chance != 0) {
+            builder.add(RarityFilterPlacementModifier.of(chance));
+        }
+        builder.add(SquarePlacementModifier.of());
+        builder.add(PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP);
+        builder.add(BiomePlacementModifier.of());
+        return builder.build();
     }
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {

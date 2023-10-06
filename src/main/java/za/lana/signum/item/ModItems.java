@@ -89,6 +89,9 @@ public class ModItems {
     public static final Item WATER_STAFF = registerItem("water_staff",
             new Item(new FabricItemSettings()));
 
+    public static final StewItem TOXIC_SOUP = (StewItem) registerItem("toxic_soup",
+            new StewItem(new FabricItemSettings().maxCount(1).food(ModFoodComponents.TOXIC_SOUP)));
+
     public static final Item TOXICBALL_ITEM = registerItem("toxicball_item", new ToxicBallItem(new FabricItemSettings()));
     public static final Item BPISTOL_ITEM = registerItem("bpistol_item", new BPistolItem(new FabricItemSettings()));
     public static final Item LASERBOLT_ITEM = registerItem("laserbolt_item", new LaserBoltItem(new FabricItemSettings()));
@@ -166,6 +169,8 @@ public class ModItems {
         entries.add(GRAVITY_STAFF);
         entries.add(PETRIFY_STAFF);
         entries.add(WATER_STAFF);
+
+        entries.add(TOXIC_SOUP);
 
         entries.add(TOXICBALL_ITEM);
         entries.add(BPISTOL_ITEM);

@@ -27,6 +27,7 @@ import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.TiberiumWormEntity;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
+import za.lana.signum.util.ModEntityTypeTags;
 
 public class TiberiumBoltEntity extends ThrownItemEntity {
     private static final TrackedData<Boolean> HIT =
@@ -59,15 +60,10 @@ public class TiberiumBoltEntity extends ThrownItemEntity {
         int i = entity instanceof EndermanEntity ? 6 : 0;
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
 
-        if (entity instanceof TiberiumWormEntity){
-            entity.damage(getWorld().getDamageSources().magic(), dam / 4);
-            this.discard();
-
-        }
         if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
             entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
-            entity.damage(getWorld().getDamageSources().magic(), dam);
+            //entity.damage(getWorld().getDamageSources().magic(), dam);
             this.discard();
         }
         for(int x = 0; x < 18; ++x) {

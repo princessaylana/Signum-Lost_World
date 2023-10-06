@@ -4,7 +4,7 @@
  * Lana
  * 2023
  * */
-package za.lana.signum.block.custom.props;
+package za.lana.signum.block.custom.plants;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

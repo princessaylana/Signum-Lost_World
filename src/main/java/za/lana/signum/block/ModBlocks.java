@@ -18,6 +18,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 import za.lana.signum.Signum;
 import za.lana.signum.block.custom.AssemblyStationBlock;
 import za.lana.signum.block.custom.ExampleBlock;
@@ -25,8 +26,11 @@ import za.lana.signum.block.custom.RazorWireBlock;
 import za.lana.signum.block.custom.SkyForgeBlock;
 import za.lana.signum.block.custom.crystal.*;
 import za.lana.signum.block.custom.modore.ElementZeroOreBlock;
+import za.lana.signum.block.custom.plants.ToxicMushroomBlock;
+import za.lana.signum.block.custom.plants.ToxicMushroomPlantblock;
 import za.lana.signum.block.custom.props.*;
 import za.lana.signum.sound.ModSounds;
+import za.lana.signum.world.ModConfiguredFeatures;
 
 //obsidian hardness (50.0f, 1200.0f)
 //iron hardness (5.0f, 6.0f)
@@ -98,6 +102,18 @@ public class ModBlocks {
     public static final Block TOXIC_SHROOM_STEM = registerBlock("toxic_shroom_stem",
             new ToxicMushroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).mapColor(MapColor.WHITE_GRAY)
                     .instrument(Instrument.BASS).strength(0.2f).sounds(BlockSoundGroup.WOOD).burnable()));
+
+    public static final Block TOXIC_MUSHROOM = registerBlock("toxic_mushroom",
+            new ToxicMushroomPlantblock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM).mapColor(MapColor.LIME)
+                    .noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)
+                    .postProcess(Blocks::always).pistonBehavior(PistonBehavior.DESTROY), ModConfiguredFeatures.HUGE_TOXIC_MUSHROOM_KEY));
+
+
+
+
+
+
+
     public static final Block SKY_ICE_BLOCK = registerBlock("sky_ice_block",
             new SkyIceBlock(FabricBlockSettings.copyOf(Blocks.ICE).mapColor(MapColor.WHITE)
                     .strength(5.0f, 5.0f)

@@ -153,6 +153,10 @@ public class ModItemGroups {
                         entries.add(ModItems.GRAVITY_STAFF);
                         entries.add(ModItems.PETRIFY_STAFF);
                         entries.add(ModItems.WATER_STAFF);
+                        //PLANTS AND FOOD
+                        entries.add(ModBlocks.TOXIC_MUSHROOM);
+                        entries.add(ModItems.TOXIC_SOUP);
+
                         // SPAWN EGGS
                         entries.add(ModItems.TIBERIUM_WORM_SPAWN_EGG);
                         entries.add(ModItems.TIBERIUM_SKELETON_SPAWN_EGG);

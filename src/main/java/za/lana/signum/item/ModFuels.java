@@ -33,8 +33,6 @@ import za.lana.signum.Signum;
 
 public class ModFuels {
 
-
-
     public static void registerModFuels() {
         Signum.LOGGER.info("Registering ModFuels for " + Signum.MOD_ID);
         FuelRegistry registry = FuelRegistry.INSTANCE;
@@ -43,9 +41,6 @@ public class ModFuels {
         registry.add(ModItems.COKECOAL, 15000);
         registry.add(ModItems.TIBERIUMCOAL, 20000);
         registry.add(ModItems.ELEMENTZEROCOAL, 30000);
-
-
-
 
     }
 }
