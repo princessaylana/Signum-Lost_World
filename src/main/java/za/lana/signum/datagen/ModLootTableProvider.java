@@ -102,6 +102,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.BLUE_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.BLUE_SHROOM_BLOCK, ModBlocks.BLUE_MUSHROOM));
         addDrop(ModBlocks.PURPLE_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.PURPLE_SHROOM_BLOCK, ModBlocks.PURPLE_MUSHROOM));
         addDrop(ModBlocks.PINK_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.PINK_SHROOM_BLOCK, ModBlocks.PINK_MUSHROOM));
+        addDrop(ModBlocks.WHITE_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.WHITE_SHROOM_BLOCK, ModBlocks.WHITE_MUSHROOM));
+        addDrop(ModBlocks.BLACK_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.BLACK_SHROOM_BLOCK, ModBlocks.BLACK_MUSHROOM));
         addDrop(ModBlocks.GENERIC_SHROOM_STEM, mushroomBlockDrops(ModBlocks.GENERIC_SHROOM_STEM, ModBlocks.GENERIC_SHROOM_STEM));
         addDrop(ModBlocks.TOXIC_SHROOM_STEM, mushroomBlockDrops(ModBlocks.TOXIC_SHROOM_STEM, ModBlocks.TOXIC_SHROOM_STEM));
 

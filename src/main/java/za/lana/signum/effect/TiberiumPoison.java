@@ -35,7 +35,8 @@ public class TiberiumPoison extends StatusEffect {
 
             } else if (entity.getType().isIn(ModEntityTypeTags.TIBERIUM_TYPE)){
                 if (entity.getHealth() < entity.getMaxHealth()) {
-                    entity.heal(2.0f);
+                    entity.heal(1.0f);
+                    entity.heal(Math.max(4 << amplifier, 0));
                 }
             }
             if (!entity.getWorld().isClient()) {

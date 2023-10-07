@@ -8,7 +8,9 @@ package za.lana.signum.block.custom.plants;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CherryLeavesBlock;
 import net.minecraft.block.ConnectingBlock;
+import net.minecraft.client.util.ParticleUtil;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -16,8 +18,10 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import za.lana.signum.particle.ModParticles;
 
 import java.util.Map;
 
@@ -64,6 +68,19 @@ extends Block {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(UP, DOWN, NORTH, EAST, SOUTH, WEST);
+    }
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        super.randomDisplayTick(state, world, pos, random);
+        if (random.nextInt(10) != 0) {
+            return;
+        }
+        BlockPos blockPos = pos.down();
+        BlockState blockState = world.getBlockState(blockPos);
+        if (CherryLeavesBlock.isFaceFullSquare(blockState.getCollisionShape(world, blockPos), Direction.UP)) {
+            return;
+        }
+        ParticleUtil.spawnParticle(world, pos, random, ModParticles.PINK_SHROOM_PARTICLE);
     }
 }
 

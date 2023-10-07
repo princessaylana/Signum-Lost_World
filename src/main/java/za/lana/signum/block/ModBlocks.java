@@ -120,8 +120,14 @@ public class ModBlocks {
             new PurpleMushroomBlock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM_BLOCK)
                     .mapColor(MapColor.PURPLE).instrument(Instrument.BASS).strength(0.2f).sounds(BlockSoundGroup.WOOD).burnable()));
     public static final Block PINK_SHROOM_BLOCK = registerBlock("pink_shroom_block",
-            new ToxicMushroomBlock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM_BLOCK)
+            new PinkMushroomBlock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM_BLOCK)
                     .mapColor(MapColor.PINK).instrument(Instrument.BASS).strength(0.2f).sounds(BlockSoundGroup.WOOD).burnable()));
+    public static final Block WHITE_SHROOM_BLOCK = registerBlock("white_shroom_block",
+            new WhiteMushroomBlock(FabricBlockSettings.copyOf(Blocks.BROWN_MUSHROOM_BLOCK)
+                    .mapColor(MapColor.WHITE).instrument(Instrument.BASS).strength(0.2f).sounds(BlockSoundGroup.WOOD).burnable()));
+    public static final Block BLACK_SHROOM_BLOCK = registerBlock("black_shroom_block",
+            new BlackMushroomBlock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM_BLOCK)
+                    .mapColor(MapColor.BLACK).instrument(Instrument.BASS).strength(0.2f).sounds(BlockSoundGroup.WOOD).burnable()));
 
     // PLANTS
     public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom",
@@ -145,9 +151,17 @@ public class ModBlocks {
                     .noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)
                     .postProcess(Blocks::always).pistonBehavior(PistonBehavior.DESTROY), ModConfiguredFeatures.SMALL_PURPLE_MUSHROOM_KEY));
     public static final Block PINK_MUSHROOM = registerBlock("pink_mushroom",
-            new PurpleMushroomPlantblock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM).mapColor(MapColor.PINK)
+            new PinkMushroomPlantblock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM).mapColor(MapColor.PINK)
                     .noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)
                     .postProcess(Blocks::always).pistonBehavior(PistonBehavior.DESTROY), ModConfiguredFeatures.SMALL_PINK_MUSHROOM_KEY));
+    public static final Block WHITE_MUSHROOM = registerBlock("white_mushroom",
+            new WhiteMushroomPlantblock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM).mapColor(MapColor.WHITE)
+                    .noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)
+                    .postProcess(Blocks::always).pistonBehavior(PistonBehavior.DESTROY), ModConfiguredFeatures.SMALL_WHITE_MUSHROOM_KEY));
+    public static final Block BLACK_MUSHROOM = registerBlock("black_mushroom",
+            new BlackMushroomPlantblock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM).mapColor(MapColor.BLACK)
+                    .noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)
+                    .postProcess(Blocks::always).pistonBehavior(PistonBehavior.DESTROY), ModConfiguredFeatures.SMALL_BLACK_MUSHROOM_KEY));
 
     // PROPS
     public static final Block SKY_ICE_BLOCK = registerBlock("sky_ice_block",

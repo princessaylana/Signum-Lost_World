@@ -83,7 +83,9 @@ public class SignumClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TOXIC_MUSHROOM, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BLUE_MUSHROOM, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PURPLE_MUSHROOM, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PINK_MUSHROOM   , RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PINK_MUSHROOM, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WHITE_MUSHROOM, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BLACK_MUSHROOM, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SKY_ICE_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FROSTED_SKY_ICE_BLOCK, RenderLayer.getTranslucent());
@@ -124,6 +126,16 @@ public class SignumClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.FREEZE_PARTICLE, FreezeParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.TRANSMUTE_PARTICLE, TransmuteParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.FLAME_PARTICLE, FlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOXIC_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.BLACK_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.BLUE_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.BROWN_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.ORANGE_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.PINK_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.PURPLE_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.RED_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.WHITE_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.YELLOW_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
         // NETWORK
         ModMessages.registerS2CPackets();
         // VANILLA/FABRIC SCREENS

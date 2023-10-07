@@ -126,7 +126,10 @@
       "minecraft:glow_lichen",
       "minecraft:trees_mangrove",
       "signum:small_toxic_mushroom_placed",
+      "signum:small_white_mushroom_placed",
+      "signum:small_black_mushroom_placed",
       "signum:tiberium_vegetation",
+      "signum:vegetation_white_black_shroom",
       "minecraft:patch_grass_normal",
       "minecraft:patch_dead_bush",
       "minecraft:patch_dead_bush_2"

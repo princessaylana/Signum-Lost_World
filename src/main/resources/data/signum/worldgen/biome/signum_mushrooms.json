@@ -96,10 +96,6 @@
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:mushroom_island_vegetation",
-      "signum:vegetation_orange_yellow_shroom",
-      "signum:vegetation_pink_purple_shroom",
-      "signum:vegetation_toxic_blue_shroom",
       "minecraft:brown_mushroom_taiga",
       "minecraft:red_mushroom_taiga",
       "signum:small_blue_mushroom_placed",
@@ -108,6 +104,10 @@
       "signum:small_purple_mushroom_placed",
       "signum:small_toxic_mushroom_placed",
       "signum:small_yellow_mushroom_placed",
+      "minecraft:mushroom_island_vegetation",
+      "signum:vegetation_orange_yellow_shroom",
+      "signum:vegetation_pink_purple_shroom",
+      "signum:vegetation_toxic_blue_shroom",
       "minecraft:patch_sugar_cane",
       "minecraft:patch_pumpkin"
     ],
