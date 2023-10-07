@@ -68,6 +68,15 @@
   "item.signum.petrify_staff": "Petrify Staff",
   "item.signum.water_staff": "Water Staff",
 
+  "item.signum.orange_mushroom": "Orange Mushroom",
+  "item.signum.yellow_mushroom": "Yellow Mushroom",
+  "item.signum.toxic_mushroom": "Toxic Mushroom",
+  "item.signum.blue_mushroom": "Blue Mushroom",
+  "item.signum.purple_mushroom": "Purple Mushroom",
+  "item.signum.pink_mushroom": "Pink Mushroom",
+
+  "item.signum.toxic_soup": "Toxic Stew",
+
   "item.signum.bpistol_item": "Baretta Pistol",
   "item.signum.bpistol_item.ammo": "Ammo",
   "item.signum.laserbolt_item": "Laser Bolt",
@@ -145,8 +154,15 @@
   "block.signum.medium_quartz_crystal_bud": "Medium Quartz Crystal Bud",
   "block.signum.small_quartz_crystal_bud": "Small Quartz Crystal Bud",
 
-  "block.signum.toxic_shroom_block": "Toxic Mushroom",
   "block.signum.toxic_shroom_stem": "Toxic Mushroom Stem",
+  "block.signum.generic_shroom_stem": "Mushroom Stem",
+  "block.signum.orange_shroom_block": "Orange Mushroom Block",
+  "block.signum.yellow_shroom_block": "Yellow Mushroom Block",
+  "block.signum.toxic_shroom_block": "Toxic Mushroom Block",
+  "block.signum.blue_shroom_block": "Blue Mushroom Block",
+  "block.signum.purple_shroom_block": "Purple Mushroom Block",
+  "block.signum.pink_shroom_block": "Pink Mushroom Block",
+
   "block.signum.sky_ice_block": "Sky Ice",
   "block.signum.frosted_sky_ice_block": "Frosted Sky Ice",
 
@@ -168,6 +184,8 @@
   "biome.signum.signum_birch": "Birch",
   "biome.signum.signum_cherry": "Cherry",
   "biome.signum.signum_snowy": "Frozen Wasteland",
+  "biome.signum.signum_mushrooms": "Rainbow Mushroom Field",
+
 
   "effect.signum.sigteleport": "Teleport",
   "example_gui.signum.examplebutton":"Test Button",

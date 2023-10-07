@@ -3,13 +3,13 @@
   "config": {
     "features": [
       {
-        "chance": 0.1,
+        "chance": 0.25,
         "feature": {
           "feature": "signum:huge_toxic_mushroom",
           "placement": []
         }
       }
     ],
-    "default": "minecraft:oak_checked"
+    "default": "minecraft:tall_mangrove_checked"
   }
 }

@@ -30,7 +30,13 @@ import za.lana.signum.world.gen.ModFeatureGeneration;
  * */
 public class ModPlacedFeatures {
 
+    public static final RegistryKey<PlacedFeature> SMALL_ORANGE_MUSHROOM_PLACED = registerKey("small_orange_mushroom_placed");
+    public static final RegistryKey<PlacedFeature> SMALL_YELLOW_MUSHROOM_PLACED = registerKey("small_yellow_mushroom_placed");
     public static final RegistryKey<PlacedFeature> SMALL_TOXIC_MUSHROOM_PLACED = registerKey("small_toxic_mushroom_placed");
+    public static final RegistryKey<PlacedFeature> SMALL_BLUE_MUSHROOM_PLACED = registerKey("small_blue_mushroom_placed");
+    public static final RegistryKey<PlacedFeature> SMALL_PURPLE_MUSHROOM_PLACED = registerKey("small_purple_mushroom_placed");
+    public static final RegistryKey<PlacedFeature> SMALL_PINK_MUSHROOM_PLACED = registerKey("small_pink_mushroom_placed");
+
     public static final RegistryKey<PlacedFeature> MANGANESE_ORE_PLACED_KEY = registerKey("manganese_ore_placed");
     public static final RegistryKey<PlacedFeature> MOISSANITE_ORE_PLACED_KEY = registerKey("moissanite_ore_placed");
     public static final RegistryKey<PlacedFeature> ELEMENT_ZERO_ORE_PLACED_KEY = registerKey("element_zero_ore_placed");
@@ -50,10 +56,24 @@ public class ModPlacedFeatures {
     public static void bootstrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
 
-        register(context, SMALL_TOXIC_MUSHROOM_PLACED,
-                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MANGANESE_ORE_KEY),
+        register(context, SMALL_ORANGE_MUSHROOM_PLACED,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_ORANGE_MUSHROOM_KEY),
                 ModPlacedFeatures.mushroomModifiers(64, null));
-
+        register(context, SMALL_YELLOW_MUSHROOM_PLACED,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_YELLOW_MUSHROOM_KEY),
+                ModPlacedFeatures.mushroomModifiers(64, null));
+        register(context, SMALL_TOXIC_MUSHROOM_PLACED,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_TOXIC_MUSHROOM_KEY),
+                ModPlacedFeatures.mushroomModifiers(64, null));
+        register(context, SMALL_BLUE_MUSHROOM_PLACED,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_BLUE_MUSHROOM_KEY),
+                ModPlacedFeatures.mushroomModifiers(64, null));
+        register(context, SMALL_PURPLE_MUSHROOM_PLACED,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_PURPLE_MUSHROOM_KEY),
+                ModPlacedFeatures.mushroomModifiers(64, null));
+        register(context, SMALL_PINK_MUSHROOM_PLACED,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_PINK_MUSHROOM_KEY),
+                ModPlacedFeatures.mushroomModifiers(64, null));
 
         register(context, MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MANGANESE_ORE_KEY),

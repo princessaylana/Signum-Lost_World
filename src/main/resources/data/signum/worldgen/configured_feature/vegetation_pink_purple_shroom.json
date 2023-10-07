@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:random_boolean_selector",
+  "config": {
+    "feature_false": {
+      "feature": "signum:huge_pink_mushroom",
+      "placement": []
+    },
+    "feature_true": {
+      "feature": "signum:huge_purple_mushroom",
+      "placement": []
+    }
+  }
+}

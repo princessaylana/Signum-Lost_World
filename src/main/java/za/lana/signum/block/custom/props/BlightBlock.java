@@ -105,11 +105,14 @@ public class BlightBlock
         BlockPos blockPos = pos.offset(direction);
         BlockState blockState = world.getBlockState(blockPos);
         Block block = null;
+        /** needs to spawn worms
         if (BlightBlock.canSpawnWorm(blockState)) {
             TiberiumWormEntity tiberiumWormEntity = new TiberiumWormEntity(ModEntities.TIBERIUM_WORM, world);
             world.spawnEntity(tiberiumWormEntity);
             tiberiumWormEntity.playSpawnEffects();
         }
+        **/
+
         if (world.getLightLevel(pos.up()) >= 9) {
             BlockState blockState2 = this.getDefaultState();
             for (int i = 0; i < 4; ++i) {

@@ -23,6 +23,7 @@ import za.lana.signum.world.ModConfiguredFeatures;
 
 import java.util.Optional;
 
+// this is the small mushroom plant block
 public class ToxicMushroomPlantblock extends PlantBlock implements Fertilizable {
     protected static final VoxelShape SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
     private final RegistryKey<ConfiguredFeature<?, ?>> featureKey = ModConfiguredFeatures.HUGE_TOXIC_MUSHROOM_KEY;

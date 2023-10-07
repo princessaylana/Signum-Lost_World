@@ -44,7 +44,14 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerDoor(ModBlocks.MANGANESE_DOOR);
         blockStateModelGenerator.registerTrapdoor(ModBlocks.MANGANESE_TRAPDOOR);
 
+        blockStateModelGenerator.registerMushroomBlock(ModBlocks.ORANGE_SHROOM_BLOCK);
+        blockStateModelGenerator.registerMushroomBlock(ModBlocks.YELLOW_SHROOM_BLOCK);
         blockStateModelGenerator.registerMushroomBlock(ModBlocks.TOXIC_SHROOM_BLOCK);
+        blockStateModelGenerator.registerMushroomBlock(ModBlocks.BLUE_SHROOM_BLOCK);
+        blockStateModelGenerator.registerMushroomBlock(ModBlocks.PURPLE_SHROOM_BLOCK);
+        blockStateModelGenerator.registerMushroomBlock(ModBlocks.PINK_SHROOM_BLOCK);
+
+        blockStateModelGenerator.registerMushroomBlock(ModBlocks.GENERIC_SHROOM_STEM);
         blockStateModelGenerator.registerMushroomBlock(ModBlocks.TOXIC_SHROOM_STEM);
 
 

@@ -9,6 +9,7 @@ package za.lana.signum.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
@@ -95,8 +96,14 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.MANGANESE_DOOR, doorDrops(ModBlocks.MANGANESE_DOOR));
         addDrop(ModBlocks.MANGANESE_DOOR, slabDrops(ModBlocks.MANGANESE_SLAB));
 
-        addDrop(ModBlocks.TOXIC_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.TOXIC_SHROOM_BLOCK, Items.RED_MUSHROOM_BLOCK));
-        addDrop(ModBlocks.TOXIC_SHROOM_STEM, mushroomBlockDrops(ModBlocks.TOXIC_SHROOM_STEM, Items.RED_MUSHROOM_BLOCK));
+        addDrop(ModBlocks.ORANGE_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.ORANGE_SHROOM_BLOCK, ModBlocks.ORANGE_MUSHROOM));
+        addDrop(ModBlocks.YELLOW_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.YELLOW_SHROOM_BLOCK, ModBlocks.YELLOW_MUSHROOM));
+        addDrop(ModBlocks.TOXIC_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.TOXIC_SHROOM_BLOCK, ModBlocks.TOXIC_MUSHROOM));
+        addDrop(ModBlocks.BLUE_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.BLUE_SHROOM_BLOCK, ModBlocks.BLUE_MUSHROOM));
+        addDrop(ModBlocks.PURPLE_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.PURPLE_SHROOM_BLOCK, ModBlocks.PURPLE_MUSHROOM));
+        addDrop(ModBlocks.PINK_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.PINK_SHROOM_BLOCK, ModBlocks.PINK_MUSHROOM));
+        addDrop(ModBlocks.GENERIC_SHROOM_STEM, mushroomBlockDrops(ModBlocks.GENERIC_SHROOM_STEM, ModBlocks.GENERIC_SHROOM_STEM));
+        addDrop(ModBlocks.TOXIC_SHROOM_STEM, mushroomBlockDrops(ModBlocks.TOXIC_SHROOM_STEM, ModBlocks.TOXIC_SHROOM_STEM));
 
 
     }

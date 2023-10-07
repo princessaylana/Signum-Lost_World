@@ -29,20 +29,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.BLIGHT_BLOCK);
                         entries.add(ModBlocks.SKY_ICE_BLOCK);
                         entries.add(ModBlocks.FROSTED_SKY_ICE_BLOCK);
-                        entries.add(ModBlocks.MANGANESE_STAIRS);
-                        entries.add(ModBlocks.MANGANESE_WALL);
-                        entries.add(ModBlocks.MANGANESE_SLAB);
-                        entries.add(ModBlocks.MANGANESE_FENCE);
-                        entries.add(ModBlocks.MANGANESE_GATE);
-                        entries.add(ModBlocks.MANGANESE_DOOR);
-                        entries.add(ModBlocks.MANGANESE_TRAPDOOR);
-                        entries.add(ModBlocks.MANGANESE_BUTTON);
-                        entries.add(ModBlocks.MANGANESE_PRESSURE_PLATE);
-                        // disabled
-                        entries.add(ModBlocks.TOXIC_SHROOM_BLOCK);
-                        entries.add(ModBlocks.TOXIC_SHROOM_STEM);
 
-                        //entries.add(ModBlocks.TIBERIUM_FIRE);
                         // ORES
                         entries.add(ModBlocks.MANGANESE_ORE);
                         entries.add(ModBlocks.DEEPSLATE_MANGANESE_ORE);
@@ -65,9 +52,32 @@ public class ModItemGroups {
                         entries.add(ModBlocks.BUDDING_ICE_CRYSTAL);
                         entries.add(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
 
+                        // PLANTBLOCKS
+                        entries.add(ModBlocks.ORANGE_SHROOM_BLOCK);
+                        entries.add(ModBlocks.YELLOW_SHROOM_BLOCK);
+                        entries.add(ModBlocks.TOXIC_SHROOM_BLOCK);
+                        entries.add(ModBlocks.BLUE_SHROOM_BLOCK);
+                        entries.add(ModBlocks.PURPLE_SHROOM_BLOCK);
+                        entries.add(ModBlocks.PINK_SHROOM_BLOCK);
+
+                        entries.add(ModBlocks.TOXIC_SHROOM_STEM);
+                        entries.add(ModBlocks.GENERIC_SHROOM_STEM);
+
                         // BLOCKENTITIES
                         entries.add(ModBlocks.SKYFORGE);
-                        entries.add(ModBlocks.ASSEMBLY_STATION_BLOCK);
+
+                        // DECORATION
+                        entries.add(ModBlocks.MANGANESE_STAIRS);
+                        entries.add(ModBlocks.MANGANESE_WALL);
+                        entries.add(ModBlocks.MANGANESE_SLAB);
+                        entries.add(ModBlocks.MANGANESE_FENCE);
+                        entries.add(ModBlocks.MANGANESE_GATE);
+                        entries.add(ModBlocks.MANGANESE_DOOR);
+                        entries.add(ModBlocks.MANGANESE_TRAPDOOR);
+                        entries.add(ModBlocks.MANGANESE_BUTTON);
+                        entries.add(ModBlocks.MANGANESE_PRESSURE_PLATE);
+
+
                         // RAW ITEMS
                         entries.add(ModItems.RAW_ELEMENT_ZERO);
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
@@ -154,7 +164,13 @@ public class ModItemGroups {
                         entries.add(ModItems.PETRIFY_STAFF);
                         entries.add(ModItems.WATER_STAFF);
                         //PLANTS AND FOOD
+                        entries.add(ModBlocks.ORANGE_MUSHROOM);
+                        entries.add(ModBlocks.YELLOW_MUSHROOM);
                         entries.add(ModBlocks.TOXIC_MUSHROOM);
+                        entries.add(ModBlocks.BLUE_MUSHROOM);
+                        entries.add(ModBlocks.PURPLE_MUSHROOM);
+                        entries.add(ModBlocks.PINK_MUSHROOM);
+
                         entries.add(ModItems.TOXIC_SOUP);
 
                         // SPAWN EGGS
@@ -173,6 +189,10 @@ public class ModItemGroups {
                         entries.add(ModItems.E0ROD);
                         entries.add(ModItems.TOXICGUN);
                         entries.add(ModItems.DETECTOR_ITEM);
+
+                        // disabled
+                        //entries.add(ModBlocks.TIBERIUM_FIRE);
+                        //entries.add(ModBlocks.ASSEMBLY_STATION_BLOCK);
 
                     }).build());
     public static void registerItemGroups(){

@@ -23,8 +23,20 @@ import za.lana.signum.block.ModBlocks;
 import java.util.List;
 
 public class ModConfiguredFeatures {
+    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_ORANGE_MUSHROOM_KEY = registerKey("huge_orange_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_ORANGE_MUSHROOM_KEY = registerKey("patch_small_orange_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_YELLOW_MUSHROOM_KEY = registerKey("huge_yellow_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_YELLOW_MUSHROOM_KEY = registerKey("patch_small_yellow_mushroom");
    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_TOXIC_MUSHROOM_KEY = registerKey("huge_toxic_mushroom");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_TOXIC_MUSHROOM_KEY = registerKey("patch_small_toxic_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_BLUE_MUSHROOM_KEY = registerKey("huge_blue_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_BLUE_MUSHROOM_KEY = registerKey("patch_small_blue_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_PURPLE_MUSHROOM_KEY = registerKey("huge_purple_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_PURPLE_MUSHROOM_KEY = registerKey("patch_small_purple_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_PINK_MUSHROOM_KEY = registerKey("huge_pink_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_PINK_MUSHROOM_KEY = registerKey("patch_small_pink_mushroom");
+
+
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> MANGANESE_ORE_KEY = registerKey("manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> MIOSSANITE_ORE_KEY = registerKey("moissanite_ore");
@@ -98,13 +110,48 @@ public class ModConfiguredFeatures {
         register(context, ENDSTONE_MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(endManganeseOres, 12));
 
         // register mushrooms
+        register(context, SMALL_ORANGE_MUSHROOM_KEY, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
+                new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.ORANGE_MUSHROOM))));
+        register(context, HUGE_ORANGE_MUSHROOM_KEY, Feature.HUGE_BROWN_MUSHROOM,
+                new HugeMushroomFeatureConfig(BlockStateProvider.of(ModBlocks.ORANGE_SHROOM_BLOCK.getDefaultState().with(MushroomBlock.DOWN, false)),
+                        BlockStateProvider.of(ModBlocks.GENERIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)
+                                .with(MushroomBlock.DOWN, false)), 2));
+
+        register(context, SMALL_YELLOW_MUSHROOM_KEY, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
+                new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.YELLOW_MUSHROOM))));
+        register(context, HUGE_YELLOW_MUSHROOM_KEY, Feature.HUGE_RED_MUSHROOM,
+                new HugeMushroomFeatureConfig(BlockStateProvider.of(ModBlocks.ORANGE_SHROOM_BLOCK.getDefaultState().with(MushroomBlock.DOWN, false)),
+                        BlockStateProvider.of(ModBlocks.GENERIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)
+                                .with(MushroomBlock.DOWN, false)), 2));
+
         register(context, SMALL_TOXIC_MUSHROOM_KEY, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
                 new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.TOXIC_MUSHROOM))));
-
-        register(context, HUGE_TOXIC_MUSHROOM_KEY, Feature.HUGE_RED_MUSHROOM,
+        register(context, HUGE_TOXIC_MUSHROOM_KEY, Feature.HUGE_BROWN_MUSHROOM,
                 new HugeMushroomFeatureConfig(BlockStateProvider.of(ModBlocks.TOXIC_SHROOM_BLOCK.getDefaultState().with(MushroomBlock.DOWN, false)),
                         BlockStateProvider.of(ModBlocks.TOXIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)
                                 .with(MushroomBlock.DOWN, false)), 2));
+
+        register(context, SMALL_BLUE_MUSHROOM_KEY, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
+                new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.BLUE_MUSHROOM))));
+        register(context, HUGE_BLUE_MUSHROOM_KEY, Feature.HUGE_RED_MUSHROOM,
+                new HugeMushroomFeatureConfig(BlockStateProvider.of(ModBlocks.BLUE_SHROOM_BLOCK.getDefaultState().with(MushroomBlock.DOWN, false)),
+                        BlockStateProvider.of(ModBlocks.GENERIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)
+                                .with(MushroomBlock.DOWN, false)), 2));
+
+        register(context, SMALL_PURPLE_MUSHROOM_KEY, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
+                new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.PURPLE_MUSHROOM))));
+        register(context, HUGE_PURPLE_MUSHROOM_KEY, Feature.HUGE_RED_MUSHROOM,
+                new HugeMushroomFeatureConfig(BlockStateProvider.of(ModBlocks.PINK_SHROOM_BLOCK.getDefaultState().with(MushroomBlock.DOWN, false)),
+                        BlockStateProvider.of(ModBlocks.GENERIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)
+                                .with(MushroomBlock.DOWN, false)), 2));
+
+        register(context, SMALL_PINK_MUSHROOM_KEY, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
+                new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.PINK_MUSHROOM))));
+        register(context, HUGE_PINK_MUSHROOM_KEY, Feature.HUGE_RED_MUSHROOM,
+                new HugeMushroomFeatureConfig(BlockStateProvider.of(ModBlocks.PINK_SHROOM_BLOCK.getDefaultState().with(MushroomBlock.DOWN, false)),
+                        BlockStateProvider.of(ModBlocks.GENERIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)
+                                .with(MushroomBlock.DOWN, false)), 2));
+
 
 
     }

@@ -27,48 +27,43 @@
       {
         "type": "minecraft:bat",
         "weight": 10,
-        "minCount": 8,
+        "minCount": 4,
         "maxCount": 8
       }
     ],
     "creature": [
-      {
-        "type": "signum:tiberium_worm",
-        "weight": 100,
-        "minCount": 5,
-        "maxCount": 5
-      }
+
     ],
     "misc": [],
     "monster": [
       {
         "type": "signum:tiberium_skeleton",
         "weight": 100,
-        "minCount": 4,
+        "minCount": 2,
         "maxCount": 4
+      },
+      {
+        "type": "signum:tiberium_worm",
+        "weight": 80,
+        "minCount": 2,
+        "maxCount": 5
       },
       {
         "type": "minecraft:zombie",
         "weight": 95,
-        "minCount": 4,
+        "minCount": 2,
         "maxCount": 4
       },
       {
         "type": "minecraft:skeleton",
         "weight": 100,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:evoker",
-        "weight": 25,
         "minCount": 2,
         "maxCount": 4
       },
       {
-        "type": "minecraft:creeper",
-        "weight": 100,
-        "minCount": 4,
+        "type": "minecraft:pillager",
+        "weight": 25,
+        "minCount": 2,
         "maxCount": 4
       },
       {
@@ -130,8 +125,8 @@
     [
       "minecraft:glow_lichen",
       "minecraft:trees_mangrove",
-      "signum:tiberium_vegetation",
       "signum:small_toxic_mushroom_placed",
+      "signum:tiberium_vegetation",
       "minecraft:patch_grass_normal",
       "minecraft:patch_dead_bush",
       "minecraft:patch_dead_bush_2"
