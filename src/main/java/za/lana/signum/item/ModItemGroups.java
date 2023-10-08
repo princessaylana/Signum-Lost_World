@@ -53,12 +53,15 @@ public class ModItemGroups {
                         entries.add(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
 
                         // PLANTBLOCKS
+
                         entries.add(ModBlocks.ORANGE_SHROOM_BLOCK);
                         entries.add(ModBlocks.YELLOW_SHROOM_BLOCK);
                         entries.add(ModBlocks.TOXIC_SHROOM_BLOCK);
                         entries.add(ModBlocks.BLUE_SHROOM_BLOCK);
                         entries.add(ModBlocks.PURPLE_SHROOM_BLOCK);
                         entries.add(ModBlocks.PINK_SHROOM_BLOCK);
+                        entries.add(ModBlocks.RED_SHROOM_BLOCK);
+                        entries.add(ModBlocks.BROWN_SHROOM_BLOCK);
 
                         entries.add(ModBlocks.TOXIC_SHROOM_STEM);
                         entries.add(ModBlocks.GENERIC_SHROOM_STEM);

@@ -68,14 +68,7 @@
   "item.signum.petrify_staff": "Petrify Staff",
   "item.signum.water_staff": "Water Staff",
 
-  "item.signum.orange_mushroom": "Orange Mushroom",
-  "item.signum.yellow_mushroom": "Yellow Mushroom",
-  "item.signum.toxic_mushroom": "Toxic Mushroom",
-  "item.signum.blue_mushroom": "Blue Mushroom",
-  "item.signum.purple_mushroom": "Purple Mushroom",
-  "item.signum.pink_mushroom": "Pink Mushroom",
-  "item.signum.white_mushroom": "White Mushroom",
-  "item.signum.black_mushroom": "Black Mushroom",
+
 
   "item.signum.toxic_soup": "Toxic Stew",
 
@@ -164,6 +157,17 @@
   "block.signum.blue_shroom_block": "Blue Mushroom Block",
   "block.signum.purple_shroom_block": "Purple Mushroom Block",
   "block.signum.pink_shroom_block": "Pink Mushroom Block",
+  "block.signum.brown_shroom_block": "Brown Mushroom Block",
+  "block.signum.red_shroom_block": "Red Mushroom Block",
+
+  "block.signum.orange_mushroom": "Orange Mushroom",
+  "block.signum.yellow_mushroom": "Yellow Mushroom",
+  "block.signum.toxic_mushroom": "Toxic Mushroom",
+  "block.signum.blue_mushroom": "Blue Mushroom",
+  "block.signum.purple_mushroom": "Purple Mushroom",
+  "block.signum.pink_mushroom": "Pink Mushroom",
+  "block.signum.white_mushroom": "White Mushroom",
+  "block.signum.black_mushroom": "Black Mushroom",
 
   "block.signum.sky_ice_block": "Sky Ice",
   "block.signum.frosted_sky_ice_block": "Frosted Sky Ice",

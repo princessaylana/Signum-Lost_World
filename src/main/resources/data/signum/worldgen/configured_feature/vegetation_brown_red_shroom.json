@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:random_boolean_selector",
+  "config": {
+    "feature_false": {
+      "feature": "signum:huge_sbrown_mushroom",
+      "placement": []
+    },
+    "feature_true": {
+      "feature": "signum:huge_sred_mushroom",
+      "placement": []
+    }
+  }
+}

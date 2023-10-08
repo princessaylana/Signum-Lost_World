@@ -128,6 +128,12 @@ public class ModBlocks {
     public static final Block BLACK_SHROOM_BLOCK = registerBlock("black_shroom_block",
             new BlackMushroomBlock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM_BLOCK)
                     .mapColor(MapColor.BLACK).instrument(Instrument.BASS).strength(0.2f).sounds(BlockSoundGroup.WOOD).burnable()));
+    public static final Block BROWN_SHROOM_BLOCK = registerBlock("brown_shroom_block",
+            new EarthMushroomBlock(FabricBlockSettings.copyOf(Blocks.BROWN_MUSHROOM_BLOCK)
+                    .mapColor(MapColor.BROWN).instrument(Instrument.BASS).strength(0.2f).sounds(BlockSoundGroup.WOOD).burnable()));
+    public static final Block RED_SHROOM_BLOCK = registerBlock("red_shroom_block",
+            new CrimsonMushroomBlock(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM_BLOCK)
+                    .mapColor(MapColor.RED).instrument(Instrument.BASS).strength(0.2f).sounds(BlockSoundGroup.WOOD).burnable()));
 
     // PLANTS
     public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom",
