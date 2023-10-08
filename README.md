@@ -14,13 +14,15 @@ A mixture of tech, fantasy, and new adventures...
 
 Adds a few unique things to Minecraft:
 - Sky Lands Dimension (Vanilla Type)
-- New Biomes (Tiberium Wasteland)
-- Unique Mobs (Ghosts, Aliens, etc)
-- Unique Weapons (3D with Animated Textures)
+- New Uniue Biomes and themes
+- Unique Mobs and Hostiles
+- Five Crystal Types
+- Seven Mushroom Types
+- Five Unique Repairable Magic Staffs
+- Fly in a Air Balloon
 - Quality Tools (Alloys)
-- New Fuels (Coke Coal, Tiberium Coal, and more)
+- New Fuels that burns longer
 - Usefull Things (Razorwire, Glass Shards)
-- More Crystals (Tiberium)
 - and More
 
 
@@ -38,7 +40,7 @@ Built using:
 
 This Mod is still in very early development, and some things might change.
 This mod is a Hobby of mine, will regularly improve and update this.
-Basic Models are used for testing, will update in time.
+Basic Models are used in some instances for testing, will update in time.
 
 [Contents](https://github.com/princessaylana/Signum-1.20/blob/master/docs/Contents.md)
 
