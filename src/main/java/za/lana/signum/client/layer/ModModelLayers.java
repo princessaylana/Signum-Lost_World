@@ -12,6 +12,8 @@ import za.lana.signum.Signum;
 
 public class ModModelLayers {
 
+    public static final EntityModelLayer UNICORN =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "unicorn"), "mainbody");
     public static final EntityModelLayer TIBERIUM_BOLT =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_bolt"), "main");
     public static final EntityModelLayer ICE_BOLT =

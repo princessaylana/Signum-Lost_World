@@ -17,10 +17,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.client.layer.ModModelLayers;
-import za.lana.signum.client.model.FireBoltEntityModel;
-import za.lana.signum.client.model.IceBoltEntityModel;
-import za.lana.signum.client.model.ShockBoltEntityModel;
-import za.lana.signum.client.model.TiberiumBoltEntityModel;
+import za.lana.signum.client.model.*;
 import za.lana.signum.client.renderer.entity.*;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
 import za.lana.signum.client.renderer.transport.SkyCarRenderer;
@@ -90,8 +87,12 @@ public class SignumClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SKY_ICE_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FROSTED_SKY_ICE_BLOCK, RenderLayer.getTranslucent());
 
-
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.EXAMPLE_BLOCK, RenderLayer.getCutout());
+
+        // ANIMALS
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.UNICORN, UnicornEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.UNICORN, UnicornRenderer::new);
+
         // PROJECTILES
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TIBERIUM_BOLT, TiberiumBoltEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TIBERIUM_PROJECTILE, TiberiumBoltRenderer::new);
@@ -110,13 +111,14 @@ public class SignumClient implements ClientModInitializer {
         //
         EntityRendererRegistry.register(ModEntities.TOXICBALL, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASERBOLT, FlyingItemEntityRenderer::new);
-        // MOBS
+        // HOSTILES
         EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);
         EntityRendererRegistry.register(ModEntities.TIBERIUM_SKELETON, TiberiumSkeletonRenderer::new);
 
         EntityRendererRegistry.register(ModEntities.GHOST, GhostRenderer::new);
         EntityRendererRegistry.register(ModEntities.SIGALIEN, SigAlienRenderer::new);
         EntityRendererRegistry.register(ModEntities.AIRDRONE, AirDroneRenderer::new);
+        EntityRendererRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterRenderer::new);
         // VEHICLES
         EntityRendererRegistry.register(ModEntities.SKYCAR, SkyCarRenderer::new);
         EntityRendererRegistry.register(ModEntities.AIRBALLOON, AirBalloonRenderer::new);
@@ -136,6 +138,7 @@ public class SignumClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.RED_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.WHITE_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.YELLOW_SHROOM_PARTICLE, ToxicShroomParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.RAINBOW_STAR_PARTICLE, ToxicShroomParticle.Factory::new);
         // NETWORK
         ModMessages.registerS2CPackets();
         // VANILLA/FABRIC SCREENS

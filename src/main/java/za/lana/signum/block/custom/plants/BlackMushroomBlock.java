@@ -6,10 +6,7 @@
  * */
 package za.lana.signum.block.custom.plants;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CherryLeavesBlock;
-import net.minecraft.block.ConnectingBlock;
+import net.minecraft.block.*;
 import net.minecraft.client.util.ParticleUtil;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
@@ -24,6 +21,7 @@ import net.minecraft.world.WorldAccess;
 import za.lana.signum.particle.ModParticles;
 
 import java.util.Map;
+import java.util.function.ToIntFunction;
 
 public class BlackMushroomBlock
 extends Block {
@@ -77,10 +75,11 @@ extends Block {
         }
         BlockPos blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
-        if (CherryLeavesBlock.isFaceFullSquare(blockState.getCollisionShape(world, blockPos), Direction.UP)) {
+        if (BlackMushroomBlock.isFaceFullSquare(blockState.getCollisionShape(world, blockPos), Direction.UP)) {
             return;
         }
         ParticleUtil.spawnParticle(world, pos, random, ModParticles.BLACK_SHROOM_PARTICLE);
     }
+
 }
 

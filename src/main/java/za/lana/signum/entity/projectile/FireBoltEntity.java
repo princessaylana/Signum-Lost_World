@@ -36,7 +36,7 @@ public class FireBoltEntity extends ThrownItemEntity {
             DataTracker.registerData(FireBoltEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int counter = 0;
     protected final float dam = 1.5f * 2;
-    protected final int age1 = 520;
+    protected final int age1 = 200;
 
     public FireBoltEntity(EntityType<FireBoltEntity> type, World world) {
         super(type, world);
@@ -49,6 +49,9 @@ public class FireBoltEntity extends ThrownItemEntity {
         double d1 = (double)blockpos.getY() + 1.75D;
         double d2 = (double)blockpos.getZ() + 0.5D;
         this.refreshPositionAndAngles(d0, d1, d2, this.getYaw(), this.getPitch());
+        if (this.age >= age1) {
+            this.discard();
+        }
     }
 
     @Override

@@ -20,6 +20,7 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
@@ -42,6 +43,7 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.block.custom.props.BlightBlock;
+import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.item.ModItems;
 
@@ -103,6 +105,15 @@ public class TiberiumWormEntity extends HostileEntity implements GeoEntity {
 	@Override
 	public AnimatableInstanceCache getAnimatableInstanceCache() {
 		return cache;
+	}
+
+	// IMUMME TO TIBERIUM
+	@Override
+	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+		if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
+			return false;
+		}
+		return super.canHaveStatusEffect(effect);
 	}
 
 	static class WanderAndInfestGoal

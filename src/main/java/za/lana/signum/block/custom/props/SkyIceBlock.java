@@ -8,6 +8,7 @@ package za.lana.signum.block.custom.props;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.TransparentBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -34,7 +35,7 @@ public class SkyIceBlock extends TransparentBlock {
     }
     // block this turns into when it melts
     public static BlockState getMeltedState() {
-        return ModBlocks.SKY_ICE_BLOCK.getDefaultState();
+        return Blocks.POWDER_SNOW.getDefaultState();
     }
     @Override
     public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state,

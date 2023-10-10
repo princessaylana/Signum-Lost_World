@@ -95,7 +95,7 @@ public class ModBlocks {
 
     public static final Block BLIGHT_BLOCK = registerBlock("blight_block",
             new BlightBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).mapColor(MapColor.LIME)
-                    .sounds(BlockSoundGroup.ROOTED_DIRT).requiresTool()));
+                    .sounds(BlockSoundGroup.ROOTED_DIRT).requiresTool(), Blocks.GRASS_BLOCK));
     // huge shrooms
     public static final Block TOXIC_SHROOM_STEM = registerBlock("toxic_shroom_stem",
             new ToxicMushroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).mapColor(MapColor.WHITE_GRAY)

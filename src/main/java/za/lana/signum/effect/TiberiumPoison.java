@@ -5,20 +5,13 @@
  * */
 package za.lana.signum.effect;
 
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import za.lana.signum.entity.ModEntities;
-import za.lana.signum.entity.hostile.TiberiumSkeletonEntity;
-import za.lana.signum.entity.hostile.TiberiumWormEntity;
-import za.lana.signum.util.ModEntityTypeTags;
-
-import static za.lana.signum.util.ModEntityTypeTags.TIBERIUM_TYPE;
+import za.lana.signum.tag.ModEntityTypeTags;
 
 public class TiberiumPoison extends StatusEffect {
 

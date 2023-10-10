@@ -29,6 +29,9 @@ public class ModParticles {
     public static final DefaultParticleType RED_SHROOM_PARTICLE = FabricParticleTypes.simple();
     public static final DefaultParticleType WHITE_SHROOM_PARTICLE = FabricParticleTypes.simple();
     public static final DefaultParticleType YELLOW_SHROOM_PARTICLE = FabricParticleTypes.simple();
+
+    public static final DefaultParticleType RAINBOW_STAR_PARTICLE = FabricParticleTypes.simple();
+
     public static void registerParticles() {
         Registry.register(Registries.PARTICLE_TYPE, new Identifier(Signum.MOD_ID, "blue_dust_particle"),
                 BlUE_DUST_PARTICLE);
@@ -60,6 +63,8 @@ public class ModParticles {
                 WHITE_SHROOM_PARTICLE);
         Registry.register(Registries.PARTICLE_TYPE, new Identifier(Signum.MOD_ID, "yellow_shroom_particle"),
                 YELLOW_SHROOM_PARTICLE);
+        Registry.register(Registries.PARTICLE_TYPE, new Identifier(Signum.MOD_ID, "rainbow_star_particle"),
+                RAINBOW_STAR_PARTICLE);
 
 
         Signum.LOGGER.info("Registering ModParticles for " + Signum.MOD_ID);

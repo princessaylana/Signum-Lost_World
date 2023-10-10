@@ -53,6 +53,9 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
         double d1 = (double)blockpos.getY() + 1.75D;
         double d2 = (double)blockpos.getZ() + 0.5D;
         this.refreshPositionAndAngles(d0, d1, d2, this.getYaw(), this.getPitch());
+        if (this.age >= age1) {
+            this.discard();
+        }
     }
 
     @Override

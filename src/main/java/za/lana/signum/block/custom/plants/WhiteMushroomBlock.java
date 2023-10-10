@@ -77,7 +77,7 @@ extends Block {
         }
         BlockPos blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
-        if (CherryLeavesBlock.isFaceFullSquare(blockState.getCollisionShape(world, blockPos), Direction.UP)) {
+        if (WhiteMushroomBlock.isFaceFullSquare(blockState.getCollisionShape(world, blockPos), Direction.UP)) {
             return;
         }
         ParticleUtil.spawnParticle(world, pos, random, ModParticles.WHITE_SHROOM_PARTICLE);

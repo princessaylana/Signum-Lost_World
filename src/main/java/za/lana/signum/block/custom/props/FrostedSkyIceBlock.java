@@ -38,18 +38,18 @@ public class FrostedSkyIceBlock extends SkyIceBlock{
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if ((random.nextInt(3) == 0 || this.canMelt(world, pos)) && world.getLightLevel(pos) >
+        if ((random.nextInt(5) == 0 || this.canMelt(world, pos)) && world.getLightLevel(pos) >
                 11 - state.get(AGE) - state.getOpacity(world, pos) && this.increaseAge(state, world, pos)) {
             BlockPos.Mutable mutable = new BlockPos.Mutable();
             for (Direction direction : Direction.values()) {
                 mutable.set(pos, direction);
                 BlockState blockState = world.getBlockState(mutable);
                 if (!blockState.isOf(this) || this.increaseAge(blockState, world, mutable)) continue;
-                world.scheduleBlockTick(mutable, this, MathHelper.nextInt(random, 200, 400));
+                world.scheduleBlockTick(mutable, this, MathHelper.nextInt(random, 60, 120));
             }
             return;
         }
-        world.scheduleBlockTick(pos, this, MathHelper.nextInt(random, 200, 400));
+        world.scheduleBlockTick(pos, this, MathHelper.nextInt(random, 60, 120));
     }
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {

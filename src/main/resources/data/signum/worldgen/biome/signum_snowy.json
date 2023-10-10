@@ -8,7 +8,7 @@
     "water_color": 4159204,
     "water_fog_color": 329011,
     "mood_sound": {
-      "sound": "minecraft:ambient.cave",
+      "sound": "signum:snowy_wind",
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2
@@ -42,6 +42,12 @@
         "weight": 5,
         "minCount": 1,
         "maxCount": 3
+      },
+      {
+        "type": "minecraft:fox",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 8
       },
       {
         "type": "minecraft:polar_bear",
@@ -176,11 +182,10 @@
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:trees_snowy",
-      "minecraft:mega_pine_checked",
-      "minecraft:mega_spruce_checked",
+      "minecraft:trees_grove",
+      "minecraft:patch_grass_taiga_2",
+      "minecraft:flower_default",
       "minecraft:patch_berry_common"
-
     ],
     [
       "minecraft:freeze_top_layer"

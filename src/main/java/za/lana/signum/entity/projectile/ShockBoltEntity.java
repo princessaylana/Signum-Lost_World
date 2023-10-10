@@ -34,7 +34,7 @@ public class ShockBoltEntity extends ThrownItemEntity {
             DataTracker.registerData(ShockBoltEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private final int counter = 0;
     protected final float dam = 1.5f * 2;
-    protected final int age1 = 520;
+    protected final int age1 = 200;
 
     public ShockBoltEntity(EntityType<ShockBoltEntity> type, World world) {
         super(type, world);
@@ -47,6 +47,9 @@ public class ShockBoltEntity extends ThrownItemEntity {
         double d1 = (double)blockpos.getY() + 1.75D;
         double d2 = (double)blockpos.getZ() + 0.5D;
         this.refreshPositionAndAngles(d0, d1, d2, this.getYaw(), this.getPitch());
+        if (this.age >= age1) {
+            this.discard();
+        }
     }
 
     @Override

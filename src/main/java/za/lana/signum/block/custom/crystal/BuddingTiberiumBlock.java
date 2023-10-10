@@ -73,7 +73,7 @@ public class BuddingTiberiumBlock
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
-            livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 20, 3));
+            livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 20, 2));
             // world.playSound(null, pos, ModSounds.TIBERIUM_WALK, SoundCategory.BLOCKS, 1.0f, 0.5f);
         }
         super.onSteppedOn(world, pos, state, entity);

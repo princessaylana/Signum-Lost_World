@@ -101,6 +101,8 @@ public class ModItems {
     public static final ToxicGunItem TOXICGUN = (ToxicGunItem) registerItem("toxicgun", new ToxicGunItem(ModToolMaterial.TIBERIUM, new FabricItemSettings()));
     public static final Item DETECTOR_ITEM = registerItem("detector_item", new OreDetectorItem(new FabricItemSettings().maxDamage(64)));
     //
+    public static final Item UNICORN_SPAWN_EGG = registerItem("unicorn_spawn_egg", new SpawnEggItem(
+            ModEntities.UNICORN, 0xD42E36, 0x1D0D00, new FabricItemSettings()));
     public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(ModEntities.TIBERIUM_WORM, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
     public static final Item TIBERIUM_SKELETON_SPAWN_EGG = registerItem("tiberium_skeleton_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_SKELETON, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
@@ -113,6 +115,7 @@ public class ModItems {
     public static final Item SKYCAR_SPAWN_EGG = registerItem("skycar_spawn_egg", new SpawnEggItem(ModEntities.SKYCAR, 0xD30E36, 0x1D0550, new FabricItemSettings()));
     public static final Item AIRBALOON_SPAWN_EGG = registerItem("airballoon_spawn_egg", new SpawnEggItem(ModEntities.AIRBALLOON, 0xD83E36, 0x1D0550, new FabricItemSettings()));
 
+    public static final Item TIBERIUM_FLOATER_SPAWN_EGG = registerItem("tiberium_floater_spawn_egg", new SpawnEggItem(ModEntities.TIBERIUM_FLOATER, 0xD83E36, 0x1D0550, new FabricItemSettings()));
 
     public static void addItemsToIngredientGroup(FabricItemGroupEntries entries) {
         entries.add(RAW_ELEMENT_ZERO);
@@ -179,9 +182,11 @@ public class ModItems {
         entries.add(TOXICGUN);
         entries.add(DETECTOR_ITEM);
 
+        entries.add(UNICORN_SPAWN_EGG);
         entries.add(TIBERIUM_WORM_SPAWN_EGG);
         entries.add(TIBERIUM_SKELETON_SPAWN_EGG);
         entries.add(GHOST_SPAWN_EGG);
+        entries.add(TIBERIUM_FLOATER_SPAWN_EGG);
         entries.add(AIRDRONE_SPAWN_EGG);
         //entries.add(SKYCAR_SPAWN_EGG);
         entries.add(AIRBALOON_SPAWN_EGG);

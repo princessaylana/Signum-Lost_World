@@ -22,6 +22,22 @@ public class ModSounds {
     public static SoundEvent TIBERIUM_PLACE = registerSoundEvent("tiberium_place");
     public static SoundEvent TIBERIUM_HIT = registerSoundEvent("tiberium_hit");
 
+    public static SoundEvent GHOST_TELEPORT = registerSoundEvent("ghost_teleport");
+    public static SoundEvent GHOST_ANGRY = registerSoundEvent("ghost_angry");
+    public static SoundEvent GHOST_ATTACK = registerSoundEvent("ghost_attack");
+    public static SoundEvent GHOST_HURT = registerSoundEvent("ghost_hurt");
+    public static SoundEvent GHOST_DIE = registerSoundEvent("ghost_die");
+    public static SoundEvent GHOST_AMBIENT = registerSoundEvent("ghost_ambient");
+    public static SoundEvent FLOATER_AMBIENT = registerSoundEvent("floater_ambient");
+    public static SoundEvent FLOATER_DIE = registerSoundEvent("floater_die");
+    public static SoundEvent FLOATER_HURT = registerSoundEvent("floater_hurt");
+    public static SoundEvent FLOATER_SHOOT = registerSoundEvent("floater_shoot");
+    public static SoundEvent FLOATER_TELEPORT = registerSoundEvent("floater_teleport");
+    public static SoundEvent FLOATER_WARNS = registerSoundEvent("floater_warns");
+
+
+
+
 
     public static final BlockSoundGroup TIBERIUM_BLOCK_SOUNDS = new BlockSoundGroup(1f, 1f,
             ModSounds.TIBERIUM_BREAK, ModSounds.TIBERIUM_WALK, ModSounds.TIBERIUM_PLACE,

@@ -22,6 +22,7 @@ import za.lana.signum.block.entity.ModBlockEntities;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.*;
+import za.lana.signum.entity.mob.UnicornEntity;
 import za.lana.signum.entity.transport.AirBalloonEntity;
 import za.lana.signum.entity.transport.SkyCarEntity;
 import za.lana.signum.item.ModFuels;
@@ -69,9 +70,12 @@ public class Signum implements ModInitializer {
 		ModMessages.registerC2SPackets();
 		GuiScreens.registerGuiScreens();
 
+		FabricDefaultAttributeRegistry.register(ModEntities.UNICORN, UnicornEntity.setAttributes());
+
 		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AIRBALLOON, AirBalloonEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_SKELETON, TiberiumSkeletonEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterEntity.setAttributes());
 
 		FabricDefaultAttributeRegistry.register(ModEntities.GHOST, GhostEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AIRDRONE, AirDroneEntity.setAttributes());

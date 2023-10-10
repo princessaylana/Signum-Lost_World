@@ -13,19 +13,24 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.World;
 import za.lana.signum.Signum;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.TiberiumWormEntity;
+import za.lana.signum.particle.ModParticles;
 
 import java.util.List;
 import java.util.Map;
@@ -35,24 +40,18 @@ import static net.minecraft.block.SnowyBlock.SNOWY;
 
 public class BlightBlock
         extends Block {
-    private Block regularBlock = this;
+    private final Block regularBlock;
     private static final Map<Block, Block> REGULAR_TO_INFESTED_BLOCK = Maps.newIdentityHashMap();
     private static final Map<BlockState, BlockState> REGULAR_TO_INFESTED_STATE = Maps.newIdentityHashMap();
     private static final Map<BlockState, BlockState> INFESTED_TO_REGULAR_STATE = Maps.newIdentityHashMap();
 
-    /**
-     * Creates an infested block
-     *
-     * @param settings block settings
-     */
-    public BlightBlock(Settings settings) {
-        super(settings);
-        // .hardness(regularBlock.getHardness() / 2.0f).resistance(0.75f);
+    public BlightBlock(Settings settings, Block regularBlock) {
+        super(settings.hardness(regularBlock.getHardness() / 2.0f).resistance(0.75f));
+        this.regularBlock = regularBlock;
         REGULAR_TO_INFESTED_BLOCK.put(regularBlock, this);
     }
 
     public Block getRegularBlock() {
-
         return this.regularBlock;
     }
 
@@ -63,9 +62,9 @@ public class BlightBlock
     private void spawnTiberiumWorm(ServerWorld world, BlockPos pos) {
         TiberiumWormEntity tiberiumWormEntity = ModEntities.TIBERIUM_WORM.create(world);
         if (tiberiumWormEntity != null) {
-            tiberiumWormEntity.refreshPositionAndAngles((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, 0.0f, 0.0f);
+            tiberiumWormEntity.refreshPositionAndAngles((double)pos.getX() + 1.5f, pos.getY(), (double)pos.getZ() + 0.5, 0.0f, 0.0f);
             world.spawnEntity(tiberiumWormEntity);
-            tiberiumWormEntity.playSpawnEffects();
+            //tiberiumWormEntity.playSpawnEffects();
         }
     }
 
@@ -105,13 +104,6 @@ public class BlightBlock
         BlockPos blockPos = pos.offset(direction);
         BlockState blockState = world.getBlockState(blockPos);
         Block block = null;
-        /** needs to spawn worms
-        if (BlightBlock.canSpawnWorm(blockState)) {
-            TiberiumWormEntity tiberiumWormEntity = new TiberiumWormEntity(ModEntities.TIBERIUM_WORM, world);
-            world.spawnEntity(tiberiumWormEntity);
-            tiberiumWormEntity.playSpawnEffects();
-        }
-        **/
 
         if (world.getLightLevel(pos.up()) >= 9) {
             BlockState blockState2 = this.getDefaultState();
@@ -127,9 +119,19 @@ public class BlightBlock
         //
         return false;
     }
-
-    public static boolean canSpawnWorm(BlockState state) {
-        return state.isAir() || state.isOf(ModBlocks.BLIGHT_BLOCK);
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+        if (entity instanceof LivingEntity) {
+            if (world.isClient) {
+                boolean bl;
+                Random random = world.getRandom();
+                bl = entity.lastRenderX != entity.getX() || entity.lastRenderZ != entity.getZ();
+                if (bl && random.nextBoolean()) {
+                    world.addParticle(ModParticles.BLACK_SHROOM_PARTICLE, entity.getX(), pos.getY() + 1.0f, entity.getZ(), MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05f, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f);
+                }
+            }
+        }
+        super.onSteppedOn(world, pos, state, entity);
     }
     @Override
     public void appendTooltip(ItemStack stack, BlockView blockGetter, List<Text> tooltip, TooltipContext tooltipFlag) {

@@ -10,31 +10,26 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
-import za.lana.signum.entity.hostile.TiberiumWormEntity;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
-import za.lana.signum.util.ModEntityTypeTags;
 
 public class TiberiumBoltEntity extends ThrownItemEntity {
     private static final TrackedData<Boolean> HIT =
             DataTracker.registerData(TiberiumBoltEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private int counter = 0;
+    private final int counter = 0;
     protected final float dam = 1.5f * 2;
     protected final int age1 = 200;
+    //private int explosionPower = 1;
 
     public TiberiumBoltEntity(EntityType<TiberiumBoltEntity> type, World world) {
         super(type, world);
@@ -48,7 +43,7 @@ public class TiberiumBoltEntity extends ThrownItemEntity {
         double d2 = (double)blockpos.getZ() + 0.5D;
         this.refreshPositionAndAngles(d0, d1, d2, this.getYaw(), this.getPitch());
         if (this.age >= age1) {
-            this.remove(RemovalReason.DISCARDED);
+            this.discard();
         }
     }
 
@@ -101,12 +96,12 @@ public class TiberiumBoltEntity extends ThrownItemEntity {
     protected Item getDefaultItem() {
         return null;
     }
-
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(HIT, false);
     }
+
 }
 
 

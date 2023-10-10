@@ -46,9 +46,13 @@ public class ToxicBallEntity
         extends ThrownItemEntity {
     private static final TrackedData<ItemStack> ITEM = DataTracker.registerData(ToxicBallEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
     private int life;
+    protected final int age1 = 200;
 
     public ToxicBallEntity(EntityType<ToxicBallEntity> type, World world) {
         super(type, world);
+        if (this.age >= age1) {
+            this.discard();
+        }
     }
     public ToxicBallEntity(World world, LivingEntity owner) {
         super(TOXICBALL, owner, world);
