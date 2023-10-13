@@ -56,7 +56,7 @@ public class UnicornEntityModel<T extends UnicornEntity> extends SinglePartEntit
 
 		this.animateMovement(UnicornAnimations.UNICORN_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
 		this.updateAnimation(entity.idleAniState, UnicornAnimations.UNICORN_IDLE, ageInTicks, 1f);
-		//this.updateAnimation(entity.attackAnitate, UnicornAnimations.UNICORN_ATTACK, ageInTicks, 1f);
+		this.updateAnimation(entity.attackAniState, UnicornAnimations.UNICORN_ATTACK, ageInTicks, 1f);
 	}
 	public void setHeadAngles(float headYaw, float headPitch){
 		headYaw = MathHelper.clamp(headYaw, -30.0f, 30.0f);

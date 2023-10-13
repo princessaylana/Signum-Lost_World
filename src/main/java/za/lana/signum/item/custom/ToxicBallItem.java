@@ -15,7 +15,7 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import za.lana.signum.entity.projectile.ToxicBallEntity;
+import za.lana.signum.entity.itemprojectile.ToxicBallEntity;
 
 public class ToxicBallItem
         extends Item {

@@ -20,7 +20,7 @@ public class ModEntityGeneration {
     public static void addSpawns() {
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MUSHROOMS), SpawnGroup.CREATURE,
-                ModEntities.UNICORN, 50, 1, 3);
+                ModEntities.UNICORN, 5, 2, 6);
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MANGROVE), SpawnGroup.MONSTER,
                 ModEntities.TIBERIUM_WORM, 75, 1, 2);
@@ -28,6 +28,7 @@ public class ModEntityGeneration {
                 ModEntities.TIBERIUM_SKELETON, 50, 1, 2);
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MANGROVE), SpawnGroup.MONSTER,
                 ModEntities.TIBERIUM_FLOATER, 30, 1, 2);
+
 
         SpawnRestriction.register(ModEntities.UNICORN, SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
@@ -38,5 +39,6 @@ public class ModEntityGeneration {
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnIgnoreLightLevel);
         SpawnRestriction.register(ModEntities.TIBERIUM_FLOATER, SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, TiberiumFloaterEntity::canSpawn);
+
     }
 }

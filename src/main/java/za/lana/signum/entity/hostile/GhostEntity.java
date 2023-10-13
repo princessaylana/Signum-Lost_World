@@ -61,7 +61,7 @@ public class GhostEntity extends HostileEntity implements GeoEntity, Angerable {
     private int lastAngrySoundAge = Integer.MIN_VALUE;
     private static final UniformIntProvider ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private static final TrackedData<Boolean> ANGRY = DataTracker.registerData(GhostEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    static final TrackedData<Boolean> ANGRY = DataTracker.registerData(GhostEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> PROVOKED = DataTracker.registerData(GhostEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
 

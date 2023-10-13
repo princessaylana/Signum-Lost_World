@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.hostile.TiberiumFloaterEntity;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 

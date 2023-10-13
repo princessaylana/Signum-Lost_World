@@ -125,7 +125,7 @@ public class AirBalloonEntity
     }
     @Override
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
-        return 0.1F;
+        return 2.0F;
     }
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
@@ -233,6 +233,7 @@ public class AirBalloonEntity
                 float z = (float) (passenger.forwardSpeed * V / 0.25f);
                 if (y <= 0)
                     y *= 0.25f;
+
                 if ((KeyInputHandler.flyDownkey.isPressed())) {
                     y = -5.0f * 2;
                     fuelFlameDecrease(getWorld(), getBlockPos());

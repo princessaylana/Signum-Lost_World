@@ -6,9 +6,8 @@
  * MIT License
  * Lana
  **/
-package za.lana.signum.entity.projectile;
+package za.lana.signum.entity.itemprojectile;
 
-import net.minecraft.client.util.ParticleUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -16,7 +15,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.entity.passive.FrogEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,35 +22,33 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.item.ModItems;
-
-import java.util.List;
+import za.lana.signum.particle.ModParticles;
 
 import static za.lana.signum.entity.ModEntities.TOXICBALL;
 
 public class ToxicBallEntity
         extends ThrownItemEntity {
     private static final TrackedData<ItemStack> ITEM = DataTracker.registerData(ToxicBallEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
-    private int life;
+
     protected final int age1 = 200;
+
+    private int life;
+    private int lifeTime;
 
     public ToxicBallEntity(EntityType<ToxicBallEntity> type, World world) {
         super(type, world);
-        if (this.age >= age1) {
-            this.discard();
-        }
+        int i = 1;
+        this.life = 0;
+        this.lifeTime = 10 * i + this.random.nextInt(6) + this.random.nextInt(7);
+
     }
     public ToxicBallEntity(World world, LivingEntity owner) {
         super(TOXICBALL, owner, world);
@@ -66,12 +62,7 @@ public class ToxicBallEntity
     public void initFromStack(ItemStack stack){
 
     }
-    protected void age() {
-        ++this.life;
-        if (this.life >= 2400) {
-            this.discard();
-        }
-    }
+
     //Customization below
     @Override
     public boolean hasNoGravity() {
@@ -80,7 +71,7 @@ public class ToxicBallEntity
 
     private ParticleEffect getParticleParameters() {
         ItemStack itemStack = this.getItem();
-        return itemStack.isEmpty() ? ParticleTypes.FIREWORK: new ItemStackParticleEffect(ParticleTypes.ITEM, itemStack);
+        return itemStack.isEmpty() ? ModParticles.TIBERIUM_PARTICLE : new ItemStackParticleEffect(ParticleTypes.ITEM, itemStack);
     }
     @Override
     public void handleStatus(byte status) {
@@ -91,7 +82,17 @@ public class ToxicBallEntity
             }
         }
     }
-
+public void tick(){
+    if (!this.getWorld().isClient && this.life > this.lifeTime) {
+        ++this.life;
+        if (this.getWorld().isClient && this.life % 2 < 2) {
+            this.getWorld().addParticle(ParticleTypes.FIREWORK, this.getX(), this.getY(), this.getZ(), this.random.nextGaussian() * 0.05, -this.getVelocity().y * 0.5, this.random.nextGaussian() * 0.05);
+        }
+        if (!this.getWorld().isClient && this.life > this.lifeTime) {
+            this.discard();
+        }
+    }
+}
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult){
         super.onEntityHit(entityHitResult);

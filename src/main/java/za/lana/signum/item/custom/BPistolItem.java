@@ -20,7 +20,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
-import za.lana.signum.entity.projectile.ToxicBallEntity;
+import za.lana.signum.entity.itemprojectile.ToxicBallEntity;
 
 import java.util.List;
 

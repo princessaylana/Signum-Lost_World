@@ -6,6 +6,8 @@
  * */
 package za.lana.signum.entity.hostile;
 
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
@@ -65,8 +67,12 @@ public class TiberiumSkeletonEntity extends HostileEntity implements GeoEntity {
         this.targetSelector.add(8, new ActiveTargetGoal<>(this, CreeperEntity.class, true));
 
     }
+    @Override
+    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
+        return 1.5f;
+    }
 
-    //ANIMATIONS
+    //GECKO ANIMATIONS
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "walk",1, this::walkController));

@@ -6,7 +6,7 @@
  * MIT License
  * Lana
  **/
-package za.lana.signum.entity.projectile;
+package za.lana.signum.entity.itemprojectile;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
