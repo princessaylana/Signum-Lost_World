@@ -6,18 +6,12 @@
  * */
 package za.lana.signum.entity.hostile;
 
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -32,6 +26,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.constant.SignumAnimations;
 import za.lana.signum.effect.ModEffects;
+import za.lana.signum.entity.ModEntityGroup;
 
 import java.util.List;
 
@@ -53,18 +48,17 @@ public class TiberiumSkeletonEntity extends HostileEntity implements GeoEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(2, new AvoidSunlightGoal(this));
-        this.goalSelector.add(3, new MeleeAttackGoal(this, 1.2D, false));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2D, false));
+        this.goalSelector.add(3, new AvoidSunlightGoal(this));
         this.goalSelector.add(4, new LookAroundGoal(this));
         this.goalSelector.add(5, new WanderAroundGoal(this, 1.0));
-        //this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
 
         this.targetSelector.add(1, new TiberiumSkeletonRevengeGoal());
         this.targetSelector.add(2, new ProtectHordeGoal());
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
         this.targetSelector.add(4, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
-        this.targetSelector.add(5, new ActiveTargetGoal<>(this, VillagerEntity.class, true));
-        this.targetSelector.add(8, new ActiveTargetGoal<>(this, CreeperEntity.class, true));
+        this.targetSelector.add(5, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+
 
     }
     @Override
@@ -103,7 +97,10 @@ public class TiberiumSkeletonEntity extends HostileEntity implements GeoEntity {
         return cache;
     }
 
-    // IMUMME TO TIBERIUM
+    // GROUP ATTRIBUTES
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TIBERIUM;
+    }
     @Override
     public boolean canHaveStatusEffect(StatusEffectInstance effect) {
         if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {

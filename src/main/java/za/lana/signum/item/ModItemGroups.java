@@ -178,14 +178,20 @@ public class ModItemGroups {
 
                         // SPAWN EGGS
                         entries.add(ModItems.UNICORN_SPAWN_EGG);
+                        entries.add(ModItems.ESPIDER_SPAWN_EGG);
+
                         entries.add(ModItems.TIBERIUM_WORM_SPAWN_EGG);
                         entries.add(ModItems.TIBERIUM_SKELETON_SPAWN_EGG);
-                        entries.add(ModItems.GHOST_SPAWN_EGG);
+                        entries.add(ModItems.TTROOPER_SPAWN_EGG);
+                        entries.add(ModItems.TCOMMANDER_SPAWN_EGG);
                         entries.add(ModItems.TIBERIUM_FLOATER_SPAWN_EGG);
-                        entries.add(ModItems.AIRDRONE_SPAWN_EGG);
-                        entries.add(ModItems.SIGALIEN_SPAWN_EGG);
-                        entries.add(ModItems.SKYCAR_SPAWN_EGG);
+
+                        //entries.add(ModItems.AIRDRONE_SPAWN_EGG);
+                        //entries.add(ModItems.SIGALIEN_SPAWN_EGG);
+                        //entries.add(ModItems.SKYCAR_SPAWN_EGG);
+                        entries.add(ModItems.GHOST_SPAWN_EGG);
                         entries.add(ModItems.AIRBALOON_SPAWN_EGG);
+
 
                         //TODO: BELOW TO BE REMOVED - FOR TESTING ONLY
                         entries.add(ModBlocks.EXAMPLE_BLOCK);

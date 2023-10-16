@@ -123,8 +123,7 @@
       "signum:small_toxic_mushroom_placed",
       "signum:small_yellow_mushroom_placed",
       "minecraft:patch_sugar_cane",
-      "minecraft:patch_pumpkin",
-      "signum:sky_vines"
+      "minecraft:patch_pumpkin"
     ],
     [
       "minecraft:freeze_top_layer"

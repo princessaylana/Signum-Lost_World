@@ -76,6 +76,23 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "unicorn"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, UnicornEntity::new)
                     .dimensions(EntityDimensions.fixed(1.5f, 2.2f)).build());
+
+    // VANILLA HOSTILES
+    public static final EntityType<TTrooperEntity> TTROOPER_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ttrooper_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TTrooperEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
+    public static final EntityType<TCommanderEntity> TCOMMANDER_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tcommander_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TCommanderEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
+    public static final EntityType<ESpiderEntity> ESPIDER_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "espider_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ESpiderEntity::new)
+                    .dimensions(EntityDimensions.fixed(3.0f, 1.3f)).build());
+
+
+
     // PROJECTILES
     public static final EntityType<TiberiumBoltEntity> TIBERIUM_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(Signum.MOD_ID, "tiberium_projectile"),

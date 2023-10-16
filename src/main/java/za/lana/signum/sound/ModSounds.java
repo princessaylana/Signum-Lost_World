@@ -34,6 +34,11 @@ public class ModSounds {
     public static SoundEvent FLOATER_SHOOT = registerSoundEvent("floater_shoot");
     public static SoundEvent FLOATER_TELEPORT = registerSoundEvent("floater_teleport");
     public static SoundEvent FLOATER_WARNS = registerSoundEvent("floater_warns");
+    public static SoundEvent TCOMMANDER_IDLE = registerSoundEvent("tcommander_idle");
+    public static SoundEvent TCOMMANDER_HURT = registerSoundEvent("tcommander_hurt");
+    public static SoundEvent TCOMMANDER_HURT2 = registerSoundEvent("tcommander_hurt2");
+    public static SoundEvent TCOMMANDER_DIE = registerSoundEvent("tcommander_die");
+    public static SoundEvent TCOMMANDER_WALK = registerSoundEvent("tcommander_walk");
 
 
 

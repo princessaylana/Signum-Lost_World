@@ -111,6 +111,17 @@ public class SignumClient implements ClientModInitializer {
         //
         EntityRendererRegistry.register(ModEntities.TOXICBALL, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASERBOLT, FlyingItemEntityRenderer::new);
+
+        //VANILLA HOSTILES
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TTROOPER, TTrooperModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TCOMMANDER, TCommanderModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER, ESpiderModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderRenderer::new);
+
         // HOSTILES
         EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);
         EntityRendererRegistry.register(ModEntities.TIBERIUM_SKELETON, TiberiumSkeletonRenderer::new);

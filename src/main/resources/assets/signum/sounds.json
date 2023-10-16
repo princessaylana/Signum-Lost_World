@@ -131,5 +131,42 @@
       "signum:floater_warns"
     ],
     "volume":"0.15"
+  },
+  "tcommander_death": {
+    "subtitle": "sounds.signum.tcommander_death",
+    "sounds": [
+      "signum:tcommander_death"
+    ],
+    "volume":"0.15"
+  },
+  "tcommander_hurt": {
+    "subtitle": "sounds.signum.tcommander_hurt",
+    "sounds": [
+      "signum:tcommander_hurt"
+    ],
+    "volume":"0.15"
+  },
+  "tcommander_hurt2": {
+    "subtitle": "sounds.signum.tcommander_hurt2",
+    "sounds": [
+      "signum:tcommander_hurt2"
+    ],
+    "volume":"0.15"
+  },
+  "tcommander_idle": {
+    "subtitle": "sounds.signum.tcommander_idle",
+    "sounds": [
+      "signum:tcommander_idle"
+    ],
+    "volume":"0.15"
+  },
+  "tcommander_walk": {
+    "subtitle": "sounds.signum.tcommander_walk",
+    "sounds": [
+      "signum:tcommander_walk"
+    ],
+    "volume":"0.15"
   }
+
+
 }

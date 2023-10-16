@@ -1,10 +1,13 @@
 package za.lana.signum.client.animation;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.animation.Keyframe;
 import net.minecraft.client.render.entity.animation.Transformation;
 
+@Environment(value= EnvType.CLIENT)
 public class UnicornAnimations {
 
     // JAVA ANIMATION BELOW

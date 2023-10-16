@@ -49,6 +49,7 @@ public class UnicornEntityModel<T extends UnicornEntity> extends SinglePartEntit
 				.uv(0, 0).cuboid(0.0F, -16.0F, 6.0F, 0.0F, 16.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 		return TexturedModelData.of(modelData, 64, 64);
 	}
+
 	@Override
 	public void setAngles(UnicornEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.getPart().traverse().forEach(ModelPart::resetTransform);
@@ -65,8 +66,6 @@ public class UnicornEntityModel<T extends UnicornEntity> extends SinglePartEntit
 		this.head.yaw = headYaw * 0.017453292F;
 		this.head.pitch = headPitch * 0.017453292F;
 	}
-
-
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
 		unicorn.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);

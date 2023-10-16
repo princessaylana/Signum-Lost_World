@@ -19,7 +19,7 @@ import za.lana.signum.world.biomes.SignumBioKeys;
 public class ModEntityGeneration {
     public static void addSpawns() {
 
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MUSHROOMS), SpawnGroup.CREATURE,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MUSHROOMS, SignumBioKeys.SIGNUM_FOREST), SpawnGroup.CREATURE,
                 ModEntities.UNICORN, 5, 2, 6);
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MANGROVE), SpawnGroup.MONSTER,

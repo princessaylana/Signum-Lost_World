@@ -29,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import za.lana.signum.effect.ModEffects;
+import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.particle.ModParticles;
 
@@ -101,16 +102,14 @@ public void tick(){
         BlockPos pos = getBlockPos();
 
         int i = entity instanceof EndermanEntity ? 6 : 0;
-        //List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, this.getBoundingBox().expand(4.0, 2.0, 4.0));
-       // entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
         if (entity instanceof LivingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.GLOWING, 10, 0)));
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
             entity.playSound(SoundEvents.BLOCK_GLASS_HIT, 2F, 2F); // plays a sound for the entity hit only
             entity.damage(getWorld().getDamageSources().magic(), 1.5f * 2);
             this.discard();
-            }
         }
+    }
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
@@ -121,7 +120,6 @@ public void tick(){
             // world.getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(8.0), e->true).forEach(e->e.setOnFireFor(5));
         }
     }
-
     private void bounce() {
         Vec3d vec3d = this.getVelocity();
 
@@ -142,19 +140,7 @@ public void tick(){
         }
 
     }
-    // this seems to be needed?
     public void setDamage() {
     }
-    // will add a custom particle here in future
-    private void spawnSparkParticle(ItemUsageContext pContext, BlockPos positionClicked) {
-        for(int i = 0; i < 360; i++) {
-            if(i % 20 == 0) {
-                pContext.getWorld().addParticle(ParticleTypes.ELECTRIC_SPARK,
-                        positionClicked.getX() + 0.5d, positionClicked.getY() + 1, positionClicked.getZ() + 0.5d,
-                        Math.cos(i) * 0.25d, 0.15d, Math.sin(i) * 0.25d);
-            }
-        }
-    }
-
 
 }

@@ -14,6 +14,13 @@ public class ModModelLayers {
 
     public static final EntityModelLayer UNICORN =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "unicorn"), "mainbody");
+    public static final EntityModelLayer ESPIDER =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "espider_entity"), "mainbody");
+    public static final EntityModelLayer TTROOPER =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "ttrooper_entity"), "waist");
+    public static final EntityModelLayer TCOMMANDER =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tcommander_entity"), "waist");
+
     public static final EntityModelLayer TIBERIUM_BOLT =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_bolt"), "main");
     public static final EntityModelLayer ICE_BOLT =

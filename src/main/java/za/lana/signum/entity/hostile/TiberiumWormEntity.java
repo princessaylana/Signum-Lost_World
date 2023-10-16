@@ -14,6 +14,7 @@ package za.lana.signum.entity.hostile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
@@ -45,6 +46,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.block.custom.props.BlightBlock;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.item.ModItems;
 
 import java.util.EnumSet;
@@ -72,15 +74,15 @@ public class TiberiumWormEntity extends HostileEntity implements GeoEntity {
 		this.goalSelector.add(2, new AvoidSunlightGoal(this));
 		this.goalSelector.add(3, new MeleeAttackGoal(this, 1.2D, false));
 		this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
-		this.goalSelector.add(5, new WanderAndInfestGoal(this));
-		this.goalSelector.add(6, new LookAroundGoal(this));
+		this.goalSelector.add(5, new LookAroundGoal(this));
+		this.goalSelector.add(6, new WanderAndInfestGoal(this));
 
 		this.targetSelector.add(1, new TiberiumWormEntity.TiberiumWormRevengeGoal());
 		this.targetSelector.add(2, new TiberiumWormEntity.ProtectHordeGoal());
-		this.targetSelector.add(2, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
-		this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.add(2, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
-		this.targetSelector.add(3, new ActiveTargetGoal<>(this, ChickenEntity.class, true));
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.add(5, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
+		this.targetSelector.add(4, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+
 	}
 
 	public TiberiumWormEntity createChild(ServerWorld world, PassiveEntity entity) {
@@ -107,7 +109,10 @@ public class TiberiumWormEntity extends HostileEntity implements GeoEntity {
 		return cache;
 	}
 
-	// IMUMME TO TIBERIUM
+	// GROUP ATTRIBUTES
+	public EntityGroup getGroup() {
+		return ModEntityGroup.TIBERIUM;
+	}
 	@Override
 	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
 		if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {

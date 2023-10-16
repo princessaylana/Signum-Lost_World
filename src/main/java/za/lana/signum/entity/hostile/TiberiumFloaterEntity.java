@@ -1,18 +1,23 @@
-/*
- * Decompiled with CFR 0.2.1 (FabricMC 53fa44c9).
- */
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * 2023
+ * */
 package za.lana.signum.entity.hostile;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.MushroomBlock;
 import net.minecraft.client.util.ParticleUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.FuzzyTargeting;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.control.MoveControl;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.FlyGoal;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -24,13 +29,12 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.*;
-import net.minecraft.entity.passive.ParrotEntity;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -52,21 +56,18 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.constant.SignumAnimations;
 import za.lana.signum.effect.ModEffects;
+import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.projectile.TiberiumBoltEntity;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 import za.lana.signum.tag.ModBlockTags;
 import za.lana.signum.tag.ModEntityTypeTags;
 
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Predicate;
 
-//todo NEED TO ADD TELEPORTATION and  tiberium particles?
 public class TiberiumFloaterEntity
-        extends HostileEntity
+        extends  FlyingEntity
         implements GeoEntity, Monster, Angerable {
 
     @Nullable
@@ -99,13 +100,13 @@ public class TiberiumFloaterEntity
         this.goalSelector.add(2, new FlyRandomlyGoal(this));
         this.goalSelector.add(3, new ShootBoltGoal(this));
         this.goalSelector.add(4, new TeleportToTargetGoal(this, this::shouldAngerAt));
-        this.goalSelector.add(5, new MeleeAttackGoal(this, 1.2D, false));
-        this.goalSelector.add(6, new LandMushroomGoal(this, 1.0));
+        //this.goalSelector.add(6, new LandMushroomGoal(this, 1.0));
 
-        this.targetSelector.add(1, new TiberiumFloaterRevengeGoal());
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, 10, true, false, entity -> Math.abs(entity.getY() - this.getY()) <= 4.0));
-        this.targetSelector.add(2, new TeleportToTargetGoal(this, this::shouldAngerAt));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+        //this.targetSelector.add(2, new TiberiumFloaterEntity.ProtectTroopersGoal());
+        this.targetSelector.add(3, new TeleportToTargetGoal(this, this::shouldAngerAt));
+        this.targetSelector.add(4, new ActiveTargetGoal<>(this, VillagerEntity.class, true));
+        this.targetSelector.add(5, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
     }
     public int getBoltStrength() {
         return this.boltStrength;
@@ -136,13 +137,9 @@ public class TiberiumFloaterEntity
     public void setShooting(boolean shooting) {
         this.dataTracker.set(SHOOTING, shooting);
     }
-    // IMUMME TO TIBERIUM
-    private static boolean isBoltFromPlayer(DamageSource damageSource) {
-        return damageSource.getSource() instanceof TiberiumBoltEntity && damageSource.getAttacker() instanceof PlayerEntity;
-    }
-    @Override
-    public boolean isInvulnerableTo(DamageSource damageSource) {
-        return !TiberiumFloaterEntity.isBoltFromPlayer(damageSource) && super.isInvulnerableTo(damageSource);
+    // GROUP ATTRIBUTES
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TIBERIUM;
     }
     @Override
     public boolean canHaveStatusEffect(StatusEffectInstance effect) {
@@ -151,10 +148,20 @@ public class TiberiumFloaterEntity
         }
         return super.canHaveStatusEffect(effect);
     }
+
+
+    // IMUMME TO TIBERIUM ATTACK
+    private static boolean isBoltFromPlayer(DamageSource damageSource) {
+        return damageSource.getSource() instanceof TiberiumBoltEntity && damageSource.getAttacker() instanceof PlayerEntity;
+    }
+    @Override
+    public boolean isInvulnerableTo(DamageSource damageSource) {
+        return !TiberiumFloaterEntity.isBoltFromPlayer(damageSource) && super.isInvulnerableTo(damageSource);
+    }
     @Override
     public boolean damage(DamageSource source, float amount) {
         if (TiberiumFloaterEntity.isBoltFromPlayer(source)) {
-            super.damage(source, 0.5f);
+            super.damage(source, 250.0f);
            // super.damage(source, 1000.0f);
             return true;
         }
@@ -376,7 +383,9 @@ public class TiberiumFloaterEntity
     public boolean tiberiumTarget(){
         return Objects.requireNonNull(this.getTarget()).getType().isIn(ModEntityTypeTags.TIBERIUM_TARGETS);
     }
+
     // TELEPORTATION
+    //TODO - fix the teleportation, random and goal
     @Override
     protected void mobTick() {
         float f;
@@ -430,28 +439,32 @@ public class TiberiumFloaterEntity
         return bl3;
     }
     // GOALS
-    class TiberiumFloaterRevengeGoal
-            extends RevengeGoal {
-        public TiberiumFloaterRevengeGoal() {
-            super(TiberiumFloaterEntity.this);
+    /**
+    class ProtectTroopersGoal
+            extends ActiveTargetGoal<PlayerEntity> {
+        public ProtectTroopersGoal() {
+            super(TiberiumFloaterEntity.this, PlayerEntity.class, 20, true, true, null);
         }
 
         @Override
-        public void start() {
-            super.start();
-            if (TiberiumFloaterEntity.this.isAttacking()) {
-                this.callSameTypeForRevenge();
-                this.stop();
+        public boolean canStart() {
+            if (super.canStart()) {
+                List<TTrooperEntity> list = TiberiumFloaterEntity.this.getWorld().getNonSpectatingEntities(TTrooperEntity.class, TiberiumFloaterEntity.this.getBoundingBox().expand(8.0, 4.0, 8.0));
+                for (TTrooperEntity tTrooperEntity : list) {
+                    if (!tTrooperEntity.isBaby()) continue;
+                    return true;
+                }
             }
+            return false;
         }
 
         @Override
-        protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
-            if (mob instanceof SkeletonEntity) {
-                super.setMobEntityTarget(mob, target);
-            }
+        protected double getFollowRange() {
+            return super.getFollowRange() * 0.7;
         }
     }
+
+        **/
     static class LookAtTargetGoal
             extends Goal {
         private final TiberiumFloaterEntity floater;
@@ -527,6 +540,7 @@ public class TiberiumFloaterEntity
             this.floater.getMoveControl().moveTo(d, e, f, 1.0);
         }
     }
+    //TODO Needs to shoot ToxicBallEntity
     static class ShootBoltGoal
             extends Goal {
         private final TiberiumFloaterEntity floater;

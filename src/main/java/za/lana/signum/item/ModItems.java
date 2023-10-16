@@ -102,20 +102,32 @@ public class ModItems {
     public static final Item DETECTOR_ITEM = registerItem("detector_item", new OreDetectorItem(new FabricItemSettings().maxDamage(64)));
     //
     public static final Item UNICORN_SPAWN_EGG = registerItem("unicorn_spawn_egg", new SpawnEggItem(
-            ModEntities.UNICORN, 0xD42E36, 0x1D0D00, new FabricItemSettings()));
-    public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(ModEntities.TIBERIUM_WORM, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
-    public static final Item TIBERIUM_SKELETON_SPAWN_EGG = registerItem("tiberium_skeleton_spawn_egg", new SpawnEggItem(
-            ModEntities.TIBERIUM_SKELETON, 0xD57E36, 0x1D0D00, new FabricItemSettings()));
+            ModEntities.UNICORN, 0xDCE8E8, 0xEEFC69, new FabricItemSettings()));
+
     public static final Item GHOST_SPAWN_EGG = registerItem("ghost_spawn_egg", new SpawnEggItem(
             ModEntities.GHOST, 0xD57E36, 0x1CED00, new FabricItemSettings()));
     public static final Item AIRDRONE_SPAWN_EGG = registerItem("airdrone_spawn_egg", new SpawnEggItem(
             ModEntities.AIRDRONE, 0xD5B756, 0x1B0C83, new FabricItemSettings()));
     public static final Item SIGALIEN_SPAWN_EGG = registerItem("sigalien_spawn_egg", new SpawnEggItem(
             ModEntities.SIGALIEN, 0xD54446, 0x1B0C83, new FabricItemSettings()));
-    public static final Item SKYCAR_SPAWN_EGG = registerItem("skycar_spawn_egg", new SpawnEggItem(ModEntities.SKYCAR, 0xD30E36, 0x1D0550, new FabricItemSettings()));
-    public static final Item AIRBALOON_SPAWN_EGG = registerItem("airballoon_spawn_egg", new SpawnEggItem(ModEntities.AIRBALLOON, 0xD83E36, 0x1D0550, new FabricItemSettings()));
+    public static final Item SKYCAR_SPAWN_EGG = registerItem("skycar_spawn_egg", new SpawnEggItem(
+            ModEntities.SKYCAR, 0xD30E36, 0x1D0550, new FabricItemSettings()));
+    public static final Item AIRBALOON_SPAWN_EGG = registerItem("airballoon_spawn_egg", new SpawnEggItem(
+            ModEntities.AIRBALLOON, 0xD83E36, 0x1D0550, new FabricItemSettings()));
 
-    public static final Item TIBERIUM_FLOATER_SPAWN_EGG = registerItem("tiberium_floater_spawn_egg", new SpawnEggItem(ModEntities.TIBERIUM_FLOATER, 0xD83E36, 0x1D0550, new FabricItemSettings()));
+    // TIBERIUM GROUP
+    public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(
+            ModEntities.TIBERIUM_WORM, 0x70F427, 0x73FA5B, new FabricItemSettings()));
+    public static final Item TIBERIUM_SKELETON_SPAWN_EGG = registerItem("tiberium_skeleton_spawn_egg", new SpawnEggItem(
+            ModEntities.TIBERIUM_SKELETON, 0x70F427, 0x363835, new FabricItemSettings()));
+    public static final Item TIBERIUM_FLOATER_SPAWN_EGG = registerItem("tiberium_floater_spawn_egg", new SpawnEggItem(
+            ModEntities.TIBERIUM_FLOATER, 0x70F427, 0x9BFC14, new FabricItemSettings()));
+    public static final Item TTROOPER_SPAWN_EGG = registerItem("ttrooper_spawn_egg", new SpawnEggItem(
+            ModEntities.TTROOPER_ENTITY, 0x70F427, 0x292929, new FabricItemSettings()));
+    public static final Item TCOMMANDER_SPAWN_EGG = registerItem("tcommander_spawn_egg", new SpawnEggItem(
+            ModEntities.TCOMMANDER_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
+    public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
+            ModEntities.ESPIDER_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
 
     public static void addItemsToIngredientGroup(FabricItemGroupEntries entries) {
         entries.add(RAW_ELEMENT_ZERO);
@@ -182,14 +194,25 @@ public class ModItems {
         entries.add(TOXICGUN);
         entries.add(DETECTOR_ITEM);
 
+        // ANIMALS
         entries.add(UNICORN_SPAWN_EGG);
+
+        entries.add(ESPIDER_SPAWN_EGG);
+
+        // TIBERIUM
         entries.add(TIBERIUM_WORM_SPAWN_EGG);
         entries.add(TIBERIUM_SKELETON_SPAWN_EGG);
-        entries.add(GHOST_SPAWN_EGG);
+        entries.add(TTROOPER_SPAWN_EGG);
+        entries.add(TCOMMANDER_SPAWN_EGG);
         entries.add(TIBERIUM_FLOATER_SPAWN_EGG);
+
+        // OTHER
+        entries.add(GHOST_SPAWN_EGG);
         entries.add(AIRDRONE_SPAWN_EGG);
         //entries.add(SKYCAR_SPAWN_EGG);
+        //vehicles
         entries.add(AIRBALOON_SPAWN_EGG);
+
 
     }
 

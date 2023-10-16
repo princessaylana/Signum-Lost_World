@@ -71,6 +71,10 @@ public class Signum implements ModInitializer {
 		GuiScreens.registerGuiScreens();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.UNICORN, UnicornEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderEntity.setAttributes());
+
+		FabricDefaultAttributeRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderEntity.setAttributes());
 
 		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AIRBALLOON, AirBalloonEntity.setAttributes());
