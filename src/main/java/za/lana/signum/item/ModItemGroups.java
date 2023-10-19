@@ -200,6 +200,7 @@ public class ModItemGroups {
                         entries.add(ModItems.E0ROD);
                         entries.add(ModItems.TOXICGUN);
                         entries.add(ModItems.DETECTOR_ITEM);
+                        entries.add(ModItems.ROTTEN_FLESH_ON_A_STICK);
 
                         // disabled
                         //entries.add(ModBlocks.TIBERIUM_FIRE);

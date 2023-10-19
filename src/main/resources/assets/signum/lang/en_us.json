@@ -83,9 +83,13 @@
   "item.signum.detector_item.info": "Item Used to Test Ore WorldGen",
   "item.signum.e0rod": "E0Elemental Rod",
   "item.signum.slayer_staff": "Slayer Staff",
+  "item.signum.rotten_flesh_on_a_stick": "Rotten Flesh on a Stick",
 
   "item.signum.tiberium_skeleton_spawn_egg": "Tiberium Skeleton Spawn Egg",
   "item.signum.tiberium_worm_spawn_egg": "Tiberium Worm Spawn Egg",
+  "item.signum.tiberium_floater_spawn_egg": "Tiberium Floater Spawn Egg",
+  "item.signum.unicorn_spawn_egg": "Unicorn Spawn Egg",
+  "item.signum.espider_spawn_egg": "Evolved Spider Egg",
   "item.signum.airdrone_spawn_egg": "Airdrone Spawn Egg",
   "item.signum.sigalien_spawn_egg": "Alien Spawn Egg",
   "item.signum.skycar_spawn_egg": "Skycar Spawn Egg",

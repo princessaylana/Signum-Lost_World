@@ -7,6 +7,7 @@
 package za.lana.signum.client.layer;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 
@@ -16,6 +17,9 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "unicorn"), "mainbody");
     public static final EntityModelLayer ESPIDER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "espider_entity"), "mainbody");
+    public static final EntityModelLayer ESPIDER_SADDLE =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "espider_entity"), "saddle");
+
     public static final EntityModelLayer TTROOPER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "ttrooper_entity"), "waist");
     public static final EntityModelLayer TCOMMANDER =

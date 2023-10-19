@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "signum:item/rotten_flesh_on_a_stick"
+  }
+}

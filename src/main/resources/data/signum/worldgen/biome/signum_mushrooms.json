@@ -1,6 +1,6 @@
 {
   "temperature": 0.9,
-  "downfall": 1,
+  "downfall": 1.0,
   "has_precipitation": true,
   "effects": {
     "sky_color": 7842047,
@@ -11,48 +11,31 @@
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
       "block_search_extent": 8,
-      "offset": 2
+      "offset": 2.0
     }
   },
+
   "spawners": {
     "ambient": [
       {
         "type": "minecraft:bat",
-        "weight": 10,
+        "maxCount": 8,
         "minCount": 8,
-        "maxCount": 8
+        "weight": 10
       }
     ],
     "axolotls": [],
     "creature": [
       {
-        "type": "minecraft:horse",
-        "weight": 5,
-        "minCount": 2,
-        "maxCount": 6
-      },
-      {
-        "type": "signum:unicorn",
-        "weight": 5,
-        "minCount": 2,
-        "maxCount": 6
-      },
-      {
-        "type": "minecraft:chicken",
-        "weight": 10,
+        "type": "minecraft:mooshroom",
+        "maxCount": 8,
         "minCount": 4,
-        "maxCount": 4
+        "weight": 8
       }
     ],
     "misc": [],
-    "monster": [
-      {
-        "type": "minecraft:witch",
-        "weight": 5,
-        "minCount": 1,
-        "maxCount": 1
-      }
-    ],
+    "monster": [],
+    "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
   },
@@ -104,9 +87,7 @@
       "signum:quartz_crystal_placed"
     ],
     [],
-    [
-      "minecraft:spring_water"
-    ],
+    [],
     [
       "minecraft:glow_lichen",
       "minecraft:flower_flower_forest",

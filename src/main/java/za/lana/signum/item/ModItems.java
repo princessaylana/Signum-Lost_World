@@ -11,12 +11,15 @@ package za.lana.signum.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.hostile.ESpiderEntity;
 import za.lana.signum.item.custom.*;
 
 public class ModItems {
@@ -129,6 +132,9 @@ public class ModItems {
     public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
             ModEntities.ESPIDER_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
 
+    public static final Item ROTTEN_FLESH_ON_A_STICK = registerItem("rotten_flesh_on_a_stick",
+            new OnAStickItem<>(new FabricItemSettings().maxDamage(25), ModEntities.ESPIDER_ENTITY, 7));
+
     public static void addItemsToIngredientGroup(FabricItemGroupEntries entries) {
         entries.add(RAW_ELEMENT_ZERO);
         entries.add(RAW_QUARTZ_CRYSTAL);
@@ -193,6 +199,8 @@ public class ModItems {
 
         entries.add(TOXICGUN);
         entries.add(DETECTOR_ITEM);
+
+        entries.add(ROTTEN_FLESH_ON_A_STICK);
 
         // ANIMALS
         entries.add(UNICORN_SPAWN_EGG);

@@ -22,7 +22,6 @@ import za.lana.signum.client.renderer.entity.*;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
 import za.lana.signum.client.renderer.transport.SkyCarRenderer;
 import za.lana.signum.entity.ModEntities;
-import za.lana.signum.entity.projectile.FireBoltEntity;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.networking.ModMessages;
 import za.lana.signum.particle.ModParticles;
@@ -120,6 +119,7 @@ public class SignumClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER, ESpiderModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER_SADDLE, ESpiderModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderRenderer::new);
 
         // HOSTILES

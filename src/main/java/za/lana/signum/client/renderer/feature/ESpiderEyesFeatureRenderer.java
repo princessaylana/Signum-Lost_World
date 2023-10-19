@@ -11,19 +11,19 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.feature.EyesFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.model.EndermanEntityModel;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
+import za.lana.signum.client.model.ESpiderModel;
 import za.lana.signum.client.model.UnicornEntityModel;
+import za.lana.signum.entity.hostile.ESpiderEntity;
 import za.lana.signum.entity.mob.UnicornEntity;
 
 @Environment(value=EnvType.CLIENT)
-public class UnicornEyesFeatureRenderer<T extends UnicornEntity>
-        extends EyesFeatureRenderer<T, UnicornEntityModel<T>> {
-    private static final RenderLayer SKIN = RenderLayer.getEyes(new Identifier(Signum.MOD_ID, "textures/entity/animal/unicorn_eyes.png"));
+public class ESpiderEyesFeatureRenderer<T extends ESpiderEntity>
+        extends EyesFeatureRenderer<T, ESpiderModel<T>> {
+    private static final RenderLayer SKIN = RenderLayer.getEyes(new Identifier(Signum.MOD_ID, "textures/entity/hostile/espider_eyes_texture.png"));
 
-    public UnicornEyesFeatureRenderer(FeatureRendererContext<T, UnicornEntityModel<T>> featureRendererContext) {
+    public ESpiderEyesFeatureRenderer(FeatureRendererContext<T, ESpiderModel<T>> featureRendererContext) {
         super(featureRendererContext);
     }
 
