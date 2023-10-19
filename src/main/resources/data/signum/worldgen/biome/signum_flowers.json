@@ -56,6 +56,12 @@
         "maxCount": 4
       },
       {
+        "type": "signum:unicorn",
+        "weight": 5,
+        "minCount": 2,
+        "maxCount": 6
+      },
+      {
         "type": "minecraft:rabbit",
         "weight": 4,
         "minCount": 2,

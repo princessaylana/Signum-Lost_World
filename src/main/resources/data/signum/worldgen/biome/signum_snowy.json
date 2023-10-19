@@ -56,14 +56,7 @@
         "weight": 7
       }
     ],
-    "misc": [
-      {
-        "type": "minecraft:area_effect_cloud",
-        "weight": 80,
-        "minCount": 2,
-        "maxCount": 4
-      }
-    ],
+    "misc": [],
     "monster": [
       {
         "type": "minecraft:spider",
@@ -185,7 +178,9 @@
       "minecraft:trees_grove",
       "minecraft:patch_grass_taiga_2",
       "minecraft:flower_default",
-      "minecraft:patch_berry_common"
+      "minecraft:patch_berry_common",
+      "minecraft:mega_spruce_checked",
+      "minecraft:mega_pine_checked"
     ],
     [
       "minecraft:freeze_top_layer"

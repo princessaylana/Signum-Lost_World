@@ -53,8 +53,20 @@
         "maxCount": 4
       },
       {
+        "type": "signum:ttrooper_entity",
+        "weight": 25,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "signum:tcommander_entity",
+        "weight": 15,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
         "type": "signum:tiberium_floater",
-        "weight": 30,
+        "weight": 10,
         "minCount": 1,
         "maxCount": 2
       },

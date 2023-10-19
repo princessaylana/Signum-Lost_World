@@ -153,9 +153,9 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
 
     private ItemStack makeInitialWeapon() {
         if ((double)this.random.nextFloat() < 0.5) {
-            return new ItemStack(Items.CROSSBOW);
+            return new ItemStack(Items.IRON_SWORD);
         }
-        return new ItemStack(ModItems.TOXICGUN);
+        return new ItemStack(ModItems.PLASMA_SWORD);
         //return new ItemStack(Items.IRON_SWORD);
     }
 

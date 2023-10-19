@@ -50,11 +50,11 @@ public class ModEntities {
                     .dimensions(EntityDimensions.fixed(2.0f, 3.5f)).build());
     public static final EntityType<GhostEntity> GHOST = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ghost"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, GhostEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GhostEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.8f)).build());
     public static final EntityType<SigAlienEntity> SIGALIEN = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "sig_alien_worm"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, SigAlienEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SigAlienEntity::new)
                     .dimensions(EntityDimensions.fixed(1.8f, 1.8f)).build());
     public static final EntityType<AirDroneEntity> AIRDRONE= Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "airdrone"),
