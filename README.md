@@ -30,6 +30,7 @@ Dependancies:
 - Fabric Loader 0.14.23
 - Fabric API 0.90.0
 - Geckolib 4.2.3
+- REI v13.0.666
 
 Built using:
 - Fabric
