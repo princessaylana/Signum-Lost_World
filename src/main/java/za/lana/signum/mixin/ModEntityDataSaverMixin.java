@@ -6,6 +6,7 @@
  * */
 package za.lana.signum.mixin;
 
+import org.spongepowered.asm.mixin.Unique;
 import za.lana.signum.util.IEntityDataSaver;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
@@ -17,10 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class ModEntityDataSaverMixin implements IEntityDataSaver {
+    @Unique
     private NbtCompound persistentData;
 
     @Override
-    public NbtCompound getPersistentData() {
+    public NbtCompound signum$getPersistentData() {
         if(this.persistentData == null) {
             this.persistentData = new NbtCompound();
         }

@@ -39,6 +39,7 @@ public class ModEffects {
         Registry.register(Registries.STATUS_EFFECT, new Identifier(Signum.MOD_ID, "teleport_effect"), TELEPORT_EFFECT);
         Registry.register(Registries.STATUS_EFFECT, new Identifier(Signum.MOD_ID, "burn_effect"), BURN_EFFECT);
         Registry.register(Registries.STATUS_EFFECT, new Identifier(Signum.MOD_ID, "transmute_effect"), TRANSMUTE_EFFECT);
+        Registry.register(Registries.STATUS_EFFECT, new Identifier(Signum.MOD_ID, "shock_effect"), SHOCK_EFFECT);
 
         Signum.LOGGER.info("Registering ModEffects for " + Signum.MOD_ID);
 

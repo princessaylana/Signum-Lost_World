@@ -31,7 +31,6 @@ public class ShockEffect extends StatusEffect {
                 spawnParticles(victim, level);
                 victim.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             }
-            //if (entity instanceof TiberiumWormEntity){victim.heal(2.0f);}
             if (!victim.getWorld().isClient()) {
                 World level = victim.getWorld();
                 randomShock(victim, level);
@@ -55,7 +54,6 @@ public class ShockEffect extends StatusEffect {
             if (random.nextInt(CHANCE) != 0) {
                 return;
             }
-            //if (victim instanceof TiberiumWormEntity){victim.heal(2.0f);}
             level.getEntitiesByClass(LivingEntity.class, victim.getBoundingBox().expand(3.0), e->true).forEach(e->e
                     .addStatusEffect(new StatusEffectInstance(ModEffects.SHOCK_EFFECT, DURATION_SHOCK, 1), victim));
             spawnParticles(victim, level);

@@ -120,7 +120,7 @@ public class TiberiumFloaterEntity
             this.dataTracker.set(ANGRY, false);
             this.dataTracker.set(PROVOKED, false);
             assert entityAttributeInstance != null;
-            entityAttributeInstance.removeModifier(ATTACKING_SPEED_BOOST);
+            entityAttributeInstance.removeModifier(ATTACKING_SPEED_BOOST.getId());
         } else {
             this.ageWhenTargetSet = this.age;
             this.dataTracker.set(ANGRY, true);

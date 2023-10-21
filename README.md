@@ -2,7 +2,7 @@
 # Signum
 ![Signum Icon](https://images2.imgbox.com/eb/59/T5Pikr4X_o.png "Signum Minecraft Fabric Mod")
 
-A Minecraft Fabric 1.20.1 Modification
+A Minecraft Fabric 1.20.2 Modification
 
 
 
@@ -27,8 +27,8 @@ Adds a few unique things to Minecraft:
 
 
 Dependancies:
-- Fabric Loader 0.14.22
-- Fabric API 0.89.3
+- Fabric Loader 0.14.23
+- Fabric API 0.90.0
 - Geckolib 4.2.3
 
 Built using:

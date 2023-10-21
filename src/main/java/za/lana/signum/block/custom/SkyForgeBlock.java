@@ -130,9 +130,13 @@ public class SkyForgeBlock
     protected void dropExperience(ServerWorld world, BlockPos pos, int size) {
         super.dropExperience(world, pos, size);
     }
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.SKYFORGE, SkyForgeBlockEntity::tick);
+        return validateTicker(type, ModBlockEntities.SKYFORGE,
+                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
+
+
 }

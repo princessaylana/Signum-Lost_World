@@ -18,15 +18,10 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.Signum;
-import za.lana.signum.world.gen.ModFeatureGeneration;
 
 /**IMPORTANT README
  * ores are placed high, so they will spawn on our sky dimension,
- * and possibly very rare in the overworld if a mountian exceeds 144 height,
- * except for future water Crystals?
- * make sure this corresponds with the datagen files
- * sky dimension ores are higher in concentration due to less surface area
- * than the actual overworld see placed feature json files
+ * and possibly very rare in the overworld if a mountain exceeds 144 height,
  * */
 public class ModPlacedFeatures {
 
@@ -112,12 +107,6 @@ public class ModPlacedFeatures {
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ELEMENT_ZERO_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(19,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
-
-        /**
-         * TECHNOLOGY TREE FOR PORTAL
-         * we will spawn FIRE_CRYSTAL in the nether, so players can only access our dimension
-         * only after they have reached the nether
-         * */
 
         register(context, NETHERRACK_MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.NETHERRACK_MANGANESE_ORE_KEY),

@@ -30,8 +30,8 @@ public class UnicornAttackGoal extends MeleeAttackGoal {
         ticksUntilNextAttack = 10;
     }
     @Override
-    protected void attack(LivingEntity pEnemy, double squaredDistance) {
-        if (isEnemyWithinAttackDistance(pEnemy)) {
+    protected void attack(LivingEntity pTarget) {
+        if (isEnemyWithinAttackDistance(pTarget)) {
             shouldCountTillNextAttack = true;
 
             if(isTimeToStartAttackAnimation()) {
@@ -39,8 +39,8 @@ public class UnicornAttackGoal extends MeleeAttackGoal {
             }
 
             if(isTimeToAttack()) {
-                this.mob.getLookControl().lookAt(pEnemy.getX(), pEnemy.getEyeY(), pEnemy.getZ());
-                performAttack(pEnemy);
+                this.mob.getLookControl().lookAt(pTarget.getX(), pTarget.getEyeY(), pTarget.getZ());
+                performAttack(pTarget);
             }
         } else {
             resetAttackCooldown();

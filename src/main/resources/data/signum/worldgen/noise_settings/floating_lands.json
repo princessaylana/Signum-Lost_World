@@ -1303,7 +1303,6 @@
                         }
                       },
 
-
                       {
                         "type": "minecraft:condition",
                         "if_true": {
@@ -1398,7 +1397,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:snow_block"
+                                  "Name": "signum:sky_ice_block"
                                 }
                               }
                             },
@@ -1413,38 +1412,16 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "signum:sky_ice_block",
+                                  "Name": "signum:frosted_sky_ice_block",
                                   "Properties": {
-                                    "snowy": "false"
+                                    "snowy": "true"
                                   }
-                                }
-                              }
-                            },
-                            {
-                              "type": "minecraft:block",
-                              "result_state": {
-                                "Name": "minecraft:grass_block"
-                              }
-                            },
-                            {
-                              "type": "minecraft:condition",
-                              "if_true": {
-                                "type": "minecraft:biome",
-                                "biome_is": [
-                                  "signum:signum_snowy"
-                                ]
-                              },
-                              "then_run": {
-                                "type": "minecraft:block",
-                                "result_state": {
-                                  "Name": "signum:frosted_sky_ice_block"
                                 }
                               }
                             }
                           ]
                         }
                       },
-
 
                       {
                         "type": "minecraft:condition",

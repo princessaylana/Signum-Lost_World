@@ -27,7 +27,7 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_ORANGE_MUSHROOM_KEY = registerKey("patch_small_orange_mushroom");
     public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_YELLOW_MUSHROOM_KEY = registerKey("huge_yellow_mushroom");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_YELLOW_MUSHROOM_KEY = registerKey("patch_small_yellow_mushroom");
-   public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_TOXIC_MUSHROOM_KEY = registerKey("huge_toxic_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_TOXIC_MUSHROOM_KEY = registerKey("huge_toxic_mushroom");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_TOXIC_MUSHROOM_KEY = registerKey("patch_small_toxic_mushroom");
     public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_BLUE_MUSHROOM_KEY = registerKey("huge_blue_mushroom");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_BLUE_MUSHROOM_KEY = registerKey("patch_small_blue_mushroom");
@@ -178,8 +178,6 @@ public class ModConfiguredFeatures {
         new HugeMushroomFeatureConfig(BlockStateProvider.of(ModBlocks.RED_SHROOM_BLOCK.getDefaultState().with(MushroomBlock.DOWN, false)),
                 BlockStateProvider.of(ModBlocks.GENERIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)
                         .with(MushroomBlock.DOWN, false)), 3);
-
-
 
     }
 

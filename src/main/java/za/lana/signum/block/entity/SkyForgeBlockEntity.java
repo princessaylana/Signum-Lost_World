@@ -13,12 +13,19 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.RecipeManager;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
@@ -29,6 +36,7 @@ import za.lana.signum.recipe.SkyForgeRecipe;
 import za.lana.signum.screen.SkyForgeScreenHandler;
 import za.lana.signum.util.ImplementedInventory;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static za.lana.signum.block.custom.SkyForgeBlock.LIT;
@@ -43,18 +51,22 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
     private int maxFuelTime = 4;
     private float experience = 0;
     private int cookTime = 0;
+    private static final int FUEL_SLOT = 0;
+    private static final int INPUT_SLOT = 1;
+    private static final int INPUT_SLOT2 = 2;
+    private static final int OUTPUT_SLOT = 3;
 
     public SkyForgeBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SKYFORGE, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
-                switch (index) {
-                    case 0: return SkyForgeBlockEntity.this.progress;
-                    case 1: return SkyForgeBlockEntity.this.maxProgress;
-                    case 2: return SkyForgeBlockEntity.this.fuelTime;
-                    case 3: return SkyForgeBlockEntity.this.maxFuelTime;
-                    default: return 0;
-                }
+                return switch (index) {
+                    case 0 -> SkyForgeBlockEntity.this.progress;
+                    case 1 -> SkyForgeBlockEntity.this.maxProgress;
+                    case 2 -> SkyForgeBlockEntity.this.fuelTime;
+                    case 3 -> SkyForgeBlockEntity.this.maxFuelTime;
+                    default -> 0;
+                };
             }
 
             public void set(int index, int value) {
@@ -82,7 +94,6 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
                 world.setBlockState(pos, state.cycle (LIT));}
         }
     }
-
 
     @Override
     public Text getDisplayName() {
@@ -127,17 +138,22 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
         }
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, SkyForgeBlockEntity entity) {
+    public void tick(World world, BlockPos pos, BlockState state) {
+        if (world.isClient){
+            return;
+        }
+
+        SkyForgeBlockEntity entity = this;
         if(isConsumingFuel(entity)) {
             entity.fuelTime--;
             entity.forceUpdateAllStates();
         }
 
-        if(hasRecipe(entity)) {
+        if(this.hasRecipe()) {
             if(hasFuelInFuelSlot(entity) && !isConsumingFuel(entity)) {
                 entity.consumeFuel();
             }
-            if(isConsumingFuel(entity)) {
+            if(isConsumingFuel(entity) && isOutputSlotEmptyOrReceivable()) {
                 //need to add change of blockstate on block to LIT
                 entity.progress++;
                 if(entity.progress > entity.maxProgress) {
@@ -146,6 +162,7 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
             }
         } else {
             entity.resetProgress();
+            markDirty(world, pos, state);
 
         }
     }
@@ -157,46 +174,57 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
         return entity.fuelTime > 0;
     }
 
-    private static boolean hasRecipe(SkyForgeBlockEntity entity) {
-        World world = entity.world;
-        SimpleInventory inventory = new SimpleInventory(entity.inventory.size());
-        for (int i = 0; i < entity.inventory.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
+
+    private boolean hasRecipe() {
+        Optional<RecipeEntry<SkyForgeRecipe>> recipe = getCurrentRecipe();
+
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe.get().value().getResult(null))
+                && canInsertItemIntoOutputSlot(recipe.get().value().getResult(null).getItem());
+    }
+    private Optional<RecipeEntry<SkyForgeRecipe>> getCurrentRecipe() {
+        SimpleInventory inv = new SimpleInventory(this.size());
+        for(int i = 0; i < this.size(); i++) {
+            inv.setStack(i, this.getStack(i));
         }
-
-        Optional<SkyForgeRecipe> match = world.getRecipeManager()
-                .getFirstMatch(SkyForgeRecipe.Type.INSTANCE, inventory, world);
-
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getOutput());
+        return Objects.requireNonNull(getWorld()).getRecipeManager().getFirstMatch(SkyForgeRecipe.Type.INSTANCE, inv, getWorld());
+        //return getWorld().getRecipeManager().getFirstMatch(SkyForgeRecipe.Type.INSTANCE, inv, getWorld());
     }
 
-    private static void craftItem(SkyForgeBlockEntity entity) {
-        World world = entity.world;
-        SimpleInventory inventory = new SimpleInventory(entity.inventory.size());
-        for (int i = 0; i < entity.inventory.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
-        }
-        Optional<SkyForgeRecipe> match = world.getRecipeManager()
-                .getFirstMatch(SkyForgeRecipe.Type.INSTANCE, inventory, world);
-        if(match.isPresent()) {
-            entity.removeStack(1,1);
-            entity.removeStack(2,1);
-            entity.setStack(3, new ItemStack(match.get().getOutput().getItem(),
-                    entity.getStack(3).getCount() + 1));
-            entity.resetProgress();
+    private void craftItem(SkyForgeBlockEntity entity) {
+        Optional<RecipeEntry<SkyForgeRecipe>> recipe = getCurrentRecipe();
 
-        }
+        this.removeStack(1,1);
+        this.removeStack(2,1);
+
+        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().value().getResult(null).getItem(),
+                getStack(OUTPUT_SLOT).getCount() + recipe.get().value().getResult(null).getCount()));
     }
 
     private void resetProgress() {
         this.progress = 0;
     }
-    private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, ItemStack output) {
-        return inventory.getStack(3).getItem() == output.getItem() || inventory.getStack(3).isEmpty();
+
+    private boolean canInsertItemIntoOutputSlot(Item item) {
+        return this.getStack(OUTPUT_SLOT).getItem() == item || this.getStack(OUTPUT_SLOT).isEmpty();
     }
 
-    private static boolean canInsertAmountIntoOutputSlot(SimpleInventory inventory) {
-        return inventory.getStack(3).getMaxCount() > inventory.getStack(3).getCount();
+    private boolean canInsertAmountIntoOutputSlot(ItemStack result) {
+        //return inventory.getStack(3).getMaxCount() > inventory.getStack(3).getCount();
+        return this.getStack(OUTPUT_SLOT).getCount() + result.getCount() <= getStack(OUTPUT_SLOT).getMaxCount();
+    }
+
+    private boolean isOutputSlotEmptyOrReceivable() {
+        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
     }
 }
