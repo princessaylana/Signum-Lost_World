@@ -19,8 +19,8 @@ public class FreezeEffect extends StatusEffect {
     public void applyUpdateEffect(LivingEntity pLivingEntity, int pAmplifier) {
         if (!pLivingEntity.getWorld().isClient()) {
             pLivingEntity.setInPowderSnow(true);
-        }
 
+        }
         super.applyUpdateEffect(pLivingEntity, pAmplifier);
     }
 

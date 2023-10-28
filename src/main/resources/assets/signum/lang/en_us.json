@@ -173,6 +173,14 @@
   "block.signum.white_mushroom": "White Mushroom",
   "block.signum.black_mushroom": "Black Mushroom",
 
+  "block.signum.soulwood_log": "SoulWood Log",
+  "block.signum.soulwood_wood": "SoulWood ",
+  "block.signum.stripped_soulwood_log": "Stripped SoulWood Log",
+  "block.signum.stripped_soulwood_wood": "Stripped SoulWood Wood",
+  "block.signum.soulwood_planks": "SoulWood Planks",
+  "block.signum.soulwood_leaves": "SoulWood Leaves",
+
+
   "block.signum.sky_ice_block": "Sky Ice",
   "block.signum.frosted_sky_ice_block": "Frosted Sky Ice",
 
@@ -188,14 +196,8 @@
   "entity.signum.toxicball": "Toxic Ball",
 
   "dimension.signum_dim": "SkyLand",
+  "dimension.lost_world": "Lost World",
   "biome.signum.signum_mangrove": "Tiberium Wasteland",
-  "biome.signum.signum_badlands": "Badlands",
-  "biome.signum.signum_bamboo": "Bamboo",
-  "biome.signum.signum_birch": "Birch",
-  "biome.signum.signum_cherry": "Cherry",
-  "biome.signum.signum_snowy": "Frozen Wasteland",
-  "biome.signum.signum_mushrooms": "Rainbow Mushroom Field",
-
 
   "effect.signum.sigteleport": "Teleport",
   "example_gui.signum.examplebutton":"Test Button",

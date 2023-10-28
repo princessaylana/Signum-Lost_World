@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import za.lana.signum.block.ModBlocks;
 
 import java.util.concurrent.CompletableFuture;
@@ -146,6 +147,12 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.MANGANESE_WALL);
         getOrCreateTagBuilder(BlockTags.WALLS)
                 .add(ModBlocks.MANGANESE_WALL);
+
+        getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+                .add(ModBlocks.SOULWOOD_LOG)
+                .add(ModBlocks.STRIPPED_SOULWOOD_LOG)
+                .add(ModBlocks.SOULWOOD_WOOD)
+                .add(ModBlocks.STRIPPED_SOULWOOD_WOOD);
 
     }
 }

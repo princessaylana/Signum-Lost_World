@@ -6,11 +6,17 @@
  * */
 package za.lana.signum.client.renderer.entity;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.SpiderEyesFeatureRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.client.layer.ModModelLayers;
@@ -40,6 +46,18 @@ private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entit
             matrixStack.scale(1.0f, 1.0f ,1.0f);
         }
 
+        /**
+
+         MinecraftClient minecraftClient = MinecraftClient.getInstance();
+        ClientPlayerEntity clientPlayerEntity = minecraftClient.player;
+        boolean bl = this.isVisible(mobEntity);
+        boolean bl2 = !bl && !((Entity)mobEntity).isInvisibleTo(clientPlayerEntity);
+        int p = LivingEntityRenderer.getOverlay(mobEntity, this.getAnimationCounter(mobEntity, g));
+        ((Model)this.model).render(matrixStack, (VertexConsumer) vertexConsumerProvider, i, p, 1.0f, 1.0f, 1.0f, bl2 ? 0.15f : 1.0f);
+
+         **/
+
         super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
+
     }
 }

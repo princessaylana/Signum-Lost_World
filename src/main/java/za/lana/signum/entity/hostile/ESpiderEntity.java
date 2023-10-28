@@ -6,6 +6,7 @@
  * */
 package za.lana.signum.entity.hostile;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
@@ -32,12 +33,13 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.ai.ESpiderAttackGoal;
 import za.lana.signum.item.ModItems;
@@ -118,11 +120,14 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
     }
     @Override
     protected void initGoals(){
-        this.goalSelector.add(1, new PounceAtTargetGoal(this, 0.4f));
-        this.goalSelector.add(2, new ESpiderAttackGoal(this, 1.0D, true));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.8));
-        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
-        this.goalSelector.add(5, new LookAroundGoal(this));
+        this.goalSelector.add(1, new SwimGoal(this));
+        this.goalSelector.add(2, new ESpiderEntity.SpinWebGoal(this));
+        this.goalSelector.add(3, new PounceAtTargetGoal(this, 0.4f));
+        this.goalSelector.add(4, new ESpiderAttackGoal(this, 1.0D, true));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.8));
+        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
+        this.goalSelector.add(6, new LookAroundGoal(this));
+
 
         this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
         this.targetSelector.add(2, new ESpiderEntity.TargetGoal<>(this, PlayerEntity.class));
@@ -131,19 +136,18 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         this.initCustomGoals();
     }
     protected void initCustomGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(3, new AvoidSunlightGoal(this));
         this.goalSelector.add(4, new TemptGoal(this, 1.2, Ingredient.ofItems(ModItems.ROTTEN_FLESH_ON_A_STICK), false));
         this.goalSelector.add(4, new TemptGoal(this, 1.2, BREEDING_INGREDIENT, false));
+        this.goalSelector.add(5, new AvoidSunlightGoal(this));
 
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.5);
     }
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
@@ -163,6 +167,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         }
         super.onTrackedDataSet(data);
     }
+
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
@@ -215,7 +220,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
     }
     @Override
     public void slowMovement(BlockState state, Vec3d multiplier) {
-        if (!state.isOf(Blocks.COBWEB)) {
+        if (!state.isOf(ModBlocks.SPIDERWEB_BLOCK)) {
             super.slowMovement(state, multiplier);
         }
     }
@@ -344,6 +349,20 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         return stack.getItem().isFood() && this.getTarget() == null && this.isOnGround();
     }
 
+    @Override
+    protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
+        ESpiderEntity eSpider;
+        super.dropEquipment(source, lootingMultiplier, allowDrops);
+        Entity entity = source.getAttacker();
+        this.dropItem(Items.STRING);
+    }
+
+    static {
+        SADDLED = DataTracker.registerData(ESpiderEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+        BOOST_TIME = DataTracker.registerData(ESpiderEntity.class, TrackedDataHandlerRegistry.INTEGER);
+        BREEDING_INGREDIENT = Ingredient.ofItems(Items.ROTTEN_FLESH);
+    }
+
     // GOALS
     static class TargetGoal<T extends LivingEntity>
             extends ActiveTargetGoal<T> {
@@ -361,17 +380,48 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         }
     }
     //
-    @Override
-    protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
-        ESpiderEntity eSpider;
-        super.dropEquipment(source, lootingMultiplier, allowDrops);
-        Entity entity = source.getAttacker();
-        this.dropItem(Items.STRING);
+
+    public static class SpinWebGoal extends Goal {
+        private final ESpiderEntity eSpider;
+
+        public SpinWebGoal(ESpiderEntity eSpider) {
+            this.eSpider = eSpider;
+        }
+
+        @Override
+        public boolean canStart() {
+            if (!this.eSpider.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+                return false;
+            }
+            // default is 2000
+            return this.eSpider.getRandom().nextInt(ESpiderEntity.SpinWebGoal.toGoalTicks(100)) == 0;
+        }
+        @Override
+        public void tick() {
+            Random random = this.eSpider.getRandom();
+            World world = this.eSpider.getEntityWorld();
+            int i = MathHelper.floor(this.eSpider.getX() - 1.0 + random.nextDouble() * 2.0);
+            int j = MathHelper.floor(this.eSpider.getY() + random.nextDouble() * 2.0);
+            int k = MathHelper.floor(this.eSpider.getZ() - 1.0 + random.nextDouble() * 2.0);
+            BlockPos blockPos = new BlockPos(i, j, k);
+            BlockState blockState = world.getBlockState(blockPos);
+            BlockPos blockPos2 = BlockPos.ofFloored(blockPos.toCenterPos());
+            BlockState blockState2 = world.getBlockState(blockPos2);
+            BlockState blockState3 = ModBlocks.SPIDERWEB_BLOCK.getDefaultState();
+            if (blockState3 == null) {
+                return;
+            }
+
+            if (this.canPlaceOn(world, blockPos, blockState3 = Block.postProcessState(blockState3, this.eSpider.getWorld(), blockPos), blockState, blockState2, blockPos2)) {
+                world.setBlockState(blockPos, blockState3, Block.NOTIFY_ALL);
+                world.emitGameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Emitter.of(this.eSpider, blockState3));
+            }
+        }
+        private boolean canPlaceOn(World world, BlockPos posAbove, BlockState carriedState, BlockState stateAbove, BlockState state, BlockPos pos) {
+            return stateAbove.isAir() && !state.isAir() && !state.isOf(Blocks.BEDROCK) && state.isFullCube(world, pos) && carriedState.canPlaceAt(world, posAbove) && world.getOtherEntities(this.eSpider, Box.from(Vec3d.of(posAbove))).isEmpty();
+        }
     }
 
-    static {
-        SADDLED = DataTracker.registerData(ESpiderEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-        BOOST_TIME = DataTracker.registerData(ESpiderEntity.class, TrackedDataHandlerRegistry.INTEGER);
-        BREEDING_INGREDIENT = Ingredient.ofItems(Items.ROTTEN_FLESH);
-    }
 }
+
+

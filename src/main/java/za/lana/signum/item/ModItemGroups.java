@@ -29,6 +29,10 @@ public class ModItemGroups {
                         entries.add(ModBlocks.BLIGHT_BLOCK);
                         entries.add(ModBlocks.SKY_ICE_BLOCK);
                         entries.add(ModBlocks.FROSTED_SKY_ICE_BLOCK);
+                        entries.add(ModBlocks.ASH_BLOCK);
+                        entries.add(ModBlocks.ROCK_BLOCK);
+                        entries.add(ModBlocks.RAINBOW_MARBLE_BLOCK);
+                        entries.add(ModBlocks.SPIDERWEB_BLOCK);
 
                         // ORES
                         entries.add(ModBlocks.MANGANESE_ORE);
@@ -65,6 +69,14 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.TOXIC_SHROOM_STEM);
                         entries.add(ModBlocks.GENERIC_SHROOM_STEM);
+
+                        entries.add(ModBlocks.SOULWOOD_LOG);
+                        entries.add(ModBlocks.STRIPPED_SOULWOOD_LOG);
+                        entries.add(ModBlocks.SOULWOOD_WOOD);
+                        entries.add(ModBlocks.STRIPPED_SOULWOOD_WOOD);
+                        entries.add(ModBlocks.SOULWOOD_PLANKS);
+                        entries.add(ModBlocks.SOULWOOD_LEAVES);
+                        entries.add(ModBlocks.SOULWOOD_SAPLING);
 
                         // BLOCKENTITIES
                         entries.add(ModBlocks.SKYFORGE);

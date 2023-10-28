@@ -15,12 +15,20 @@ import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.size.ThreeLayersFeatureSize;
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.DarkOakFoliagePlacer;
+import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.trunk.DarkOakTrunkPlacer;
+import net.minecraft.world.gen.trunk.TrunkPlacer;
 import za.lana.signum.Signum;
 import za.lana.signum.block.ModBlocks;
 
 import java.util.List;
+import java.util.OptionalInt;
 
 public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_ORANGE_MUSHROOM_KEY = registerKey("huge_orange_mushroom");
@@ -41,6 +49,7 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_BLACK_MUSHROOM_KEY = registerKey("patch_small_black_mushroom");
     public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_SRED_MUSHROOM_KEY = registerKey("huge_sred_mushroom");
     public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_SBROWN_MUSHROOM_KEY = registerKey("huge_sbrown_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SOULWOOD_KEY = registerKey("soulwood_tree");
 
 
 
@@ -178,6 +187,15 @@ public class ModConfiguredFeatures {
         new HugeMushroomFeatureConfig(BlockStateProvider.of(ModBlocks.RED_SHROOM_BLOCK.getDefaultState().with(MushroomBlock.DOWN, false)),
                 BlockStateProvider.of(ModBlocks.GENERIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)
                         .with(MushroomBlock.DOWN, false)), 3);
+
+
+        register(context, SOULWOOD_KEY, Feature.TREE, new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.SOULWOOD_LOG),
+                new DarkOakTrunkPlacer(6, 2, 1), BlockStateProvider.of(ModBlocks.SOULWOOD_LEAVES),
+                new DarkOakFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0)),
+                new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())).ignoreVines().build());
+
+
+
 
     }
 

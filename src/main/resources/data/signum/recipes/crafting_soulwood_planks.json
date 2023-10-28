@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "signum:soulwood_logs"
+    }
+  ],
+  "result": {
+    "item": "signum:soulwood_planks",
+    "count": 4
+  }
+}

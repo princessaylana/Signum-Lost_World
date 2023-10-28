@@ -10,6 +10,8 @@ package za.lana.signum;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -85,6 +87,15 @@ public class Signum implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.AIRDRONE, AirDroneEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.SIGALIEN, SigAlienEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.SKYCAR, SkyCarEntity.setAttributes());
+
+		StrippableBlockRegistry.register(ModBlocks.SOULWOOD_LOG, ModBlocks.STRIPPED_SOULWOOD_LOG);
+		StrippableBlockRegistry.register(ModBlocks.SOULWOOD_WOOD, ModBlocks.STRIPPED_SOULWOOD_WOOD);
+
+		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_LOG, 5 , 5);
+		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_WOOD, 5 , 5);
+		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_SOULWOOD_WOOD, 5 , 5);
+		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_PLANKS, 5 , 20);
+		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_LEAVES, 30 , 60);
 
 
 		EXAMPLE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(ExampleBlockEntity::new, ModBlocks.EXAMPLE_BLOCK).build(null);

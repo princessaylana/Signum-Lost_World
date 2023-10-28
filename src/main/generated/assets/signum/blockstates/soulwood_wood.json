@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "signum:block/soulwood_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "signum:block/soulwood_wood"
+    },
+    "axis=z": {
+      "model": "signum:block/soulwood_wood",
+      "x": 90
+    }
+  }
+}

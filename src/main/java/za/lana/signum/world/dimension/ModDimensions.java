@@ -16,7 +16,7 @@ import za.lana.signum.block.ModBlocks;
 import za.lana.signum.item.ModItems;
 
 public class ModDimensions {
-    public static final String PATH = "signum_dim";
+    public static final String PATH = "lost_world";
     public static final RegistryKey<DimensionOptions> DIMENSION_KEY =
             RegistryKey.of(RegistryKeys.DIMENSION, new Identifier(Signum.MOD_ID, PATH));
 
@@ -29,7 +29,7 @@ public class ModDimensions {
         WORLD_KEY = RegistryKey.of(RegistryKeys.WORLD, new Identifier(Signum.MOD_ID, PATH));
         Signum.LOGGER.debug("Registering ModDimensions for " + Signum.MOD_ID);
         CustomPortalBuilder.beginPortal()
-                .setPortalSearchYRange(256, 320)
+                .setPortalSearchYRange(256, 328)
                 .frameBlock(ModBlocks.MANGANESE_BLOCK)
                 .destDimID(WORLD_KEY.getValue())
                 .tintColor(240, 255, 240)

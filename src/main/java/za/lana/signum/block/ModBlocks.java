@@ -18,7 +18,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 import za.lana.signum.Signum;
 import za.lana.signum.block.custom.AssemblyStationBlock;
 import za.lana.signum.block.custom.ExampleBlock;
@@ -30,6 +29,7 @@ import za.lana.signum.block.custom.plants.*;
 import za.lana.signum.block.custom.props.*;
 import za.lana.signum.sound.ModSounds;
 import za.lana.signum.world.ModConfiguredFeatures;
+import za.lana.signum.world.gen.SoulWoodSaplingGenerator;
 
 //obsidian hardness (50.0f, 1200.0f)
 //iron hardness (5.0f, 6.0f)
@@ -65,7 +65,8 @@ public class ModBlocks {
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.END_STONE).sounds(BlockSoundGroup.NETHER_ORE),
                     UniformIntProvider.create(3, 6)));
     //
-
+    public static final Block MOISSANITE_BLOCK = registerBlock("moissanite_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)));
     public static final Block MANGANESE_BLOCK = registerBlock("manganese_block",
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.NETHERITE)));
     public static final Block MANGANESE_STAIRS = registerBlock("manganese_stairs",
@@ -89,13 +90,42 @@ public class ModBlocks {
     public static final Block MANGANESE_TRAPDOOR = registerBlock("manganese_trapdoor",
             new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR).sounds(BlockSoundGroup.NETHERITE), BlockSetType.OAK));
 
+    // woods
+    public static final Block SOULWOOD_LOG = registerBlock("soulwood_log",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG).sounds(BlockSoundGroup.WOOD).strength(3f)));
+    public static final Block SOULWOOD_WOOD = registerBlock("soulwood_wood",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).sounds(BlockSoundGroup.WOOD).strength(3f)));
+    public static final Block STRIPPED_SOULWOOD_LOG = registerBlock("stripped_soulwood_log",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_LOG).sounds(BlockSoundGroup.WOOD).strength(3f)));
+    public static final Block STRIPPED_SOULWOOD_WOOD = registerBlock("stripped_soulwood_wood",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD).sounds(BlockSoundGroup.WOOD).strength(3f)));
 
-    public static final Block MOISSANITE_BLOCK = registerBlock("moissanite_block",
-            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)));
+    public static final Block SOULWOOD_PLANKS = registerBlock("soulwood_planks",
+            new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.WOOD).strength(3f)));
+    public static final Block SOULWOOD_LEAVES = registerBlock("soulwood_leaves",
+            new SoulWoodLeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).sounds(BlockSoundGroup.WOOD).strength(3f).nonOpaque()));
+    public static final Block SOULWOOD_SAPLING = registerBlock("soulwood_sapling",
+            new SaplingBlock(new SoulWoodSaplingGenerator(), FabricBlockSettings.copyOf(Blocks.OAK_SAPLING).strength(1f)));
 
+
+    //props
     public static final Block BLIGHT_BLOCK = registerBlock("blight_block",
             new BlightBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).mapColor(MapColor.LIME)
                     .sounds(BlockSoundGroup.ROOTED_DIRT).requiresTool(), Blocks.GRASS_BLOCK));
+    public static final Block ASH_BLOCK = registerBlock("ash_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).sounds(BlockSoundGroup.SAND)));
+    public static final Block ROCK_BLOCK = registerBlock("rock_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.STONE).sounds(BlockSoundGroup.STONE)));
+    public static final Block RAINBOW_MARBLE_BLOCK = registerBlock("rainbow_marble",
+            new Block(FabricBlockSettings.copyOf(Blocks.ANDESITE).sounds(BlockSoundGroup.STONE)));
+
+    public static final Block SPIDERWEB_BLOCK = registerBlock("spiderweb_block",
+            new SpiderWebBlock(FabricBlockSettings.copyOf(Blocks.COBWEB).sounds(BlockSoundGroup.SOUL_SAND)));
+
+
+
+
+
     // huge shrooms
     public static final Block TOXIC_SHROOM_STEM = registerBlock("toxic_shroom_stem",
             new ToxicMushroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).mapColor(MapColor.WHITE_GRAY)

@@ -35,9 +35,9 @@
     "volume":"0.15"
   },
   "snowy_wind": {
-    "subtitle": "sounds.signum.snowy_wind",
+    "subtitle": "sounds.signum.wind0",
     "sounds": [
-      "signum:snowy_wind"
+      "signum:wind0"
     ],
     "volume":"0.15"
   },

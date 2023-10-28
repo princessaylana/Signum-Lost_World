@@ -109,6 +109,19 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.GENERIC_SHROOM_STEM, mushroomBlockDrops(ModBlocks.GENERIC_SHROOM_STEM, ModBlocks.GENERIC_SHROOM_STEM));
         addDrop(ModBlocks.TOXIC_SHROOM_STEM, mushroomBlockDrops(ModBlocks.TOXIC_SHROOM_STEM, ModBlocks.TOXIC_SHROOM_STEM));
 
+        addDrop(ModBlocks.SOULWOOD_LOG);
+        addDrop(ModBlocks.STRIPPED_SOULWOOD_LOG);
+        addDrop(ModBlocks.SOULWOOD_WOOD);
+        addDrop(ModBlocks.STRIPPED_SOULWOOD_WOOD);
+        addDrop(ModBlocks.SOULWOOD_PLANKS);
+        addDrop(ModBlocks.SOULWOOD_SAPLING);
+        addDrop(ModBlocks.SOULWOOD_LEAVES, leavesDrops(ModBlocks.SOULWOOD_LEAVES, ModBlocks.SOULWOOD_SAPLING, 0.0025f));
+
+        addDrop(ModBlocks.SPIDERWEB_BLOCK);
+        addDrop(ModBlocks.ASH_BLOCK);
+        addDrop(ModBlocks.ROCK_BLOCK);
+        addDrop(ModBlocks.RAINBOW_MARBLE_BLOCK);
+
 
     }
     public LootTable.Builder commonOreDrops(Block drop, Item item) {

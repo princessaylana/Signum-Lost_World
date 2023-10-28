@@ -58,6 +58,16 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerMushroomBlock(ModBlocks.GENERIC_SHROOM_STEM);
         blockStateModelGenerator.registerMushroomBlock(ModBlocks.TOXIC_SHROOM_STEM);
 
+        blockStateModelGenerator.registerLog(ModBlocks.SOULWOOD_LOG).log(ModBlocks.SOULWOOD_LOG).wood(ModBlocks.SOULWOOD_WOOD);
+        blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_SOULWOOD_LOG).log(ModBlocks.STRIPPED_SOULWOOD_LOG).wood(ModBlocks.STRIPPED_SOULWOOD_WOOD);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SOULWOOD_LEAVES);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SOULWOOD_PLANKS);
+        blockStateModelGenerator.registerTintableCrossBlockState(ModBlocks.SOULWOOD_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RAINBOW_MARBLE_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ASH_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ROCK_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SPIDERWEB_BLOCK);
 
 
     }

@@ -19,25 +19,25 @@ public class ModEntityGeneration {
     public static void addSpawns() {
 
         // SIGNUM PLAINS
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_PLAINS, SignumBioKeys.SIGNUM_FLOWERS), SpawnGroup.CREATURE,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.RAINBOW_MUSHROOMS), SpawnGroup.CREATURE,
                 ModEntities.UNICORN, 5, 2, 6);
 
         // TIBERIUM WASTELAND
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MANGROVE), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.TIBERIUM_WASTELAND), SpawnGroup.MONSTER,
                 ModEntities.TIBERIUM_WORM, 75, 1, 2);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MANGROVE), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.TIBERIUM_WASTELAND), SpawnGroup.MONSTER,
                 ModEntities.TIBERIUM_SKELETON, 50, 1, 2);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MANGROVE), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.TIBERIUM_WASTELAND), SpawnGroup.MONSTER,
                 ModEntities.TTROOPER_ENTITY, 25, 2, 4);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MANGROVE), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.TIBERIUM_WASTELAND), SpawnGroup.MONSTER,
                 ModEntities.TCOMMANDER_ENTITY, 15, 1, 2);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_MANGROVE), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.TIBERIUM_WASTELAND), SpawnGroup.MONSTER,
                 ModEntities.TIBERIUM_FLOATER, 10, 1, 2);
         // BLACK FOREST
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_DARK), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.DEATH_LANDS), SpawnGroup.MONSTER,
                 ModEntities.ESPIDER_ENTITY, 75, 2, 6);
 
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.SIGNUM_DARK), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.DEATH_LANDS), SpawnGroup.MONSTER,
                 ModEntities.GHOST, 50, 2, 4);
 
         // SPAWN RESTRICTIONS

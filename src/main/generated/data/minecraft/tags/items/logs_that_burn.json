@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "signum:soulwood_log",
+    "signum:stripped_soulwood_log",
+    "signum:soulwood_wood",
+    "signum:stripped_soulwood_wood"
+  ]
+}

@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.Signum;
+import za.lana.signum.block.ModBlocks;
 
 /**IMPORTANT README
  * ores are placed high, so they will spawn on our sky dimension,
@@ -31,6 +32,7 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> SMALL_BLUE_MUSHROOM_PLACED = registerKey("small_blue_mushroom_placed");
     public static final RegistryKey<PlacedFeature> SMALL_PURPLE_MUSHROOM_PLACED = registerKey("small_purple_mushroom_placed");
     public static final RegistryKey<PlacedFeature> SMALL_PINK_MUSHROOM_PLACED = registerKey("small_pink_mushroom_placed");
+    public static final RegistryKey<PlacedFeature> SOULWOOD_PLACED = registerKey("soulwood_placed");
 
     public static final RegistryKey<PlacedFeature> MANGANESE_ORE_PLACED_KEY = registerKey("manganese_ore_placed");
     public static final RegistryKey<PlacedFeature> MOISSANITE_ORE_PLACED_KEY = registerKey("moissanite_ore_placed");
@@ -69,6 +71,11 @@ public class ModPlacedFeatures {
         register(context, SMALL_PINK_MUSHROOM_PLACED,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_PINK_MUSHROOM_KEY),
                 ModPlacedFeatures.mushroomModifiers(64, null));
+
+
+        register(context, SOULWOOD_PLACED, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SOULWOOD_KEY),
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(
+                        PlacedFeatures.createCountExtraModifier(1, 0.1f, 2), ModBlocks.SOULWOOD_SAPLING));
 
         register(context, MANGANESE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MANGANESE_ORE_KEY),

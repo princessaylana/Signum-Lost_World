@@ -235,7 +235,7 @@ public class AirBalloonEntity
                     y *= 0.25f;
 
                 if ((KeyInputHandler.flyDownkey.isPressed())) {
-                    y = -5.0f * 2;
+                    y = -5.0f;
                     fuelFlameDecrease(getWorld(), getBlockPos());
                 }
                 else if (fuelTime > 0) {
