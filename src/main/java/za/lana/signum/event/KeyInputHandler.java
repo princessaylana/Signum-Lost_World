@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import za.lana.signum.networking.ModMessages;
 
@@ -37,16 +36,14 @@ public class KeyInputHandler {
 
 
             }
-            while (flyUpKey.wasPressed()) {
-                //client.player.sendMessage(Text.literal("Fly Up was pressed!"), false);
-            }
-            while (flyDownkey.wasPressed()) {
-                //client.player.sendMessage(Text.literal("Fly Down was pressed!"), false);
-            }
+            //while (flyUpKey.wasPressed()) {
+                //client.player.sendMessage(Text.literal("Fly Up was pressed!"), false);}
+
+            //while (flyDownkey.wasPressed()) {
+                //client.player.sendMessage(Text.literal("Fly Down was pressed!"), false);}
 
         });
     }
-
 
     public static void register(){
         inventKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -71,12 +68,3 @@ public class KeyInputHandler {
         registerKeyInputs();
     }
 }
-
-// should Open the screen?
-/**
- * client.player.isRiding() && vehicle instanceof AirBalloonEntity
- *
- if (client.player.isRiding()){
- ClientPlayNetworking.send(ModMessages.AIRBALLOON_INVENTORY, PacketByteBufs.create());
- }
- **/

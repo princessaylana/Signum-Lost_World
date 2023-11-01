@@ -11,6 +11,9 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -21,8 +24,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -32,15 +33,15 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -50,35 +51,40 @@ import software.bernie.geckolib.core.animation.Animation;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
-import za.lana.signum.Signum;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.screen.AirBalloonScreenHandler;
 import za.lana.signum.util.ImplementedInventory;
 
+
 public class AirBalloonEntity
         extends AnimalEntity
         implements GeoEntity, ImplementedInventory, NamedScreenHandlerFactory {
-
     protected final PropertyDelegate propertyDelegate;
     private int fuel;
     private int fuelTime = 0;
     private int maxFuelTime = 4;
-    public double U = 0.05f;
+
+    // floating
+    public double S = -0.12f; //
+    // up
+    public double T = 1.0f;
     public double V = 0.25f;
-    public double W = V + U; // 0.30f
-    /** QUICK CALC
-     U = 0.05f;
-     V = 0.25f;
-     W = 0.30f;
-     **/
+    // floating 2 total -0.48f
+    public double W = 0.36f;
+    // Down   -1.5f * 8
+    public double U = -32.0 * 2;
+
     private float lastIntensity;
     private int lastAge;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final String TPATH = "signum_dim";
 
+    public boolean isflyUpKeyPressed = false;
+    public boolean isflyDownKeyPressed = false;
 
+    public static final TrackedData<Boolean> FLY_UP_PRESSED = DataTracker.registerData(AirBalloonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    public static final TrackedData<Boolean> FLY_DOWN_PRESSED = DataTracker.registerData(AirBalloonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private final boolean isInAir;
     public static final String AIRBALLOON_MOUNT = "message.signum.airballoon.mount";
     public static final String AIRBALLOON_EMPTY = "message.signum.airballoon.empty";
@@ -159,11 +165,22 @@ public class AirBalloonEntity
 
     // DATA
     @Override
+    protected void initDataTracker() {
+        super.initDataTracker();
+        dataTracker.startTracking(FLY_UP_PRESSED, false);
+        dataTracker.startTracking(FLY_DOWN_PRESSED, false);
+    }
+    public void updateInputs(boolean up, boolean down) {
+        dataTracker.set(FLY_UP_PRESSED, up);
+        dataTracker.set(FLY_DOWN_PRESSED, down);
+    }
+    public boolean isFlyUpKeyPressed() {return dataTracker.get(FLY_UP_PRESSED);}
+    public boolean isFlyDownKeyPressed() {return dataTracker.get(FLY_DOWN_PRESSED);}
+    @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
         nbt.putDouble("airballoon.V", V);
-        nbt.putDouble("airballoon.W", W);
         nbt.putInt("airballoon.fuel", fuel);
         nbt.putInt("airballoon.fuelTime", fuelTime);
         nbt.putInt("airballoon.maxFuelTime", maxFuelTime);
@@ -173,7 +190,6 @@ public class AirBalloonEntity
         super.readCustomDataFromNbt(nbt);
         Inventories.readNbt(nbt, inventory);
         this.V = nbt.getDouble("airballoon.V");
-        this.W = nbt.getDouble("airballoon.W");
         fuel = nbt.getInt("airballoon.fuel");
         fuelTime = nbt.getInt("airballoon.fueltime");
         maxFuelTime = nbt.getInt("airballoon.maxfueltime");
@@ -213,6 +229,7 @@ public class AirBalloonEntity
                 consumeFuel(this);
             }
         }
+
     }
     @Override
     public void travel(Vec3d pos) {
@@ -220,33 +237,40 @@ public class AirBalloonEntity
             if (hasPassengers()) {
                 this.setMovementSpeed((float) V);
                 LivingEntity passenger = getControllingPassenger();
+                boolean isFlyUpPressed = KeyInputHandler.flyUpKey.isPressed();
+                boolean isFlyDownPressed = KeyInputHandler.flyDownkey.isPressed();
                 this.prevYaw = getYaw();
                 this.prevPitch = getPitch();
                 assert passenger != null;
+                if (getControllingPassenger() == null) updateInputs(false, false);
+
                 setYaw(passenger.getYaw());
                 setPitch(passenger.getPitch() * 0.1f);
                 setRotation(getYaw(), getPitch());
                 this.bodyYaw = this.getYaw();
                 this.headYaw = this.bodyYaw;
-                float x = (float) (passenger.sidewaysSpeed * V / 2.0f);
-                float y = (float) (passenger.upwardSpeed * V / 2.5f);
+                float x = (float) (passenger.sidewaysSpeed * V / 2.0f); // 0.5f
+                float y = (float) (passenger.upwardSpeed * V / 2.5f); // 0.5
                 float z = (float) (passenger.forwardSpeed * V / 0.25f);
                 if (y <= 0)
-                    y *= 0.25f;
+                    y *= (float) V;
 
-                if ((KeyInputHandler.flyDownkey.isPressed())) {
-                    y = -5.0f;
+                if (isFlyDownPressed) {
+                    y = (float) U;
+
+                    //Vec3d vec3d3 = this.getVelocity();
+                    //this.setVelocity(new Vec3d(vec3d3.x, vec3d3.y - U, vec3d3.z));
                     fuelFlameDecrease(getWorld(), getBlockPos());
                 }
                 else if (fuelTime > 0) {
-                    if (KeyInputHandler.flyUpKey.isPressed()) {
-                        y = 1.0f;
+                    if (isFlyUpPressed) {
+                        y = (float) T;
                         fuelFlameIncrease(getWorld(), getBlockPos());
                     }
                 }
                 // Float Air
                 else {
-                    y = -0.48f * 2.5f;
+                    y = (float) S;
                     this.onLanding();
                     this.bounce(this);
                 }
@@ -254,7 +278,7 @@ public class AirBalloonEntity
             }
             else if (!hasPassengers()) {
                 Vec3d vec3d2 = this.getVelocity();
-                super.travel(new Vec3d(vec3d2.x, vec3d2.y - 0.08f, vec3d2.z));
+                super.travel(new Vec3d(vec3d2.x, vec3d2.y - W, vec3d2.z));
             }
         }
         this.onLanding();
@@ -317,6 +341,7 @@ public class AirBalloonEntity
     protected void dropItems(DamageSource player) {
         this.dropItem(this.asItem());
     }
+
     public Item asItem() {
         Item airballoon;
         airballoon = ModItems.AIRBALOON_SPAWN_EGG;
@@ -405,21 +430,5 @@ public class AirBalloonEntity
         return !this.hasVehicle() && !this.hasPassengers();
     }
 
-    /***
-    @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (world instanceof ServerWorld && entity.canUsePortals() && VoxelShapes.matchesAnywhere(VoxelShapes.cuboid(entity.getBoundingBox().offset(-pos.getX(), -pos.getY(), -pos.getZ())), state.getOutlineShape(world, pos), BooleanBiFunction.AND)) {
-            String signumDim = "signum_dim";
-
-            RegistryKey<World> registryKey = world.getRegistryKey() == (Signum.MOD_ID, "signum_dim") ? World.OVERWORLD : World.END;
-            //RegistryKey<World> registryKey = world.getRegistryKey() == World.END ? World.OVERWORLD : World.END;
-            ServerWorld serverWorld = ((ServerWorld)world).getServer().getWorld(registryKey);
-            if (serverWorld == null) {
-                return;
-            }
-            entity.moveToWorld(serverWorld);
-        }
-    }
-    **/
 
 }

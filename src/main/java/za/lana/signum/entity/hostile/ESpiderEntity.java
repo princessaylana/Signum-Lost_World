@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.SpiderNavigation;
@@ -22,7 +23,9 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.passive.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.LlamaSpitEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -42,9 +45,13 @@ import org.jetbrains.annotations.Nullable;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.ai.ESpiderAttackGoal;
+import za.lana.signum.entity.itemprojectile.ToxicBallEntity;
+import za.lana.signum.entity.projectile.IceBoltEntity;
+import za.lana.signum.entity.projectile.ShockBoltEntity;
+import za.lana.signum.entity.projectile.TiberiumBoltEntity;
 import za.lana.signum.item.ModItems;
 
-public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddleable {
+public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddleable, RangedAttackMob {
     public int attackAniTimeout = 0;
     private int idleAniTimeout = 0;
     private int climbAniTimeout = 0;
@@ -58,9 +65,10 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
     private static final TrackedData<Boolean> SADDLED;
     private final SaddledComponent saddledComponent;
     private int eatingTime;
+    private boolean spit;
 
 
-//TODO Saddle texture, and also
+    //TODO Saddle texture, ranged attack
     public ESpiderEntity(EntityType<? extends ESpiderEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
@@ -120,18 +128,19 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
     }
     @Override
     protected void initGoals(){
-        this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(2, new ESpiderEntity.SpinWebGoal(this));
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new ESpiderEntity.SpinWebGoal(this));
+        //this.goalSelector.add(2, new ProjectileAttackGoal(this, 1.25, 40, 20.0F));
         this.goalSelector.add(3, new PounceAtTargetGoal(this, 0.4f));
         this.goalSelector.add(4, new ESpiderAttackGoal(this, 1.0D, true));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.8));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(6, new LookAroundGoal(this));
 
-
-        this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(2, new ESpiderEntity.TargetGoal<>(this, PlayerEntity.class));
-        this.targetSelector.add(3, new ESpiderEntity.TargetGoal<>(this, ZombieEntity.class));
+        //this.targetSelector.add(1, new ESpitRevengeGoal(this));
+        this.targetSelector.add(2, new RevengeGoal(this, new Class[0]));
+        this.targetSelector.add(3, new ESpiderEntity.TargetGoal<>(this, PlayerEntity.class));
+        this.targetSelector.add(4, new ESpiderEntity.TargetGoal<>(this, ZombieEntity.class));
 
         this.initCustomGoals();
     }
@@ -379,8 +388,8 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
             return super.canStart();
         }
     }
-    //
 
+    // EXPERIMENTAL
     public static class SpinWebGoal extends Goal {
         private final ESpiderEntity eSpider;
 
@@ -419,6 +428,47 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         }
         private boolean canPlaceOn(World world, BlockPos posAbove, BlockState carriedState, BlockState stateAbove, BlockState state, BlockPos pos) {
             return stateAbove.isAir() && !state.isAir() && !state.isOf(Blocks.BEDROCK) && state.isFullCube(world, pos) && carriedState.canPlaceAt(world, posAbove) && world.getOtherEntities(this.eSpider, Box.from(Vec3d.of(posAbove))).isEmpty();
+        }
+    }
+
+    // RANGED ATTACK WIP
+    private void spitAt(LivingEntity target) {
+        World level = this.getEntityWorld();
+
+        ToxicBallEntity toxicBallEntity = new ToxicBallEntity(level, this);
+
+        double d = target.getX() - this.getX();
+        double e = target.getBodyY(0.3333333333333333) - toxicBallEntity.getY();
+        double f = target.getZ() - this.getZ();
+        double g = Math.sqrt(d * d + f * f) * 0.20000000298023224;
+        toxicBallEntity.setVelocity(d, e + g, f, 1.5F, 10.0F);
+        if (!this.isSilent()) {
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_LLAMA_SPIT, this.getSoundCategory(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+        }
+
+        this.getWorld().spawnEntity(toxicBallEntity);
+        this.spit = true;
+    }
+    void setSpit(boolean spit) {
+        this.spit = spit;
+    }
+    public void shootAt(LivingEntity target, float pullProgress) {
+        this.spitAt(target);
+    }
+    static class ESpitRevengeGoal extends RevengeGoal {
+        public ESpitRevengeGoal(ESpiderEntity eSpider) {
+            super(eSpider, new Class[0]);
+        }
+
+        public boolean shouldContinue() {
+            if (this.mob instanceof ESpiderEntity eSpiderEntity) {
+                if (eSpiderEntity.spit) {
+                    eSpiderEntity.setSpit(false);
+                    return false;
+                }
+            }
+
+            return super.shouldContinue();
         }
     }
 

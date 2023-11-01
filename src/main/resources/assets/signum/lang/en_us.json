@@ -5,8 +5,8 @@
 
   "item.signum.raw_manganese": "Raw Manganese",
   "item.signum.manganese_ingot": "Manganese Ingot",
-  "item.signum.sigsteel_ingot": "Steel Ingot",
-  "item.signum.sigstainsteel_ingot": "Stainless Steel Ingot",
+  "item.signum.steel_ingot": "Steel Ingot",
+  "item.signum.stainless_steel_ingot": "Stainless Steel Ingot",
   "item.signum.manganese_nugget": "Manganese Nugget",
 
   "item.signum.raw_moissanite": "Raw Moissanite",
@@ -51,6 +51,11 @@
 
   "item.signum.plasma_sword": "Plasma Sword",
 
+  "item.signum.steel_helmet": "Steel Helmet",
+  "item.signum.steel_chestplate": "Steel Chestplate",
+  "item.signum.steel_leggings": "Steel Leggings",
+  "item.signum.steel_boots": "Steel Boots",
+
   "item.signum.tiberium_staff": "Tiberium Staff",
   "item.signum.tiberium_staff.info": "Magic Staff that Poisons Targets",
   "item.signum.freeze_staff": "Ice Staff",
@@ -67,8 +72,6 @@
   "item.signum.gravity_staff": "Gravity Staff",
   "item.signum.petrify_staff": "Petrify Staff",
   "item.signum.water_staff": "Water Staff",
-
-
 
   "item.signum.toxic_soup": "Toxic Stew",
 
@@ -87,6 +90,8 @@
 
   "item.signum.tiberium_skeleton_spawn_egg": "Tiberium Skeleton Spawn Egg",
   "item.signum.tiberium_worm_spawn_egg": "Tiberium Worm Spawn Egg",
+  "item.signum.ttrooper_spawn_egg": "Tiberium Trooper Spawn Egg",
+  "item.signum.tcommander_spawn_egg": "Tiberium Commander Spawn Egg",
   "item.signum.tiberium_floater_spawn_egg": "Tiberium Floater Spawn Egg",
   "item.signum.unicorn_spawn_egg": "Unicorn Spawn Egg",
   "item.signum.espider_spawn_egg": "Evolved Spider Egg",
@@ -179,12 +184,16 @@
   "block.signum.stripped_soulwood_wood": "Stripped SoulWood Wood",
   "block.signum.soulwood_planks": "SoulWood Planks",
   "block.signum.soulwood_leaves": "SoulWood Leaves",
+  "block.signum.soulwood_sapling": "SoulWood Sapling",
 
 
   "block.signum.sky_ice_block": "Sky Ice",
   "block.signum.frosted_sky_ice_block": "Frosted Sky Ice",
-
+  "block.signum.ash_block": "Ash Block",
   "block.signum.blight_block": "Blight Block",
+  "block.signum.rock_block": "Rock Block",
+  "block.signum.rainbow_marble": "Rainbow Marble Block",
+  "block.signum.spiderweb_block": "Spiderweb Block",
   "block.signum.blight_block.tooltip": "Tiberium infested dirt",
   "block.signum.skyforge": "Sky Forge",
   "block.signum.skyforge.tooltip": "Very Powerful Alloy Furnace",

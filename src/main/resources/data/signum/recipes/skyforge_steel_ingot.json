@@ -3,14 +3,15 @@
   "experience": 0.7,
   "ingredients": [
     {
-      "item": "minecraft:coal"
+      "item": "minecraft:iron_ingot"
     },
     {
       "item": "minecraft:coal"
     }
   ],
   "output": {
-    "item": "minecraft:diamond"
+    "count": 1,
+    "item": "signum:steel_ingot"
   },
   "show_notification": true
 }

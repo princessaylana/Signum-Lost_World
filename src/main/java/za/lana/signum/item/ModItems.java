@@ -11,15 +11,12 @@ package za.lana.signum.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.entity.ModEntities;
-import za.lana.signum.entity.hostile.ESpiderEntity;
 import za.lana.signum.item.custom.*;
 
 public class ModItems {
@@ -41,8 +38,8 @@ public class ModItems {
     public static final Item GLASS_SHARD = registerItem("glass_shard", new Item(new FabricItemSettings()));
 
     public static final Item MANGANESE_INGOT = registerItem("manganese_ingot", new Item(new FabricItemSettings()));
-    public static final Item SIGSTEEL_INGOT = registerItem("sigsteel_ingot", new Item(new FabricItemSettings()));
-    public static final Item SIGSTAINSTEEL_INGOT = registerItem("sigstainsteel_ingot", new Item(new FabricItemSettings()));
+    public static final Item STEEL_INGOT = registerItem("steel_ingot", new Item(new FabricItemSettings()));
+    public static final Item STAINLESS_STEEL_INGOT = registerItem("stainless_steel_ingot", new Item(new FabricItemSettings()));
     public static final Item MANGANESE_NUGGET = registerItem("manganese_nugget", new Item(new FabricItemSettings()));
 
     public static final Item MOISSANITE = registerItem("moissanite", new Item(new FabricItemSettings()));
@@ -65,28 +62,44 @@ public class ModItems {
     public static final Item MOISSANITE_DUST = registerItem("moissanite_dust", new Item(new FabricItemSettings()));
     public static final Item ELEMENT_ZERO_DUST = registerItem("element_zero_dust", new Item(new FabricItemSettings()));
 
-    public static final Item MANGANESE_PICKAXE = registerItem("manganese_pickaxe", new PickaxeItem(ModToolMaterial.MANGANESE, 2,3f, new FabricItemSettings()));
-    public static final Item MANGANESE_AXE = registerItem("manganese_axe", new AxeItem(ModToolMaterial.MANGANESE, 3,2.5f, new FabricItemSettings()));
-    public static final Item MANGANESE_SHOVEL = registerItem("manganese_shovel", new ShovelItem(ModToolMaterial.MANGANESE, 2,3f, new FabricItemSettings()));
-    public static final Item MANGANESE_HOE = registerItem("manganese_hoe", new HoeItem(ModToolMaterial.MANGANESE, 1,3f, new FabricItemSettings()));
-    public static final Item MANGANESE_SWORD = registerItem("manganese_sword", new SwordItem(ModToolMaterial.MANGANESE, 7,7f, new FabricItemSettings()));
-    public static final Item PLASMA_SWORD = registerItem("plasma_sword", new SwordItem(ModToolMaterial.ELEMENT_ZERO, 10,6f, new FabricItemSettings()));
+    public static final Item MANGANESE_PICKAXE = registerItem("manganese_pickaxe", new PickaxeItem(ModToolMaterials.MANGANESE, 2,3f, new FabricItemSettings()));
+    public static final Item MANGANESE_AXE = registerItem("manganese_axe", new AxeItem(ModToolMaterials.MANGANESE, 3,2.5f, new FabricItemSettings()));
+    public static final Item MANGANESE_SHOVEL = registerItem("manganese_shovel", new ShovelItem(ModToolMaterials.MANGANESE, 2,3f, new FabricItemSettings()));
+    public static final Item MANGANESE_HOE = registerItem("manganese_hoe", new HoeItem(ModToolMaterials.MANGANESE, 1,3f, new FabricItemSettings()));
+    public static final Item MANGANESE_SWORD = registerItem("manganese_sword", new SwordItem(ModToolMaterials.MANGANESE, 7,7f, new FabricItemSettings()));
 
-    public static final Item TIBERIUM_STAFF = registerItem("tiberium_staff", new TiberiumStaff(ModToolMaterial.TIBERIUM, new FabricItemSettings()));
+    // Armor
+    public static final Item STEEL_HELMET = registerItem("steel_helmet",
+            new ArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item STEEL_CHESTPLATE = registerItem("steel_chestplate",
+            new ArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item STEEL_LEGGINGS = registerItem("steel_leggings",
+            new ArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item STEEL_BOOTS = registerItem("steel_boots",
+            new ArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+
+    // Weapons
+    public static final Item PLASMA_SWORD = registerItem("plasma_sword", new SwordItem(ModToolMaterials.ELEMENT_ZERO, 10,6f, new FabricItemSettings()));
+    public static final Item TIBERIUM_SWORD = registerItem("tiberium_sword",
+            new SwordItem(ModToolMaterials.TIBERIUM, 10,6f, new FabricItemSettings()));
+
+    public static final Item TIBERIUM_STAFF = registerItem("tiberium_staff",
+            new TiberiumStaff(ModToolMaterials.TIBERIUM, new FabricItemSettings()));
     public static final Item FREEZE_STAFF = registerItem("freeze_staff",
-            new IceStaff(ModToolMaterial.ICE_CRYSTAL, new FabricItemSettings()));
+            new IceStaff(ModToolMaterials.ICE_CRYSTAL, new FabricItemSettings()));
     public static final Item TRANSMUTE_STAFF = registerItem("transmute_staff",
-            new TransmuteStaff(ModToolMaterial.ICE_CRYSTAL, new FabricItemSettings()));
+            new TransmuteStaff(ModToolMaterials.ICE_CRYSTAL, new FabricItemSettings()));
     public static final Item FIRE_STAFF = registerItem("fire_staff",
-            new FireStaff(ModToolMaterial.FIRE_CRYSTAL, new FabricItemSettings()));
+            new FireStaff(ModToolMaterials.FIRE_CRYSTAL, new FabricItemSettings()));
     public static final Item LIGHTNING_STAFF = registerItem("lightning_staff",
-            new LightningStaff(ModToolMaterial.QUARTZ_CRYSTAL, new FabricItemSettings()));
+            new LightningStaff(ModToolMaterials.QUARTZ_CRYSTAL, new FabricItemSettings()));
     public static final Item HEALING_STAFF = registerItem("healing_staff",
-            new ToolItem(ModToolMaterial.MOISSANITE_CRYSTAL, new FabricItemSettings()));
+            new ToolItem(ModToolMaterials.MOISSANITE_CRYSTAL, new FabricItemSettings()));
     public static final Item TELEPORT_STAFF = registerItem("teleport_staff",
             new Item(new FabricItemSettings()));
     public static final Item GRAVITY_STAFF = registerItem("gravity_staff",
-            new ToolItem(ModToolMaterial.ELEMENT_ZERO, new FabricItemSettings()));
+            new ToolItem(ModToolMaterials.ELEMENT_ZERO, new FabricItemSettings()));
     public static final Item PETRIFY_STAFF = registerItem("petrify_staff",
             new Item(new FabricItemSettings()));
     public static final Item WATER_STAFF = registerItem("water_staff",
@@ -100,8 +113,8 @@ public class ModItems {
     public static final Item LASERBOLT_ITEM = registerItem("laserbolt_item", new LaserBoltItem(new FabricItemSettings()));
     public static final Item E0ROD = registerItem("e0rod", new E0RodItem(new FabricItemSettings()));
 
-    public static final Item SLAYER_STAFF = registerItem("slayer_staff", new ToolItem(ModToolMaterial.FIRE_CRYSTAL, new FabricItemSettings()));
-    public static final ToxicGunItem TOXICGUN = (ToxicGunItem) registerItem("toxicgun", new ToxicGunItem(ModToolMaterial.TIBERIUM, new FabricItemSettings()));
+    public static final Item SLAYER_STAFF = registerItem("slayer_staff", new ToolItem(ModToolMaterials.FIRE_CRYSTAL, new FabricItemSettings()));
+    public static final ToxicGunItem TOXICGUN = (ToxicGunItem) registerItem("toxicgun", new ToxicGunItem(ModToolMaterials.TIBERIUM, new FabricItemSettings()));
     public static final Item DETECTOR_ITEM = registerItem("detector_item", new OreDetectorItem(new FabricItemSettings().maxDamage(64)));
     //
     public static final Item UNICORN_SPAWN_EGG = registerItem("unicorn_spawn_egg", new SpawnEggItem(
@@ -152,8 +165,8 @@ public class ModItems {
         entries.add(GLASS_SHARD);
 
         entries.add(MANGANESE_INGOT);
-        entries.add(SIGSTEEL_INGOT);
-        entries.add(SIGSTAINSTEEL_INGOT);
+        entries.add(STEEL_INGOT);
+        entries.add(STAINLESS_STEEL_INGOT);
         entries.add(MANGANESE_NUGGET);
 
         entries.add(MOISSANITE);

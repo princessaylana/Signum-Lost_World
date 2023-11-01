@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "signum:steel_helmet",
+    "signum:steel_chestplate",
+    "signum:steel_leggings",
+    "signum:steel_boots"
+  ]
+}

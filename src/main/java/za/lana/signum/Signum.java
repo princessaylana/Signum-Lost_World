@@ -31,6 +31,7 @@ import za.lana.signum.item.ModFuels;
 import za.lana.signum.item.ModItemGroups;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.networking.ModMessages;
+import za.lana.signum.networking.packet.ABKeyInputC2SPacket;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.recipe.ModRecipes;
 import za.lana.signum.screen.ModScreenHandlers;
@@ -97,6 +98,8 @@ public class Signum implements ModInitializer {
 		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_PLANKS, 5 , 20);
 		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_LEAVES, 30 , 60);
 
+
+		ABKeyInputC2SPacket.init();
 
 		EXAMPLE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(ExampleBlockEntity::new, ModBlocks.EXAMPLE_BLOCK).build(null);
 		Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "example_block_entity"), EXAMPLE_BLOCK_ENTITY);

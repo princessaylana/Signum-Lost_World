@@ -18,12 +18,14 @@ import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.*;
+import za.lana.signum.client.networking.ABKeyInputPacket;
 import za.lana.signum.client.renderer.entity.*;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
 import za.lana.signum.client.renderer.transport.SkyCarRenderer;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.networking.ModMessages;
+import za.lana.signum.networking.packet.ABKeyInputC2SPacket;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.particle.custom.*;
 import za.lana.signum.screen.AirBalloonVScreen;
@@ -155,6 +157,8 @@ public class SignumClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.RAINBOW_STAR_PARTICLE, ToxicShroomParticle.Factory::new);
         // NETWORK
         ModMessages.registerS2CPackets();
+        ABKeyInputPacket.init();
+        ABKeyInputC2SPacket.init();
         // VANILLA/FABRIC SCREENS
         HandledScreens.register(ModScreenHandlers.SKYFORGE_SCREENHANDLER, SkyForgeScreen::new);
         HandledScreens.register(ModScreenHandlers.AIRBALLOON_SCREENHANDLER, AirBalloonVScreen::new);

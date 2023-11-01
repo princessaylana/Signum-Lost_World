@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.item.ArmorItem;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.item.ModItems;
 
@@ -89,8 +90,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAW_ELEMENT_ZERO, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_MOISSANITE, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_QUARTZ_CRYSTAL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.SIGSTEEL_INGOT, Models.GENERATED);
-        itemModelGenerator.register(ModItems.SIGSTAINSTEEL_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.STEEL_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.STAINLESS_STEEL_INGOT, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.TIBERIUM_SHARD, Models.GENERATED);
         itemModelGenerator.register(ModItems.TIBERIUM_CRYSTAL, Models.GENERATED);
@@ -117,6 +118,10 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ELEMENT_ZERO_CRYSTAL, Models.GENERATED);
         itemModelGenerator.register(ModItems.ELEMENT_ZERO_DUST, Models.GENERATED);
 
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.STEEL_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.STEEL_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.STEEL_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.STEEL_BOOTS));
 
 
     }

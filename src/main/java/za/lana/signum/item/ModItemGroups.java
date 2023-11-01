@@ -100,8 +100,8 @@ public class ModItemGroups {
                         entries.add(ModItems.RAW_MOISSANITE);
                         // INGOTS AND EQUIVALENT CRYSTALS
                         entries.add(ModItems.MANGANESE_INGOT);
-                        entries.add(ModItems.SIGSTEEL_INGOT);
-                        entries.add(ModItems.SIGSTAINSTEEL_INGOT);
+                        entries.add(ModItems.STEEL_INGOT);
+                        entries.add(ModItems.STAINLESS_STEEL_INGOT);
                         entries.add(ModItems.MANGANESE_NUGGET);
                         entries.add(ModItems.MOISSANITE);
                         entries.add(ModItems.ELEMENT_ZERO);
@@ -165,9 +165,16 @@ public class ModItemGroups {
                         entries.add(ModItems.MANGANESE_SWORD);
                         // WEAPONS
                         entries.add(ModItems.PLASMA_SWORD);
+                        entries.add(ModItems.TIBERIUM_SWORD);
+                        // ARMORS
+                        entries.add(ModItems.STEEL_HELMET);
+                        entries.add(ModItems.STEEL_CHESTPLATE);
+                        entries.add(ModItems.STEEL_LEGGINGS);
+                        entries.add(ModItems.STEEL_BOOTS);
+
                         // STAFFS
                         entries.add(ModItems.SLAYER_STAFF);
-                        // NEW SET
+
                         entries.add(ModItems.TIBERIUM_STAFF);
                         entries.add(ModItems.FIRE_STAFF);
                         entries.add(ModItems.TRANSMUTE_STAFF);
