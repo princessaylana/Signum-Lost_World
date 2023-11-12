@@ -35,10 +35,12 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> SOULWOOD_PLACED = registerKey("soulwood_placed");
 
     public static final RegistryKey<PlacedFeature> MANGANESE_ORE_PLACED_KEY = registerKey("manganese_ore_placed");
+    public static final RegistryKey<PlacedFeature> BLACK_DIAMOND_ORE_PLACED_KEY = registerKey("black_diamond_ore_placed");
     public static final RegistryKey<PlacedFeature> MOISSANITE_ORE_PLACED_KEY = registerKey("moissanite_ore_placed");
     public static final RegistryKey<PlacedFeature> ELEMENT_ZERO_ORE_PLACED_KEY = registerKey("element_zero_ore_placed");
 
     public static final RegistryKey<PlacedFeature> DEEPSLATE_MANGANESE_ORE_PLACED_KEY = registerKey("deepslate_manganese_ore_placed");
+    public static final RegistryKey<PlacedFeature> DEEPSLATE_BLACK_DIAMOND_ORE_PLACED_KEY = registerKey("deepslate_black_diamond_ore_placed");
     public static final RegistryKey<PlacedFeature> DEEPSLATE_MOISSANITE_ORE_PLACED_KEY = registerKey("deepslate_moissanite_ore_placed");
     public static final RegistryKey<PlacedFeature> DEEPSLATE_ELEMENT_ZERO_ORE_PLACED_KEY = registerKey("deepslate_moissanite_ore_placed");
     public static final RegistryKey<PlacedFeature> EXOTIC_CRYSTAL_PLACED_KEY = registerKey("exotic_crystal_placed");
@@ -85,6 +87,10 @@ public class ModPlacedFeatures {
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MIOSSANITE_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(17,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
+        register(context, BLACK_DIAMOND_ORE_PLACED_KEY,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BLACK_DIAMOND_ORE_KEY),
+                ModOrePlacement.modifiersWithCount(17,
+                        HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(384))));
         register(context, ELEMENT_ZERO_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ELEMENT_ZERO_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(17,
@@ -108,6 +114,10 @@ public class ModPlacedFeatures {
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
         register(context, DEEPSLATE_MOISSANITE_ORE_PLACED_KEY,
                 configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.DEEPSLATE_MIOSSANITE_ORE_KEY),
+                ModOrePlacement.modifiersWithCount(19,
+                        HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
+        register(context, DEEPSLATE_BLACK_DIAMOND_ORE_PLACED_KEY,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.DEEPSLATE_BLACK_DIAMOND_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(19,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(144), YOffset.fixed(292))));
         register(context, DEEPSLATE_ELEMENT_ZERO_ORE_PLACED_KEY,

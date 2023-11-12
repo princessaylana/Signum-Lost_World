@@ -31,6 +31,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
+        addDrop(ModBlocks.BLACK_DIAMOND_BLOCK);
+        addDrop(ModBlocks.ELEMENT_ZERO_BLOCK);
         addDrop(ModBlocks.BLIGHT_BLOCK);
         addDrop(ModBlocks.MANGANESE_BLOCK);
         addDrop(ModBlocks.MOISSANITE_BLOCK);
@@ -52,6 +54,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         //silk touch ad normal drop
         addDrop(ModBlocks.ELEMENT_ZERO_ORE, uncommonOreDrops(ModBlocks.ELEMENT_ZERO_ORE, ModItems.RAW_ELEMENT_ZERO));
         addDrop(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE, uncommonOreDrops(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE, ModItems.RAW_ELEMENT_ZERO));
+
+        addDrop(ModBlocks.BLACK_DIAMOND_ORE, uncommonOreDrops(ModBlocks.BLACK_DIAMOND_ORE, ModItems.BLACK_DIAMOND_SHARD));
+        addDrop(ModBlocks.DEEPSLATE_BLACK_DIAMOND_ORE, commonOreDrops(ModBlocks.DEEPSLATE_BLACK_DIAMOND_ORE, ModItems.BLACK_DIAMOND_SHARD));
 
         addDrop(ModBlocks.MANGANESE_ORE, lesscommonOreDrops(ModBlocks.MANGANESE_ORE, ModItems.RAW_MANGANESE));
         addDrop(ModBlocks.DEEPSLATE_MANGANESE_ORE, lesscommonOreDrops(ModBlocks.DEEPSLATE_MANGANESE_ORE, ModItems.RAW_MANGANESE));

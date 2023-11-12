@@ -84,6 +84,8 @@ public class Signum implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_SKELETON, TiberiumSkeletonEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterEntity.setAttributes());
 
+		FabricDefaultAttributeRegistry.register(ModEntities.ELVE_ENTITY, ElveEntity.setAttributes());
+
 		FabricDefaultAttributeRegistry.register(ModEntities.GHOST, GhostEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AIRDRONE, AirDroneEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.SIGALIEN, SigAlienEntity.setAttributes());

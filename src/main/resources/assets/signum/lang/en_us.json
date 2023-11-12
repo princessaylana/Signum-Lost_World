@@ -17,6 +17,7 @@
   "item.signum.elementzerocoal": "Element Zero Coal",
 
   "item.signum.glass_shard": "Glass Shard",
+  "item.signum.black_diamond_shard": "Black Diamond Shard",
   "item.signum.tiberium_shard": "Raw Tiberium Shard",
   "item.signum.fire_crystal_shard": "Raw Fire Shard",
   "item.signum.exotic_crystal_shard": "Raw Exotic Shard",
@@ -29,6 +30,7 @@
   "item.signum.exotic_crystal": "Exotic Crystal",
   "item.signum.ice_crystal": "Ice Crystal",
   "item.signum.quartz_crystal": "Quartz Crystal",
+  "item.signum.black_diamond_crystal": "Black Diamond Crystal",
 
   "item.signum.element_zero_crystal": "Element Zero Crystal",
   "item.signum.moissanite_crystal": "Moissanite Crystal",
@@ -68,9 +70,11 @@
   "item.signum.lightning_staff.info": "Magic Staff that Electrocutes Targets",
 
   "item.signum.healing_staff": "Healing Staff",
+  "item.signum.healing_staff.info": "Magic Staff that Heals the User and Allies",
   "item.signum.teleport_staff": "Teleport Staff",
   "item.signum.gravity_staff": "Gravity Staff",
-  "item.signum.petrify_staff": "Petrify Staff",
+  "item.signum.death_staff": "Death Staff",
+  "item.signum.death_staff.info": "Magic Staff that Summons Undead Creatures",
   "item.signum.water_staff": "Water Staff",
 
   "item.signum.toxic_soup": "Toxic Stew",
@@ -122,6 +126,10 @@
   "block.signum.moissanite_block": "Moissanite Block",
   "block.signum.element_zero_ore": "Element Zero Ore",
   "block.signum.deepslate_element_zero_ore": "Deepslate Element Zero Ore",
+  "block.signum.element_zero_block": "Element Zero Block",
+  "block.signum.black_diamond_ore": "Black Diamond Ore",
+  "block.signum.deepslate_black_diamond_ore": "Deepslate Black Diamond Ore",
+  "block.signum.black_diamond_block": "Black Diamond Block",
 
   "block.signum.tiberium_block": "Block of Tiberium",
   "block.signum.budding_tiberium": "Tiberium Bud",

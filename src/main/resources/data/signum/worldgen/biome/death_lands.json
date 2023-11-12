@@ -155,9 +155,12 @@
       "minecraft:disk_gravel",
       "minecraft:ore_ancient_debris_large",
       "minecraft:ore_debris_small",
-      "signum:moissanite_ore_placed",
+      "signum:black_diamond_ore_placed",
+      "signum:deepslate_black_diamond_ore_placed",
       "signum:manganese_ore_placed",
-      "signum:element_zero_ore_placed"
+      "signum:deepslate_manganese_ore_placed",
+      "signum:element_zero_ore_placed",
+      "signum:deepslate_element_zero_ore_placed"
     ],
     [],
     [],

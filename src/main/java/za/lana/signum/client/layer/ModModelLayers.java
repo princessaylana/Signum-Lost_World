@@ -24,6 +24,8 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "ttrooper_entity"), "waist");
     public static final EntityModelLayer TCOMMANDER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "tcommander_entity"), "waist");
+    public static final EntityModelLayer ELVE_ENTITY =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "elve_entity"), "waist");
 
     public static final EntityModelLayer TIBERIUM_BOLT =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_bolt"), "main");
@@ -35,4 +37,7 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "fire_bolt"), "main");
     public static final EntityModelLayer SHOCK_BOLT =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "shock_bolt"), "main");
+
+
 }
+

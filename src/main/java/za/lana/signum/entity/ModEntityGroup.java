@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityGroup;
 
 public class ModEntityGroup {
     public static final EntityGroup TIBERIUM = new EntityGroup();
+    public static final EntityGroup GOLDEN_KINGDOM = new EntityGroup();
 
 
 }

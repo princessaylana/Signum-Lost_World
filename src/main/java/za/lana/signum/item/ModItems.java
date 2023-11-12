@@ -21,6 +21,9 @@ import za.lana.signum.item.custom.*;
 
 public class ModItems {
 
+    public static final Item BLACK_DIAMOND_SHARD = registerItem("black_diamond_shard", new Item(new FabricItemSettings()));
+    public static final Item BLACK_DIAMOND_CRYSTAL = registerItem("black_diamond_crystal", new Item(new FabricItemSettings()));
+
     public static final Item RAW_ELEMENT_ZERO = registerItem("raw_element_zero", new Item(new FabricItemSettings()));
     public static final Item RAW_QUARTZ_CRYSTAL = registerItem("raw_quartz_crystal", new Item(new FabricItemSettings()));
     public static final Item RAW_MANGANESE = registerItem("raw_manganese", new Item(new FabricItemSettings()));
@@ -95,13 +98,14 @@ public class ModItems {
     public static final Item LIGHTNING_STAFF = registerItem("lightning_staff",
             new LightningStaff(ModToolMaterials.QUARTZ_CRYSTAL, new FabricItemSettings()));
     public static final Item HEALING_STAFF = registerItem("healing_staff",
-            new ToolItem(ModToolMaterials.MOISSANITE_CRYSTAL, new FabricItemSettings()));
+            new HealingStaff(ModToolMaterials.MOISSANITE_CRYSTAL, new FabricItemSettings()));
+    public static final Item DEATH_STAFF = registerItem("death_staff",
+            new DeathStaff(ModToolMaterials.BLACK_DIAMOND_CRYSTAL, new FabricItemSettings()));
     public static final Item TELEPORT_STAFF = registerItem("teleport_staff",
             new Item(new FabricItemSettings()));
     public static final Item GRAVITY_STAFF = registerItem("gravity_staff",
             new ToolItem(ModToolMaterials.ELEMENT_ZERO, new FabricItemSettings()));
-    public static final Item PETRIFY_STAFF = registerItem("petrify_staff",
-            new Item(new FabricItemSettings()));
+
     public static final Item WATER_STAFF = registerItem("water_staff",
             new Item(new FabricItemSettings()));
 
@@ -145,10 +149,16 @@ public class ModItems {
     public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
             ModEntities.ESPIDER_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
 
+    public static final Item ELVE_SPAWN_EGG = registerItem("elve_spawn_egg", new SpawnEggItem(
+            ModEntities.ELVE_ENTITY, 0x70F427, 0x292929, new FabricItemSettings()));
+
     public static final Item ROTTEN_FLESH_ON_A_STICK = registerItem("rotten_flesh_on_a_stick",
             new OnAStickItem<>(new FabricItemSettings().maxDamage(25), ModEntities.ESPIDER_ENTITY, 7));
 
     public static void addItemsToIngredientGroup(FabricItemGroupEntries entries) {
+        entries.add(BLACK_DIAMOND_SHARD);
+        entries.add(BLACK_DIAMOND_CRYSTAL);
+
         entries.add(RAW_ELEMENT_ZERO);
         entries.add(RAW_QUARTZ_CRYSTAL);
         entries.add(RAW_MANGANESE);
@@ -199,9 +209,10 @@ public class ModItems {
         entries.add(FIRE_STAFF);
         entries.add(LIGHTNING_STAFF);
         entries.add(HEALING_STAFF);
+        entries.add(DEATH_STAFF);
         entries.add(TELEPORT_STAFF);
         entries.add(GRAVITY_STAFF);
-        entries.add(PETRIFY_STAFF);
+
         entries.add(WATER_STAFF);
 
         entries.add(TOXIC_SOUP);
@@ -226,6 +237,7 @@ public class ModItems {
         entries.add(TTROOPER_SPAWN_EGG);
         entries.add(TCOMMANDER_SPAWN_EGG);
         entries.add(TIBERIUM_FLOATER_SPAWN_EGG);
+        entries.add(ELVE_SPAWN_EGG);
 
         // OTHER
         entries.add(GHOST_SPAWN_EGG);

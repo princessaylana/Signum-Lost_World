@@ -25,6 +25,14 @@ public class ModModelProvider extends FabricModelProvider {
 
         BlockStateModelGenerator.BlockTexturePool manganesePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.MANGANESE_BLOCK);
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BLACK_DIAMOND_ORE);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_BLACK_DIAMOND_ORE);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BLACK_DIAMOND_BLOCK);
+
+        //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ELEMENT_ZERO_ORE);
+        //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ELEMENT_ZERO_BLOCK);
+
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MOISSANITE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MOISSANITE_BLOCK);
@@ -92,6 +100,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAW_QUARTZ_CRYSTAL, Models.GENERATED);
         itemModelGenerator.register(ModItems.STEEL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.STAINLESS_STEEL_INGOT, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.BLACK_DIAMOND_SHARD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BLACK_DIAMOND_CRYSTAL, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.TIBERIUM_SHARD, Models.GENERATED);
         itemModelGenerator.register(ModItems.TIBERIUM_CRYSTAL, Models.GENERATED);

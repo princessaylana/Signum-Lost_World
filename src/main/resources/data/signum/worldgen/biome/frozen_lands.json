@@ -179,9 +179,10 @@
       "minecraft:ore_copper",
       "minecraft:disk_clay",
       "minecraft:ore_emerald",
-      "signum:moissanite_ore_placed",
       "signum:manganese_ore_placed",
+      "signum:deepslate_manganese_ore_placed",
       "signum:element_zero_ore_placed",
+      "signum:deepslate_element_zero_ore_placed",
       "signum:ice_crystal_placed"
     ],
     [

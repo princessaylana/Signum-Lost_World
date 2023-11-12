@@ -123,6 +123,9 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TCOMMANDER, TCommanderModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ELVE_ENTITY, ElveEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ELVE_ENTITY, ElveEntityRenderer::new);
+
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER, ESpiderModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER_SADDLE, ESpiderModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderRenderer::new);

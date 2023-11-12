@@ -29,6 +29,8 @@ public enum ModToolMaterials implements ToolMaterial {
             () -> Ingredient.ofItems(ModItems.QUARTZ_CRYSTAL)),
     MOISSANITE_CRYSTAL(4, 750, 5.5f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.MOISSANITE_CRYSTAL)),
+    BLACK_DIAMOND_CRYSTAL(4, 750, 5.5f, 3.5f, 26,
+            () -> Ingredient.ofItems(ModItems.BLACK_DIAMOND_CRYSTAL)),
     ELEMENT_ZERO(4, 800, 7f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.ELEMENT_ZERO_CRYSTAL));
 

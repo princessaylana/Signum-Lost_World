@@ -23,8 +23,7 @@ public class ModItemGroups {
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.signum"))
                     .icon(() -> new ItemStack(ModBlocks.EXAMPLE_BLOCK)).entries((displayContext, entries) -> {
                         // BUIDLING BLOCKS
-                        entries.add(ModBlocks.MANGANESE_BLOCK);
-                        entries.add(ModBlocks.MOISSANITE_BLOCK);
+
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
                         entries.add(ModBlocks.BLIGHT_BLOCK);
                         entries.add(ModBlocks.SKY_ICE_BLOCK);
@@ -35,20 +34,27 @@ public class ModItemGroups {
                         entries.add(ModBlocks.SPIDERWEB_BLOCK);
 
                         // ORES
+                        entries.add(ModBlocks.BLACK_DIAMOND_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_BLACK_DIAMOND_ORE);
+                        entries.add(ModBlocks.ELEMENT_ZERO_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE);
                         entries.add(ModBlocks.MANGANESE_ORE);
                         entries.add(ModBlocks.DEEPSLATE_MANGANESE_ORE);
                         entries.add(ModBlocks.NETHERRACK_MANGANESE_ORE);
                         entries.add(ModBlocks.MOISSANITE_ORE);
                         entries.add(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
                         entries.add(ModBlocks.ENDSTONE_MANGANESE_ORE);
-                        entries.add(ModBlocks.ELEMENT_ZERO_ORE);
-                        entries.add(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE);
-                        // MAIN CRYSTAL BLOCKS
-                        entries.add(ModBlocks.TIBERIUM_BLOCK);
-                        entries.add(ModBlocks.FIRE_CRYSTAL_BLOCK);
+
+                        // MAIN BLOCKS
+                        entries.add(ModBlocks.BLACK_DIAMOND_BLOCK);
+                        entries.add(ModBlocks.ELEMENT_ZERO_BLOCK);
                         entries.add(ModBlocks.EXOTIC_CRYSTAL_BLOCK);
+                        entries.add(ModBlocks.FIRE_CRYSTAL_BLOCK);
                         entries.add(ModBlocks.ICE_CRYSTAL_BLOCK);
+                        entries.add(ModBlocks.MANGANESE_BLOCK);
+                        entries.add(ModBlocks.MOISSANITE_BLOCK);
                         entries.add(ModBlocks.QUARTZ_CRYSTAL_BLOCK);
+                        entries.add(ModBlocks.TIBERIUM_BLOCK);
 
                         entries.add(ModBlocks.BUDDING_TIBERIUM);
                         entries.add(ModBlocks.BUDDING_FIRE_CRYSTAL);
@@ -57,7 +63,6 @@ public class ModItemGroups {
                         entries.add(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
 
                         // PLANTBLOCKS
-
                         entries.add(ModBlocks.ORANGE_SHROOM_BLOCK);
                         entries.add(ModBlocks.YELLOW_SHROOM_BLOCK);
                         entries.add(ModBlocks.TOXIC_SHROOM_BLOCK);
@@ -91,8 +96,6 @@ public class ModItemGroups {
                         entries.add(ModBlocks.MANGANESE_TRAPDOOR);
                         entries.add(ModBlocks.MANGANESE_BUTTON);
                         entries.add(ModBlocks.MANGANESE_PRESSURE_PLATE);
-
-
                         // RAW ITEMS
                         entries.add(ModItems.RAW_ELEMENT_ZERO);
                         entries.add(ModItems.RAW_QUARTZ_CRYSTAL);
@@ -134,6 +137,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.SMALL_ICE_CRYSTAL_BUD);
                         entries.add(ModBlocks.SMALL_QUARTZ_CRYSTAL_BUD);
                         //SHARDS
+                        entries.add(ModItems.BLACK_DIAMOND_SHARD);
                         entries.add(ModItems.TIBERIUM_SHARD);
                         entries.add(ModItems.FIRE_CRYSTAL_SHARD);
                         entries.add(ModItems.EXOTIC_CRYSTAL_SHARD);
@@ -141,6 +145,7 @@ public class ModItemGroups {
                         entries.add(ModItems.QUARTZ_CRYSTAL_SHARD);
                         entries.add(ModItems.GLASS_SHARD);
                         // CRYSTALS
+                        entries.add(ModItems.BLACK_DIAMOND_CRYSTAL);
                         entries.add(ModItems.TIBERIUM_CRYSTAL);
                         entries.add(ModItems.FIRE_CRYSTAL);
                         entries.add(ModItems.EXOTIC_CRYSTAL);
@@ -181,9 +186,10 @@ public class ModItemGroups {
                         entries.add(ModItems.FREEZE_STAFF);
                         entries.add(ModItems.LIGHTNING_STAFF);
                         entries.add(ModItems.HEALING_STAFF);
+                        entries.add(ModItems.DEATH_STAFF);
                         entries.add(ModItems.TELEPORT_STAFF);
                         entries.add(ModItems.GRAVITY_STAFF);
-                        entries.add(ModItems.PETRIFY_STAFF);
+
                         entries.add(ModItems.WATER_STAFF);
                         //PLANTS AND FOOD
                         entries.add(ModBlocks.ORANGE_MUSHROOM);
@@ -204,6 +210,7 @@ public class ModItemGroups {
                         entries.add(ModItems.TTROOPER_SPAWN_EGG);
                         entries.add(ModItems.TCOMMANDER_SPAWN_EGG);
                         entries.add(ModItems.TIBERIUM_FLOATER_SPAWN_EGG);
+                        entries.add(ModItems.ELVE_SPAWN_EGG);
 
                         //entries.add(ModItems.AIRDRONE_SPAWN_EGG);
                         //entries.add(ModItems.SIGALIEN_SPAWN_EGG);

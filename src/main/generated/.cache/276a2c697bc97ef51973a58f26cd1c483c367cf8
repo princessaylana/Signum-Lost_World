@@ -1,4 +1,4 @@
-// 1.20.2	2023-11-01T19:32:44.985882052	Signum/Block Loot Tables
+// 1.20.2	2023-11-12T16:25:20.660347346	Signum/Block Loot Tables
 1850f726862d4a4b7d962cfcb634d86f3a549f55 data/signum/loot_tables/blocks/budding_quartz_crystal.json
 bbf09d87467d9cd4a2f52f56e9bd2d77bb018256 data/signum/loot_tables/blocks/soulwood_leaves.json
 09ef9489a63be5731ba43d88c7bd8f7a8e0792c7 data/signum/loot_tables/blocks/endstone_manganese_ore.json
@@ -31,6 +31,7 @@ d346ecca8fa517fe0805ad1cfa7a2ff549ffec5a data/signum/loot_tables/blocks/small_ex
 afd7c7d147c85f6e981cbce0613e7b7bfe225bf6 data/signum/loot_tables/blocks/skyforge.json
 f7ad6ac6847db3d4e20a75c16daa34ad6fa24c22 data/signum/loot_tables/blocks/tiberium_cluster.json
 9b4b0c04e0e301625b8989f2773871324e69455b data/signum/loot_tables/blocks/moissanite_ore.json
+f02b9c4d84263701df44a7e51ce2ae4f1f81eb23 data/signum/loot_tables/blocks/element_zero_block.json
 bd4c385dc2938f91ef24a6d49fe6a584df76f017 data/signum/loot_tables/blocks/medium_tiberium_bud.json
 fc493401cfc781149e84e97eba1c6e0bed02848f data/signum/loot_tables/blocks/manganese_trapdoor.json
 7324093f83e472599d3d1cf748f2211def45a387 data/signum/loot_tables/blocks/ice_crystal_cluster.json
@@ -44,8 +45,8 @@ c56c42b1e609dc829ef418f1161242a70fc129ab data/signum/loot_tables/blocks/deepslat
 a445674d566b2608b041bffc312bd935924ed15e data/signum/loot_tables/blocks/medium_quartz_crystal_bud.json
 0db83bcb3a6ba537415e1b0d40c6ec9648e1b952 data/signum/loot_tables/blocks/black_shroom_block.json
 04d331e39aebd508c874737981e92299d167b3f7 data/signum/loot_tables/blocks/manganese_door.json
-7daf1c997581adda3c36e948f1e3c1aa3b875db7 data/signum/loot_tables/blocks/small_ice_crystal_bud.json
 e03b6474feb8b9d1206d0b56646ace6c5dc3e955 data/signum/loot_tables/blocks/soulwood_log.json
+7daf1c997581adda3c36e948f1e3c1aa3b875db7 data/signum/loot_tables/blocks/small_ice_crystal_bud.json
 6cd2190ef1c74216edb198973f8e3f5e9a958e7a data/signum/loot_tables/blocks/exotic_crystal_block.json
 fd2157fc407cb3085277b54d2958b405b8caf2f4 data/signum/loot_tables/blocks/manganese_fence.json
 3872df4c6c90def2bb24dc22fc84317be70df64b data/signum/loot_tables/blocks/orange_shroom_block.json
@@ -53,6 +54,7 @@ c93216198bc7b212dd79b63652de9b0c41d84dba data/signum/loot_tables/blocks/manganes
 2a0f9f63c73ae885cae6e2f9452f970a38786449 data/signum/loot_tables/blocks/medium_ice_crystal_bud.json
 fdc20ab6fff80ae8c1106ad6a4509ecaa3990c87 data/signum/loot_tables/blocks/budding_exotic_crystal.json
 92d965648602f9955cec3c758f75356eda90d2f7 data/signum/loot_tables/blocks/ice_crystal_block.json
+de136748eb679edfb23d4e5f325a0dbc9a7cdc9b data/signum/loot_tables/blocks/black_diamond_ore.json
 6dff63318e85c542eab41574c7ef2fb49023dd87 data/signum/loot_tables/blocks/ash_block.json
 bbd6395b3c9e09c80dc1278eb598f4578af862cd data/signum/loot_tables/blocks/large_ice_crystal_bud.json
 1de76c00c57a1ff78dbdc7f10f2345adfecb8898 data/signum/loot_tables/blocks/netherrack_manganese_ore.json
@@ -66,8 +68,10 @@ bcbfb219820896763b3193c58bd0de8d81ce4f21 data/signum/loot_tables/blocks/toxic_sh
 a41f747da890785c3bf517d11ba44414596a4978 data/signum/loot_tables/blocks/stripped_soulwood_log.json
 d555e7e3fbdedc541eddb4505bc30d5d367d896d data/signum/loot_tables/blocks/manganese_gate.json
 4dead749f27d9a897569c22113112b8e3b78f1cf data/signum/loot_tables/blocks/yellow_shroom_block.json
+9a593fde8e4c00fd5c9a35c798589b6894c7359e data/signum/loot_tables/blocks/deepslate_black_diamond_ore.json
 0d0f90164fadc94d0cf5920150ed2ad4ba3f9151 data/signum/loot_tables/blocks/assembly_station_block.json
 a93f0eb1bb32f7515310b4ca43c2c36ed18b0b57 data/signum/loot_tables/blocks/spiderweb_block.json
+03e174b525f9778f0721e762117a007e6740b0cf data/signum/loot_tables/blocks/black_diamond_block.json
 95fbec5493f968a5f8dd51880e3fe2705404edd8 data/signum/loot_tables/blocks/fire_crystal_block.json
 db05198d280b1e5100337769c47aab296716333a data/signum/loot_tables/blocks/large_fire_crystal_bud.json
 72f0a1eb77c5882110a0e002849188bde508d39d data/signum/loot_tables/blocks/purple_shroom_block.json

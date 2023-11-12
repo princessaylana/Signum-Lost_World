@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exotic_crystal",
+  "pattern": [
+    " # ",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "signum:black_diamond_shard"
+    }
+  },
+  "result": {
+    "item": "signum:black_diamond_crystal"
+  }
+}

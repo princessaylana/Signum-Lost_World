@@ -82,6 +82,10 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ttrooper_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TTrooperEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
+    public static final EntityType<ElveEntity> ELVE_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "elve_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ElveEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
     public static final EntityType<TCommanderEntity> TCOMMANDER_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tcommander_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TCommanderEntity::new)

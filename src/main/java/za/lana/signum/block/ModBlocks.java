@@ -45,15 +45,17 @@ public class ModBlocks {
     public static final Block MOISSANITE_ORE = registerBlock("moissanite_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.STONE).sounds(BlockSoundGroup.STONE)
                     , UniformIntProvider.create(3, 6)));
+
     public static final Block ELEMENT_ZERO_ORE = registerBlock("element_zero_ore",
             new ElementZeroOreBlock(FabricBlockSettings.copyOf(Blocks.STONE).sounds(BlockSoundGroup.STONE)
                     .luminance(state -> state.get (ElementZeroOreBlock.LIT)? 6 : 0), UniformIntProvider.create(3, 9)));
     public static final Block DEEPSLATE_MANGANESE_ORE = registerBlock("deepslate_manganese_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).sounds(BlockSoundGroup.DEEPSLATE)
-                    .strength(15.0f, 20.0f).requiresTool(), UniformIntProvider.create(3, 6)));
+                    .strength(3.0f, 3.0f).requiresTool(), UniformIntProvider.create(3, 6)));
     public static final Block DEEPSLATE_MOISSANITE_ORE = registerBlock("deepslate_moissanite_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).sounds(BlockSoundGroup.DEEPSLATE),
                     UniformIntProvider.create(3, 9)));
+
     public static final Block DEEPSLATE_ELEMENT_ZERO_ORE = registerBlock("deepslate_element_zero_ore",
             new ElementZeroOreBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).sounds(BlockSoundGroup.DEEPSLATE)
                     , UniformIntProvider.create(3, 9)));
@@ -65,6 +67,19 @@ public class ModBlocks {
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.END_STONE).sounds(BlockSoundGroup.NETHER_ORE),
                     UniformIntProvider.create(3, 6)));
     //
+    public static final Block BLACK_DIAMOND_ORE = registerBlock("black_diamond_ore",
+            new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.STONE).sounds(BlockSoundGroup.STONE).strength(3.0f, 3.0f)
+                    , UniformIntProvider.create(3, 6)));
+    public static final Block DEEPSLATE_BLACK_DIAMOND_ORE = registerBlock("deepslate_black_diamond_ore",
+            new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.STONE).sounds(BlockSoundGroup.DEEPSLATE).strength(4.5f, 3.0f)
+                    , UniformIntProvider.create(3, 6)));
+    public static final Block BLACK_DIAMOND_BLOCK = registerBlock("black_diamond_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).mapColor(MapColor.BLACK).strength(5.0f, 6.0f)
+                    .sounds(BlockSoundGroup.METAL)));
+    public static final Block ELEMENT_ZERO_BLOCK = registerBlock("element_zero_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).mapColor(MapColor.BLACK).strength(5.0f, 6.0f)
+                    .sounds(BlockSoundGroup.METAL)));
+
     public static final Block MOISSANITE_BLOCK = registerBlock("moissanite_block",
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)));
     public static final Block MANGANESE_BLOCK = registerBlock("manganese_block",
@@ -121,10 +136,6 @@ public class ModBlocks {
 
     public static final Block SPIDERWEB_BLOCK = registerBlock("spiderweb_block",
             new SpiderWebBlock(FabricBlockSettings.copyOf(Blocks.COBWEB).sounds(BlockSoundGroup.SOUL_SAND)));
-
-
-
-
 
     // huge shrooms
     public static final Block TOXIC_SHROOM_STEM = registerBlock("toxic_shroom_stem",

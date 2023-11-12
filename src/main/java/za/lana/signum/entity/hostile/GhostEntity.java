@@ -70,6 +70,8 @@ public class GhostEntity extends HostileEntity implements GeoEntity, Angerable {
         this.experiencePoints = 3;
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0f);
     }
+
+
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));

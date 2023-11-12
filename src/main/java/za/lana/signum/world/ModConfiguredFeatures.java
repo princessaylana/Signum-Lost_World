@@ -52,10 +52,11 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> SOULWOOD_KEY = registerKey("soulwood_tree");
 
 
-
+    public static final RegistryKey<ConfiguredFeature<?, ?>> BLACK_DIAMOND_ORE_KEY = registerKey("black_diamond_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> MANGANESE_ORE_KEY = registerKey("manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> MIOSSANITE_ORE_KEY = registerKey("moissanite_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> ELEMENT_ZERO_ORE_KEY = registerKey("element_zero_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_BLACK_DIAMOND_ORE_KEY = registerKey("deepslate_black_diamond_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_MANGANESE_ORE_KEY = registerKey("deepslate_manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_MIOSSANITE_ORE_KEY = registerKey("deepslate_manganese_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_ELEMENT_ZERO_ORE_KEY = registerKey("deepslate_manganese_ore");
@@ -78,6 +79,9 @@ public class ModConfiguredFeatures {
 
 
         //replace ores with dimension blocks
+        List<OreFeatureConfig.Target> overworldBlackDiamondOres =
+                List.of(OreFeatureConfig.createTarget(stoneReplaceables, ModBlocks.BLACK_DIAMOND_ORE.getDefaultState()),
+                        OreFeatureConfig.createTarget(deepslateReplaceables, ModBlocks.DEEPSLATE_BLACK_DIAMOND_ORE.getDefaultState()));
         List<OreFeatureConfig.Target> overworldManganeseOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplaceables, ModBlocks.MANGANESE_ORE.getDefaultState()),
                         OreFeatureConfig.createTarget(deepslateReplaceables, ModBlocks.DEEPSLATE_MANGANESE_ORE.getDefaultState()));
@@ -109,6 +113,8 @@ public class ModConfiguredFeatures {
                 List.of(OreFeatureConfig.createTarget(endReplaceables, ModBlocks.ENDSTONE_MANGANESE_ORE.getDefaultState()));
 
         //register and ore sizes
+        register(context, BLACK_DIAMOND_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldBlackDiamondOres, 17));
+        register(context, DEEPSLATE_BLACK_DIAMOND_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldBlackDiamondOres, 19));
         register(context, MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldManganeseOres, 19));
         register(context, DEEPSLATE_MANGANESE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldManganeseOres, 22));
         register(context, MIOSSANITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldMoissaniteOres, 17));
@@ -188,13 +194,10 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.of(ModBlocks.GENERIC_SHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false)
                         .with(MushroomBlock.DOWN, false)), 3);
 
-
         register(context, SOULWOOD_KEY, Feature.TREE, new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.SOULWOOD_LOG),
                 new DarkOakTrunkPlacer(6, 2, 1), BlockStateProvider.of(ModBlocks.SOULWOOD_LEAVES),
                 new DarkOakFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0)),
                 new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())).ignoreVines().build());
-
-
 
 
     }

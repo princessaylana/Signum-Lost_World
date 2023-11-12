@@ -23,9 +23,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.entity.passive.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.LlamaSpitEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -46,9 +44,6 @@ import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.ai.ESpiderAttackGoal;
 import za.lana.signum.entity.itemprojectile.ToxicBallEntity;
-import za.lana.signum.entity.projectile.IceBoltEntity;
-import za.lana.signum.entity.projectile.ShockBoltEntity;
-import za.lana.signum.entity.projectile.TiberiumBoltEntity;
 import za.lana.signum.item.ModItems;
 
 public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddleable, RangedAttackMob {
@@ -75,6 +70,8 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         this.setCanPickUpLoot(true);
         this.saddledComponent = new SaddledComponent(this.dataTracker, BOOST_TIME, SADDLED);
     }
+
+
     private void setupAnimationStates() {
         if (this.idleAniTimeout <= 0) {
             this.idleAniTimeout = this.random.nextInt(40) + 80;

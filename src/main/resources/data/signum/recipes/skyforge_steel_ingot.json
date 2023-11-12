@@ -1,5 +1,6 @@
 {
   "type": "signum:skyforge",
+  "cookingtime": 200,
   "experience": 0.7,
   "ingredients": [
     {

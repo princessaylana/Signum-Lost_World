@@ -89,8 +89,12 @@
       "minecraft:disk_sand",
       "minecraft:disk_clay",
       "signum:moissanite_ore_placed",
+      "signum:deepslate_moissanite_ore_placed",
       "signum:manganese_ore_placed",
-      "signum:element_zero_ore_placed"
+      "signum:deepslate_manganese_ore_placed",
+      "signum:element_zero_ore_placed",
+      "signum:deepslate_element_zero_ore_placed"
+
     ],
     [],
     [

@@ -25,6 +25,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                     .add(ModBlocks.ELEMENT_ZERO_ORE)
                     .add(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE)
+                    .add(ModBlocks.ELEMENT_ZERO_BLOCK)
+
+                    .add(ModBlocks.BLACK_DIAMOND_ORE)
+                    .add(ModBlocks.DEEPSLATE_BLACK_DIAMOND_ORE)
+                    .add(ModBlocks.BLACK_DIAMOND_BLOCK)
 
                     .add(ModBlocks.MANGANESE_ORE)
                     .add(ModBlocks.DEEPSLATE_MANGANESE_ORE)
@@ -84,6 +89,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.ELEMENT_ZERO_ORE)
                 .add(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE)
+                .add(ModBlocks.ELEMENT_ZERO_BLOCK)
+
+                .add(ModBlocks.BLACK_DIAMOND_ORE)
+                .add(ModBlocks.DEEPSLATE_BLACK_DIAMOND_ORE)
+                .add(ModBlocks.BLACK_DIAMOND_BLOCK)
 
                 .add(ModBlocks.MANGANESE_ORE)
                 .add(ModBlocks.DEEPSLATE_MANGANESE_ORE)

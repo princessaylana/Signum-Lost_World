@@ -3,6 +3,10 @@
   "values": [
     "signum:element_zero_ore",
     "signum:deepslate_element_zero_ore",
+    "signum:element_zero_block",
+    "signum:black_diamond_ore",
+    "signum:deepslate_black_diamond_ore",
+    "signum:black_diamond_block",
     "signum:manganese_ore",
     "signum:deepslate_manganese_ore",
     "signum:netherrack_manganese_ore",
