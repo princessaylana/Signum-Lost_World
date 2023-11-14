@@ -38,7 +38,6 @@ public class TiberiumStaff
         if (!world.isClient()) {
             TiberiumBoltEntity tiberiumProjectile = new TiberiumBoltEntity(world, user);
             tiberiumProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0, 3, 1);
-            //tiberiumProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0.25F);
             world.spawnEntity(tiberiumProjectile);
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));

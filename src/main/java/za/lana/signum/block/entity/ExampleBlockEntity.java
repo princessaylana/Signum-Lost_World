@@ -27,7 +27,7 @@ public class ExampleBlockEntity
         implements ImplementedInventory, NamedScreenHandlerFactory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public ExampleBlockEntity(BlockPos pos, BlockState state) {
-        super(Signum.EXAMPLE_BLOCK_ENTITY, pos, state);
+        super(ModBlockEntities.EXAMPLE_BLOCK_ENTITY, pos, state);
     }
 
     @Override

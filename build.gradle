@@ -23,11 +23,14 @@ repositories {
 			includeGroup "curse.maven"
 		}
 	}
+	// CUSTOMPORTAL_API
 	maven {url = "https://maven.kyrptonaught.dev"}
+	// LIBGUI
 	maven {
-		name = 'CottonMC'
-		url "https://server.bbkr.space/artifactory/libs-release"
+		name = "CottonMC"
+		url = "https://server.bbkr.space/artifactory/libs-release"
 	}
+	// REI
 	maven { url "https://maven.shedaniel.me" }
 	//Geckolib4 added
 	maven {
@@ -84,7 +87,6 @@ dependencies {
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
-
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 }
 

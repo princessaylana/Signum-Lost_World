@@ -34,6 +34,7 @@ import za.lana.signum.networking.ModMessages;
 import za.lana.signum.networking.packet.ABKeyInputC2SPacket;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.recipe.ModRecipes;
+import za.lana.signum.runinit.RunInitMain;
 import za.lana.signum.screen.ModScreenHandlers;
 import za.lana.signum.screen.gui.GuiScreens;
 import za.lana.signum.sound.ModSounds;
@@ -44,10 +45,11 @@ import za.lana.signum.world.gen.ModWorldGeneration;
 public class Signum implements ModInitializer {
 	public static final String MOD_ID = "signum";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static BlockEntityType<ExampleBlockEntity> EXAMPLE_BLOCK_ENTITY;
+
 
 	@Override
 	public void onInitialize() {
+		RunInitMain.registerInits();
 
 		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
@@ -58,13 +60,10 @@ public class Signum implements ModInitializer {
 		ModRecipes.registerRecipes();
 		ModScreenHandlers.registerScreenHandler();
 
-		ModDimensions.register();
 		ModWorldGeneration.generateModWorldGeneration();
-
 		SignumBioKeys.registerModBiomes();
-		ModEntities.registerModEntities();
 
-		ModFuels.registerModFuels();
+		ModEntities.registerModEntities();
 		ModParticles.registerParticles();
 
 		ModEffects.RegisterEffects();
@@ -73,38 +72,7 @@ public class Signum implements ModInitializer {
 		ModMessages.registerC2SPackets();
 		GuiScreens.registerGuiScreens();
 
-		FabricDefaultAttributeRegistry.register(ModEntities.UNICORN, UnicornEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderEntity.setAttributes());
-
-		FabricDefaultAttributeRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderEntity.setAttributes());
-
-		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.AIRBALLOON, AirBalloonEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_SKELETON, TiberiumSkeletonEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterEntity.setAttributes());
-
-		FabricDefaultAttributeRegistry.register(ModEntities.ELVE_ENTITY, ElveEntity.setAttributes());
-
-		FabricDefaultAttributeRegistry.register(ModEntities.GHOST, GhostEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.AIRDRONE, AirDroneEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.SIGALIEN, SigAlienEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.SKYCAR, SkyCarEntity.setAttributes());
-
-		StrippableBlockRegistry.register(ModBlocks.SOULWOOD_LOG, ModBlocks.STRIPPED_SOULWOOD_LOG);
-		StrippableBlockRegistry.register(ModBlocks.SOULWOOD_WOOD, ModBlocks.STRIPPED_SOULWOOD_WOOD);
-
-		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_LOG, 5 , 5);
-		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_WOOD, 5 , 5);
-		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_SOULWOOD_WOOD, 5 , 5);
-		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_PLANKS, 5 , 20);
-		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.SOULWOOD_LEAVES, 30 , 60);
-
-
 		ABKeyInputC2SPacket.init();
-
-		EXAMPLE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(ExampleBlockEntity::new, ModBlocks.EXAMPLE_BLOCK).build(null);
-		Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "example_block_entity"), EXAMPLE_BLOCK_ENTITY);
 
 		LOGGER.info("Signum Loaded");
 	}

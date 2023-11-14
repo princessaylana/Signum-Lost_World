@@ -27,7 +27,7 @@ public class ElveEntityModel<T extends ElveEntity> extends SinglePartEntityModel
     public ElveEntityModel(ModelPart root) {
         this.elve = root.getChild("waist");
         this.head = elve.getChild("body").getChild("head");
-        this.rightArm = elve.getChild("body").getChild("rightarm");
+        this.rightArm = elve.getChild("body").getChild("rightArm");
         this.leftArm = elve.getChild("body").getChild("leftArm");
         this.hat = elve.getChild("body").getChild("head").getChild("hat");
 
@@ -50,7 +50,7 @@ public class ElveEntityModel<T extends ElveEntity> extends SinglePartEntityModel
 
         ModelPartData hat = head.addChild("hat", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(0.5F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-        ModelPartData rightarm = body.addChild("rightarm", ModelPartBuilder.create().uv(57, 59).cuboid(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.0F, 2.0F, 0.0F));
+        ModelPartData rightarm = body.addChild("rightArm", ModelPartBuilder.create().uv(57, 59).cuboid(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.0F, 2.0F, 0.0F));
 
         ModelPartData rightItem = rightarm.addChild("rightItem", ModelPartBuilder.create(), ModelTransform.pivot(-1.0F, 7.0F, 1.0F));
 

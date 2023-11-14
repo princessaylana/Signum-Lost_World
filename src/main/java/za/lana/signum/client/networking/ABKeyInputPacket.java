@@ -20,9 +20,8 @@ public class ABKeyInputPacket {
             if (player != null)
                 if (player.getVehicle() instanceof AirBalloonEntity airBalloon) {
                     PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                    buf.writeBoolean(airBalloon.isFlyUpKeyPressed());
-                    buf.writeBoolean(airBalloon.isFlyDownKeyPressed());
-
+                    buf.writeBoolean(airBalloon.isFlyUpPressed);
+                    buf.writeBoolean(airBalloon.isFlyDownPressed);
                     buf.writeInt(airBalloon.getId());
                     ClientPlayNetworking.send(ABKeyInputC2SPacket.ABKEY_INPUT_PACKET, buf);
                     //client.player.sendMessage(Text.literal("Fly Key was pressed!"), false);

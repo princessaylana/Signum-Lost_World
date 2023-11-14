@@ -19,13 +19,13 @@ import za.lana.signum.block.ModBlocks;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.*;
 import za.lana.signum.client.networking.ABKeyInputPacket;
+import za.lana.signum.client.networking.ABKeyInputSyncPacket;
 import za.lana.signum.client.renderer.entity.*;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
 import za.lana.signum.client.renderer.transport.SkyCarRenderer;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.networking.ModMessages;
-import za.lana.signum.networking.packet.ABKeyInputC2SPacket;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.particle.custom.*;
 import za.lana.signum.screen.AirBalloonVScreen;
@@ -117,6 +117,9 @@ public class SignumClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.LASERBOLT, FlyingItemEntityRenderer::new);
 
         //VANILLA HOSTILES
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SSKELETON, SumSkeletonModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.SSKELETON_ENTITY, SumSkeletonRenderer::new);
+
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TTROOPER, TTrooperModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperRenderer::new);
 
@@ -160,8 +163,9 @@ public class SignumClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.RAINBOW_STAR_PARTICLE, ToxicShroomParticle.Factory::new);
         // NETWORK
         ModMessages.registerS2CPackets();
+
         ABKeyInputPacket.init();
-        ABKeyInputC2SPacket.init();
+        ABKeyInputSyncPacket.init();
         // VANILLA/FABRIC SCREENS
         HandledScreens.register(ModScreenHandlers.SKYFORGE_SCREENHANDLER, SkyForgeScreen::new);
         HandledScreens.register(ModScreenHandlers.AIRBALLOON_SCREENHANDLER, AirBalloonVScreen::new);

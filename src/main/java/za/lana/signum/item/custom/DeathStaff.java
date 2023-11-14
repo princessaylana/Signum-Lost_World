@@ -7,6 +7,9 @@
 package za.lana.signum.item.custom;
 
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.SilverfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,8 +24,10 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.GhostEntity;
+import za.lana.signum.entity.hostile.SumSkeletonEntity;
 import za.lana.signum.sound.ModSounds;
 
+import java.beans.XMLDecoder;
 import java.util.List;
 
 public class DeathStaff
@@ -42,7 +47,7 @@ public class DeathStaff
         user.getItemCooldownManager().set(this, 40);
         if (!world.isClient()) {
             BlockPos BlockPos = user.getBlockPos();
-            spawnMonster(world, BlockPos);
+            spawnMonster(world, BlockPos, user);
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         // BREAK TOOL
@@ -52,12 +57,16 @@ public class DeathStaff
         return TypedActionResult.success(itemstack, world.isClient());
     }
 
-    private void spawnMonster(World world, BlockPos pos) {
-        GhostEntity ghost = ModEntities.GHOST.create(world);
-        if (ghost != null) {
-            ghost.refreshPositionAndAngles((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, 0.0f, 0.0f);
-            world.spawnEntity(ghost);
-            ghost.playSpawnEffects();
+    // Spawns and tames the entity
+    private void spawnMonster(World world, BlockPos pos, PlayerEntity user) {
+        SumSkeletonEntity sskeleton = ModEntities.SSKELETON_ENTITY.create(world);
+        if (sskeleton != null) {
+            sskeleton.refreshPositionAndAngles((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, 0.0f, 0.0f);
+            world.spawnEntity(sskeleton);
+            sskeleton.setOwner(user);
+            //sskeleton.navigation.stop();
+            //sskeleton.setTarget(null);
+            sskeleton.playSpawnEffects();
         }
     }
     

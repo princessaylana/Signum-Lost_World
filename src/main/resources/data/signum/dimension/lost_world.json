@@ -1,5 +1,5 @@
 {
-  "type": "signum:lost_world",
+  "type": "signum:lost_world_type",
   "generator": {
     "type": "minecraft:noise",
     "settings": "signum:lost_world",

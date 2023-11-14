@@ -9,6 +9,7 @@ package za.lana.signum.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.world.World;
 import za.lana.signum.Signum;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -94,6 +95,10 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "espider_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ESpiderEntity::new)
                     .dimensions(EntityDimensions.fixed(3.0f, 1.3f)).build());
+    public static final EntityType<SumSkeletonEntity> SSKELETON_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "sskeleton_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SumSkeletonEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
 
 
 
@@ -128,5 +133,5 @@ public class ModEntities {
         Signum.LOGGER.info("Registering ModEntities for " + Signum.MOD_ID);
     }
 
-    
+
 }

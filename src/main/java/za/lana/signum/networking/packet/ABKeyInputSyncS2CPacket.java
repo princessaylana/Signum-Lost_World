@@ -8,16 +8,14 @@ import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.entity.transport.AirBalloonEntity;
 
-
 public class ABKeyInputSyncS2CPacket {
     public static final Identifier ABKEY_INPUT_SYNC_PACKET = new Identifier(Signum.MOD_ID, "abkey_input_sync_packet");
 
     public static void send(ServerPlayerEntity player, AirBalloonEntity airBalloon) {
         if (airBalloon.hasPassengers()) {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            buf.writeBoolean(airBalloon.isFlyUpKeyPressed());
-            buf.writeBoolean(airBalloon.isFlyDownKeyPressed());
-
+            buf.writeBoolean(airBalloon.isFlyUpPressed);
+            buf.writeBoolean(airBalloon.isFlyDownPressed);
             buf.writeInt(airBalloon.getId());
             ServerPlayNetworking.send(player, ABKEY_INPUT_SYNC_PACKET, buf);
         }

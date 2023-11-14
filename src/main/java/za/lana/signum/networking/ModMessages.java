@@ -6,17 +6,17 @@
  * */
 package za.lana.signum.networking;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.networking.packet.*;
 
 
 public class ModMessages {
-
     public static final Identifier AIRBALLOON_INVENTORY = new Identifier(Signum.MOD_ID, "airballoon_inventory");
     public static final Identifier SIGNUM_TEST = new Identifier(Signum.MOD_ID, "signum_test");
-
 
     // client to server
     public static void registerC2SPackets(){

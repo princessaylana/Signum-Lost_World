@@ -22,7 +22,6 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.random.Random;
@@ -32,7 +31,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
-import za.lana.signum.entity.ai.TTrooperGoSleepGoal;
 import za.lana.signum.item.ModItems;
 
 import java.util.List;
@@ -44,13 +42,12 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
     public final AnimationState idleAniState = new AnimationState();
     private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(TTrooperEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private final SimpleInventory inventory = new SimpleInventory(5);
-    private static final TrackedData<Boolean> IN_SLEEPING_POSE = DataTracker.registerData(TTrooperEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    //private static final TrackedData<Boolean> IN_SLEEPING_POSE = DataTracker.registerData(TTrooperEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public TTrooperEntity(EntityType<? extends TTrooperEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
     }
-    //TODO Fix the sleep goal, change weapons and armor to tiberium etc
 
     public void initGoals(){
         this.goalSelector.add(0, new SwimGoal(this));
@@ -66,7 +63,6 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
         this.initCustomGoals();
     }
     protected void initCustomGoals() {
-        //this.goalSelector.add(2, new TTrooperGoSleepGoal(this, 1.1, 16));
         this.goalSelector.add(3, new AvoidSunlightGoal(this));
     }
 
@@ -81,18 +77,11 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(IN_SLEEPING_POSE, false);
     }
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         this.writeInventory(nbt);
-    }
-    public void setInSleepingPose(boolean sleeping) {
-        this.dataTracker.set(IN_SLEEPING_POSE, sleeping);
-    }
-    public boolean isInSleepingPose() {
-        return this.dataTracker.get(IN_SLEEPING_POSE);
     }
 
     private void setupAnimationStates() {
@@ -133,7 +122,6 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
     }
-
     @Override
     public boolean isAttacking() {
         return this.dataTracker.get(ATTACKING);

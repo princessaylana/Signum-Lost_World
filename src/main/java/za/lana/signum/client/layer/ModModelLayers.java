@@ -22,6 +22,8 @@ public class ModModelLayers {
 
     public static final EntityModelLayer TTROOPER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "ttrooper_entity"), "waist");
+    public static final EntityModelLayer SSKELETON =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "sskeleton_entity"), "waist");
     public static final EntityModelLayer TCOMMANDER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "tcommander_entity"), "waist");
     public static final EntityModelLayer ELVE_ENTITY =

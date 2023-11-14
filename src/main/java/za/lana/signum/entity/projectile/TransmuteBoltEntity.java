@@ -41,6 +41,7 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
     private int counter = 0;
     protected final float dam = 1.5f * 2;
     protected final int age1 = 200;
+    private final TransmuteBoltEntity entity = this;
 
     public TransmuteBoltEntity(EntityType<TransmuteBoltEntity> type, World world) {
         super(type, world);
@@ -80,19 +81,16 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
                 // spawn a frog #3
                 EntityType.FROG.spawn(((ServerWorld) entity.getWorld()), entity.getBlockPos(), SpawnReason.TRIGGERED);
                 //
-            entity.damage(getWorld().getDamageSources().magic(), dam);
-            // damage and destroy the entity
-            entity.discard();
-            this.discard();
+                this.entity.playSpawnEffects();
+                entity.damage(getWorld().getDamageSources().magic(), dam);
+                // damage and destroy the entity
+                entity.discard();
+                this.discard();
             }
             if (this.getWorld().isClient){
-                entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+                level.addParticle(ModParticles.TRANSMUTE_PARTICLE, getX(), getY(), getZ(), 0.0, 2.0, 0.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             }
-        }
-        //client
-        if (this.getWorld().isClient){
-            level.addParticle(ModParticles.TRANSMUTE_PARTICLE, getX(), getY(), getZ(), 0.0, 2.0, 0.0);
-            this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
         }
     }
 
@@ -121,17 +119,27 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
                     (double)((float)this.getZ() + random.nextFloat()) - 0.5);
         }
     }
-
+    public void playSpawnEffects() {
+        if (this.getWorld().isClient) {
+            for (int i = 0; i < 20; ++i) {
+                double d = this.random.nextGaussian() * 0.02;
+                double e = this.random.nextGaussian() * 0.02;
+                double f = this.random.nextGaussian() * 0.02;
+                double g = 10.0;
+                this.getWorld().addParticle(ParticleTypes.POOF, this.offsetX(1.0) - d * 10.0, this.getRandomBodyY() - e * 10.0, this.getParticleZ(1.0) - f * 10.0, d, e, f);
+            }
+        } else {
+            this.getWorld().sendEntityStatus(this, EntityStatuses.PLAY_SPAWN_EFFECTS);
+        }
+    }
     @Override
     public boolean hasNoGravity() {
         return true;
     }
-
     @Override
     protected Item getDefaultItem() {
         return null;
     }
-
     @Override
     protected void initDataTracker() {
         super.initDataTracker();

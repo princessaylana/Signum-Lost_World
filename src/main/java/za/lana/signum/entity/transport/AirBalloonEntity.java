@@ -5,15 +5,14 @@
  * */
 package za.lana.signum.entity.transport;
 
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -27,6 +26,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -53,6 +53,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.item.ModItems;
+import za.lana.signum.networking.packet.ABKeyInputSyncS2CPacket;
 import za.lana.signum.screen.AirBalloonScreenHandler;
 import za.lana.signum.util.ImplementedInventory;
 
@@ -64,31 +65,25 @@ public class AirBalloonEntity
     private int fuel;
     private int fuelTime = 0;
     private int maxFuelTime = 4;
-
     // floating
     public double S = -0.12f; //
-    // up
-    public double T = 1.0f;
+    // up 0.75f def
+    public double T = 0.50f;
     public double V = 0.25f;
     // floating 2 total -0.48f
     public double W = 0.36f;
     // Down   -1.5f * 8
-    public double U = -32.0 * 2;
-
+    //public double U = -1.75f * 2;
+    public double U = -512 * 4;
     private float lastIntensity;
     private int lastAge;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
-
-    public boolean isflyUpKeyPressed = false;
-    public boolean isflyDownKeyPressed = false;
-
-    public static final TrackedData<Boolean> FLY_UP_PRESSED = DataTracker.registerData(AirBalloonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    public static final TrackedData<Boolean> FLY_DOWN_PRESSED = DataTracker.registerData(AirBalloonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    public boolean isFlyUpPressed = false;
+    public boolean isFlyDownPressed = false;
     private final boolean isInAir;
     public static final String AIRBALLOON_MOUNT = "message.signum.airballoon.mount";
-    public static final String AIRBALLOON_EMPTY = "message.signum.airballoon.empty";
-    //todo I cannot get the voxelshape/bounding box to work
+    //public static final String AIRBALLOON_EMPTY = "message.signum.airballoon.empty";
     public
     AirBalloonEntity(EntityType<? extends AnimalEntity> entityType, World level) {
         super(entityType, level);
@@ -113,6 +108,11 @@ public class AirBalloonEntity
                 return 2;
             }
         };
+    }
+
+    @Override
+    protected void initDataTracker() {
+        super.initDataTracker();
     }
 
     // BASICS
@@ -164,18 +164,7 @@ public class AirBalloonEntity
     }
 
     // DATA
-    @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        dataTracker.startTracking(FLY_UP_PRESSED, false);
-        dataTracker.startTracking(FLY_DOWN_PRESSED, false);
-    }
-    public void updateInputs(boolean up, boolean down) {
-        dataTracker.set(FLY_UP_PRESSED, up);
-        dataTracker.set(FLY_DOWN_PRESSED, down);
-    }
-    public boolean isFlyUpKeyPressed() {return dataTracker.get(FLY_UP_PRESSED);}
-    public boolean isFlyDownKeyPressed() {return dataTracker.get(FLY_DOWN_PRESSED);}
+
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
@@ -229,21 +218,25 @@ public class AirBalloonEntity
                 consumeFuel(this);
             }
         }
-
+        if (getWorld().isClient() && getControllingPassenger() == MinecraftClient.getInstance().player) {
+            isFlyUpPressed = KeyInputHandler.flyUpKey.isPressed();
+            isFlyDownPressed = KeyInputHandler.flyDownkey.isPressed();
+            if (getWorld() instanceof ServerWorld world && hasPassengers())
+                for (ServerPlayerEntity player : PlayerLookup.tracking(world, getBlockPos())) {
+                    ABKeyInputSyncS2CPacket.send(player, this);
+                }
+        }
     }
+
     @Override
     public void travel(Vec3d pos) {
         if (isAlive()) {
             if (hasPassengers()) {
                 this.setMovementSpeed((float) V);
                 LivingEntity passenger = getControllingPassenger();
-                boolean isFlyUpPressed = KeyInputHandler.flyUpKey.isPressed();
-                boolean isFlyDownPressed = KeyInputHandler.flyDownkey.isPressed();
                 this.prevYaw = getYaw();
                 this.prevPitch = getPitch();
                 assert passenger != null;
-                if (getControllingPassenger() == null) updateInputs(false, false);
-
                 setYaw(passenger.getYaw());
                 setPitch(passenger.getPitch() * 0.1f);
                 setRotation(getYaw(), getPitch());
@@ -255,14 +248,13 @@ public class AirBalloonEntity
                 if (y <= 0)
                     y *= (float) V;
 
+                boolean isFlyDownPressed = this.isFlyDownPressed;
                 if (isFlyDownPressed) {
                     y = (float) U;
-
-                    //Vec3d vec3d3 = this.getVelocity();
-                    //this.setVelocity(new Vec3d(vec3d3.x, vec3d3.y - U, vec3d3.z));
                     fuelFlameDecrease(getWorld(), getBlockPos());
                 }
                 else if (fuelTime > 0) {
+                    boolean isFlyUpPressed = this.isFlyUpPressed;
                     if (isFlyUpPressed) {
                         y = (float) T;
                         fuelFlameIncrease(getWorld(), getBlockPos());
@@ -429,6 +421,5 @@ public class AirBalloonEntity
     public boolean canUsePortals() {
         return !this.hasVehicle() && !this.hasPassengers();
     }
-
 
 }
