@@ -1,17 +1,12 @@
 package za.lana.signum.runinit;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.block.ModBlocks;
-import za.lana.signum.block.entity.ExampleBlockEntity;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.*;
 import za.lana.signum.entity.mob.UnicornEntity;
@@ -38,7 +33,7 @@ public class RunInitMain {
                 .frameBlock(ModBlocks.MANGANESE_BLOCK)
                 .lightWithItem(ModItems.FIRE_CRYSTAL)
                 .destDimID(new Identifier(Signum.MOD_ID, "lost_world"))
-                .setPortalSearchYRange(256, 328)
+                .setPortalSearchYRange(144, 400)
                 .tintColor(240, 255, 240)
                 .registerPortal();
     }

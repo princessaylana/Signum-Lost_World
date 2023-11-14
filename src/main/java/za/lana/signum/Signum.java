@@ -8,26 +8,12 @@
 package za.lana.signum;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.lana.signum.block.ModBlocks;
-import za.lana.signum.block.entity.ExampleBlockEntity;
 import za.lana.signum.block.entity.ModBlockEntities;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
-import za.lana.signum.entity.hostile.*;
-import za.lana.signum.entity.mob.UnicornEntity;
-import za.lana.signum.entity.transport.AirBalloonEntity;
-import za.lana.signum.entity.transport.SkyCarEntity;
-import za.lana.signum.item.ModFuels;
 import za.lana.signum.item.ModItemGroups;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.networking.ModMessages;
@@ -39,7 +25,6 @@ import za.lana.signum.screen.ModScreenHandlers;
 import za.lana.signum.screen.gui.GuiScreens;
 import za.lana.signum.sound.ModSounds;
 import za.lana.signum.world.biomes.SignumBioKeys;
-import za.lana.signum.world.dimension.ModDimensions;
 import za.lana.signum.world.gen.ModWorldGeneration;
 
 public class Signum implements ModInitializer {
