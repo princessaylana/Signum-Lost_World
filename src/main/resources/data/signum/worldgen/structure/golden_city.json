@@ -8,9 +8,9 @@
       "spawns": [
         {
           "type": "signum:elve_entity",
-          "weight": 80,
+          "weight": 1,
           "minCount": 2,
-          "maxCount": 6
+          "maxCount": 4
         }
       ]
     }

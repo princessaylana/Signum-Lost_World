@@ -18,7 +18,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "signum:golden_city/city_center/golden_castle",
+        "location": "signum:golden_city/streets/castleblock_01",
         "processors": "minecraft:empty"
       }
     }

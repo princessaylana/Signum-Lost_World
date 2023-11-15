@@ -19,7 +19,6 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.entity.projectile.FireBoltEntity;
-import za.lana.signum.entity.projectile.TransmuteBoltEntity;
 import za.lana.signum.sound.ModSounds;
 
 import java.util.List;

@@ -74,6 +74,7 @@ public class AirBalloonEntity
     public double W = 0.36f;
     // Down   -1.5f * 8
     //public double U = -1.75f * 2;
+    // S
     public double U = -512 * 4;
     private float lastIntensity;
     private int lastAge;

@@ -13,29 +13,21 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.ServerConfigHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.entity.ModEntityGroup;
+import za.lana.signum.entity.ai.TrackSumSkeletonTargetGoal;
 import za.lana.signum.item.ModItems;
-
-import java.util.Objects;
-import java.util.UUID;
-import java.util.function.Predicate;
 
 public class SumSkeletonEntity extends TameableEntity implements InventoryOwner {
     public int attackAniTimeout = 0;
@@ -43,28 +35,27 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     public final AnimationState attackAniState = new AnimationState();
     public final AnimationState idleAniState = new AnimationState();
     private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(SumSkeletonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private final SimpleInventory inventory = new SimpleInventory(5);
-    @Nullable
-    private UUID ownerUuid;
-
+    private final SimpleInventory inventory = new SimpleInventory(4);
 
     public SumSkeletonEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
+        this.experiencePoints = 5;
     }
     public void initGoals(){
 
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.2D, false));
         this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
-        this.goalSelector.add(3, new LookAroundGoal(this));
+        this.goalSelector.add(3, new FollowOwnerGoal(this, 1.0, 10.0F, 2.0F, false));
+        this.goalSelector.add(4, new LookAroundGoal(this));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.0, 10.0F, 2.0F, false));
 
         this.targetSelector.add(1, new TrackOwnerAttackerGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new AttackWithOwnerGoal(this));
+        this.targetSelector.add(1, new AttackWithOwnerGoal(this));
+        this.targetSelector.add(2, new TrackSumSkeletonTargetGoal(this));
+        this.targetSelector.add(3, new RevengeGoal(this));
         this.targetSelector.add(3, (new RevengeGoal(this, new Class[0])).setGroupRevenge(new Class[0]));
 
-        this.initCustomGoals();
+        //this.initCustomGoals();
     }
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
@@ -141,6 +132,9 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     public SimpleInventory getInventory() {
         return this.inventory;
     }
+    public EntityGroup getGroup() {
+        return ModEntityGroup.GOLDEN_KINGDOM;
+    }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
@@ -153,19 +147,29 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         super.readCustomDataFromNbt(nbt);
         this.readInventory(nbt);
         this.setCanPickUpLoot(true);
-        UUID uUID;
-        if (nbt.containsUuid("Owner")) {
-            uUID = nbt.getUuid("Owner");
-        } else {
-            String string = nbt.getString("Owner");
-            uUID = ServerConfigHandler.getPlayerUuidByName(this.getServer(), string);
-        }
+        nbt.getUuid("Owner");
     }
 
     @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
         this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
         this.equipStack(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
+
+    }
+    private ItemStack makeInitialWeapon() {
+        if ((double)this.random.nextFloat() < 0.5) {
+            return new ItemStack(Items.IRON_SWORD);
+        }
+        return new ItemStack(ModItems.TIBERIUM_SWORD);
+    }
+    @Override
+    public boolean canPickupItem(ItemStack stack) {
+        return super.canPickupItem(stack);
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT;
     }
 
     @Override
@@ -175,6 +179,7 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         this.initEquipment(random, difficulty);
         this.updateEnchantments(random, difficulty);
         this.equipStack(EquipmentSlot.MAINHAND, this.makeInitialWeapon());
+        this.armorDropChances[EquipmentSlot.HEAD.getEntitySlotId()] = 0.0f;
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
@@ -188,86 +193,32 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         if (bl) {
             this.applyDamageEffects(this, target);
         }
-
         return bl;
-    }
-    public void setTamed(boolean tamed) {
-        super.setTamed(tamed);
-        if (tamed) {
-            Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(30.0);
-            this.setHealth(20.0F);
-        } else {
-            Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(20.0);
-        }
-
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(4.0);
-    }
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack itemStack = player.getStackInHand(hand);
-        Item item = itemStack.getItem();
-        if (this.getWorld().isClient) {
-            boolean bl = this.isOwner(player) || this.isTamed() || itemStack.isOf(ModItems.DEATH_STAFF) && !this.isTamed();
-            this.setOwner(player);
-            this.navigation.stop();
-            this.setTarget((LivingEntity)null);
-            return bl ? ActionResult.CONSUME : ActionResult.PASS;
-
-        }   return ActionResult.SUCCESS;
-    }
-
-
-
-    private ItemStack makeInitialWeapon() {
-        if ((double)this.random.nextFloat() < 0.5) {
-            return new ItemStack(Items.IRON_SWORD);
-        }
-        return new ItemStack(ModItems.TIBERIUM_SWORD);
-        //return new ItemStack(Items.IRON_SWORD);
-    }
-    @Override
-    public boolean canPickupItem(ItemStack stack) {
-        return super.canPickupItem(stack);
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT;
     }
 
     public boolean canAttackWithOwner(LivingEntity target, LivingEntity owner) {
         if (!(target instanceof CreeperEntity) && !(target instanceof GhastEntity)) {
-            if (target instanceof SumSkeletonEntity) {
-                SumSkeletonEntity sskeleton = (SumSkeletonEntity)target;
+            if (target instanceof SumSkeletonEntity sskeleton) {
                 return !sskeleton.isTamed() || sskeleton.getOwner() != owner;
             } else if (target instanceof PlayerEntity && owner instanceof PlayerEntity && !((PlayerEntity)owner).shouldDamagePlayer((PlayerEntity)target)) {
                 return false;
             } else if (target instanceof AbstractHorseEntity && ((AbstractHorseEntity)target).isTame()) {
                 return false;
-            } else {
+            }  else if (target != null && target.getGroup() == ModEntityGroup.GOLDEN_KINGDOM) {
+                return false;
+            }
+            //
+            else {
                 return !(target instanceof TameableEntity) || !((TameableEntity)target).isTamed();
             }
         } else {
             return false;
         }
     }
-    @Nullable
-    public UUID getOwnerUuid() {
-        return this.ownerUuid;
-    }
-
     @Override
     public EntityView method_48926() {
-        return null;
+        return getWorld();
     }
 
-    @Nullable
-    @Override
-    public LivingEntity getOwner() {
-        return null;
-    }
-
-    public void setOwnerUuid(@Nullable UUID ownerUuid) {
-        this.ownerUuid = ownerUuid;
-    }
 
 }

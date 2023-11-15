@@ -41,7 +41,7 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
     public final AnimationState attackAniState = new AnimationState();
     public final AnimationState idleAniState = new AnimationState();
     private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(TTrooperEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private final SimpleInventory inventory = new SimpleInventory(5);
+    private final SimpleInventory inventory = new SimpleInventory(6);
     //private static final TrackedData<Boolean> IN_SLEEPING_POSE = DataTracker.registerData(TTrooperEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public TTrooperEntity(EntityType<? extends TTrooperEntity> entityType, World world) {

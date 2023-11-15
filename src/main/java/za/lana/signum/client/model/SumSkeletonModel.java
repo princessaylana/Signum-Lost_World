@@ -59,12 +59,10 @@ public class SumSkeletonModel<T extends SumSkeletonEntity> extends SinglePartEnt
     public void setAngles(SumSkeletonEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.setHeadAngles(netHeadYaw, headPitch);
-
         //arm
         this.rightArm.pitch = MathHelper.cos(limbSwing * 0.6662f + (float)Math.PI) * 2.0f * limbSwingAmount * 0.5f;
         this.rightArm.yaw = 0.0f;
         this.rightArm.roll = 0.0f;
-
         this.animateMovement(SSkeletonAnimations.SUMSKELETON_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
         this.updateAnimation(entity.idleAniState, SSkeletonAnimations.SUMSKELETON_IDLE, ageInTicks, 1f);
         this.updateAnimation(entity.attackAniState, SSkeletonAnimations.SUMSKELETON_ATTACK, ageInTicks, 1f);
@@ -92,8 +90,11 @@ public class SumSkeletonModel<T extends SumSkeletonEntity> extends SinglePartEnt
         }
         return this.rightArm;
     }
+
+
     @Override
     public void setArmAngle(Arm arm, MatrixStack matrices) {
         this.getAttackingArm(arm).rotate(matrices);
+
     }
 }

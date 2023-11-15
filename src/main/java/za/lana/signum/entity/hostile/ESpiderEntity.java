@@ -444,6 +444,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         }
 
         this.getWorld().spawnEntity(toxicBallEntity);
+
         this.spit = true;
     }
     void setSpit(boolean spit) {

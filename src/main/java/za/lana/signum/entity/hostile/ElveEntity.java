@@ -59,7 +59,7 @@ public class ElveEntity extends HostileEntity implements InventoryOwner {
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new ElveEntity.ProtectHordeGoal());
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        //this.targetSelector.add(4, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.initCustomGoals();
     }
     protected void initCustomGoals() {

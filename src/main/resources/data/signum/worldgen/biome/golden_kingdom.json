@@ -65,7 +65,7 @@
     "misc": [],
     "monster": [
       {
-        "type": "minecraft:spider",
+        "type": "signum:elve_entity",
         "weight": 100,
         "minCount": 4,
         "maxCount": 4

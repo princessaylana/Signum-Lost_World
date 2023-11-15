@@ -3,29 +3,11 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 4,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "signum:golden_city/houses/empty_01",
-        "processors": "minecraft:empty"
-      }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "signum:golden_city/houses/empty_02",
-        "processors": "minecraft:empty"
-      }
-    },
-    {
-      "weight": 5,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "signum:golden_city/houses/empty_03",
+        "location": "signum:golden_city/houses/house_01_aine",
         "processors": "minecraft:empty"
       }
     },
@@ -34,7 +16,53 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "signum:golden_city/houses/empty_04",
+        "location": "signum:golden_city/houses/house_02_lana",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "signum:golden_city/houses/house_03_lana",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "signum:golden_city/houses/house_04_lana",
+        "processors": "minecraft:empty"
+      }
+    },
+
+    {
+      "weight": 5,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "signum:golden_city/houses/house_05_aine",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "signum:golden_city/houses/building_01_lana",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "signum:golden_city/houses/empty_lot",
         "processors": "minecraft:empty"
       }
     }

@@ -7,9 +7,6 @@
 package za.lana.signum.item.custom;
 
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.SilverfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,17 +20,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.entity.ModEntities;
-import za.lana.signum.entity.hostile.GhostEntity;
 import za.lana.signum.entity.hostile.SumSkeletonEntity;
 import za.lana.signum.sound.ModSounds;
 
-import java.beans.XMLDecoder;
 import java.util.List;
 
 public class DeathStaff
         extends Item {
     private final ToolMaterial material;
     private float attackDamage = 2.0f;
+
     public DeathStaff(ToolMaterial material, Settings settings) {
         super(settings.maxDamageIfAbsent(material.getDurability()));
         this.material = material;
@@ -50,7 +46,6 @@ public class DeathStaff
             spawnMonster(world, BlockPos, user);
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));
-        // BREAK TOOL
         if (!user.getAbilities().creativeMode) {
             itemstack.damage(1, user, p -> p.sendToolBreakStatus(hand));
         }
@@ -61,16 +56,14 @@ public class DeathStaff
     private void spawnMonster(World world, BlockPos pos, PlayerEntity user) {
         SumSkeletonEntity sskeleton = ModEntities.SSKELETON_ENTITY.create(world);
         if (sskeleton != null) {
-            sskeleton.refreshPositionAndAngles((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, 0.0f, 0.0f);
+            sskeleton.refreshPositionAndAngles((double)pos.getX() + 0.05, pos.getY(), (double)pos.getZ() + 0.05, 0.0f, 0.0f);
             world.spawnEntity(sskeleton);
             sskeleton.setOwner(user);
-            //sskeleton.navigation.stop();
-            //sskeleton.setTarget(null);
+            sskeleton.setTarget(null);
             sskeleton.playSpawnEffects();
         }
     }
-    
-    // REPAIR ITEM WITH MOD MATERIAL
+
     public ToolMaterial getMaterial() {
         return this.material;
     }
