@@ -212,6 +212,18 @@
   "block.signum.example_block": "Example Block",
   "entity.signum.toxicball": "Toxic Ball",
 
+  "entity.signum.tiberium_worm": "Tiberium Worm",
+  "entity.signum.tiberium_skeleton": "Tiberium Skeleton",
+  "entity.signum.tiberium_floater": "Tiberium Floater",
+  "entity.signum.ghost": "Tiberium Ghost",
+  "entity.signum.airballoon": "AirBalloon",
+  "entity.signum.unicorn": "Unicorn",
+  "entity.signum.ttrooper_entity": "Tiberium Trooper",
+  "entity.signum.elve_entity": "Elve",
+  "entity.signum.tcommander_entity": "Tiberium Commander",
+  "entity.signum.espider_entity": "Deadly Spider",
+  "entity.signum.sskeleton_entity": "Summoned Skeleton",
+
   "dimension.signum_dim": "SkyLand",
   "dimension.lost_world": "Lost World",
   "biome.signum.signum_mangrove": "Tiberium Wasteland",
