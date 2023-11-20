@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.util.ParticleUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -22,7 +23,6 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -40,6 +40,7 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -54,36 +55,36 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.networking.packet.ABKeyInputSyncS2CPacket;
+import za.lana.signum.particle.ModParticles;
 import za.lana.signum.screen.AirBalloonScreenHandler;
+import za.lana.signum.sound.ModSounds;
 import za.lana.signum.util.ImplementedInventory;
-
 
 public class AirBalloonEntity
         extends AnimalEntity
         implements GeoEntity, ImplementedInventory, NamedScreenHandlerFactory {
-    protected final PropertyDelegate propertyDelegate;
-    private int fuel;
-    private int fuelTime = 0;
-    private int maxFuelTime = 4;
     // floating
-    public double S = -0.12f; //
-    // up 0.75f def
-    public double T = 0.50f;
-    public double V = 0.25f;
-    // floating 2 total -0.48f
-    public double W = 0.36f;
-    // Down   -1.5f * 8
-    //public double U = -1.75f * 2;
-    // S
-    public double U = -512 * 4;
+    public double T = 0.50f;        // up 0.75f def
+    public double S = -0.12f;       // Floating Down
+    public double W = 0.36f;        // Floating total -0.48f
+    public double U = -0.9f;        // Down   -1.5f * 8
+    public double V = 0.25f;        //
+    public boolean isFlyUpPressed = false;
+    public boolean isFlyDownPressed = false;
+    public static int ambientChance = 2;
+    public static final String AIRBALLOON_MOUNT = "message.signum.airballoon.mount";
+    public static final String AIRBALLOON_WIND = "message.signum.airballoon.wind";
+    private final boolean isInAir;
     private float lastIntensity;
+    private final float volume = 0.5f;
     private int lastAge;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public boolean isFlyUpPressed = false;
-    public boolean isFlyDownPressed = false;
-    private final boolean isInAir;
-    public static final String AIRBALLOON_MOUNT = "message.signum.airballoon.mount";
+    private int fuel;
+    private int fuelTime = 0;
+    private int maxFuelTime = 4;
+    protected final PropertyDelegate propertyDelegate;
+
     //public static final String AIRBALLOON_EMPTY = "message.signum.airballoon.empty";
     public
     AirBalloonEntity(EntityType<? extends AnimalEntity> entityType, World level) {
@@ -111,11 +112,29 @@ public class AirBalloonEntity
         };
     }
 
+    // INIT DATA
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
     }
-
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        Inventories.writeNbt(nbt, inventory);
+        nbt.putDouble("airballoon.V", V);
+        nbt.putInt("airballoon.fuel", fuel);
+        nbt.putInt("airballoon.fuelTime", fuelTime);
+        nbt.putInt("airballoon.maxFuelTime", maxFuelTime);
+    }
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        Inventories.readNbt(nbt, inventory);
+        this.V = nbt.getDouble("airballoon.V");
+        fuel = nbt.getInt("airballoon.fuel");
+        fuelTime = nbt.getInt("airballoon.fueltime");
+        maxFuelTime = nbt.getInt("airballoon.maxfueltime");
+    }
     // BASICS
     public static DefaultAttributeContainer setAttributes() {
         return PathAwareEntity.createLivingAttributes()
@@ -138,6 +157,41 @@ public class AirBalloonEntity
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
     }
+
+    // SHAPE
+    public static boolean canCollide(Entity entity, Entity other) {
+        return (other.isCollidable() || other.isPushable()) && !entity.isConnectedThroughVehicle(other);
+    }
+    public boolean isPushable() {
+        return true;
+    }
+    public boolean collidesWith(Entity other) {
+        return canCollide(this, other);
+    }
+    // INVENTORY / STORAGE
+    @Override
+    public DefaultedList<ItemStack> getItems() {
+        return inventory;
+    }
+    // FUEL
+    private static boolean hasFuel(AirBalloonEntity vehicle) {
+        return !vehicle.getStack(0).isEmpty();
+    }
+    private void consumeFuel(AirBalloonEntity airBalloon) {
+        if(!getStack(0).isEmpty()) {
+            this.fuelTime = FuelRegistry.INSTANCE.get(this.removeStack(0, 1).getItem());
+            this.maxFuelTime = this.fuelTime;
+            this.fuel = this.fuelTime;
+        }
+    }
+    private static boolean burningFuel(AirBalloonEntity vehicle) {
+        return vehicle.fuelTime > 0;
+    }
+    @Override
+    protected float getVelocityMultiplier() {
+        return this.isInAir && this.hasPassengers() || this.isFallFlying() ? 1.0f : super.getVelocityMultiplier();
+    }
+    // TRAVEL
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (!this.hasPassengers()) {
@@ -152,62 +206,6 @@ public class AirBalloonEntity
         }
         return super.interactMob(player, hand);
     }
-
-    // SHAPE
-    public static boolean canCollide(Entity entity, Entity other) {
-        return (other.isCollidable() || other.isPushable()) && !entity.isConnectedThroughVehicle(other);
-    }
-    public boolean isPushable() {
-        return true;
-    }
-    public boolean collidesWith(Entity other) {
-        return canCollide(this, other);
-    }
-
-    // DATA
-
-    @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
-        nbt.putDouble("airballoon.V", V);
-        nbt.putInt("airballoon.fuel", fuel);
-        nbt.putInt("airballoon.fuelTime", fuelTime);
-        nbt.putInt("airballoon.maxFuelTime", maxFuelTime);
-    }
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        Inventories.readNbt(nbt, inventory);
-        this.V = nbt.getDouble("airballoon.V");
-        fuel = nbt.getInt("airballoon.fuel");
-        fuelTime = nbt.getInt("airballoon.fueltime");
-        maxFuelTime = nbt.getInt("airballoon.maxfueltime");
-    }
-
-    // INVENTORY / STORAGE
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return inventory;
-    }
-
-    // FUEL
-    private static boolean hasFuel(AirBalloonEntity vehicle) {
-        return !vehicle.getStack(0).isEmpty();
-    }
-
-    private void consumeFuel(AirBalloonEntity airBalloon) {
-        if(!getStack(0).isEmpty()) {
-            this.fuelTime = FuelRegistry.INSTANCE.get(this.removeStack(0, 1).getItem());
-            this.maxFuelTime = this.fuelTime;
-            this.fuel = this.fuelTime;
-        }
-    }
-
-    private static boolean burningFuel(AirBalloonEntity vehicle) {
-        return vehicle.fuelTime > 0;
-    }
-
     @Override
     public void tick() {
         super.tick();
@@ -228,11 +226,12 @@ public class AirBalloonEntity
                 }
         }
     }
-
     @Override
     public void travel(Vec3d pos) {
         if (isAlive()) {
+            //
             if (hasPassengers()) {
+                Vec3d vec3d2 = this.getVelocity();
                 this.setMovementSpeed((float) V);
                 LivingEntity passenger = getControllingPassenger();
                 this.prevYaw = getYaw();
@@ -246,40 +245,51 @@ public class AirBalloonEntity
                 float x = (float) (passenger.sidewaysSpeed * V / 2.0f); // 0.5f
                 float y = (float) (passenger.upwardSpeed * V / 2.5f); // 0.5
                 float z = (float) (passenger.forwardSpeed * V / 0.25f);
-                if (y <= 0)
-                    y *= (float) V;
 
+                // y is less than or equal to
+                if (y <= 0)
+                    // y * float (0.25f)
+                    y *= (float) V;
+                //
                 boolean isFlyDownPressed = this.isFlyDownPressed;
                 if (isFlyDownPressed) {
+                    // U = -0.9f
                     y = (float) U;
-                    fuelFlameDecrease(getWorld(), getBlockPos());
+                    this.setVelocity(vec3d2.x, U * 0.12, vec3d2.z);
+                    airDeflate(getEntityWorld(), getBlockPos());;
                 }
                 else if (fuelTime > 0) {
                     boolean isFlyUpPressed = this.isFlyUpPressed;
                     if (isFlyUpPressed) {
+                        // T = 0.50f
                         y = (float) T;
-                        fuelFlameIncrease(getWorld(), getBlockPos());
+                        increaseHeat(getEntityWorld(), getBlockPos());
+                        //this.setVelocity(vec3d2.x, T * -0.36 , vec3d2.z);
                     }
                 }
-                // Float Air
+                // Float slowly down in Air
                 else {
+                    // s = -0.12f
                     y = (float) S;
+                    //this.setVelocity(vec3d2.x, S * 0.12, vec3d2.z);
                     this.onLanding();
                     this.bounce(this);
                 }
                 super.travel(new Vec3d(x, y, z));
             }
+            // Float down when empty
             else if (!hasPassengers()) {
                 Vec3d vec3d2 = this.getVelocity();
-                super.travel(new Vec3d(vec3d2.x, vec3d2.y - W, vec3d2.z));
+                // W = 0.36f
+                // 0.9f
+                super.travel(new Vec3d(vec3d2.x, vec3d2.y - (0.60 + W), vec3d2.z));
+                //super.travel(new Vec3d(vec3d2.x, vec3d2.y + U , vec3d2.z));
             }
         }
         this.onLanding();
         this.bounce(this);
     }
-
     // LANDING
-    // gravity seems to break the dynamics.
     @Override
     public boolean hasNoGravity() {
         return true;
@@ -287,11 +297,10 @@ public class AirBalloonEntity
     private void bounce(Entity entity) {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0.0) {
-            double d = entity instanceof LivingEntity ? 1.0 : 0.8;
+            double d = entity instanceof AirBalloonEntity ? 1.0 : 0.8;
             entity.setVelocity(vec3d.x, -vec3d.y * d, vec3d.z);
         }
     }
-
     // PASSENGERS
     public void onPassengerLookAround(Entity passenger) {
     }
@@ -315,8 +324,7 @@ public class AirBalloonEntity
             this.prevPitch = passenger.prevPitch;
         }
     }
-
-    // DROPS AS A ITEM
+    // DROPS
     public boolean damage(DamageSource source, float amount) {
         if (this.isInvulnerableTo(source)) {
             return false;
@@ -334,7 +342,6 @@ public class AirBalloonEntity
     protected void dropItems(DamageSource player) {
         this.dropItem(this.asItem());
     }
-
     public Item asItem() {
         Item airballoon;
         airballoon = ModItems.AIRBALOON_SPAWN_EGG;
@@ -348,17 +355,15 @@ public class AirBalloonEntity
         super.remove(reason);
     }
 
-    // STATE
-    // todo I am unsure of how states work with mobs
-    // will move lit state with fire particles similar to furnace
+    // VANILLA ANIMATIONS
 
+    // TODO REMOVE GECKO AND REPLACE WITH VANILLA
     // GECKO ANIMATIONS
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, state -> {
             if (state.isMoving() && getControllingPassenger() != null) {
                 return state.setAndContinue(RawAnimation.begin().then("animation.airballoon.fly", Animation.LoopType.LOOP));
-
             }
             if (this.isInAir && getControllingPassenger() != null) {
                 return state.setAndContinue(RawAnimation.begin().then("animation.airballoon.idle", Animation.LoopType.LOOP));
@@ -376,51 +381,71 @@ public class AirBalloonEntity
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
     }
-
-    // GUI
+    // VANILLA GUI
     @Override
     public Text getDisplayName() {
         return Text.literal("Air Balloon");
     }
-
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new AirBalloonScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
-
-    // todo having trouble getting the correct position for the particles to spawn
-    // ENTITY FX
+    //SOUND
+    public void randomSoundTick(){
+        if (this.random.nextInt(ambientChance) != 0) {
+            return;
+        }
+        World level = this.getWorld();;
+        Random random = this.random;
+        double d = this.getX();
+        double e = this.getY();
+        double f = this.getZ();
+        if (random.nextDouble() < 0.1) {
+            level.playSound(null, d, e, f, ModSounds.SNOWY_WIND,
+                    SoundCategory.NEUTRAL,1.0f, 0.5f + this.random.nextFloat() * 1.2f);
+            LivingEntity passenger = this.getControllingPassenger();
+            if(level.isClient){
+                assert passenger != null;
+                passenger.sendMessage(Text.translatable(AIRBALLOON_WIND).fillStyle(
+                        Style.EMPTY.withColor(Formatting.YELLOW)));
+            }
+        }
+    }
     @Override
     protected SoundEvent getAmbientSound() {
+        this.randomSoundTick();
         return SoundEvents.BLOCK_FIRE_AMBIENT;
     }
     @Override
     protected void playStepSound(BlockPos pos, BlockState block) {
         //this.playSound(SigSounds.BALLOON_FLY, 0.15f, 1.0f);
     }
-    private void playFireAmbientSound() {
+    private void playFireSound() {
         this.lastIntensity *= (float)Math.pow(0.997, this.age - this.lastAge);
         this.lastIntensity = Math.min(1.0f, this.lastIntensity + 0.07f);
-        float f = 0.5f + this.lastIntensity * this.random.nextFloat() * 1.2f; // volume?
-        float g = 0.1f + this.lastIntensity * 1.2f; // pitch?
+        float f = 0.5f + this.lastIntensity * this.random.nextFloat() * 1.2f; // pitch
+        float g = 0.1f + this.lastIntensity * 1.2f; // volume
+        //
         this.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, g, f);
         this.lastAge = this.age;
     }
-
-    private void fuelFlameIncrease(World world, BlockPos pos) {
-        this.getWorld().addParticle(ParticleTypes.FLAME, this.getX(), this.getY() + 2.2, this.getZ() + 1.5,
-                0.0, 1.7, 0.0);
-        world.playSound(this.getX(), this.getY() + 0.5, this.getZ() -0.5,
-                SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0f, 1.0f, false);
+    private void playDeflateSound() {
+        this.lastIntensity *= (float)Math.pow(0.997, this.age - this.lastAge);
+        this.lastIntensity = Math.min(1.0f, this.lastIntensity + 0.07f);
+        float f = 0.5f + this.lastIntensity * this.random.nextFloat() * 1.2f; // pitch
+        float g = 0.1f + this.lastIntensity * volume; // volume
+        //
+        this.playSound(ModSounds.AIRBALLOON_DOWN, g, f);
+        this.lastAge = this.age;
     }
-    private void fuelFlameDecrease(World world, BlockPos pos) {
-        this.getWorld().addParticle(ParticleTypes.ASH, this.getX(), this.getY() + 2.2, this.getZ() + 1.5,
-                0.0, 0.9, 0.0);
-        playFireAmbientSound();
+    private void increaseHeat(World world, BlockPos pos) {
+        playFireSound();
+        if (world.isClient){
+            ParticleUtil.spawnParticle(getWorld(), BlockPos.ofFloored(getPos()), random, ModParticles.BLACK_SHROOM_PARTICLE);
+        }
     }
-    public boolean canUsePortals() {
-        return !this.hasVehicle() && !this.hasPassengers();
+    private void airDeflate(World world, BlockPos pos) {
+        playDeflateSound();
     }
-
 }

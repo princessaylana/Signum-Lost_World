@@ -18,6 +18,9 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
     private int attackDelay = 20;
     private int ticksUntilNextAttack = 20;
     private boolean shouldCountTillNextAttack = false;
+    //protected float range = 16;
+    protected float attackDistance = 2.0f;
+    protected float maxSpitDistance = 16.0f;
 
     public ESpiderAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
         super(mob, speed, pauseWhenMobIdle);
@@ -40,31 +43,55 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
         return super.shouldContinue();
     }
 
-
     @Override
     protected void attack(LivingEntity pTarget) {
+        // MELEE ATTACK WHEN TARGET IN CLOSE RANGE
         if (isEnemyWithinAttackDistance(pTarget)) {
             shouldCountTillNextAttack = true;
-
             if(isTimeToStartAttackAnimation()) {
                 entity.setAttacking(true);
             }
-
             if(isTimeToAttack()) {
                 this.mob.getLookControl().lookAt(pTarget.getX(), pTarget.getEyeY(), pTarget.getZ());
+                //
                 performAttack(pTarget);
             }
-        } else {
+        }
+        // RANGED ATTACK WHEN TARGET OUT OF RANGE
+        if (isEnemyWithinSpitDistance(pTarget)) {
+            shouldCountTillNextAttack = true;
+            if(isTimeToStartAttackAnimation()) {
+                entity.setSpit(true);
+            }
+            if(isTimeToAttack()) {
+                this.mob.getLookControl().lookAt(pTarget.getX(), pTarget.getEyeY(), pTarget.getZ());
+                performSpitAttack(pTarget);
+            }
+        }
+        // RESET
+        else {
             resetAttackCooldown();
             shouldCountTillNextAttack = false;
             entity.setAttacking(false);
+            entity.setSpit(false);
             entity.attackAniTimeout = 0;
         }
     }
+    // TODO
     private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy) {
-        //return this.entity.distanceTo(pEnemy) <= 2f; // TODO
-        return this.entity.distanceTo(pEnemy) <= 4.0f + entity.getWidth();
+        // entity distance is less than or equal to 2.0f
+        return this.entity.distanceTo(pEnemy) <= attackDistance + entity.getWidth();
     }
+
+    private boolean maxSpitRange(LivingEntity pEnemy){
+        // entity distance is less than or equal to 16.0f
+        return this.entity.distanceTo(pEnemy) <= maxSpitDistance + entity.getWidth();
+    }
+    private boolean isEnemyWithinSpitDistance(LivingEntity pEnemy) {
+        // distance not less than 2.0f or less or equal to 16.0f
+        return !isEnemyWithinAttackDistance(pEnemy) || maxSpitRange(pEnemy);
+    }
+
     protected void resetAttackCooldown() {
         this.ticksUntilNextAttack = this.getTickCount(attackDelay * 2); // 40 ticks
     }
@@ -79,6 +106,11 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
         this.mob.swingHand(Hand.MAIN_HAND);
         this.mob.tryAttack(pEnemy);
     }
+    protected void performSpitAttack(LivingEntity pEnemy) {
+        this.resetAttackCooldown();
+        this.entity.spitAt(pEnemy);
+    }
+
     @Override
     public void tick() {
         super.tick();

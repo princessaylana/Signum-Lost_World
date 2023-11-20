@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * 2023
+ * */
 package za.lana.signum.entity.hostile;
 
 import net.minecraft.entity.*;
@@ -29,6 +35,8 @@ import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.TrackSumSkeletonTargetGoal;
 import za.lana.signum.item.ModItems;
 
+import java.util.List;
+
 public class SumSkeletonEntity extends TameableEntity implements InventoryOwner {
     public int attackAniTimeout = 0;
     private int idleAniTimeout = 0;
@@ -51,9 +59,9 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
 
         this.targetSelector.add(1, new TrackOwnerAttackerGoal(this));
         this.targetSelector.add(1, new AttackWithOwnerGoal(this));
+        this.targetSelector.add(2, new SumSkeletonEntity.ProtectHordeGoal());
         this.targetSelector.add(2, new TrackSumSkeletonTargetGoal(this));
-        this.targetSelector.add(3, new RevengeGoal(this));
-        this.targetSelector.add(3, (new RevengeGoal(this, new Class[0])).setGroupRevenge(new Class[0]));
+        this.targetSelector.add(3, new SumSkeletonEntity.SumSkeletonRevengeGoal());
 
         //this.initCustomGoals();
     }
@@ -118,6 +126,7 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         if(this.getWorld().isClient()) {
             setupAnimationStates();
         }
+        //
     }
 
     public void setAttacking(boolean attacking) {
@@ -154,6 +163,8 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
         this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
         this.equipStack(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
+
+        this.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
 
     }
     private ItemStack makeInitialWeapon() {
@@ -214,11 +225,62 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         } else {
             return false;
         }
+
     }
     @Override
     public EntityView method_48926() {
         return getWorld();
     }
+    public boolean isShaking() {
+        return this.isFrozen();
+    }
+
+    //
+
+    class SumSkeletonRevengeGoal
+            extends RevengeGoal {
+        public SumSkeletonRevengeGoal() {
+            super(SumSkeletonEntity.this);
+        }
+        @Override
+        public void start() {
+            super.start();
+            if (SumSkeletonEntity.this.isAttacking()) {
+                this.callSameTypeForRevenge();
+                this.stop();
+            }
+        }
+        @Override
+        protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
+            if (mob instanceof SkeletonEntity) {
+                super.setMobEntityTarget(mob, target);
+            }
+        }
+    }
+    class ProtectHordeGoal
+            extends ActiveTargetGoal<LivingEntity> {
+        public ProtectHordeGoal() {
+            super(SumSkeletonEntity.this, LivingEntity.class, 20, true, true, null);
+        }
+
+        @Override
+        public boolean canStart() {
+            if (super.canStart()) {
+                List<SumSkeletonEntity> list = SumSkeletonEntity.this.getWorld().getNonSpectatingEntities(SumSkeletonEntity.class, SumSkeletonEntity.this.getBoundingBox().expand(16.0, 4.0, 16.0));
+                for (SumSkeletonEntity sumSkeleton : list) {
+                    if (sumSkeleton.isTamed()) continue;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected double getFollowRange() {
+            return super.getFollowRange() * 0.5;
+        }
+    }
+
 
 
 }

@@ -112,6 +112,10 @@ public class SignumClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SHOCK_BOLT, ShockBoltEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.SHOCK_PROJECTILE, ShockBoltRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GRAVITY_BOLT, GravityBoltEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.GRAVITY_PROJECTILE, GravityBoltRenderer::new);
+
         //
         EntityRendererRegistry.register(ModEntities.TOXICBALL, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASERBOLT, FlyingItemEntityRenderer::new);
@@ -132,6 +136,9 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER, ESpiderModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER_SADDLE, ESpiderModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SPIDER_SPIT, SpiderSpitModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.SPIDERSPIT_PROJECTILE, SpiderSpitRenderer::new);
 
         // HOSTILES
         EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);

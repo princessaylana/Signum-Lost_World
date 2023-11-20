@@ -133,7 +133,7 @@ public class UnicornAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(3f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
-    public static final Animation UNICORN_ATTACK = Animation.Builder.create(1f)
+    public static final Animation UNICORN_ATTACK = Animation.Builder.create(2f)
             .addBoneAnimation("neck",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),

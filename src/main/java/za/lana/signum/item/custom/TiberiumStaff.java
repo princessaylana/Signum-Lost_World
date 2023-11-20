@@ -26,15 +26,22 @@ import java.util.List;
 public class TiberiumStaff
         extends Item {
     private final ToolMaterial material;
+    private float attackDamage = 2.0f;
+
+    // default is 100 = 5 seconds
+    private static final int STAFFCOOLDOWN = 100;
+
+
     public TiberiumStaff(ToolMaterial material, Item.Settings settings) {
         super(settings.maxDamageIfAbsent(material.getDurability()));
         this.material = material;
+        this.attackDamage = attackDamage + material.getAttackDamage();
     }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemstack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.TIBERIUM_HIT, SoundCategory.NEUTRAL,1.5F, 1F);
-        user.getItemCooldownManager().set(this, 40);
+        user.getItemCooldownManager().set(this, STAFFCOOLDOWN);
         if (!world.isClient()) {
             TiberiumBoltEntity tiberiumProjectile = new TiberiumBoltEntity(world, user);
             tiberiumProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0, 3, 1);

@@ -25,7 +25,7 @@ public class TTrooperModel<T extends TTrooperEntity> extends SinglePartEntityMod
     public TTrooperModel(ModelPart root) {
         this.ttrooper = root.getChild("waist");
         this.head = ttrooper.getChild("body").getChild("head");
-        this.rightArm = ttrooper.getChild("body").getChild("rightarm");
+        this.rightArm = ttrooper.getChild("body").getChild("rightArm");
         this.leftArm = ttrooper.getChild("body").getChild("leftArm");
     }
     public static TexturedModelData getTexturedModelData() {
@@ -41,7 +41,7 @@ public class TTrooperModel<T extends TTrooperEntity> extends SinglePartEntityMod
 
         ModelPartData hat = head.addChild("hat", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(0.5F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-        ModelPartData rightarm = body.addChild("rightarm", ModelPartBuilder.create().uv(59, 51).cuboid(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.0F, 2.0F, 0.0F));
+        ModelPartData rightarm = body.addChild("rightArm", ModelPartBuilder.create().uv(59, 51).cuboid(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.0F, 2.0F, 0.0F));
 
         ModelPartData rightItem = rightarm.addChild("rightItem", ModelPartBuilder.create(), ModelTransform.pivot(-1.0F, 7.0F, 1.0F));
 

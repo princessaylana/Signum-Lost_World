@@ -14,9 +14,10 @@ import za.lana.signum.entity.mob.UnicornEntity;
 
 public class UnicornAttackGoal extends MeleeAttackGoal {
     private final UnicornEntity entity;
-    private int attackDelay = 10;
-    private int ticksUntilNextAttack = 10;
+    private int attackDelay = 20;
+    private int ticksUntilNextAttack = 20;
     private boolean shouldCountTillNextAttack = false;
+    //unicorn attack 1sec 20ticks
 
     public UnicornAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
         super(mob, speed, pauseWhenMobIdle);
@@ -26,8 +27,8 @@ public class UnicornAttackGoal extends MeleeAttackGoal {
     public void start() {
         super.start();
         //length of animation
-        attackDelay = 10;
-        ticksUntilNextAttack = 10;
+        attackDelay = 20;
+        ticksUntilNextAttack = 20;
     }
     @Override
     protected void attack(LivingEntity pTarget) {

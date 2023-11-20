@@ -18,32 +18,29 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import za.lana.signum.entity.projectile.IceBoltEntity;
-import za.lana.signum.entity.projectile.TransmuteBoltEntity;
+import za.lana.signum.entity.projectile.FireBoltEntity;
+import za.lana.signum.entity.projectile.GravityBoltEntity;
 import za.lana.signum.sound.ModSounds;
 
 import java.util.List;
 
-public class TransmuteStaff
+public class GravityStaff
         extends Item {
     private final ToolMaterial material;
-    private float attackDamage = 2.0f;
+    private static final int STAFFCOOLDOWN = 40;
 
-    // default is 100 = 5 seconds
-    private static final int STAFFCOOLDOWN = 100;
-
-    public TransmuteStaff(ToolMaterial material, Settings settings) {
+    public GravityStaff(ToolMaterial material, Settings settings) {
         super(settings.maxDamageIfAbsent(material.getDurability()));
         this.material = material;
-        this.attackDamage = attackDamage + material.getAttackDamage();
     }
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemstack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.TIBERIUM_HIT, SoundCategory.NEUTRAL,1.5F, 1F);
         user.getItemCooldownManager().set(this, STAFFCOOLDOWN);
         if (!world.isClient()) {
-            TransmuteBoltEntity projectile = new TransmuteBoltEntity(world, user);
+            GravityBoltEntity projectile = new GravityBoltEntity(world, user);
             projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0, 3, 1);
             world.spawnEntity(projectile);
         }
@@ -54,6 +51,7 @@ public class TransmuteStaff
         }
         return TypedActionResult.success(itemstack, world.isClient());
     }
+
     // REPAIR ITEM WITH MOD MATERIAL
     public ToolMaterial getMaterial() {
         return this.material;
@@ -68,7 +66,7 @@ public class TransmuteStaff
     }
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.signum.transmute_staff.info"));
+        tooltip.add(Text.translatable("item.signum.gravity_staff.info"));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

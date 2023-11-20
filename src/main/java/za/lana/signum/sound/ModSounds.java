@@ -14,14 +14,13 @@ import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 
 public class ModSounds {
-    //public static final RegistryEntry.Reference<SoundEvent> AMBIENT_CAVE = SoundEvents.registerReference("ambient.cave");
     public static SoundEvent SNOWY_WIND = registerSoundEvent("snowy_wind");
+    public static SoundEvent AIRBALLOON_DOWN = registerSoundEvent("airballoon_down");
     public static SoundEvent TIBERIUM_AMBIENT = registerSoundEvent("tiberium_ambient");
     public static SoundEvent TIBERIUM_BREAK = registerSoundEvent("tiberium_break");
     public static SoundEvent TIBERIUM_WALK = registerSoundEvent("tiberium_walk");
     public static SoundEvent TIBERIUM_PLACE = registerSoundEvent("tiberium_place");
     public static SoundEvent TIBERIUM_HIT = registerSoundEvent("tiberium_hit");
-
     public static SoundEvent GHOST_TELEPORT = registerSoundEvent("ghost_teleport");
     public static SoundEvent GHOST_ANGRY = registerSoundEvent("ghost_angry");
     public static SoundEvent GHOST_ATTACK = registerSoundEvent("ghost_attack");
@@ -40,15 +39,9 @@ public class ModSounds {
     public static SoundEvent TCOMMANDER_DIE = registerSoundEvent("tcommander_die");
     public static SoundEvent TCOMMANDER_WALK = registerSoundEvent("tcommander_walk");
 
-
-
-
-
     public static final BlockSoundGroup TIBERIUM_BLOCK_SOUNDS = new BlockSoundGroup(1f, 1f,
             ModSounds.TIBERIUM_BREAK, ModSounds.TIBERIUM_WALK, ModSounds.TIBERIUM_PLACE,
             ModSounds.TIBERIUM_HIT, ModSounds.TIBERIUM_WALK);
-
-
 
     private static SoundEvent registerSoundEvent(String name){
         Identifier id = new Identifier(Signum.MOD_ID, name);

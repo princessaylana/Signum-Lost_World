@@ -80,8 +80,8 @@ extends Block {
         if (EarthMushroomBlock.isFaceFullSquare(blockState.getCollisionShape(world, blockPos), Direction.UP)) {
             return;
         }
-        //ParticleUtil.spawnParticle(world, pos, random, ModParticles.BROWN_SHROOM_PARTICLE);
-        ParticleUtil.spawnParticle(world, pos, random, ModParticles.RAINBOW_STAR_PARTICLE);
+        ParticleUtil.spawnParticle(world, pos, random, ModParticles.BROWN_SHROOM_PARTICLE);
+        //ParticleUtil.spawnParticle(world, pos, random, ModParticles.RAINBOW_STAR_PARTICLE);
     }
 }
 

@@ -104,7 +104,7 @@ public class ModItems {
     public static final Item TELEPORT_STAFF = registerItem("teleport_staff",
             new Item(new FabricItemSettings()));
     public static final Item GRAVITY_STAFF = registerItem("gravity_staff",
-            new ToolItem(ModToolMaterials.ELEMENT_ZERO, new FabricItemSettings()));
+            new GravityStaff(ModToolMaterials.ELEMENT_ZERO, new FabricItemSettings()));
 
     public static final Item WATER_STAFF = registerItem("water_staff",
             new Item(new FabricItemSettings()));
@@ -148,6 +148,9 @@ public class ModItems {
             ModEntities.TCOMMANDER_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
     public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
             ModEntities.ESPIDER_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
+
+    public static final Item SUMSKELETON_SPAWN_EGG = registerItem("sskeleton_spawn_egg", new SpawnEggItem(
+            ModEntities.SSKELETON_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
 
     public static final Item ELVE_SPAWN_EGG = registerItem("elve_spawn_egg", new SpawnEggItem(
             ModEntities.ELVE_ENTITY, 0x70F427, 0x292929, new FabricItemSettings()));
@@ -241,6 +244,8 @@ public class ModItems {
 
         // OTHER
         entries.add(GHOST_SPAWN_EGG);
+        entries.add(SUMSKELETON_SPAWN_EGG);
+
         entries.add(AIRDRONE_SPAWN_EGG);
         //entries.add(SKYCAR_SPAWN_EGG);
         //vehicles

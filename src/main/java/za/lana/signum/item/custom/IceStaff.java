@@ -26,15 +26,19 @@ import java.util.List;
 public class IceStaff
         extends Item {
     private final ToolMaterial material;
+    private float attackDamage = 2.0f;
+    // default is 40 = 2 seconds
+    private static final int STAFFCOOLDOWN = 40;
     public IceStaff(ToolMaterial material, Settings settings) {
         super(settings.maxDamageIfAbsent(material.getDurability()));
         this.material = material;
+        this.attackDamage = attackDamage + material.getAttackDamage();
     }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemstack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.TIBERIUM_HIT, SoundCategory.NEUTRAL,1.5F, 1F);
-        user.getItemCooldownManager().set(this, 40);
+        user.getItemCooldownManager().set(this, STAFFCOOLDOWN);
         if (!world.isClient()) {
             IceBoltEntity projectile = new IceBoltEntity(world, user);
             projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0, 3, 1);

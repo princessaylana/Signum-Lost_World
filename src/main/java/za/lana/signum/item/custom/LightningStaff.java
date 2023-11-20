@@ -30,6 +30,10 @@ import java.util.List;
 public class LightningStaff
         extends Item {
     private final ToolMaterial material;
+    private float attackDamage = 2.0f;
+    private static final int STAFFCOOLDOWN = 40;
+
+
     public LightningStaff(ToolMaterial material, Settings settings) {
         super(settings.maxDamageIfAbsent(material.getDurability()));
         this.material = material;
@@ -38,7 +42,7 @@ public class LightningStaff
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemstack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.TIBERIUM_HIT, SoundCategory.NEUTRAL,1.5F, 1F);
-        user.getItemCooldownManager().set(this, 40);
+        user.getItemCooldownManager().set(this, STAFFCOOLDOWN);
         if (!world.isClient()) {
             ShockBoltEntity shockBoltEntity = new ShockBoltEntity(world, user);
             shockBoltEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0, 3, 1);

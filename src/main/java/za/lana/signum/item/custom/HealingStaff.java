@@ -34,21 +34,29 @@ import java.util.List;
 public class HealingStaff
         extends Item {
     private final ToolMaterial material;
+    private float attackDamage = 2.0f;
+    // default is 1200 = 1 minute
+    private static final int STAFFCOOLDOWN = 1200;
+
 
     public HealingStaff(ToolMaterial material, Settings settings) {
         super(settings.maxDamageIfAbsent(material.getDurability()));
         this.material = material;
+        this.attackDamage = attackDamage + material.getAttackDamage();
     }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemstack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.TIBERIUM_HIT, SoundCategory.NEUTRAL,1.5F, 1F);
-        user.getItemCooldownManager().set(this, 40);
+        user.getItemCooldownManager().set(this, STAFFCOOLDOWN);
         if (!world.isClient()) {
             user.addStatusEffect((new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 20, 3)));
-            world.getEntitiesByClass(LivingEntity.class, user.getBoundingBox().expand(8.0), e->true).forEach(e->e.
+
+            double healRange = 8.0;
+            world.getEntitiesByClass(LivingEntity.class, user.getBoundingBox().expand(healRange), e->true).forEach(e->e.
                     addStatusEffect((new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 60 * 2 , 1 / 4))));
-            world.getEntitiesByClass(LivingEntity.class, user.getBoundingBox().expand(8.0), e->true).forEach(e->e.
+
+            world.getEntitiesByClass(LivingEntity.class, user.getBoundingBox().expand(healRange), e->true).forEach(e->e.
             addStatusEffect((new StatusEffectInstance(ModEffects.HEALING_EFFECT, 60 * 2 , 1 / 4))));
 
         }

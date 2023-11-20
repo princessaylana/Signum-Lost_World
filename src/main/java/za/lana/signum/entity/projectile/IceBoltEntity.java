@@ -1,3 +1,8 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
 package za.lana.signum.entity.projectile;
 
 import net.minecraft.block.Blocks;

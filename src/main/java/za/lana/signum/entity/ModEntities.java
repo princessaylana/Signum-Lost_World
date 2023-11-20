@@ -8,14 +8,13 @@
 package za.lana.signum.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.world.World;
-import za.lana.signum.Signum;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import za.lana.signum.Signum;
 import za.lana.signum.entity.hostile.*;
 import za.lana.signum.entity.itemprojectile.LaserBoltEntity;
 import za.lana.signum.entity.itemprojectile.ToxicBallEntity;
@@ -94,7 +93,7 @@ public class ModEntities {
     public static final EntityType<ESpiderEntity> ESPIDER_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "espider_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ESpiderEntity::new)
-                    .dimensions(EntityDimensions.fixed(3.0f, 1.3f)).build());
+                    .dimensions(EntityDimensions.fixed(2.0f, 1.3f)).build());
     public static final EntityType<SumSkeletonEntity> SSKELETON_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "sskeleton_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SumSkeletonEntity::new)
@@ -126,6 +125,17 @@ public class ModEntities {
     public static final EntityType<ShockBoltEntity> SHOCK_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(Signum.MOD_ID, "shock_projectile"),
             FabricEntityTypeBuilder.<ShockBoltEntity>create(SpawnGroup.MISC, ShockBoltEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
+    public static final EntityType<GravityBoltEntity> GRAVITY_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "gravity_projectile"),
+            FabricEntityTypeBuilder.<GravityBoltEntity>create(SpawnGroup.MISC, GravityBoltEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
+
+    public static final EntityType<SpiderSpitEntity> SPIDERSPIT_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "spiderspit_projectile"),
+            FabricEntityTypeBuilder.<SpiderSpitEntity>create(SpawnGroup.MISC, SpiderSpitEntity::new)
                     .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
                     .trackedUpdateRate(10).build());
 

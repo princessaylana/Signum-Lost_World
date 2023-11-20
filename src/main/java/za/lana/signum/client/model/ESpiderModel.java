@@ -5,7 +5,6 @@ package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
@@ -19,7 +18,6 @@ public class ESpiderModel<T extends ESpiderEntity> extends SinglePartEntityModel
 	public ESpiderModel(ModelPart root) {
 		this.spider = root.getChild("mainbody");
 		this.head = spider.getChild("body0").getChild("head");
-
 	}
 
 	// bspider model v3
@@ -179,10 +177,11 @@ public class ESpiderModel<T extends ESpiderEntity> extends SinglePartEntityModel
 		this.head.yaw = netHeadYaw * ((float)Math.PI / 180);
 		this.head.pitch = headPitch * ((float)Math.PI / 180);
 
-		this.animateMovement(ESpiderAnimations.BSPIDER_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
-		this.updateAnimation(entity.climbAniState, ESpiderAnimations.BSPIDERL_WALL, ageInTicks, 1f);
-		this.updateAnimation(entity.idleAniState, ESpiderAnimations.BSPIDER_IDLE, ageInTicks, 1f);
-		this.updateAnimation(entity.attackAniState, ESpiderAnimations.BSPIDER_ATTACK, ageInTicks, 1f);
+		this.animateMovement(ESpiderAnimations.ESPIDERMODEL_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
+		this.updateAnimation(entity.climbAniState, ESpiderAnimations.ESPIDERMODEL_WALLCLIMB, ageInTicks, 1f);
+		this.updateAnimation(entity.idleAniState, ESpiderAnimations.ESPIDERMODEL_IDLE, ageInTicks, 1f);
+		this.updateAnimation(entity.attackAniState, ESpiderAnimations.ESPIDERMODEL_ATTACK, ageInTicks, 1f);
+		this.updateAnimation(entity.spitAniState, ESpiderAnimations.ESPIDERMODEL_SPIT, ageInTicks, 1f);
 	}
 	public void setHeadAngles(float headYaw, float headPitch){
 		headYaw = MathHelper.clamp(headYaw, -30.0f, 30.0f);

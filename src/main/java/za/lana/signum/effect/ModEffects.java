@@ -4,11 +4,7 @@
  * Lana
  * */
 package za.lana.signum.effect;
-/**
- * SIGNUM
- * MIT License
- * Lana
- * */
+
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -28,7 +24,7 @@ public class ModEffects {
     public static final StatusEffect SHOCK_EFFECT = new ShockEffect(StatusEffectCategory.HARMFUL,13234936);
     public static final StatusEffect HEALING_EFFECT = new HealingEffect(StatusEffectCategory.BENEFICIAL,13234936);
     public static final StatusEffect TELEPORT_EFFECT = new TeleportEffect(StatusEffectCategory.NEUTRAL,12796926);
-    // public static final StatusEffect GRAVITY_EFFECT = new GravityEffect(StatusEffectCategory.HARMFUL,7334395);
+    public static final StatusEffect GRAVITY_EFFECT = new GravityEffect(StatusEffectCategory.HARMFUL,7334395);
     // public static final StatusEffect PETRIFY_EFFECT = new PetrifyEffect(StatusEffectCategory.HARMFUL,6053985);
     // public static final StatusEffect DROWN_EFFECT = new DrownEffect(StatusEffectCategory.HARMFUL,4159204);
 
@@ -41,6 +37,7 @@ public class ModEffects {
         Registry.register(Registries.STATUS_EFFECT, new Identifier(Signum.MOD_ID, "transmute_effect"), TRANSMUTE_EFFECT);
         Registry.register(Registries.STATUS_EFFECT, new Identifier(Signum.MOD_ID, "shock_effect"), SHOCK_EFFECT);
         Registry.register(Registries.STATUS_EFFECT, new Identifier(Signum.MOD_ID, "healing_effect"), HEALING_EFFECT);
+        Registry.register(Registries.STATUS_EFFECT, new Identifier(Signum.MOD_ID, "gravity_effect"), GRAVITY_EFFECT);
 
         Signum.LOGGER.info("Registering ModEffects for " + Signum.MOD_ID);
 

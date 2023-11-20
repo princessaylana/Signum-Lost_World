@@ -39,6 +39,10 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "fire_bolt"), "main");
     public static final EntityModelLayer SHOCK_BOLT =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "shock_bolt"), "main");
+    public static final EntityModelLayer GRAVITY_BOLT =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "gravity_bolt"), "main");
+    public static final EntityModelLayer SPIDER_SPIT =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "spiderspit"), "main");
 
 
 }

@@ -134,9 +134,9 @@ public class TiberiumSkeletonEntity extends HostileEntity implements GeoEntity {
     }
 
     class ProtectHordeGoal
-            extends ActiveTargetGoal<PlayerEntity> {
+            extends ActiveTargetGoal<LivingEntity> {
         public ProtectHordeGoal() {
-            super(TiberiumSkeletonEntity.this, PlayerEntity.class, 20, true, true, null);
+            super(TiberiumSkeletonEntity.this, LivingEntity.class, 20, true, true, null);
         }
 
         @Override

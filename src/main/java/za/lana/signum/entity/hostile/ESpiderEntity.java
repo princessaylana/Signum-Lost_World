@@ -6,9 +6,7 @@
  * */
 package za.lana.signum.entity.hostile;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
@@ -34,28 +32,33 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.GameRules;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.block.ModBlocks;
-import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.ai.ESpiderAttackGoal;
-import za.lana.signum.entity.itemprojectile.ToxicBallEntity;
+import za.lana.signum.entity.projectile.SpiderSpitEntity;
 import za.lana.signum.item.ModItems;
+import za.lana.signum.sound.ModSounds;
+
+import java.util.List;
 
 public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddleable, RangedAttackMob {
     public int attackAniTimeout = 0;
+    public int spitAniTimeout = 0;
     private int idleAniTimeout = 0;
     private int climbAniTimeout = 0;
     public final AnimationState attackAniState = new AnimationState();
     public final AnimationState idleAniState = new AnimationState();
     public final AnimationState climbAniState = new AnimationState();
+    public final AnimationState spitAniState = new AnimationState();
     private static final TrackedData<Integer> BOOST_TIME;
     private static final Ingredient BREEDING_INGREDIENT;
     private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(ESpiderEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> SPITTING = DataTracker.registerData(ESpiderEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Byte> ESPIDER_FLAGS = DataTracker.registerData(ESpiderEntity.class, TrackedDataHandlerRegistry.BYTE);
     private static final TrackedData<Boolean> SADDLED;
     private final SaddledComponent saddledComponent;
@@ -63,14 +66,13 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
     private boolean spit;
 
 
-    //TODO Saddle texture, ranged attack
+    //TODO Saddle texture, ranged attack?
     public ESpiderEntity(EntityType<? extends ESpiderEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
         this.setCanPickUpLoot(true);
         this.saddledComponent = new SaddledComponent(this.dataTracker, BOOST_TIME, SADDLED);
     }
-
 
     private void setupAnimationStates() {
         if (this.idleAniTimeout <= 0) {
@@ -79,6 +81,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         } else {
             --this.idleAniTimeout;
         }
+        // ATTACK
         if(this.isAttacking() && attackAniTimeout <= 0) {
             attackAniTimeout = 40; // 2 seconds, length of spider attack
             attackAniState.start(this.age);
@@ -88,19 +91,27 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         if(!this.isAttacking()) {
             attackAniState.stop();
         }
+        // SPITTING
+        if(this.isSpitting() && spitAniTimeout <= 0) {;
+            this.spitAniTimeout = 40;
+            spitAniState.start(this.age);
+        } else {
+            --this.spitAniTimeout;
+        }
+        if(!this.isSpitting()) {
+            spitAniState.stop();
+        }
+        // CLIMBING WIP
         if(this.isClimbing() && climbAniTimeout <= 0) {
-            this.attackAniState.stop();
-            this.idleAniState.stop();
             this.climbAniTimeout = 40;
             climbAniState.start(this.age);
         } else {
-            this.climbAniState.startIfNotRunning(this.age);
+            //this.climbAniState.startIfNotRunning(this.age);
             --this.climbAniTimeout;
         }
         if(!this.isClimbing()) {
             climbAniState.stop();
         }
-
     }
 
     protected void updateLimbs(float posDelta) {
@@ -118,34 +129,29 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         if (!this.getWorld().isClient) {
             this.setClimbingWall(this.horizontalCollision);
         }
-
         if(this.getWorld().isClient()) {
             setupAnimationStates();
         }
     }
     @Override
     protected void initGoals(){
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new ESpiderEntity.SpinWebGoal(this));
-        //this.goalSelector.add(2, new ProjectileAttackGoal(this, 1.25, 40, 20.0F));
-        this.goalSelector.add(3, new PounceAtTargetGoal(this, 0.4f));
-        this.goalSelector.add(4, new ESpiderAttackGoal(this, 1.0D, true));
-        this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.8));
-        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
-        this.goalSelector.add(6, new LookAroundGoal(this));
 
-        //this.targetSelector.add(1, new ESpitRevengeGoal(this));
-        this.targetSelector.add(2, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(3, new ESpiderEntity.TargetGoal<>(this, PlayerEntity.class));
-        this.targetSelector.add(4, new ESpiderEntity.TargetGoal<>(this, ZombieEntity.class));
+        this.goalSelector.add(2, new ESpiderAttackGoal(this, 1.0D, true));
+        this.goalSelector.add(3, new LookAroundGoal(this));
+        this.goalSelector.add(4, new WanderAroundFarGoal(this, 0.8));
+
+        this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
+        this.targetSelector.add(2, new ESpiderEntity.ProtectHordeGoal());
+        this.targetSelector.add(3, new ESpiderEntity.TargetGoal<>(this, ZombieEntity.class));
+        this.targetSelector.add(4, new ESpiderEntity.TargetGoal<>(this, PlayerEntity.class));
 
         this.initCustomGoals();
     }
     protected void initCustomGoals() {
-        this.goalSelector.add(4, new TemptGoal(this, 1.2, Ingredient.ofItems(ModItems.ROTTEN_FLESH_ON_A_STICK), false));
-        this.goalSelector.add(4, new TemptGoal(this, 1.2, BREEDING_INGREDIENT, false));
-        this.goalSelector.add(5, new AvoidSunlightGoal(this));
-
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new TemptGoal(this, 1.2, Ingredient.ofItems(ModItems.ROTTEN_FLESH_ON_A_STICK), false));
+        this.goalSelector.add(1, new TemptGoal(this, 1.2, BREEDING_INGREDIENT, false));
+        this.goalSelector.add(2, new AvoidSunlightGoal(this));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
@@ -158,9 +164,16 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
     }
+    public void setSpit(boolean spit) {
+        this.dataTracker.set(SPITTING, spit);
+        this.spit = spit;
+    }
     @Override
     public boolean isAttacking() {
         return this.dataTracker.get(ATTACKING);
+    }
+    public boolean isSpitting() {
+        return this.dataTracker.get(SPITTING);
     }
     @Override
     protected EntityNavigation createNavigation(World world) {
@@ -181,6 +194,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         this.dataTracker.startTracking(ESPIDER_FLAGS, (byte)0);
         this.dataTracker.startTracking(BOOST_TIME, 0);
         this.dataTracker.startTracking(SADDLED, false);
+        this.dataTracker.startTracking(SPITTING, false);
     }
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
@@ -206,12 +220,12 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15f, 1.0f);
     }
-
     @Override
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return 1.2f;
     }
-    // SPIDER
+
+    // CLIMBING & MOVEMENT
     @Override
     public boolean isClimbing() {
         return this.isClimbingWall();
@@ -224,6 +238,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         b = climbing ? (byte)(b | 1) : (byte)(b & 0xFFFFFFFE);
         this.dataTracker.set(ESPIDER_FLAGS, b);
     }
+
     @Override
     public void slowMovement(BlockState state, Vec3d multiplier) {
         if (!state.isOf(ModBlocks.SPIDERWEB_BLOCK)) {
@@ -241,7 +256,6 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
                     if (!itemStack2.isEmpty()) {
                         this.equipStack(EquipmentSlot.MAINHAND, itemStack2);
                     }
-
                     this.eatingTime = 0;
                 } else if (this.eatingTime > 560 && this.random.nextFloat() < 0.1F) {
                     this.playSound(this.getEatSound(itemStack), 1.0F, 1.0F);
@@ -256,12 +270,9 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         super.tickMovement();
     }
 
-
-
     @Nullable
-    public ESpiderEntity createChild(ServerWorld serverWorld, HostileEntity hostileEntity) {
-        ESpiderEntity eSpider = ModEntities.ESPIDER_ENTITY.create(serverWorld);
-        return eSpider;
+    public ESpiderEntity createChild(ServerWorld server, HostileEntity hostile) {
+        return null;
     }
     public boolean isBreedingItem(ItemStack stack) {
         return BREEDING_INGREDIENT.test(stack);
@@ -279,7 +290,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
     }
 
     // SADDLE
-    //TODO Need to fix this properly
+    //TODO Need to fix the saddle properly and change from itemsteerable to mount and player controls?
     public boolean isSaddled() {
         return this.saddledComponent.isSaddled();
     }
@@ -303,7 +314,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         return null;
     }
 
-    // TRAVEL - ItemSteerable
+    // TRAVEL - ItemSteerable WIP
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
         Direction direction = this.getMovementDirection();
         if (direction.getAxis() == Direction.Axis.Y) {
@@ -329,7 +340,6 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
                     }
                 }
             }
-
             return super.updatePassengerForDismount(passenger);
         }
     }
@@ -337,7 +347,6 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         super.tickControlled(controllingPlayer, movementInput);
         this.setRotation(controllingPlayer.getYaw(), controllingPlayer.getPitch() * 0.5F);
         this.prevYaw = this.bodyYaw = this.headYaw = this.getYaw();
-
     }
     protected Vec3d getControlledMovementInput(PlayerEntity controllingPlayer, Vec3d movementInput) {
         return new Vec3d(0.0, 0.0, 1.0);
@@ -354,7 +363,6 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
     private boolean canEat(ItemStack stack) {
         return stack.getItem().isFood() && this.getTarget() == null && this.isOnGround();
     }
-
     @Override
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         ESpiderEntity eSpider;
@@ -362,13 +370,31 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         Entity entity = source.getAttacker();
         this.dropItem(Items.STRING);
     }
-
     static {
         SADDLED = DataTracker.registerData(ESpiderEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
         BOOST_TIME = DataTracker.registerData(ESpiderEntity.class, TrackedDataHandlerRegistry.INTEGER);
         BREEDING_INGREDIENT = Ingredient.ofItems(Items.ROTTEN_FLESH);
     }
 
+    // RANGED ATTACK
+    public void spitAt(LivingEntity target) {
+        World level = this.getEntityWorld();
+
+        SpiderSpitEntity spiderSpit = new SpiderSpitEntity(level, this);
+        double d = target.getX() - this.getX();
+        double e = target.getBodyY(0.3333333333333333) - spiderSpit.getY();
+        double f = target.getZ() - this.getZ();
+        double g = Math.sqrt(d * d + f * f) * 0.20000000298023224;
+        spiderSpit.setVelocity(d, e + g, f, 1.5F, 10.0F);
+        if (!this.isSilent()) {
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.TIBERIUM_HIT, this.getSoundCategory(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+        }
+        this.getWorld().spawnEntity(spiderSpit);
+        this.spit = true;
+    }
+    public void shootAt(LivingEntity target, float pullProgress) {
+        this.spitAt(target);
+    }
     // GOALS
     static class TargetGoal<T extends LivingEntity>
             extends ActiveTargetGoal<T> {
@@ -385,91 +411,29 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
             return super.canStart();
         }
     }
-
-    // EXPERIMENTAL
-    public static class SpinWebGoal extends Goal {
-        private final ESpiderEntity eSpider;
-
-        public SpinWebGoal(ESpiderEntity eSpider) {
-            this.eSpider = eSpider;
+    class ProtectHordeGoal
+            extends ActiveTargetGoal<LivingEntity> {
+        public ProtectHordeGoal() {
+            super(ESpiderEntity.this, LivingEntity.class, 20, true, true, null);
         }
 
         @Override
         public boolean canStart() {
-            if (!this.eSpider.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-                return false;
-            }
-            // default is 2000
-            return this.eSpider.getRandom().nextInt(ESpiderEntity.SpinWebGoal.toGoalTicks(100)) == 0;
-        }
-        @Override
-        public void tick() {
-            Random random = this.eSpider.getRandom();
-            World world = this.eSpider.getEntityWorld();
-            int i = MathHelper.floor(this.eSpider.getX() - 1.0 + random.nextDouble() * 2.0);
-            int j = MathHelper.floor(this.eSpider.getY() + random.nextDouble() * 2.0);
-            int k = MathHelper.floor(this.eSpider.getZ() - 1.0 + random.nextDouble() * 2.0);
-            BlockPos blockPos = new BlockPos(i, j, k);
-            BlockState blockState = world.getBlockState(blockPos);
-            BlockPos blockPos2 = BlockPos.ofFloored(blockPos.toCenterPos());
-            BlockState blockState2 = world.getBlockState(blockPos2);
-            BlockState blockState3 = ModBlocks.SPIDERWEB_BLOCK.getDefaultState();
-            if (blockState3 == null) {
-                return;
-            }
-
-            if (this.canPlaceOn(world, blockPos, blockState3 = Block.postProcessState(blockState3, this.eSpider.getWorld(), blockPos), blockState, blockState2, blockPos2)) {
-                world.setBlockState(blockPos, blockState3, Block.NOTIFY_ALL);
-                world.emitGameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Emitter.of(this.eSpider, blockState3));
-            }
-        }
-        private boolean canPlaceOn(World world, BlockPos posAbove, BlockState carriedState, BlockState stateAbove, BlockState state, BlockPos pos) {
-            return stateAbove.isAir() && !state.isAir() && !state.isOf(Blocks.BEDROCK) && state.isFullCube(world, pos) && carriedState.canPlaceAt(world, posAbove) && world.getOtherEntities(this.eSpider, Box.from(Vec3d.of(posAbove))).isEmpty();
-        }
-    }
-
-    // RANGED ATTACK WIP
-    private void spitAt(LivingEntity target) {
-        World level = this.getEntityWorld();
-
-        ToxicBallEntity toxicBallEntity = new ToxicBallEntity(level, this);
-
-        double d = target.getX() - this.getX();
-        double e = target.getBodyY(0.3333333333333333) - toxicBallEntity.getY();
-        double f = target.getZ() - this.getZ();
-        double g = Math.sqrt(d * d + f * f) * 0.20000000298023224;
-        toxicBallEntity.setVelocity(d, e + g, f, 1.5F, 10.0F);
-        if (!this.isSilent()) {
-            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_LLAMA_SPIT, this.getSoundCategory(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
-        }
-
-        this.getWorld().spawnEntity(toxicBallEntity);
-
-        this.spit = true;
-    }
-    void setSpit(boolean spit) {
-        this.spit = spit;
-    }
-    public void shootAt(LivingEntity target, float pullProgress) {
-        this.spitAt(target);
-    }
-    static class ESpitRevengeGoal extends RevengeGoal {
-        public ESpitRevengeGoal(ESpiderEntity eSpider) {
-            super(eSpider, new Class[0]);
-        }
-
-        public boolean shouldContinue() {
-            if (this.mob instanceof ESpiderEntity eSpiderEntity) {
-                if (eSpiderEntity.spit) {
-                    eSpiderEntity.setSpit(false);
-                    return false;
+            if (super.canStart()) {
+                List<ESpiderEntity> list = ESpiderEntity.this.getWorld().getNonSpectatingEntities(ESpiderEntity.class, ESpiderEntity.this.getBoundingBox().expand(16.0, 4.0, 16.0));
+                for (ESpiderEntity eSpider : list) {
+                    if (eSpider.isAlive() && !eSpider.hasPassengers()) continue;
+                    return true;
                 }
             }
+            return false;
+        }
 
-            return super.shouldContinue();
+        @Override
+        protected double getFollowRange() {
+            return super.getFollowRange() * 0.5;
         }
     }
-
 }
 
 

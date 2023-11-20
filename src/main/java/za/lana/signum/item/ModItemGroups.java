@@ -216,6 +216,7 @@ public class ModItemGroups {
                         //entries.add(ModItems.SIGALIEN_SPAWN_EGG);
                         //entries.add(ModItems.SKYCAR_SPAWN_EGG);
                         entries.add(ModItems.GHOST_SPAWN_EGG);
+                        entries.add(ModItems.SUMSKELETON_SPAWN_EGG);
                         entries.add(ModItems.AIRBALOON_SPAWN_EGG);
 
 

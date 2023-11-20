@@ -7,16 +7,23 @@
 package za.lana.signum.item.custom;
 
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.resource.featuretoggle.FeatureSet;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.entity.ModEntities;
@@ -27,6 +34,11 @@ import java.util.List;
 
 public class DeathStaff
         extends Item {
+
+    // default is 1200 = 1 minute
+    private static final int STAFFCOOLDOWN = 1200;
+    private final EntityType<?> type = ModEntities.SSKELETON_ENTITY;
+
     private final ToolMaterial material;
     private float attackDamage = 2.0f;
 
@@ -40,7 +52,8 @@ public class DeathStaff
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemstack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.GHOST_AMBIENT, SoundCategory.NEUTRAL,1.5F, 1F);
-        user.getItemCooldownManager().set(this, 40);
+        user.getItemCooldownManager().set(this, STAFFCOOLDOWN);
+
         if (!world.isClient()) {
             BlockPos BlockPos = user.getBlockPos();
             spawnMonster(world, BlockPos, user);
@@ -54,15 +67,22 @@ public class DeathStaff
 
     // Spawns and tames the entity
     private void spawnMonster(World world, BlockPos pos, PlayerEntity user) {
-        SumSkeletonEntity sskeleton = ModEntities.SSKELETON_ENTITY.create(world);
+        BlockHitResult blockPos = SpawnEggItem.raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
+        SumSkeletonEntity sskeleton = (SumSkeletonEntity) type.spawnFromItemStack((ServerWorld)world, this.getDefaultStack(), user, blockPos.getBlockPos(), SpawnReason.SPAWN_EGG, false, false);
         if (sskeleton != null) {
             sskeleton.refreshPositionAndAngles((double)pos.getX() + 0.05, pos.getY(), (double)pos.getZ() + 0.05, 0.0f, 0.0f);
             world.spawnEntity(sskeleton);
+            //getRequiredFeatures();
             sskeleton.setOwner(user);
             sskeleton.setTarget(null);
             sskeleton.playSpawnEffects();
         }
     }
+    @Override
+    public FeatureSet getRequiredFeatures() {
+        return this.type.getRequiredFeatures();
+    }
+
 
     public ToolMaterial getMaterial() {
         return this.material;

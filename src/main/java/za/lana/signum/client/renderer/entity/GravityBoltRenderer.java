@@ -18,22 +18,20 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import za.lana.signum.Signum;
 import za.lana.signum.client.layer.ModModelLayers;
-import za.lana.signum.client.model.IceBoltEntityModel;
-import za.lana.signum.client.model.TransmuteBoltEntityModel;
-import za.lana.signum.entity.projectile.IceBoltEntity;
-import za.lana.signum.entity.projectile.TransmuteBoltEntity;
+import za.lana.signum.client.model.GravityBoltEntityModel;
+import za.lana.signum.entity.projectile.GravityBoltEntity;
 
-public class TransmuteBoltRenderer extends EntityRenderer<TransmuteBoltEntity> {
-    public static final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/projectile/transmute_bolt_texture.png");
-    protected TransmuteBoltEntityModel model;
+public class GravityBoltRenderer extends EntityRenderer<GravityBoltEntity> {
+    public static final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/projectile/gravity_bolt_texture.png");
+    protected GravityBoltEntityModel model;
 
-    public TransmuteBoltRenderer(EntityRendererFactory.Context ctx) {
+    public GravityBoltRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);
-        model = new TransmuteBoltEntityModel(ctx.getPart(ModModelLayers.TRANSMUTE_BOLT));
+        model = new GravityBoltEntityModel(ctx.getPart(ModModelLayers.GRAVITY_BOLT));
     }
 
     @Override
-    public void render(TransmuteBoltEntity entity, float yaw, float tickDelta, MatrixStack matrices,
+    public void render(GravityBoltEntity entity, float yaw, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw()) - 90.0F));
@@ -46,7 +44,7 @@ public class TransmuteBoltRenderer extends EntityRenderer<TransmuteBoltEntity> {
     }
 
     @Override
-    public Identifier getTexture(TransmuteBoltEntity entity) {
+    public Identifier getTexture(GravityBoltEntity entity) {
         return TEXTURE;
     }
 

@@ -33,6 +33,8 @@ public class AirBalloonInvenC2SPacket {
                 NamedScreenHandlerFactory screenHandlerFactory = ((AirBalloonEntity)player.getVehicle());
                 if (screenHandlerFactory != null) {
                     player.openHandledScreen(screenHandlerFactory);
+                }else{
+                    player.closeHandledScreen();
                 }
             }
         }

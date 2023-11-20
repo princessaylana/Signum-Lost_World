@@ -39,14 +39,21 @@
     "sounds": [
       "signum:wind0"
     ],
-    "volume":"0.15"
+    "volume":"-3.0"
+  },
+  "airballoon_down": {
+    "subtitle": "sounds.signum.airballoon_down",
+    "sounds": [
+      "signum:airballoon_down"
+    ],
+    "volume":"-12.00"
   },
   "ghost_ambient": {
     "subtitle": "sounds.signum.ghost_ambient",
     "sounds": [
       "signum:ghost_ambient"
     ],
-    "volume":"0.15"
+    "volume":"-3.00"
   },
   "ghost_attack": {
     "subtitle": "sounds.signum.ghost_attack",
