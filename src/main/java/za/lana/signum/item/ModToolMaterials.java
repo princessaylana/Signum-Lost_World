@@ -19,19 +19,21 @@ public enum ModToolMaterials implements ToolMaterial {
     SIGSTAINSTEEL(4, 2200, 9f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.STAINLESS_STEEL_INGOT)),
     // Staffs materials:
-    TIBERIUM(4, 750, 5.5f, 3.5f, 26,
+    TIBERIUM_CRYSTAL(4, 750, 5.5f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.TIBERIUM_CRYSTAL)),
     ICE_CRYSTAL(4, 750, 5.5f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.ICE_CRYSTAL)),
     FIRE_CRYSTAL(4, 750, 5.5f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.FIRE_CRYSTAL)),
+    EXOTIC_CRYSTAL(4, 750, 5.5f, 3.5f, 26,
+            () -> Ingredient.ofItems(ModItems.EXOTIC_CRYSTAL)),
     QUARTZ_CRYSTAL(4, 750, 5.5f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.QUARTZ_CRYSTAL)),
     MOISSANITE_CRYSTAL(4, 750, 5.5f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.MOISSANITE_CRYSTAL)),
     BLACK_DIAMOND_CRYSTAL(4, 750, 5.5f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.BLACK_DIAMOND_CRYSTAL)),
-    ELEMENT_ZERO(4, 800, 7f, 3.5f, 26,
+    ELEMENT_ZERO(4, 750, 7f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.ELEMENT_ZERO_CRYSTAL));
 
 

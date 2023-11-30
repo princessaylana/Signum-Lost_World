@@ -15,6 +15,7 @@ import za.lana.signum.Signum;
 
 public class ModSounds {
     public static SoundEvent SNOWY_WIND = registerSoundEvent("snowy_wind");
+    public static SoundEvent PIDGEON_CALL = registerSoundEvent("pidgeon_call");
     public static SoundEvent AIRBALLOON_DOWN = registerSoundEvent("airballoon_down");
     public static SoundEvent TIBERIUM_AMBIENT = registerSoundEvent("tiberium_ambient");
     public static SoundEvent TIBERIUM_BREAK = registerSoundEvent("tiberium_break");

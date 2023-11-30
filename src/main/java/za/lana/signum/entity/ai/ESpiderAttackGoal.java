@@ -1,9 +1,3 @@
-/**
- * SIGNUM
- * MIT License
- * Lana
- * 2023
- * */
 package za.lana.signum.entity.ai;
 
 import net.minecraft.entity.LivingEntity;
@@ -17,6 +11,7 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
     //wait 20ticks till attack happens, 1sec into attack animation
     private int attackDelay = 20;
     private int ticksUntilNextAttack = 20;
+    //
     private boolean shouldCountTillNextAttack = false;
     //protected float range = 16;
     protected float attackDistance = 2.0f;
@@ -32,6 +27,7 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
         //length of animation
         attackDelay = 20;
         ticksUntilNextAttack = 20;
+
     }
     @Override
     public boolean shouldContinue() {
@@ -47,13 +43,14 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
     protected void attack(LivingEntity pTarget) {
         // MELEE ATTACK WHEN TARGET IN CLOSE RANGE
         if (isEnemyWithinAttackDistance(pTarget)) {
+
             shouldCountTillNextAttack = true;
             if(isTimeToStartAttackAnimation()) {
                 entity.setAttacking(true);
+
             }
             if(isTimeToAttack()) {
                 this.mob.getLookControl().lookAt(pTarget.getX(), pTarget.getEyeY(), pTarget.getZ());
-                //
                 performAttack(pTarget);
             }
         }
@@ -61,7 +58,7 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
         if (isEnemyWithinSpitDistance(pTarget)) {
             shouldCountTillNextAttack = true;
             if(isTimeToStartAttackAnimation()) {
-                entity.setSpit(true);
+                entity.setSpitting(true);
             }
             if(isTimeToAttack()) {
                 this.mob.getLookControl().lookAt(pTarget.getX(), pTarget.getEyeY(), pTarget.getZ());
@@ -73,8 +70,9 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
             resetAttackCooldown();
             shouldCountTillNextAttack = false;
             entity.setAttacking(false);
-            entity.setSpit(false);
+            entity.setSpitting(false);
             entity.attackAniTimeout = 0;
+            entity.spitAniTimeout = 0;
         }
     }
     // TODO
@@ -107,8 +105,8 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
         this.mob.tryAttack(pEnemy);
     }
     protected void performSpitAttack(LivingEntity pEnemy) {
-        this.resetAttackCooldown();
         this.entity.spitAt(pEnemy);
+        this.resetAttackCooldown();
     }
 
     @Override
@@ -122,6 +120,7 @@ public class ESpiderAttackGoal extends MeleeAttackGoal {
     @Override
     public void stop() {
         entity.setAttacking(false);
+        entity.setSpitting(false);
         super.stop();
     }
 }

@@ -1,4 +1,3 @@
-
 package za.lana.signum.client.model;
 
 import net.fabricmc.api.EnvType;

@@ -55,27 +55,27 @@
         "maxCount": 4
       },
       {
-        "type": "minecraft:zombie_villager",
-        "weight": 5,
-        "minCount": 1,
-        "maxCount": 1
-      },
-      {
         "type": "minecraft:skeleton",
         "weight": 100,
         "minCount": 4,
         "maxCount": 4
       },
       {
-        "type": "minecraft:creeper",
-        "weight": 100,
-        "minCount": 4,
+        "type": "signum:darkskeleton_entity",
+        "weight": 50,
+        "minCount": 2,
         "maxCount": 4
       },
       {
-        "type": "minecraft:slime",
-        "weight": 100,
-        "minCount": 4,
+        "type": "signum:enderskeleton_entity",
+        "weight": 50,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "signum:fireskeleton_entity",
+        "weight": 50,
+        "minCount": 2,
         "maxCount": 4
       },
       {

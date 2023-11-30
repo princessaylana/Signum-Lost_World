@@ -15,9 +15,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -58,7 +56,8 @@ public class ElveEntity extends HostileEntity implements InventoryOwner {
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new ElveEntity.ProtectHordeGoal());
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity)));
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
         //this.targetSelector.add(4, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.initCustomGoals();
     }

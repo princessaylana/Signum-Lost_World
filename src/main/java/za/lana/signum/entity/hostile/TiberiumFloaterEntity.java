@@ -247,7 +247,7 @@ public class TiberiumFloaterEntity
             if (this.getEntityWorld().isClient){
                 ParticleUtil.spawnParticle(getWorld(), BlockPos.ofFloored(getPos()), random, ModParticles.TIBERIUM_PARTICLE);
             }
-            return tsAnimationState.setAndContinue(SignumAnimations.TIBERIUM_SKELETON_ATTACK);
+            return tsAnimationState.setAndContinue(SignumAnimations.TIBERIUM_FLOATER_FLY);
         }
         tsAnimationState.getController().forceAnimationReset();
         return PlayState.CONTINUE;

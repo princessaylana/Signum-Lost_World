@@ -6,6 +6,7 @@
  * */
 package za.lana.signum.item.custom;
 
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -15,7 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -31,12 +34,16 @@ public class LightningStaff
         extends Item {
     private final ToolMaterial material;
     private float attackDamage = 2.0f;
+    private final int durability;
+    private final int coolDown;
     private static final int STAFFCOOLDOWN = 40;
 
 
     public LightningStaff(ToolMaterial material, Settings settings) {
         super(settings.maxDamageIfAbsent(material.getDurability()));
         this.material = material;
+        this.durability = this.material.getDurability()/10;
+        this.coolDown = STAFFCOOLDOWN /20;
     }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -51,7 +58,7 @@ public class LightningStaff
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         // BREAK TOOL
         if (!user.getAbilities().creativeMode) {
-            itemstack.damage(1, user, p -> p.sendToolBreakStatus(hand));
+            itemstack.damage(10, user, p -> p.sendToolBreakStatus(hand));
         }
         return TypedActionResult.success(itemstack, world.isClient());
     }
@@ -70,7 +77,16 @@ public class LightningStaff
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.signum.lightning_staff.info"));
+        if(Screen.hasShiftDown()) {
+            tooltip.add(Text.translatable("item.signum.lightning_staff.info")
+                    .fillStyle(Style.EMPTY.withColor(Formatting.WHITE).withBold(true)));
+            tooltip.add(Text.literal("Repairable"));
+            tooltip.add(Text.literal(this.coolDown+" sec Recharge Time"));
+            tooltip.add(Text.literal(this.durability+" Total Uses"));
+        }else {
+            tooltip.add(Text.translatable("key.signum.shift")
+                    .fillStyle(Style.EMPTY.withColor(Formatting.GOLD)));
+        }
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

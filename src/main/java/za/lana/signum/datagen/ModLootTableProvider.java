@@ -47,7 +47,6 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.QUARTZ_CRYSTAL_BLOCK);
         addDrop(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
 
-        addDrop(ModBlocks.ASSEMBLY_STATION_BLOCK);
         addDrop(ModBlocks.RAZORWIRE_BLOCK);
         addDrop(ModBlocks.SKYFORGE);
 

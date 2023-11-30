@@ -16,34 +16,20 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.entity.hostile.*;
-import za.lana.signum.entity.itemprojectile.LaserBoltEntity;
-import za.lana.signum.entity.itemprojectile.ToxicBallEntity;
+
+import za.lana.signum.entity.mob.PidgeonEntity;
 import za.lana.signum.entity.mob.UnicornEntity;
 import za.lana.signum.entity.projectile.*;
 import za.lana.signum.entity.transport.AirBalloonEntity;
-import za.lana.signum.entity.transport.SkyCarEntity;
 
 public class ModEntities {
-    //projectiles
-    public static final EntityType<ToxicBallEntity> TOXICBALL = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(Signum.MOD_ID, "toxicball"),
-            FabricEntityTypeBuilder.<ToxicBallEntity>create(SpawnGroup.MISC, ToxicBallEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
-                    .trackedUpdateRate(10).build());
-    public static final EntityType<LaserBoltEntity> LASERBOLT = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(Signum.MOD_ID, "laserbolt"),
-            FabricEntityTypeBuilder.<LaserBoltEntity>create(SpawnGroup.MISC, LaserBoltEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
-                    .trackedUpdateRate(10).build());
+
     // GECKOLIB HOSTILES:
     public static final EntityType<TiberiumWormEntity> TIBERIUM_WORM = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_worm"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TiberiumWormEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
-    public static final EntityType<TiberiumSkeletonEntity> TIBERIUM_SKELETON = Registry.register(
-            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_skeleton"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TiberiumSkeletonEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
+
     public static final EntityType<TiberiumFloaterEntity> TIBERIUM_FLOATER = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_floater"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TiberiumFloaterEntity::new)
@@ -51,55 +37,70 @@ public class ModEntities {
     public static final EntityType<GhostEntity> GHOST = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ghost"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GhostEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.0f, 1.8f)).build());
-    public static final EntityType<SigAlienEntity> SIGALIEN = Registry.register(
-            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "sig_alien_worm"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SigAlienEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.8f, 1.8f)).build());
-    public static final EntityType<AirDroneEntity> AIRDRONE= Registry.register(
-            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "airdrone"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, AirDroneEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
-    // GECKOLIB TRANSPORT
-    public static final EntityType<SkyCarEntity> SKYCAR = Registry.register(
-            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "skycar"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, SkyCarEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.7f, 1.8f)).build());
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+
+    // TRANSPORT
     public static final EntityType<AirBalloonEntity> AIRBALLOON = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "airballoon"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, AirBalloonEntity::new)
-                    .dimensions(EntityDimensions.fixed(4.0f, 6.8f)).build());
+                    .dimensions(EntityDimensions.fixed(3.0f, 3.0f)).build());
 
     // VANILLA TYPES
-
     public static final EntityType<UnicornEntity> UNICORN = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "unicorn"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, UnicornEntity::new)
                     .dimensions(EntityDimensions.fixed(1.5f, 2.2f)).build());
 
+    public static final EntityType<PidgeonEntity> PIDGEON = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "pidgeon"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PidgeonEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
+
     // VANILLA HOSTILES
     public static final EntityType<TTrooperEntity> TTROOPER_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ttrooper_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TTrooperEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
     public static final EntityType<ElveEntity> ELVE_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "elve_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ElveEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
     public static final EntityType<TCommanderEntity> TCOMMANDER_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tcommander_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TCommanderEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
     public static final EntityType<ESpiderEntity> ESPIDER_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "espider_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ESpiderEntity::new)
                     .dimensions(EntityDimensions.fixed(2.0f, 1.3f)).build());
+    // SKELETONS
+    public static final EntityType<TibSkeletonEntity> TIBSKELETON_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tibskeleton_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TibSkeletonEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+
+    public static final EntityType<IceSkeletonEntity> ICESKELETON_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "iceskeleton_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, IceSkeletonEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+    public static final EntityType<DarkSkeletonEntity> DARKSKELETON_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "darkskeleton_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, DarkSkeletonEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+    public static final EntityType<EnderSkeletonEntity> ENDERSKELETON_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "enderskeleton_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EnderSkeletonEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+    public static final EntityType<FireSkeletonEntity> FIRESKELETON_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "fireskeleton_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, FireSkeletonEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+
+
     public static final EntityType<SumSkeletonEntity> SSKELETON_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "sskeleton_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SumSkeletonEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.0f, 1.7f)).build());
-
-
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
 
     // PROJECTILES
     public static final EntityType<TiberiumBoltEntity> TIBERIUM_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,

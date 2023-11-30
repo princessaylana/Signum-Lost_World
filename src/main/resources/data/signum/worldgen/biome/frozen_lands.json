@@ -89,10 +89,10 @@
         "maxCount": 4
       },
       {
-        "type": "minecraft:zombie_villager",
-        "weight": 5,
-        "minCount": 1,
-        "maxCount": 1
+        "type": "signum:iceskeleton_entity",
+        "weight": 50,
+        "minCount": 2,
+        "maxCount": 4
       },
       {
         "type": "minecraft:skeleton",

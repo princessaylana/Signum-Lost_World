@@ -12,9 +12,12 @@ import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 
 public class ModModelLayers {
-
+    public static final EntityModelLayer AIRBALLOON =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "airballoon"), "MainBody");
     public static final EntityModelLayer UNICORN =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "unicorn"), "mainbody");
+    public static final EntityModelLayer PIDGEON =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "pidgeon"), "mainBody");
     public static final EntityModelLayer ESPIDER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "espider_entity"), "mainbody");
     public static final EntityModelLayer ESPIDER_SADDLE =
@@ -23,7 +26,21 @@ public class ModModelLayers {
     public static final EntityModelLayer TTROOPER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "ttrooper_entity"), "waist");
     public static final EntityModelLayer SSKELETON =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "sskeleton_entity"), "waist");
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "sskeleton_entity"), "mainBody");
+
+    public static final EntityModelLayer TIBSKELETON =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tibskeleton_entity"), "mainBody");
+    public static final EntityModelLayer ICESKELETON =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "iceskeleton_entity"), "mainBody");
+
+    public static final EntityModelLayer FIRESKELETON =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "fireskeleton_entity"), "mainBody");
+    public static final EntityModelLayer ENDERSKELETON =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "enderskeleton_entity"), "mainBody");
+    public static final EntityModelLayer DARKSKELETON =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "darkskeleton_entity"), "mainBody");
+
+
     public static final EntityModelLayer TCOMMANDER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "tcommander_entity"), "waist");
     public static final EntityModelLayer ELVE_ENTITY =

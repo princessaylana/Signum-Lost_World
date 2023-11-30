@@ -76,7 +76,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                     .add(ModBlocks.QUARTZ_CRYSTAL_CLUSTER)
                     .add(ModBlocks.QUARTZ_CRYSTAL_BLOCK)
 
-                    .add(ModBlocks.ASSEMBLY_STATION_BLOCK)
                     .add(ModBlocks.RAZORWIRE_BLOCK)
                     .add(ModBlocks.SKYFORGE)
                     .add(ModBlocks.SKY_ICE_BLOCK)
@@ -140,7 +139,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.QUARTZ_CRYSTAL_CLUSTER)
                 .add(ModBlocks.QUARTZ_CRYSTAL_BLOCK)
 
-                .add(ModBlocks.ASSEMBLY_STATION_BLOCK)
                 .add(ModBlocks.RAZORWIRE_BLOCK)
                 .add(ModBlocks.SKYFORGE)
                 .add(ModBlocks.SKY_ICE_BLOCK)

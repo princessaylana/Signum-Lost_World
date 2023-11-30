@@ -9,9 +9,9 @@ import za.lana.signum.Signum;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.*;
+import za.lana.signum.entity.mob.PidgeonEntity;
 import za.lana.signum.entity.mob.UnicornEntity;
 import za.lana.signum.entity.transport.AirBalloonEntity;
-import za.lana.signum.entity.transport.SkyCarEntity;
 import za.lana.signum.item.ModFuels;
 import za.lana.signum.item.ModItems;
 
@@ -42,24 +42,29 @@ public class RunInitMain {
     private static void registerAttributes() {
 
         FabricDefaultAttributeRegistry.register(ModEntities.UNICORN, UnicornEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.PIDGEON, PidgeonEntity.setAttributes());
+
         FabricDefaultAttributeRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderEntity.setAttributes());
-
-        FabricDefaultAttributeRegistry.register(ModEntities.SSKELETON_ENTITY, SumSkeletonEntity.setAttributes());
-
         FabricDefaultAttributeRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderEntity.setAttributes());
 
-        FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.AIRBALLOON, AirBalloonEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_SKELETON, TiberiumSkeletonEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterEntity.setAttributes());
-
         FabricDefaultAttributeRegistry.register(ModEntities.ELVE_ENTITY, ElveEntity.setAttributes());
 
+        // SKELETONS
+        FabricDefaultAttributeRegistry.register(ModEntities.SSKELETON_ENTITY, SumSkeletonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.TIBSKELETON_ENTITY, TibSkeletonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.ICESKELETON_ENTITY, IceSkeletonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.FIRESKELETON_ENTITY, IceSkeletonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.ENDERSKELETON_ENTITY, IceSkeletonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.DARKSKELETON_ENTITY, IceSkeletonEntity.setAttributes());
+
+        FabricDefaultAttributeRegistry.register(ModEntities.AIRBALLOON, AirBalloonEntity.setAttributes());
+
+        // gecko
         FabricDefaultAttributeRegistry.register(ModEntities.GHOST, GhostEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.AIRDRONE, AirDroneEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.SIGALIEN, SigAlienEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.SKYCAR, SkyCarEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormEntity.setAttributes());
+
     }
 
     public static void registerStrippableBlocks(){

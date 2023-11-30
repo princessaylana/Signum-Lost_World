@@ -60,6 +60,12 @@
         "weight": 5,
         "minCount": 4,
         "maxCount": 4
+      },
+      {
+        "type": "signum:pidgeon",
+        "weight": 5,
+        "minCount": 2,
+        "maxCount": 4
       }
     ],
     "misc": [],

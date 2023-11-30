@@ -12,6 +12,7 @@ import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ShieldItem;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.item.ModItems;
 
@@ -133,6 +134,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem)ModItems.STEEL_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem)ModItems.STEEL_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem)ModItems.STEEL_BOOTS));
+
 
 
     }

@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * 2023
+ * */
 package za.lana.signum.client.renderer.entity;
 
 import net.minecraft.client.render.VertexConsumerProvider;

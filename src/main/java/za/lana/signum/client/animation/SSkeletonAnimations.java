@@ -10,8 +10,10 @@ import net.minecraft.client.render.entity.animation.Transformation;
 @Environment(value= EnvType.CLIENT)
 public class SSkeletonAnimations {
 
+
+
     public static final Animation SSKELETON_WALK = Animation.Builder.create(1f).looping()
-            .addBoneAnimation("waist",
+            .addBoneAnimation("mainBody",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -145,6 +147,4 @@ public class SSkeletonAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(0.5f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
-
-
 }

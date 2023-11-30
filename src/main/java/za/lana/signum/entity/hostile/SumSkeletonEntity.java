@@ -34,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.TrackSumSkeletonTargetGoal;
 import za.lana.signum.item.ModItems;
+import za.lana.signum.particle.ModParticles;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     public final AnimationState attackAniState = new AnimationState();
     public final AnimationState idleAniState = new AnimationState();
     private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(SumSkeletonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private final SimpleInventory inventory = new SimpleInventory(4);
+    private final SimpleInventory inventory = new SimpleInventory(6);
 
     public SumSkeletonEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
@@ -63,19 +64,20 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         this.targetSelector.add(2, new TrackSumSkeletonTargetGoal(this));
         this.targetSelector.add(3, new SumSkeletonEntity.SumSkeletonRevengeGoal());
 
-        //this.initCustomGoals();
+        this.initCustomGoals();
     }
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(2, new AvoidSunlightGoal(this));
-        this.goalSelector.add(3, new EscapeSunlightGoal(this, 1.0));
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+        this.goalSelector.add(3, new EscapeSunlightGoal(this, 1.2));
         this.targetSelector.add(4, new ActiveTargetGoal<>(this, SkeletonEntity.class, true));
+        this.targetSelector.add(4, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+        //this.targetSelector.add(4, new ActiveTargetGoal<>(this, SkeletonEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 30)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.3f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5);
@@ -193,6 +195,18 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         this.armorDropChances[EquipmentSlot.HEAD.getEntitySlotId()] = 0.0f;
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
+    @Override
+    public void tickMovement() {
+        if (this.getWorld().isClient) {
+            for (int i = 0; i < 2; ++i) {
+                this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.25, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+            }
+        }
+        if (this.isAlive() && this.isAffectedByDaylight()) {
+            this.setOnFireFor(8);
+        }
+        super.tickMovement();
+    }
 
     @Nullable
     @Override
@@ -236,7 +250,6 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     }
 
     //
-
     class SumSkeletonRevengeGoal
             extends RevengeGoal {
         public SumSkeletonRevengeGoal() {
@@ -274,13 +287,9 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
             }
             return false;
         }
-
         @Override
         protected double getFollowRange() {
             return super.getFollowRange() * 0.5;
         }
     }
-
-
-
 }

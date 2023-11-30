@@ -41,6 +41,13 @@
     ],
     "volume":"-3.0"
   },
+  "pidgeon_call": {
+    "subtitle": "sounds.signum.pidgeon_call",
+    "sounds": [
+      "signum:pidgeon_call"
+    ],
+    "volume":"-3.0"
+  },
   "airballoon_down": {
     "subtitle": "sounds.signum.airballoon_down",
     "sounds": [

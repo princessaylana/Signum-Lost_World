@@ -14,6 +14,9 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -45,13 +48,6 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.networking.packet.ABKeyInputSyncS2CPacket;
@@ -62,7 +58,7 @@ import za.lana.signum.util.ImplementedInventory;
 
 public class AirBalloonEntity
         extends AnimalEntity
-        implements GeoEntity, ImplementedInventory, NamedScreenHandlerFactory {
+        implements ImplementedInventory, NamedScreenHandlerFactory {
     // floating
     public double T = 0.50f;        // up 0.75f def
     public double S = -0.12f;       // Floating Down
@@ -71,21 +67,32 @@ public class AirBalloonEntity
     public double V = 0.25f;        //
     public boolean isFlyUpPressed = false;
     public boolean isFlyDownPressed = false;
+    public boolean onGround;
+
+    private int lastAge;
+    private int fuel;
+    public int fuelTime = 0;
+    private int maxFuelTime = 4;
+    public int fuelAniTimeout = 0;
+    public int flyUpTimeout = 0;
+    public int flyDownTimeout = 0;
+    public int fuelEmptyAniTimeout = 0;
+    private float lastIntensity;
+    protected final PropertyDelegate propertyDelegate;
+    public AnimationState flyAniState = new AnimationState();
+    public AnimationState landAniState = new AnimationState();
+    public AnimationState floatingFuelEmptyAniState = new AnimationState();
+    public AnimationState floatingFuelAniState = new AnimationState();
+    public AnimationState flyUpAniState = new AnimationState();
+    public AnimationState flyDownAniState = new AnimationState();
+    private final float volume = 0.5f;
     public static int ambientChance = 2;
+    private final boolean isInAir;
     public static final String AIRBALLOON_MOUNT = "message.signum.airballoon.mount";
     public static final String AIRBALLOON_WIND = "message.signum.airballoon.wind";
-    private final boolean isInAir;
-    private float lastIntensity;
-    private final float volume = 0.5f;
-    private int lastAge;
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    private int fuel;
-    private int fuelTime = 0;
-    private int maxFuelTime = 4;
-    protected final PropertyDelegate propertyDelegate;
+    private static final TrackedData<Boolean> BURNINGFUEL = DataTracker.registerData(AirBalloonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-    //public static final String AIRBALLOON_EMPTY = "message.signum.airballoon.empty";
     public
     AirBalloonEntity(EntityType<? extends AnimalEntity> entityType, World level) {
         super(entityType, level);
@@ -112,10 +119,76 @@ public class AirBalloonEntity
         };
     }
 
+    public boolean isOnGround() {
+        return this.onGround;
+    }
+    //public boolean isInAir() {return !this.isOnGround();}
+
+    // VANILLA ANIMATIONS
+    private void setupAnimationStates(){
+        this.floatingAnimation();
+        this.burnFuelAnimation();
+        this.flyUpAnimation();
+        this.flyDownAnimation();
+
+    }
+    // TODO FLOATING ANIMATION NOT WORKING
+    private void floatingAnimation(){
+        if (!this.isBurningFuel()) {
+            floatingFuelAniState.stop();
+            fuelEmptyAniTimeout = 40;
+            this.floatingFuelAniState.start(this.age);
+        }
+        else {
+            --this.fuelEmptyAniTimeout;
+        }
+
+    }
+    // TODO BURNING ANIMATION NOT WORKING
+    private void burnFuelAnimation(){
+        if (this.isBurningFuel() && fuelAniTimeout <= 0) {
+            floatingFuelEmptyAniState.stop();
+            fuelAniTimeout = 40;
+            this.floatingFuelAniState.start(this.age);
+        }
+        else {
+            --this.fuelAniTimeout;
+        }
+        if(!this.isBurningFuel()) {
+            floatingFuelAniState.stop();
+
+        }
+    }
+    private void flyUpAnimation(){
+        if (this.isFlyUpPressed && isBurningFuel() && flyUpTimeout <= 0) {
+            flyUpTimeout = 40;
+            this.flyUpAniState.start(this.age);
+        }
+        else {
+            --this.flyUpTimeout;
+        }
+        if(!this.isFlyUpPressed) {
+            flyUpAniState.stop();
+        }
+    }
+    private void flyDownAnimation(){
+        floatingFuelAniState.stop();
+        if (this.isFlyDownPressed && flyDownTimeout <= 0) {
+            flyDownTimeout = 40;
+            this.flyDownAniState.start(this.age);
+        }
+        else {
+            --this.flyDownTimeout;
+        }
+        if(!this.isFlyDownPressed) {
+            flyDownAniState.stop();
+        }
+    }
     // INIT DATA
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
+        this.dataTracker.startTracking(BURNINGFUEL, false);
     }
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
@@ -174,8 +247,8 @@ public class AirBalloonEntity
         return inventory;
     }
     // FUEL
-    private static boolean hasFuel(AirBalloonEntity vehicle) {
-        return !vehicle.getStack(0).isEmpty();
+    private static boolean hasFuel(AirBalloonEntity airBalloon) {
+        return !airBalloon.getStack(0).isEmpty();
     }
     private void consumeFuel(AirBalloonEntity airBalloon) {
         if(!getStack(0).isEmpty()) {
@@ -184,13 +257,18 @@ public class AirBalloonEntity
             this.fuel = this.fuelTime;
         }
     }
-    private static boolean burningFuel(AirBalloonEntity vehicle) {
-        return vehicle.fuelTime > 0;
+    private static boolean burningFuel(AirBalloonEntity airBalloon) {
+        return airBalloon.fuelTime > 0;
     }
-    @Override
-    protected float getVelocityMultiplier() {
-        return this.isInAir && this.hasPassengers() || this.isFallFlying() ? 1.0f : super.getVelocityMultiplier();
+    public boolean isBurningFuel() {
+        return this.dataTracker.get(BURNINGFUEL);
     }
+    private void setBurningFuel(){
+        if(burningFuel(this)){
+            this.dataTracker.set(BURNINGFUEL, true);
+        }
+    }
+
     // TRAVEL
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
@@ -209,6 +287,7 @@ public class AirBalloonEntity
     @Override
     public void tick() {
         super.tick();
+        this.setBurningFuel();
         if (!this.getWorld().isClient()) {
             if (burningFuel(this)){
                 --this.fuelTime;
@@ -225,11 +304,13 @@ public class AirBalloonEntity
                     ABKeyInputSyncS2CPacket.send(player, this);
                 }
         }
+        if(this.getWorld().isClient()) {
+            setupAnimationStates();
+        }
     }
     @Override
     public void travel(Vec3d pos) {
         if (isAlive()) {
-            //
             if (hasPassengers()) {
                 Vec3d vec3d2 = this.getVelocity();
                 this.setMovementSpeed((float) V);
@@ -256,7 +337,7 @@ public class AirBalloonEntity
                     // U = -0.9f
                     y = (float) U;
                     this.setVelocity(vec3d2.x, U * 0.12, vec3d2.z);
-                    airDeflate(getEntityWorld(), getBlockPos());;
+                    airDeflate(getEntityWorld(), getBlockPos());
                 }
                 else if (fuelTime > 0) {
                     boolean isFlyUpPressed = this.isFlyUpPressed;
@@ -264,7 +345,7 @@ public class AirBalloonEntity
                         // T = 0.50f
                         y = (float) T;
                         increaseHeat(getEntityWorld(), getBlockPos());
-                        //this.setVelocity(vec3d2.x, T * -0.36 , vec3d2.z);
+                        //
                     }
                 }
                 // Float slowly down in Air
@@ -289,6 +370,10 @@ public class AirBalloonEntity
         this.onLanding();
         this.bounce(this);
     }
+    @Override
+    protected float getVelocityMultiplier() {
+        return this.isInAir && this.hasPassengers() || this.isFallFlying() ? 1.0f : super.getVelocityMultiplier();
+    }
     // LANDING
     @Override
     public boolean hasNoGravity() {
@@ -309,12 +394,8 @@ public class AirBalloonEntity
     public LivingEntity getControllingPassenger() {
         return getFirstPassenger() instanceof LivingEntity entity ? entity : null;
     }
-    @Override
     protected boolean canAddPassenger(Entity passenger) {
-        return this.getPassengerList().size() < this.getMaxPassengers();
-    }
-    protected int getMaxPassengers() {
-        return 2;
+        return this.getPassengerList().size() <= 2;
     }
     @Override
     public void updatePassengerPosition(Entity entity, PositionUpdater moveFunction) {
@@ -355,32 +436,6 @@ public class AirBalloonEntity
         super.remove(reason);
     }
 
-    // VANILLA ANIMATIONS
-
-    // TODO REMOVE GECKO AND REPLACE WITH VANILLA
-    // GECKO ANIMATIONS
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 0, state -> {
-            if (state.isMoving() && getControllingPassenger() != null) {
-                return state.setAndContinue(RawAnimation.begin().then("animation.airballoon.fly", Animation.LoopType.LOOP));
-            }
-            if (this.isInAir && getControllingPassenger() != null) {
-                return state.setAndContinue(RawAnimation.begin().then("animation.airballoon.idle", Animation.LoopType.LOOP));
-            }
-            else {
-                // no animation when its on the ground
-                return null;
-            }
-            // Handle the sound keyframe that is part of our animation json
-        }).setSoundKeyframeHandler(event -> {
-            // We don't have a sound for this yet :(
-        }));
-    }
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
-    }
     // VANILLA GUI
     @Override
     public Text getDisplayName() {
@@ -405,11 +460,7 @@ public class AirBalloonEntity
             level.playSound(null, d, e, f, ModSounds.SNOWY_WIND,
                     SoundCategory.NEUTRAL,1.0f, 0.5f + this.random.nextFloat() * 1.2f);
             LivingEntity passenger = this.getControllingPassenger();
-            if(level.isClient){
-                assert passenger != null;
-                passenger.sendMessage(Text.translatable(AIRBALLOON_WIND).fillStyle(
-                        Style.EMPTY.withColor(Formatting.YELLOW)));
-            }
+            //
         }
     }
     @Override
@@ -437,6 +488,7 @@ public class AirBalloonEntity
         float g = 0.1f + this.lastIntensity * volume; // volume
         //
         this.playSound(ModSounds.AIRBALLOON_DOWN, g, f);
+
         this.lastAge = this.age;
     }
     private void increaseHeat(World world, BlockPos pos) {
@@ -445,6 +497,7 @@ public class AirBalloonEntity
             ParticleUtil.spawnParticle(getWorld(), BlockPos.ofFloored(getPos()), random, ModParticles.BLACK_SHROOM_PARTICLE);
         }
     }
+
     private void airDeflate(World world, BlockPos pos) {
         playDeflateSound();
     }

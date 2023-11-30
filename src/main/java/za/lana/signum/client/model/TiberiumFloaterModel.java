@@ -1,9 +1,3 @@
-/**
- * SIGNUM
- * MIT License
- * Lana
- * 2023
- * */
 package za.lana.signum.client.model;
 
 import net.minecraft.util.Identifier;

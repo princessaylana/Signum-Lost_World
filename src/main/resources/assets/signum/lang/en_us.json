@@ -60,6 +60,10 @@
 
   "item.signum.tiberium_staff": "Tiberium Staff",
   "item.signum.tiberium_staff.info": "Magic Staff that Poisons Targets",
+  "item.signum.tiberium_staff.info1": "Repair Material",
+  "item.signum.tiberium_staff.info2": "Uses",
+
+
   "item.signum.freeze_staff": "Ice Staff",
   "item.signum.freeze_staff.info": "Magic Staff that Freezes Targets",
   "item.signum.transmute_staff": "Transmute Staff",
@@ -75,22 +79,15 @@
   "item.signum.gravity_staff.info": "Magic Staff that uses Gravity Force",
   "item.signum.gravity_staff": "Gravity Staff",
   "item.signum.death_staff": "Death Staff",
-  "item.signum.death_staff.info": "Magic Staff that Summons Undead Creatures",
+  "item.signum.death_staff.info": "Magic Staff that Summons Skeletons",
   "item.signum.water_staff": "Water Staff",
 
   "item.signum.toxic_soup": "Toxic Stew",
-
-  "item.signum.bpistol_item": "Baretta Pistol",
-  "item.signum.bpistol_item.ammo": "Ammo",
-  "item.signum.laserbolt_item": "Laser Bolt",
-  "item.signum.toxicball_item": "Toxic Ball",
-  "item.signum.toxicgun": "Toxic Gun",
-  "item.signum.toxicgun.ammo": "Toxic Balls",
+  "item.signum.mixed_mushroom_stew": "Mixed Mushroom Stew",
 
   "item.signum.detector_item": "Ore Detector",
+  "item.signum.tiberium_sword": "Tiberium Sword",
   "item.signum.detector_item.info": "Item Used to Test Ore WorldGen",
-  "item.signum.e0rod": "E0Elemental Rod",
-  "item.signum.slayer_staff": "Slayer Staff",
   "item.signum.rotten_flesh_on_a_stick": "Rotten Flesh on a Stick",
 
   "item.signum.tiberium_skeleton_spawn_egg": "Tiberium Skeleton Spawn Egg",
@@ -100,10 +97,8 @@
   "item.signum.tiberium_floater_spawn_egg": "Tiberium Floater Spawn Egg",
   "item.signum.unicorn_spawn_egg": "Unicorn Spawn Egg",
   "item.signum.espider_spawn_egg": "Evolved Spider Egg",
-  "item.signum.airdrone_spawn_egg": "Airdrone Spawn Egg",
-  "item.signum.sigalien_spawn_egg": "Alien Spawn Egg",
-  "item.signum.skycar_spawn_egg": "Skycar Spawn Egg",
   "item.signum.ghost_spawn_egg": "Ghost Spawn Egg",
+
   "item.signum.airballoon_spawn_egg": "Airballoon",
 
   "block.signum.manganese_ore": "Manganese Ore",
@@ -221,9 +216,11 @@
   "entity.signum.unicorn": "Unicorn",
   "entity.signum.ttrooper_entity": "Tiberium Trooper",
   "entity.signum.elve_entity": "Elve",
+  "item.signum.elve_spawn_egg": "Elve Spawn Egg",
   "entity.signum.tcommander_entity": "Tiberium Commander",
   "entity.signum.espider_entity": "Deadly Spider",
   "entity.signum.sskeleton_entity": "Summoned Skeleton",
+  "item.signum.sskeleton_spawn_egg": "Summoned Skeleton Spawn Egg",
 
   "dimension.signum_dim": "SkyLand",
   "dimension.lost_world": "Lost World",
@@ -238,6 +235,7 @@
   "key.signum.openinventory":"AirBalloon Inventory",
   "key.signum.flyup":"Fly Up",
   "key.signum.flydown":"Fly Down",
+  "key.signum.shift": "Press Shift for Info",
 
   "sounds.signum.snowy_wind": "Freezing Cold"
 

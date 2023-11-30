@@ -178,8 +178,6 @@ public class ModItemGroups {
                         entries.add(ModItems.STEEL_BOOTS);
 
                         // STAFFS
-                        entries.add(ModItems.SLAYER_STAFF);
-
                         entries.add(ModItems.TIBERIUM_STAFF);
                         entries.add(ModItems.FIRE_STAFF);
                         entries.add(ModItems.TRANSMUTE_STAFF);
@@ -187,10 +185,10 @@ public class ModItemGroups {
                         entries.add(ModItems.LIGHTNING_STAFF);
                         entries.add(ModItems.HEALING_STAFF);
                         entries.add(ModItems.DEATH_STAFF);
-                        entries.add(ModItems.TELEPORT_STAFF);
                         entries.add(ModItems.GRAVITY_STAFF);
 
-                        entries.add(ModItems.WATER_STAFF);
+                        //entries.add(ModItems.TELEPORT_STAFF);
+                        //entries.add(ModItems.WATER_STAFF);
                         //PLANTS AND FOOD
                         entries.add(ModBlocks.ORANGE_MUSHROOM);
                         entries.add(ModBlocks.YELLOW_MUSHROOM);
@@ -199,39 +197,38 @@ public class ModItemGroups {
                         entries.add(ModBlocks.PURPLE_MUSHROOM);
                         entries.add(ModBlocks.PINK_MUSHROOM);
 
+                        // FOODS
                         entries.add(ModItems.TOXIC_SOUP);
+                        entries.add(ModItems.MIXED_MUSHROOM_STEW);
 
                         // SPAWN EGGS
+                        entries.add(ModItems.PIDGEON_SPAWN_EGG);
                         entries.add(ModItems.UNICORN_SPAWN_EGG);
                         entries.add(ModItems.ESPIDER_SPAWN_EGG);
 
                         entries.add(ModItems.TIBERIUM_WORM_SPAWN_EGG);
-                        entries.add(ModItems.TIBERIUM_SKELETON_SPAWN_EGG);
                         entries.add(ModItems.TTROOPER_SPAWN_EGG);
                         entries.add(ModItems.TCOMMANDER_SPAWN_EGG);
                         entries.add(ModItems.TIBERIUM_FLOATER_SPAWN_EGG);
                         entries.add(ModItems.ELVE_SPAWN_EGG);
 
-                        //entries.add(ModItems.AIRDRONE_SPAWN_EGG);
-                        //entries.add(ModItems.SIGALIEN_SPAWN_EGG);
-                        //entries.add(ModItems.SKYCAR_SPAWN_EGG);
                         entries.add(ModItems.GHOST_SPAWN_EGG);
-                        entries.add(ModItems.SUMSKELETON_SPAWN_EGG);
-                        entries.add(ModItems.AIRBALOON_SPAWN_EGG);
+                        //entries.add(ModItems.SUMSKELETON_SPAWN_EGG);
+                        entries.add(ModItems.TIBSKELETON_SPAWN_EGG);
+                        entries.add(ModItems.ICESKELETON_SPAWN_EGG);
+                        entries.add(ModItems.FIRESKELETON_SPAWN_EGG);
+                        entries.add(ModItems.ENDERSKELETON_SPAWN_EGG);
+                        entries.add(ModItems.DARKSKELETON_SPAWN_EGG);
 
+                        entries.add(ModItems.AIRBALOON_SPAWN_EGG);
 
                         //TODO: BELOW TO BE REMOVED - FOR TESTING ONLY
                         entries.add(ModBlocks.EXAMPLE_BLOCK);
-                        entries.add(ModItems.BPISTOL_ITEM);
-                        entries.add(ModItems.LASERBOLT_ITEM);
-                        entries.add(ModItems.E0ROD);
-                        entries.add(ModItems.TOXICGUN);
                         entries.add(ModItems.DETECTOR_ITEM);
                         entries.add(ModItems.ROTTEN_FLESH_ON_A_STICK);
 
                         // disabled
                         //entries.add(ModBlocks.TIBERIUM_FIRE);
-                        //entries.add(ModBlocks.ASSEMBLY_STATION_BLOCK);
 
                     }).build());
     public static void registerItemGroups(){

@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * 2023
+ * */
 package za.lana.signum.client.renderer.entity;
 
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -19,7 +25,7 @@ import za.lana.signum.entity.hostile.ESpiderEntity;
 public class ESpiderRenderer extends MobEntityRenderer<ESpiderEntity, ESpiderModel<ESpiderEntity>> {
     private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/espider_texture.png");
     public ESpiderRenderer(EntityRendererFactory.Context context) {
-        super(context, new ESpiderModel<>(context.getPart(ModModelLayers.ESPIDER)), 0.6f); //entity shadow
+        super(context, new ESpiderModel<>(context.getPart(ModModelLayers.ESPIDER)), 1.1f); //entity shadow
         this.addFeature(new ESpiderEyesFeatureRenderer<>(this));
         this.addFeature(new ESpiderSaddleFeatureRenderer<>(this, new ESpiderModel(context.getPart(ModModelLayers.ESPIDER_SADDLE)), new Identifier("textures/entity/hostile/espider_saddle.png")));
     }

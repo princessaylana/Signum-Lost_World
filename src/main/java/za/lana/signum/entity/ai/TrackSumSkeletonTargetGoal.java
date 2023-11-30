@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.2.1 (FabricMC 53fa44c9).
- */
 package za.lana.signum.entity.ai;
 
 import net.minecraft.entity.LivingEntity;

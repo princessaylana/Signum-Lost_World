@@ -1,4 +1,4 @@
-// 1.20.2	2023-11-12T16:25:20.660347346	Signum/Block Loot Tables
+// 1.20.2	2023-11-25T17:24:29.694259833	Signum/Block Loot Tables
 1850f726862d4a4b7d962cfcb634d86f3a549f55 data/signum/loot_tables/blocks/budding_quartz_crystal.json
 bbf09d87467d9cd4a2f52f56e9bd2d77bb018256 data/signum/loot_tables/blocks/soulwood_leaves.json
 09ef9489a63be5731ba43d88c7bd8f7a8e0792c7 data/signum/loot_tables/blocks/endstone_manganese_ore.json
@@ -45,8 +45,8 @@ c56c42b1e609dc829ef418f1161242a70fc129ab data/signum/loot_tables/blocks/deepslat
 a445674d566b2608b041bffc312bd935924ed15e data/signum/loot_tables/blocks/medium_quartz_crystal_bud.json
 0db83bcb3a6ba537415e1b0d40c6ec9648e1b952 data/signum/loot_tables/blocks/black_shroom_block.json
 04d331e39aebd508c874737981e92299d167b3f7 data/signum/loot_tables/blocks/manganese_door.json
-e03b6474feb8b9d1206d0b56646ace6c5dc3e955 data/signum/loot_tables/blocks/soulwood_log.json
 7daf1c997581adda3c36e948f1e3c1aa3b875db7 data/signum/loot_tables/blocks/small_ice_crystal_bud.json
+e03b6474feb8b9d1206d0b56646ace6c5dc3e955 data/signum/loot_tables/blocks/soulwood_log.json
 6cd2190ef1c74216edb198973f8e3f5e9a958e7a data/signum/loot_tables/blocks/exotic_crystal_block.json
 fd2157fc407cb3085277b54d2958b405b8caf2f4 data/signum/loot_tables/blocks/manganese_fence.json
 3872df4c6c90def2bb24dc22fc84317be70df64b data/signum/loot_tables/blocks/orange_shroom_block.json
@@ -69,7 +69,6 @@ a41f747da890785c3bf517d11ba44414596a4978 data/signum/loot_tables/blocks/stripped
 d555e7e3fbdedc541eddb4505bc30d5d367d896d data/signum/loot_tables/blocks/manganese_gate.json
 4dead749f27d9a897569c22113112b8e3b78f1cf data/signum/loot_tables/blocks/yellow_shroom_block.json
 9a593fde8e4c00fd5c9a35c798589b6894c7359e data/signum/loot_tables/blocks/deepslate_black_diamond_ore.json
-0d0f90164fadc94d0cf5920150ed2ad4ba3f9151 data/signum/loot_tables/blocks/assembly_station_block.json
 a93f0eb1bb32f7515310b4ca43c2c36ed18b0b57 data/signum/loot_tables/blocks/spiderweb_block.json
 03e174b525f9778f0721e762117a007e6740b0cf data/signum/loot_tables/blocks/black_diamond_block.json
 95fbec5493f968a5f8dd51880e3fe2705404edd8 data/signum/loot_tables/blocks/fire_crystal_block.json

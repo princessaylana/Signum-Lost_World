@@ -21,7 +21,6 @@ public class TransmuteEffect extends StatusEffect {
         if (this == ModEffects.TRANSMUTE_EFFECT) {
             int i = (int)(proximity * (double)(6 << amplifier) + 0.5);
             target.damage(target.getDamageSources().magic(), i);
-            // target.heal(i);
         }
     }
 }

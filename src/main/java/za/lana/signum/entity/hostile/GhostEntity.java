@@ -62,13 +62,11 @@ public class GhostEntity extends HostileEntity implements GeoEntity, Angerable {
     static final TrackedData<Boolean> ANGRY = DataTracker.registerData(GhostEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> PROVOKED = DataTracker.registerData(GhostEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-
     public GhostEntity(EntityType<? extends HostileEntity> type, World level) {
         super(type, level);
         this.experiencePoints = 3;
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0f);
     }
-
 
     @Override
     protected void initGoals() {
@@ -81,10 +79,8 @@ public class GhostEntity extends HostileEntity implements GeoEntity, Angerable {
 
         this.targetSelector.add(1, new GhostEntity.TeleportTowardsPlayerGoal(this, this::shouldAngerAt));
         this.targetSelector.add(2, new RevengeGoal(this));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
-        this.targetSelector.add(5, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
-        this.targetSelector.add(6, new ActiveTargetGoal<>(this, ChickenEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+        this.targetSelector.add(4, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
@@ -383,9 +379,5 @@ public class GhostEntity extends HostileEntity implements GeoEntity, Angerable {
             this.ghost.getLookControl().lookAt(this.target.getX(), this.target.getEyeY(), this.target.getZ());
         }
     }
-
-
-
-
 
 }

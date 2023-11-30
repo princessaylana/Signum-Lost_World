@@ -1,9 +1,6 @@
 package za.lana.signum.entity.projectile;
 
-import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -16,19 +13,15 @@ import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.FrogEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.thrown.EggEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
@@ -67,31 +60,40 @@ public class TransmuteBoltEntity extends ThrownItemEntity {
 
         int i = entity instanceof EndermanEntity ? 6 : 0;
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
-        if (entity instanceof EnderDragonEntity || entity instanceof WitherEntity || entity instanceof GhastEntity || entity instanceof FrogEntity || entity instanceof PlayerEntity ){
-            entity.damage(getWorld().getDamageSources().magic(), dam * 2);
-            this.discard();
-        }
-        if (entity instanceof LivingEntity) {
+
+        if (entity instanceof ClientPlayerEntity) {
+                //
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
+            entity.damage(getWorld().getDamageSources().magic(), dam);
+            this.entity.playSpawnEffects();
+            this.discard();
+            }
+        if (entity instanceof EnderDragonEntity || entity instanceof WitherEntity || entity instanceof GhastEntity || entity instanceof FrogEntity ){
+            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
+            entity.damage(getWorld().getDamageSources().magic(), dam);
+            this.entity.playSpawnEffects();
+            this.discard();
+        }else{
+            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
+
             if (!this.getWorld().isClient) {
                 // spawn a frog #1
                 EntityType.FROG.spawn(((ServerWorld) entity.getWorld()), entity.getBlockPos(), SpawnReason.TRIGGERED);
-                // spawn a frog #2
+                    // spawn a frog #2
                 EntityType.FROG.spawn(((ServerWorld) entity.getWorld()), entity.getBlockPos(), SpawnReason.TRIGGERED);
-                // spawn a frog #3
+                    // spawn a frog #3
                 EntityType.FROG.spawn(((ServerWorld) entity.getWorld()), entity.getBlockPos(), SpawnReason.TRIGGERED);
-                //
+                    //
                 this.entity.playSpawnEffects();
                 entity.damage(getWorld().getDamageSources().magic(), dam);
-                // damage and destroy the entity
                 entity.discard();
                 this.discard();
-            }
-            if (this.getWorld().isClient){
-                level.addParticle(ModParticles.TRANSMUTE_PARTICLE, getX(), getY(), getZ(), 0.0, 2.0, 0.0);
-                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
-            }
+                }
         }
+        if (this.getWorld().isClient){
+            level.addParticle(ModParticles.TRANSMUTE_PARTICLE, getX(), getY(), getZ(), 0.0, 2.0, 0.0);
+            this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            }
     }
 
     @Override

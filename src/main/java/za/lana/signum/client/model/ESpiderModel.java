@@ -5,6 +5,7 @@ package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
@@ -147,8 +148,9 @@ public class ESpiderModel<T extends ESpiderEntity> extends SinglePartEntityModel
 
 		ModelPartData tiptip9 = endtip9.addChild("tiptip9", ModelPartBuilder.create().uv(51, 24).cuboid(-14.0F, -0.5F, -0.5F, 14.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(-5.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.2269F));
 
-		ModelPartData head = body0.addChild("head", ModelPartBuilder.create().uv(52, 14).cuboid(-2.0F, -6.0F, -12.0F, 4.0F, 2.0F, 7.0F, new Dilation(0.0F))
-				.uv(0, 8).cuboid(-2.75F, -3.5F, -1.0F, 5.5F, 3.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -4.5F, 6.0F));
+		ModelPartData head = body0.addChild("head", ModelPartBuilder.create().uv(0, 38).cuboid(-3.5F, -3.5F, -13.0F, 7.0F, 3.0F, 12.0F, new Dilation(0.0F))
+				.uv(52, 14).cuboid(-2.0F, -6.0F, -12.0F, 4.0F, 2.0F, 7.0F, new Dilation(0.0F))
+				.uv(0, 8).cuboid(-2.75F, -3.5F, -1.0F, 5.5F, 3.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -4.5F, 4.0F));
 
 		ModelPartData eyes = head.addChild("eyes", ModelPartBuilder.create().uv(7, 25).cuboid(1.75F, -5.75F, 2.5F, 0.5F, 1.0F, 1.0F, new Dilation(0.0F))
 				.uv(38, 10).cuboid(0.75F, -5.75F, 1.5F, 1.0F, 1.0F, 0.5F, new Dilation(0.0F))
@@ -177,7 +179,7 @@ public class ESpiderModel<T extends ESpiderEntity> extends SinglePartEntityModel
 		this.head.yaw = netHeadYaw * ((float)Math.PI / 180);
 		this.head.pitch = headPitch * ((float)Math.PI / 180);
 
-		this.animateMovement(ESpiderAnimations.ESPIDERMODEL_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
+		this.animateMovement(ESpiderAnimations.ESPIDERMODEL_WALK,  limbSwing, limbSwingAmount, 2f, 2.5f);
 		this.updateAnimation(entity.climbAniState, ESpiderAnimations.ESPIDERMODEL_WALLCLIMB, ageInTicks, 1f);
 		this.updateAnimation(entity.idleAniState, ESpiderAnimations.ESPIDERMODEL_IDLE, ageInTicks, 1f);
 		this.updateAnimation(entity.attackAniState, ESpiderAnimations.ESPIDERMODEL_ATTACK, ageInTicks, 1f);

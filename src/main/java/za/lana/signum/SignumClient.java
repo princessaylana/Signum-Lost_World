@@ -22,7 +22,6 @@ import za.lana.signum.client.networking.ABKeyInputPacket;
 import za.lana.signum.client.networking.ABKeyInputSyncPacket;
 import za.lana.signum.client.renderer.entity.*;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
-import za.lana.signum.client.renderer.transport.SkyCarRenderer;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.networking.ModMessages;
@@ -97,6 +96,9 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.UNICORN, UnicornEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.UNICORN, UnicornRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.PIDGEON, PidgeonModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.PIDGEON, PidgeonRenderer::new);
+
         // PROJECTILES
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TIBERIUM_BOLT, TiberiumBoltEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TIBERIUM_PROJECTILE, TiberiumBoltRenderer::new);
@@ -116,14 +118,10 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GRAVITY_BOLT, GravityBoltEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GRAVITY_PROJECTILE, GravityBoltRenderer::new);
 
-        //
-        EntityRendererRegistry.register(ModEntities.TOXICBALL, FlyingItemEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.LASERBOLT, FlyingItemEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SPIDER_SPIT, SpiderSpitModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.SPIDERSPIT_PROJECTILE, SpiderSpitRenderer::new);
 
-        //VANILLA HOSTILES
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SSKELETON, SumSkeletonModel::getTexturedModelData);
-        EntityRendererRegistry.register(ModEntities.SSKELETON_ENTITY, SumSkeletonRenderer::new);
-
+        //HOSTILES
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TTROOPER, TTrooperModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperRenderer::new);
 
@@ -137,20 +135,35 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER_SADDLE, ESpiderModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderRenderer::new);
 
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SPIDER_SPIT, SpiderSpitModel::getTexturedModelData);
-        EntityRendererRegistry.register(ModEntities.SPIDERSPIT_PROJECTILE, SpiderSpitRenderer::new);
 
-        // HOSTILES
-        EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);
-        EntityRendererRegistry.register(ModEntities.TIBERIUM_SKELETON, TiberiumSkeletonRenderer::new);
+        // SKELETONS
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SSKELETON, SumSkeletonModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.SSKELETON_ENTITY, SumSkeletonRenderer::new);
 
-        EntityRendererRegistry.register(ModEntities.GHOST, GhostRenderer::new);
-        EntityRendererRegistry.register(ModEntities.SIGALIEN, SigAlienRenderer::new);
-        EntityRendererRegistry.register(ModEntities.AIRDRONE, AirDroneRenderer::new);
-        EntityRendererRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TIBSKELETON, TibSkeletonModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.TIBSKELETON_ENTITY, TibSkeletonRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ICESKELETON, IceSkeletonModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ICESKELETON_ENTITY, IceSkeletonRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.FIRESKELETON, FireSkeletonModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.FIRESKELETON_ENTITY, FireSkeletonRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ENDERSKELETON, EnderSkeletonModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ENDERSKELETON_ENTITY, EnderSkeletonRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.DARKSKELETON, DarkSkeletonModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.DARKSKELETON_ENTITY, DarkSkeletonRenderer::new);
+
         // VEHICLES
-        EntityRendererRegistry.register(ModEntities.SKYCAR, SkyCarRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AIRBALLOON, AirBalloonModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.AIRBALLOON, AirBalloonRenderer::new);
+
+        // Gecko
+        EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);
+        EntityRendererRegistry.register(ModEntities.GHOST, GhostRenderer::new);
+        EntityRendererRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterRenderer::new);
+
         // PARTICLES
         ParticleFactoryRegistry.getInstance().register(ModParticles.BlUE_DUST_PARTICLE, BlueDustParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.TIBERIUM_PARTICLE, TiberiumParticle.Factory::new);

@@ -60,6 +60,7 @@ public class OreDetectorItem extends Item {
     //list of oreblocks to check for
     private boolean isValuableBlock(BlockState state) {
         return
+                state.isOf(ModBlocks.BLACK_DIAMOND_ORE) ||
                 state.isOf(ModBlocks.ELEMENT_ZERO_ORE) ||
                 state.isOf(ModBlocks.MOISSANITE_ORE) ||
                 state.isOf(ModBlocks.DEEPSLATE_MOISSANITE_ORE) ||

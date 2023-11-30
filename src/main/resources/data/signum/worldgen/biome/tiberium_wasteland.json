@@ -41,8 +41,8 @@
         "maxCount": 4
       },
       {
-        "type": "signum:tiberium_skeleton",
-        "weight": 100,
+        "type": "signum:tibskeleton_entity",
+        "weight": 50,
         "minCount": 2,
         "maxCount": 4
       },

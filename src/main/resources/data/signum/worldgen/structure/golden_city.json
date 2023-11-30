@@ -2,19 +2,7 @@
   "type": "minecraft:jigsaw",
   "biomes": "#signum:has_structure/golden_city",
   "step": "surface_structures",
-  "spawn_overrides": {
-    "monster": {
-      "bounding_box": "full",
-      "spawns": [
-        {
-          "type": "signum:elve_entity",
-          "weight": 1,
-          "minCount": 2,
-          "maxCount": 4
-        }
-      ]
-    }
-  },
+  "spawn_overrides": {},
   "terrain_adaptation": "beard_box",
   "start_pool": "signum:golden_city/start_pool",
   "size": 7,
