@@ -149,8 +149,10 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
             }
             if(isConsumingFuel(entity) && isOutputSlotEmptyOrReceivable()) {
                 entity.progress++;
+
                 if(entity.progress > entity.maxProgress) {
                     craftItem();
+                    entity.resetProgress();
                 }
             }
         } else {
