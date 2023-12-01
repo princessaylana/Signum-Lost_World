@@ -19,12 +19,14 @@ import za.lana.signum.entity.hostile.TibSkeletonEntity;
 public class IceSkeletonModel<T extends IceSkeletonEntity>
         extends SinglePartEntityModel<T> implements ModelWithArms {
     private final ModelPart iceskeleton;
+    private final ModelPart body;
     private final ModelPart head;
     private final ModelPart rightArm;
     private final ModelPart leftArm;
 
     public IceSkeletonModel(ModelPart root) {
         this.iceskeleton = root.getChild("mainBody");
+        this.body = iceskeleton.getChild("body");
         this.head = iceskeleton.getChild("body").getChild("head");
         this.rightArm = iceskeleton.getChild("body").getChild("rightArm");
         this.leftArm = iceskeleton.getChild("body").getChild("leftArm");

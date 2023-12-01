@@ -48,7 +48,7 @@ public class RunInitMain {
         FabricDefaultAttributeRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderEntity.setAttributes());
 
-        FabricDefaultAttributeRegistry.register(ModEntities.ELVE_ENTITY, ElveEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.ELVE_GUARD_ENTITY, ElveGuardEntity.setAttributes());
 
         // SKELETONS
         FabricDefaultAttributeRegistry.register(ModEntities.SSKELETON_ENTITY, SumSkeletonEntity.setAttributes());

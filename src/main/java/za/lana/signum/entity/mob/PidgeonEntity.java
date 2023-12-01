@@ -20,6 +20,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -42,10 +43,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.effect.ModEffects;
-import za.lana.signum.entity.ai.AnimalFindHomeGoal;
-import za.lana.signum.entity.ai.PidgeonFlyGoal;
-import za.lana.signum.entity.ai.PidgeonSleepGoal;
-import za.lana.signum.entity.ai.PidgeonSitOnTreeGoal;
+import za.lana.signum.entity.ai.*;
 import za.lana.signum.entity.control.PidgeonFlightControl;
 import za.lana.signum.sound.ModSounds;
 
@@ -67,6 +65,7 @@ public class PidgeonEntity extends AnimalEntity {
     private float field_28640 = 1.0F;
     private static final TrackedData<Boolean> CHASING = DataTracker.registerData(PidgeonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> SLEEPING = DataTracker.registerData(PidgeonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> ALERT = DataTracker.registerData(PidgeonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public PidgeonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -91,6 +90,9 @@ public class PidgeonEntity extends AnimalEntity {
             --this.sleepAniTimeout;
         }
         this.updateSleepAnimation();
+
+        // not moving
+        // !moveControl.isMoving()
     }
     private void updateSleepAnimation() {
         if (this.isInSleepingPose()) {
@@ -129,6 +131,7 @@ public class PidgeonEntity extends AnimalEntity {
         this.goalSelector.add(4, new PidgeonFlyGoal(this, 1.0));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 16.0F));
         this.goalSelector.add(7, new AnimalFindHomeGoal(this, 1.05f, 1));
+        this.goalSelector.add(8, new AlertTargetGoal(this));
         //this.goalSelector.add(5, new PidgeonSitOnTreeGoal(this, 1.0));
 
         this.targetSelector.add(1, new RevengeGoal(this));
@@ -200,6 +203,7 @@ public class PidgeonEntity extends AnimalEntity {
         super.initDataTracker();
         this.dataTracker.startTracking(CHASING, false);
         this.dataTracker.startTracking(SLEEPING, false);
+        this.dataTracker.startTracking(ALERT, false);
     }
     public void setInSleepingPose(boolean sleeping) {
         this.dataTracker.set(SLEEPING, sleeping);
@@ -293,6 +297,14 @@ public class PidgeonEntity extends AnimalEntity {
             }
         }
         return true;
+    }
+
+    public boolean isAlert() {
+        return this.dataTracker.get(ALERT);
+    }
+
+    public void setAlert(boolean alert) {
+        this.dataTracker.set(ALERT, alert);
     }
 
     public class JumpChasingGoal extends DiveJumpingGoal {

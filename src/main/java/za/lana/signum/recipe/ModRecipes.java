@@ -20,9 +20,5 @@ public class ModRecipes {
         Registry.register(Registries.RECIPE_TYPE, new Identifier(Signum.MOD_ID, SkyForgeRecipe.Type.ID),
                 SkyForgeRecipe.Type.INSTANCE);
 
-
-
-
-
     }
 }

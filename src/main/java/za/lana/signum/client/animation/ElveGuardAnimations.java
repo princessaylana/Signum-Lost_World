@@ -8,7 +8,7 @@ import net.minecraft.client.render.entity.animation.Keyframe;
 import net.minecraft.client.render.entity.animation.Transformation;
 
 @Environment(value= EnvType.CLIENT)
-public class ElveAnimations {
+public class ElveGuardAnimations {
 
     public static final Animation ELVE_WALK = Animation.Builder.create(1f).looping()
             .addBoneAnimation("waist",

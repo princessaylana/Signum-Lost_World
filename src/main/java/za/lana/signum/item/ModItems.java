@@ -71,6 +71,8 @@ public class ModItems {
     public static final Item MANGANESE_HOE = registerItem("manganese_hoe", new HoeItem(ModToolMaterials.MANGANESE, 1,3f, new FabricItemSettings()));
     public static final Item MANGANESE_SWORD = registerItem("manganese_sword", new SwordItem(ModToolMaterials.MANGANESE, 7,7f, new FabricItemSettings()));
 
+
+
     // Armor
     public static final Item STEEL_HELMET = registerItem("steel_helmet",
             new ArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.HELMET, new FabricItemSettings()));
@@ -81,6 +83,8 @@ public class ModItems {
     public static final Item STEEL_BOOTS = registerItem("steel_boots",
             new ArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
+    public static final Item STEEL_SHIELD = registerItem("steel_shield",
+            new ShieldItem(new FabricItemSettings().maxDamage(500)));
 
     // Weapons
     public static final Item PLASMA_SWORD = registerItem("plasma_sword", new SwordItem(ModToolMaterials.ELEMENT_ZERO, 10,6f, new FabricItemSettings()));
@@ -119,38 +123,38 @@ public class ModItems {
     public static final Item UNICORN_SPAWN_EGG = registerItem("unicorn_spawn_egg", new SpawnEggItem(
             ModEntities.UNICORN, 0xDCE8E8, 0xEEFC69, new FabricItemSettings()));
     public static final Item PIDGEON_SPAWN_EGG = registerItem("pidgeon_spawn_egg", new SpawnEggItem(
-            ModEntities.PIDGEON, 0xDCE8E8, 0xEEFC69, new FabricItemSettings()));
+            ModEntities.PIDGEON, 0xDCE8E8, 0xACADAB, new FabricItemSettings()));
 
     public static final Item GHOST_SPAWN_EGG = registerItem("ghost_spawn_egg", new SpawnEggItem(
-            ModEntities.GHOST, 0xD57E36, 0x1CED00, new FabricItemSettings()));
+            ModEntities.GHOST, 0x444342, 0x857D7C, new FabricItemSettings()));
     public static final Item AIRBALOON_SPAWN_EGG = registerItem("airballoon_spawn_egg", new SpawnEggItem(
             ModEntities.AIRBALLOON, 0xD83E36, 0x1D0550, new FabricItemSettings()));
 
     public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_WORM, 0x70F427, 0x73FA5B, new FabricItemSettings()));
     public static final Item TIBERIUM_FLOATER_SPAWN_EGG = registerItem("tiberium_floater_spawn_egg", new SpawnEggItem(
-            ModEntities.TIBERIUM_FLOATER, 0x70F427, 0x9BFC14, new FabricItemSettings()));
+            ModEntities.TIBERIUM_FLOATER, 0x70F427, 0xC3F802, new FabricItemSettings()));
     public static final Item TTROOPER_SPAWN_EGG = registerItem("ttrooper_spawn_egg", new SpawnEggItem(
-            ModEntities.TTROOPER_ENTITY, 0x70F427, 0x292929, new FabricItemSettings()));
+            ModEntities.TTROOPER_ENTITY, 0x70F427, 0xA3BE40, new FabricItemSettings()));
     public static final Item TCOMMANDER_SPAWN_EGG = registerItem("tcommander_spawn_egg", new SpawnEggItem(
-            ModEntities.TCOMMANDER_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
+            ModEntities.TCOMMANDER_ENTITY, 0x70F427, 0x3D8A3E, new FabricItemSettings()));
     public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
-            ModEntities.ESPIDER_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
+            ModEntities.ESPIDER_ENTITY, 0x484240, 0xF03C00, new FabricItemSettings()));
 
     // SKELETONS
     //public static final Item SUMSKELETON_SPAWN_EGG = registerItem("sskeleton_spawn_egg", new SpawnEggItem(ModEntities.SSKELETON_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
     public static final Item TIBSKELETON_SPAWN_EGG = registerItem("tibskeleton_spawn_egg", new SpawnEggItem(
-            ModEntities.TIBSKELETON_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
+            ModEntities.TIBSKELETON_ENTITY, 0xCECECE, 0x3ED608, new FabricItemSettings()));
     public static final Item ICESKELETON_SPAWN_EGG = registerItem("iceskeleton_spawn_egg", new SpawnEggItem(
-            ModEntities.ICESKELETON_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
+            ModEntities.ICESKELETON_ENTITY, 0xCECECE, 0x089BD6, new FabricItemSettings()));
     public static final Item FIRESKELETON_SPAWN_EGG = registerItem("fireskeleton_spawn_egg", new SpawnEggItem(
-            ModEntities.FIRESKELETON_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
+            ModEntities.FIRESKELETON_ENTITY, 0xCECECE, 0xD64308, new FabricItemSettings()));
     public static final Item ENDERSKELETON_SPAWN_EGG = registerItem("enderskeleton_spawn_egg", new SpawnEggItem(
-            ModEntities.ENDERSKELETON_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
+            ModEntities.ENDERSKELETON_ENTITY, 0xCECECE, 0xA108D6, new FabricItemSettings()));
     public static final Item DARKSKELETON_SPAWN_EGG = registerItem("darkskeleton_spawn_egg", new SpawnEggItem(
-            ModEntities.DARKSKELETON_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
-    public static final Item ELVE_SPAWN_EGG = registerItem("elve_spawn_egg", new SpawnEggItem(
-            ModEntities.ELVE_ENTITY, 0x70F427, 0x292929, new FabricItemSettings()));
+            ModEntities.DARKSKELETON_ENTITY, 0xCECECE, 0x000000, new FabricItemSettings()));
+    public static final Item ELVE_GUARD_SPAWN_EGG = registerItem("elve_guard_spawn_egg", new SpawnEggItem(
+            ModEntities.ELVE_GUARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
 
     public static final Item ROTTEN_FLESH_ON_A_STICK = registerItem("rotten_flesh_on_a_stick",
             new OnAStickItem<>(new FabricItemSettings().maxDamage(25), ModEntities.ESPIDER_ENTITY, 7));
@@ -232,7 +236,7 @@ public class ModItems {
         entries.add(TTROOPER_SPAWN_EGG);
         entries.add(TCOMMANDER_SPAWN_EGG);
         entries.add(TIBERIUM_FLOATER_SPAWN_EGG);
-        entries.add(ELVE_SPAWN_EGG);
+        entries.add(ELVE_GUARD_SPAWN_EGG);
 
         // OTHER
         entries.add(GHOST_SPAWN_EGG);

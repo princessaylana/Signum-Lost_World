@@ -35,9 +35,9 @@ public class ModEntityGeneration {
 
         // GOLDEN KINGDOM BIOME
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.GOLDEN_KINGDOM), SpawnGroup.MONSTER,
-                ModEntities.ELVE_ENTITY, 5, 2, 6);
-        SpawnRestriction.register(ModEntities.ELVE_ENTITY, SpawnRestriction.Location.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ElveEntity::canSpawnIgnoreLightLevel);
+                ModEntities.ELVE_GUARD_ENTITY, 5, 2, 6);
+        SpawnRestriction.register(ModEntities.ELVE_GUARD_ENTITY, SpawnRestriction.Location.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ElveGuardEntity::canSpawnIgnoreLightLevel);
 
         // DEATH LANDS BIOME
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.DEATH_LANDS), SpawnGroup.MONSTER,

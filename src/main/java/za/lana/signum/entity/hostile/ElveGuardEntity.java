@@ -6,7 +6,6 @@
  * */
 package za.lana.signum.entity.hostile;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -34,15 +33,15 @@ import za.lana.signum.item.ModItems;
 
 import java.util.List;
 
-public class ElveEntity extends HostileEntity implements InventoryOwner {
+public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
     public int attackAniTimeout = 0;
     private int idleAniTimeout = 0;
     public final AnimationState attackAniState = new AnimationState();
     public final AnimationState idleAniState = new AnimationState();
-    private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(ElveEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(ElveGuardEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private final SimpleInventory inventory = new SimpleInventory(6);
 
-    public ElveEntity(EntityType<? extends ElveEntity> entityType, World world) {
+    public ElveGuardEntity(EntityType<? extends ElveGuardEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
     }
@@ -55,10 +54,12 @@ public class ElveEntity extends HostileEntity implements InventoryOwner {
         this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
 
         this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new ElveEntity.ProtectHordeGoal());
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity)));
-        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
-        //this.targetSelector.add(4, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(2, new ElveGuardEntity.ProtectHordeGoal());
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false,
+                false, entity ->
+                entity instanceof Monster && !(entity instanceof CreeperEntity)
+                        && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+
         this.initCustomGoals();
     }
     protected void initCustomGoals() {
@@ -128,7 +129,7 @@ public class ElveEntity extends HostileEntity implements InventoryOwner {
     }
 
     public EntityGroup getGroup() {
-        return ModEntityGroup.TIBERIUM;
+        return ModEntityGroup.GOLDEN_KINGDOM;
     }
 
     @Override
@@ -213,14 +214,14 @@ public class ElveEntity extends HostileEntity implements InventoryOwner {
     class ProtectHordeGoal
             extends ActiveTargetGoal<PlayerEntity> {
         public ProtectHordeGoal() {
-            super(ElveEntity.this, PlayerEntity.class, 20, true, true, null);
+            super(ElveGuardEntity.this, PlayerEntity.class, 20, true, true, null);
         }
 
         @Override
         public boolean canStart() {
             if (super.canStart()) {
-                List<ElveEntity> list = ElveEntity.this.getWorld().getNonSpectatingEntities(ElveEntity.class, ElveEntity.this.getBoundingBox().expand(16.0, 4.0, 16.0));
-                for (ElveEntity tTrooperEntity : list) {
+                List<ElveGuardEntity> list = ElveGuardEntity.this.getWorld().getNonSpectatingEntities(ElveGuardEntity.class, ElveGuardEntity.this.getBoundingBox().expand(16.0, 4.0, 16.0));
+                for (ElveGuardEntity tTrooperEntity : list) {
                     if (!tTrooperEntity.isBaby()) continue;
                     return true;
                 }

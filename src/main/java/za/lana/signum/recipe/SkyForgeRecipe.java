@@ -23,16 +23,8 @@ import java.util.List;
 public class SkyForgeRecipe implements Recipe<SimpleInventory> {
     private final ItemStack output;
     private final List<Ingredient> recipeItems;
-    private float experience = 0;
-    private int cookTime = 0;
 
     public SkyForgeRecipe(List<Ingredient> ingredients, ItemStack itemStack) {
-        //this.id = id;
-        //this.output = output;
-        //this.recipeItems = recipeItems;
-        this.experience = experience;
-        this.cookTime = cookTime;
-
         this.output = itemStack;
         this.recipeItems = ingredients;
     }
@@ -62,11 +54,9 @@ public class SkyForgeRecipe implements Recipe<SimpleInventory> {
     }
 
     public float getExperience() {
-        return this.experience;
+        return (float) 0;
     }
-    public int getCookTime() {
-        return this.cookTime;
-    }
+
     @Override
     public DefaultedList<Ingredient> getIngredients() {
         DefaultedList<Ingredient> list = DefaultedList.ofSize(this.recipeItems.size());
@@ -110,10 +100,12 @@ public class SkyForgeRecipe implements Recipe<SimpleInventory> {
         @Override
         public SkyForgeRecipe read(PacketByteBuf buf) {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
-            for(int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromPacket(buf));
-            }
-           // inputs.replaceAll(ignored -> Ingredient.fromPacket(buf));
+
+            inputs.replaceAll(ignored -> Ingredient.fromPacket(buf));
+            //           for(int i = 0; i < inputs.size(); i++) {
+            //                inputs.set(i, Ingredient.fromPacket(buf));
+            //            }
+
             ItemStack output = buf.readItemStack();
             return new SkyForgeRecipe(inputs, output);
         }

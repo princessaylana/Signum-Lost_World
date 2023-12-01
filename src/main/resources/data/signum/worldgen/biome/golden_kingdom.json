@@ -65,7 +65,7 @@
     "misc": [],
     "monster": [
       {
-        "type": "signum:elve_entity",
+        "type": "signum:elve_guard_entity",
         "weight": 50,
         "minCount": 2,
         "maxCount": 4

@@ -90,7 +90,13 @@
   "item.signum.detector_item.info": "Item Used to Test Ore WorldGen",
   "item.signum.rotten_flesh_on_a_stick": "Rotten Flesh on a Stick",
 
-  "item.signum.tiberium_skeleton_spawn_egg": "Tiberium Skeleton Spawn Egg",
+  "item.signum.tibskeleton_spawn_egg": "Tiberium Skeleton Spawn Egg",
+  "item.signum.iceskeleton_spawn_egg": "Ice Skeleton Spawn Egg",
+  "item.signum.fireskeleton_spawn_egg": "Fire Skeleton Spawn Egg",
+  "item.signum.enderskeleton_spawn_egg": "Ender Skeleton Spawn Egg",
+  "item.signum.darkskeleton_spawn_egg": "Dark Skeleton Spawn Egg",
+  "item.signum.sskeleton_spawn_egg": "Summoned Skeleton Spawn Egg",
+
   "item.signum.tiberium_worm_spawn_egg": "Tiberium Worm Spawn Egg",
   "item.signum.ttrooper_spawn_egg": "Tiberium Trooper Spawn Egg",
   "item.signum.tcommander_spawn_egg": "Tiberium Commander Spawn Egg",
@@ -98,7 +104,9 @@
   "item.signum.unicorn_spawn_egg": "Unicorn Spawn Egg",
   "item.signum.espider_spawn_egg": "Evolved Spider Egg",
   "item.signum.ghost_spawn_egg": "Ghost Spawn Egg",
+  "item.signum.pidgeon_spawn_egg": "Pidgeon Spawn Egg",
 
+  "item.signum.elve_soldier_spawn_egg": "Elve Spawn Egg",
   "item.signum.airballoon_spawn_egg": "Airballoon",
 
   "block.signum.manganese_ore": "Manganese Ore",
@@ -190,7 +198,6 @@
   "block.signum.soulwood_leaves": "SoulWood Leaves",
   "block.signum.soulwood_sapling": "SoulWood Sapling",
 
-
   "block.signum.sky_ice_block": "Sky Ice",
   "block.signum.frosted_sky_ice_block": "Frosted Sky Ice",
   "block.signum.ash_block": "Ash Block",
@@ -198,7 +205,7 @@
   "block.signum.rock_block": "Rock Block",
   "block.signum.rainbow_marble": "Rainbow Marble Block",
   "block.signum.spiderweb_block": "Spiderweb Block",
-  "block.signum.blight_block.tooltip": "Tiberium infested dirt",
+  "block.signum.blight_block.tooltip": "Tiberium Infested Dirt",
   "block.signum.skyforge": "Sky Forge",
   "block.signum.skyforge.tooltip": "Very Powerful Alloy Furnace",
   "block.signum.razorwire_block": "Razor Wire",
@@ -206,21 +213,25 @@
   "block.signum.assembly_station_block": "Razor Wire",
 
   "block.signum.example_block": "Example Block",
-  "entity.signum.toxicball": "Toxic Ball",
 
-  "entity.signum.tiberium_worm": "Tiberium Worm",
-  "entity.signum.tiberium_skeleton": "Tiberium Skeleton",
-  "entity.signum.tiberium_floater": "Tiberium Floater",
-  "entity.signum.ghost": "Tiberium Ghost",
   "entity.signum.airballoon": "AirBalloon",
   "entity.signum.unicorn": "Unicorn",
-  "entity.signum.ttrooper_entity": "Tiberium Trooper",
-  "entity.signum.elve_entity": "Elve",
-  "item.signum.elve_spawn_egg": "Elve Spawn Egg",
-  "entity.signum.tcommander_entity": "Tiberium Commander",
+  "entity.signum.pidgeon": "Pidgeon",
   "entity.signum.espider_entity": "Deadly Spider",
+  "entity.signum.elve_guard_entity": "Elven Guard",
+
+  "entity.signum.tiberium_worm": "Tiberium Worm",
+  "entity.signum.tiberium_floater": "Tiberium Floater",
+  "entity.signum.ghost": "Ghost",
+  "entity.signum.ttrooper_entity": "Tiberium Trooper",
+  "entity.signum.tcommander_entity": "Tiberium Commander",
+
   "entity.signum.sskeleton_entity": "Summoned Skeleton",
-  "item.signum.sskeleton_spawn_egg": "Summoned Skeleton Spawn Egg",
+  "entity.signum.tibskeleton_entity": "Tiberium Skeleton",
+  "entity.signum.iceskeleton_entity": "Ice Skeleton",
+  "entity.signum.darkskeleton_entity": "Dark Skeleton",
+  "entity.signum.enderskeleton_entity": "Ender Skeleton",
+  "entity.signum.fireskeleton_entityentity": "Fire Skeleton",
 
   "dimension.signum_dim": "SkyLand",
   "dimension.lost_world": "Lost World",

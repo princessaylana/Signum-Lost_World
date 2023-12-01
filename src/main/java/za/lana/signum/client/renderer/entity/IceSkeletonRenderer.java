@@ -20,6 +20,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.util.Identifier;
+import software.bernie.example.block.entity.GeckoHabitatBlockEntity;
+import software.bernie.example.entity.FakeGlassEntity;
 import za.lana.signum.Signum;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.IceSkeletonModel;
@@ -37,6 +39,7 @@ public class IceSkeletonRenderer extends MobEntityRenderer<IceSkeletonEntity, Ic
         super(context, new IceSkeletonModel<>(context.getPart(ModModelLayers.ICESKELETON)), 0.4f); //entity shadow
         this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
         this.addFeature(new IceSkeletonOverlayFeatureRenderer<>(this, context.getModelLoader()));
+
     }
 
     @Override
@@ -48,5 +51,8 @@ public class IceSkeletonRenderer extends MobEntityRenderer<IceSkeletonEntity, Ic
     public void render(IceSkeletonEntity mobEntity, float f, float g, MatrixStack matrixStack,
                        VertexConsumerProvider vertexConsumerProvider, int i) {
         super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
+    }
+    public RenderLayer getRenderType(IceSkeletonEntity mobEntity, Identifier texture) {
+        return RenderLayer.getEntityTranslucent(this.getTexture(mobEntity));
     }
 }

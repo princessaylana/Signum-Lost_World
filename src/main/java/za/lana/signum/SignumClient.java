@@ -14,7 +14,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.*;
@@ -31,6 +31,7 @@ import za.lana.signum.screen.AirBalloonVScreen;
 import za.lana.signum.screen.ModScreenHandlers;
 import za.lana.signum.screen.SkyForgeScreen;
 import za.lana.signum.screen.gui.*;
+import za.lana.signum.util.ModModelPredicateProvider;
 
 
 public class SignumClient implements ClientModInitializer {
@@ -40,6 +41,7 @@ public class SignumClient implements ClientModInitializer {
 
         KeyInputHandler.register();
         ModMessages.registerS2CPackets();
+        ModModelPredicateProvider.registerModModels();
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TIBERIUM_CLUSTER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BUDDING_TIBERIUM, RenderLayer.getCutout());
@@ -128,8 +130,9 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TCOMMANDER, TCommanderModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderRenderer::new);
 
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ELVE_ENTITY, ElveEntityModel::getTexturedModelData);
-        EntityRendererRegistry.register(ModEntities.ELVE_ENTITY, ElveEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ELVE_GUARD_ENTITY, ElveGuardEntityModel::getTexturedModelData);
+        //EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ELVE_GUARD_ENTITY, ElveGuardEntityModel::getEntityTranslucent);
+        EntityRendererRegistry.register(ModEntities.ELVE_GUARD_ENTITY, ElveGuardEntityRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER, ESpiderModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER_SADDLE, ESpiderModel::getTexturedModelData);

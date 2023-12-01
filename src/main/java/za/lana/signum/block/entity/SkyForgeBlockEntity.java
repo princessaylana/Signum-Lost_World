@@ -74,13 +74,11 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
                     case 3: SkyForgeBlockEntity.this.maxFuelTime = value; break;
                 }
             }
-
             public int size() {
                 return 4;
             }
         };
     }
-
 
     public void forceUpdateAllStates() {
         assert world != null;
@@ -139,7 +137,6 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
         if (world.isClient){
             return;
         }
-
         SkyForgeBlockEntity entity = this;
         if(isConsumingFuel(entity)) {
             entity.fuelTime--;
@@ -151,10 +148,9 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
                 entity.consumeFuel();
             }
             if(isConsumingFuel(entity) && isOutputSlotEmptyOrReceivable()) {
-                //need to add change of blockstate on block to LIT
                 entity.progress++;
                 if(entity.progress > entity.maxProgress) {
-                    craftItem(entity);
+                    craftItem();
                 }
             }
         } else {
@@ -171,7 +167,6 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
         return entity.fuelTime > 0;
     }
 
-
     private boolean hasRecipe() {
         Optional<RecipeEntry<SkyForgeRecipe>> recipe = getCurrentRecipe();
 
@@ -187,7 +182,7 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
         //return getWorld().getRecipeManager().getFirstMatch(SkyForgeRecipe.Type.INSTANCE, inv, getWorld());
     }
 
-    private void craftItem(SkyForgeBlockEntity entity) {
+    private void craftItem() {
         Optional<RecipeEntry<SkyForgeRecipe>> recipe = getCurrentRecipe();
 
         this.removeStack(1,1);

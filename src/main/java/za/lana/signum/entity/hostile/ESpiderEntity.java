@@ -148,7 +148,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         this.targetSelector.add(3, new ESpiderEntity.TargetGoal<>(this, ZombieEntity.class));
         this.targetSelector.add(4, new ESpiderEntity.TargetGoal<>(this, PlayerEntity.class));
         // TESTING
-        this.targetSelector.add(5, new ESpiderEntity.TargetGoal<>(this, SlimeEntity.class));
+        //this.targetSelector.add(5, new ESpiderEntity.TargetGoal<>(this, SlimeEntity.class));
 
         this.initCustomGoals();
     }

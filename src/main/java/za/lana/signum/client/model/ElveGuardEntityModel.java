@@ -6,25 +6,22 @@ package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
-import za.lana.signum.client.animation.ElveAnimations;
-import za.lana.signum.client.animation.TTrooperAnimations;
-import za.lana.signum.entity.hostile.ElveEntity;
-import za.lana.signum.entity.hostile.TTrooperEntity;
+import za.lana.signum.client.animation.ElveGuardAnimations;
+import za.lana.signum.entity.hostile.ElveGuardEntity;
 
-public class ElveEntityModel<T extends ElveEntity> extends SinglePartEntityModel<T> implements ModelWithArms {
+public class ElveGuardEntityModel<T extends ElveGuardEntity> extends SinglePartEntityModel<T> implements ModelWithArms {
     private final ModelPart elve;
     private final ModelPart head;
     private final ModelPart rightArm;
     private final ModelPart leftArm;
     public final ModelPart hat;
 
-    public ElveEntityModel(ModelPart root) {
+    public ElveGuardEntityModel(ModelPart root) {
         this.elve = root.getChild("waist");
         this.head = elve.getChild("body").getChild("head");
         this.rightArm = elve.getChild("body").getChild("rightArm");
@@ -74,7 +71,7 @@ public class ElveEntityModel<T extends ElveEntity> extends SinglePartEntityModel
 
 
     @Override
-    public void setAngles(ElveEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(ElveGuardEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.setHeadAngles(netHeadYaw, headPitch);
 
@@ -83,9 +80,9 @@ public class ElveEntityModel<T extends ElveEntity> extends SinglePartEntityModel
         this.rightArm.yaw = 0.0f;
         this.rightArm.roll = 0.0f;
 
-        this.animateMovement(ElveAnimations.ELVE_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
-        this.updateAnimation(entity.idleAniState, ElveAnimations.ELVE_IDLE, ageInTicks, 1f);
-        this.updateAnimation(entity.attackAniState, ElveAnimations.ELVE_ATTACK, ageInTicks, 1f);
+        this.animateMovement(ElveGuardAnimations.ELVE_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
+        this.updateAnimation(entity.idleAniState, ElveGuardAnimations.ELVE_IDLE, ageInTicks, 1f);
+        this.updateAnimation(entity.attackAniState, ElveGuardAnimations.ELVE_ATTACK, ageInTicks, 1f);
     }
     public void setHeadAngles(float headYaw, float headPitch){
         headYaw = MathHelper.clamp(headYaw, -30.0f, 30.0f);

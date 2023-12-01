@@ -55,24 +55,26 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "pidgeon"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PidgeonEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
+    public static final EntityType<ESpiderEntity> ESPIDER_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "espider_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ESpiderEntity::new)
+                    .dimensions(EntityDimensions.fixed(2.0f, 1.3f)).build());
+    public static final EntityType<ElveGuardEntity> ELVE_GUARD_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "elve_guard_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ElveGuardEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
 
     // VANILLA HOSTILES
     public static final EntityType<TTrooperEntity> TTROOPER_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ttrooper_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TTrooperEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
-    public static final EntityType<ElveEntity> ELVE_ENTITY = Registry.register(
-            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "elve_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ElveEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+
     public static final EntityType<TCommanderEntity> TCOMMANDER_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tcommander_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TCommanderEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
-    public static final EntityType<ESpiderEntity> ESPIDER_ENTITY = Registry.register(
-            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "espider_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ESpiderEntity::new)
-                    .dimensions(EntityDimensions.fixed(2.0f, 1.3f)).build());
+
     // SKELETONS
     public static final EntityType<TibSkeletonEntity> TIBSKELETON_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tibskeleton_entity"),
