@@ -9,7 +9,6 @@ import net.minecraft.client.render.entity.animation.Transformation;
 
 @Environment(value= EnvType.CLIENT)
 public class TCommanderAnimations {
-
     public static final Animation TCOMMANDER_WALK = Animation.Builder.create(1f).looping()
             .addBoneAnimation("waist",
                     new Transformation(Transformation.Targets.TRANSLATE,

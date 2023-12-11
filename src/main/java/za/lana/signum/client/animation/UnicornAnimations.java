@@ -9,9 +9,6 @@ import net.minecraft.client.render.entity.animation.Transformation;
 
 @Environment(value= EnvType.CLIENT)
 public class UnicornAnimations {
-
-    // JAVA ANIMATION BELOW
-
     public static final Animation UNICORN_WALK = Animation.Builder.create(3f).looping()
             .addBoneAnimation("mainbody",
                     new Transformation(Transformation.Targets.TRANSLATE,

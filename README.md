@@ -4,27 +4,20 @@
 
 A Minecraft Fabric 1.20.2 Modification
 
+### -- SIGNUM - THE LOST WORLD --
 
+This Mod Adds A new Sky Dimension called "The Lost World".
+To get to the dimension, build a Portal out of Manganese Blocks, and light it with a Fire Crystal. Make sure to take a Air Balloon with you, so you can fly and explore.
 
------SIGNUM-----
+This Mod is intended for Mid - Late Survival Gameplay.
+Use REI to view the recipes.
 
-=======
+This Mod is still in early development.
+Lana 2023
 
-A mixture of tech, fantasy, and new adventures...
+[Contents](https://github.com/princessaylana/Signum-1.20/blob/master/docs/Contents.md)
 
-Adds a few unique things to Minecraft:
-- Sky Lands Dimension (Vanilla Type)
-- New Uniue Biomes and themes
-- Unique Mobs and Hostiles
-- Five Crystal Types
-- Seven Mushroom Types
-- Five Unique Repairable Magic Staffs
-- Fly in a Air Balloon
-- Quality Tools (Alloys)
-- New Fuels that burns longer
-- Usefull Things (Razorwire, Glass Shards)
-- and More
-
+[Wiki](https://github.com/princessaylana/Signum-1.20/wiki)
 
 Dependancies:
 - Fabric Loader 0.14.24
@@ -37,23 +30,18 @@ Built using:
 - CustomPortalApi
 - LibGui
 
------Note----
+**-----Note----**
 
-This Mod is still in very early development, and some things might change.
+This Mod is still in very early **ALPHA** development, and some things might change.
 This mod is a Hobby of mine, will regularly improve and update this.
 Basic Models are used in some instances for testing, will update in time.
 
-[Contents](https://github.com/princessaylana/Signum-1.20/blob/master/docs/Contents.md)
+Models and Texures are not covered by the MIT License, Assets.
+
 
 [RoadMap](https://github.com/princessaylana/Signum-1.20/blob/master/docs/Roadmap.md)
 
 [Credits](https://github.com/princessaylana/Signum-1.20/blob/master/docs/Credits.md)
-
-Lana
-2023
-
-
-Hoping to expand and to maybe turn this into a community Project in the future.
 
 [![Github all releases](https://img.shields.io/github/downloads/princessaylana/Signum-1.20/total.svg)](https://GitHub.com/princessaylana/Signum-1.20/releases/)
 ![](https://img.shields.io/github/license/princessaylana/Signum-1.20)

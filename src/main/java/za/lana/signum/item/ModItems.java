@@ -155,6 +155,8 @@ public class ModItems {
             ModEntities.DARKSKELETON_ENTITY, 0xCECECE, 0x000000, new FabricItemSettings()));
     public static final Item ELVE_GUARD_SPAWN_EGG = registerItem("elve_guard_spawn_egg", new SpawnEggItem(
             ModEntities.ELVE_GUARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
+    public static final Item WIZARD_SPAWN_EGG = registerItem("wizard_spawn_egg", new SpawnEggItem(
+            ModEntities.WIZARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
 
     public static final Item ROTTEN_FLESH_ON_A_STICK = registerItem("rotten_flesh_on_a_stick",
             new OnAStickItem<>(new FabricItemSettings().maxDamage(25), ModEntities.ESPIDER_ENTITY, 7));

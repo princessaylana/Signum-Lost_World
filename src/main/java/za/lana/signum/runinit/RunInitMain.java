@@ -58,6 +58,8 @@ public class RunInitMain {
         FabricDefaultAttributeRegistry.register(ModEntities.ENDERSKELETON_ENTITY, IceSkeletonEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.DARKSKELETON_ENTITY, IceSkeletonEntity.setAttributes());
 
+        FabricDefaultAttributeRegistry.register(ModEntities.WIZARD_ENTITY, WizardEntity.setAttributes());
+
         FabricDefaultAttributeRegistry.register(ModEntities.AIRBALLOON, AirBalloonEntity.setAttributes());
 
         // gecko

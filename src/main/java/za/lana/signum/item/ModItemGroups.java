@@ -176,7 +176,7 @@ public class ModItemGroups {
                         entries.add(ModItems.STEEL_CHESTPLATE);
                         entries.add(ModItems.STEEL_LEGGINGS);
                         entries.add(ModItems.STEEL_BOOTS);
-                        entries.add(ModItems.STEEL_SHIELD);
+                        //entries.add(ModItems.STEEL_SHIELD);
 
                         // STAFFS
                         entries.add(ModItems.TIBERIUM_STAFF);
@@ -212,6 +212,8 @@ public class ModItemGroups {
                         entries.add(ModItems.TCOMMANDER_SPAWN_EGG);
                         entries.add(ModItems.TIBERIUM_FLOATER_SPAWN_EGG);
                         entries.add(ModItems.ELVE_GUARD_SPAWN_EGG);
+
+                        entries.add(ModItems.WIZARD_SPAWN_EGG);
 
                         entries.add(ModItems.GHOST_SPAWN_EGG);
                         //entries.add(ModItems.SUMSKELETON_SPAWN_EGG);

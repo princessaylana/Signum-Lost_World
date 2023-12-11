@@ -1,4 +1,4 @@
-// Made with Blockbench 4.8.3
+// Made with Blockbench 4.9.1
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
 
@@ -12,9 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
 import za.lana.signum.client.animation.DarkSkeletonAnimations;
-import za.lana.signum.client.animation.IceSkeletonAnimations;
 import za.lana.signum.entity.hostile.DarkSkeletonEntity;
-import za.lana.signum.entity.hostile.IceSkeletonEntity;
 
 public class DarkSkeletonModel<T extends DarkSkeletonEntity>
         extends SinglePartEntityModel<T> implements ModelWithArms {

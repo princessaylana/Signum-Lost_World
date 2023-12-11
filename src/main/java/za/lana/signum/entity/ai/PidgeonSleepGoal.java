@@ -46,7 +46,14 @@ public class PidgeonSleepGoal
         World level = this.mob.getWorld();
         if (level.isDay()){
         super.stop();
-        this.mob.setInSleepingPose(false);}
+        this.mob.setInSleepingPose(false);
+        this.mob.wakeUp();
+        }
+        if (this.mob.isAttacking() || !(this.mob.getAttacker() == null)){
+            super.stop();
+            this.mob.setInSleepingPose(false);
+            this.mob.wakeUp();
+        }
     }
 
     @Override
@@ -57,6 +64,7 @@ public class PidgeonSleepGoal
             this.mob.setInSleepingPose(false);
         } else if (!this.mob.isInSleepingPose()) {
             this.mob.setInSleepingPose(true);
+            this.mob.sleep(targetPos);
         }
     }
 

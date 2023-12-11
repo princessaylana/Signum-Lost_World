@@ -1,10 +1,11 @@
-// Made with Blockbench 4.8.3
+// Made with Blockbench 4.9.1
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
 
 package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
@@ -25,6 +26,8 @@ public class IceSkeletonModel<T extends IceSkeletonEntity>
     private final ModelPart leftArm;
 
     public IceSkeletonModel(ModelPart root) {
+        super(RenderLayer::getEntityTranslucent);
+
         this.iceskeleton = root.getChild("mainBody");
         this.body = iceskeleton.getChild("body");
         this.head = iceskeleton.getChild("body").getChild("head");
@@ -73,6 +76,9 @@ public class IceSkeletonModel<T extends IceSkeletonEntity>
         this.rightArm.pitch = MathHelper.cos(limbSwing * 0.6662f + (float)Math.PI) * 2.0f * limbSwingAmount * 0.5f;
         this.rightArm.yaw = 0.0f;
         this.rightArm.roll = 0.0f;
+        this.leftArm.pitch = MathHelper.cos(limbSwing * 0.6662f + (float)Math.PI) * 2.0f * limbSwingAmount * 0.5f;
+        this.leftArm.yaw = 0.0f;
+        this.leftArm.roll = 0.0f;
         this.animateMovement(IceSkeletonAnimations.ICESKELETON_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
         this.updateAnimation(entity.idleAniState, IceSkeletonAnimations.ICESKELETON_IDLE, ageInTicks, 1f);
         this.updateAnimation(entity.attackAniState, IceSkeletonAnimations.ICESKELETON_ATTACK, ageInTicks, 1f);
@@ -87,6 +93,7 @@ public class IceSkeletonModel<T extends IceSkeletonEntity>
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
         iceskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+
     }
 
     @Override
@@ -109,4 +116,5 @@ public class IceSkeletonModel<T extends IceSkeletonEntity>
         modelPart.rotate(matrices);
         modelPart.pivotX -= f;
     }
+
 }

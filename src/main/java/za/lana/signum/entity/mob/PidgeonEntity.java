@@ -131,7 +131,7 @@ public class PidgeonEntity extends AnimalEntity {
         this.goalSelector.add(4, new PidgeonFlyGoal(this, 1.0));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 16.0F));
         this.goalSelector.add(7, new AnimalFindHomeGoal(this, 1.05f, 1));
-        this.goalSelector.add(8, new AlertTargetGoal(this));
+        //this.goalSelector.add(8, new AlertTargetGoal(this));
         //this.goalSelector.add(5, new PidgeonSitOnTreeGoal(this, 1.0));
 
         this.targetSelector.add(1, new RevengeGoal(this));

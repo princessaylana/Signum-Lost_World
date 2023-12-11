@@ -30,14 +30,7 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TiberiumWormEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
-    public static final EntityType<TiberiumFloaterEntity> TIBERIUM_FLOATER = Registry.register(
-            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_floater"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TiberiumFloaterEntity::new)
-                    .dimensions(EntityDimensions.fixed(2.0f, 3.5f)).build());
-    public static final EntityType<GhostEntity> GHOST = Registry.register(
-            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ghost"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GhostEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+
 
     // TRANSPORT
     public static final EntityType<AirBalloonEntity> AIRBALLOON = Registry.register(
@@ -73,6 +66,24 @@ public class ModEntities {
     public static final EntityType<TCommanderEntity> TCOMMANDER_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tcommander_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TCommanderEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+    public static final EntityType<WizardEntity> WIZARD_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "wizard_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, WizardEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+
+    public static final EntityType<SpellBoltEntity> SPELLBOLT_ENTITY = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "spellbolt_entity"),
+            FabricEntityTypeBuilder.<SpellBoltEntity>create(SpawnGroup.MISC, SpellBoltEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
+    public static final EntityType<TiberiumFloaterEntity> TIBERIUM_FLOATER = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tiberium_floater"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TiberiumFloaterEntity::new)
+                    .dimensions(EntityDimensions.fixed(2.0f, 3.5f)).build());
+    public static final EntityType<GhostEntity> GHOST = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ghost"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GhostEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
 
     // SKELETONS
@@ -139,6 +150,11 @@ public class ModEntities {
     public static final EntityType<SpiderSpitEntity> SPIDERSPIT_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(Signum.MOD_ID, "spiderspit_projectile"),
             FabricEntityTypeBuilder.<SpiderSpitEntity>create(SpawnGroup.MISC, SpiderSpitEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
+                    .trackedUpdateRate(10).build());
+    public static final EntityType<TiberiumSpitEntity> TIBERIUMSPIT_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Signum.MOD_ID, "tiberiumspit_projectile"),
+            FabricEntityTypeBuilder.<TiberiumSpitEntity>create(SpawnGroup.MISC, TiberiumSpitEntity::new)
                     .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeBlocks(4)
                     .trackedUpdateRate(10).build());
 

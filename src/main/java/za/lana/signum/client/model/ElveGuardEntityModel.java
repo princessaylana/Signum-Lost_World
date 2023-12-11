@@ -1,4 +1,4 @@
-// Made with Blockbench 4.8.3
+// Made with Blockbench 4.9.1
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
 
@@ -19,6 +19,7 @@ public class ElveGuardEntityModel<T extends ElveGuardEntity> extends SinglePartE
     private final ModelPart head;
     private final ModelPart rightArm;
     private final ModelPart leftArm;
+
     public final ModelPart hat;
 
     public ElveGuardEntityModel(ModelPart root) {
@@ -75,10 +76,13 @@ public class ElveGuardEntityModel<T extends ElveGuardEntity> extends SinglePartE
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.setHeadAngles(netHeadYaw, headPitch);
 
-        //arm
+        //arms
         this.rightArm.pitch = MathHelper.cos(limbSwing * 0.6662f + (float)Math.PI) * 2.0f * limbSwingAmount * 0.5f;
         this.rightArm.yaw = 0.0f;
         this.rightArm.roll = 0.0f;
+        this.leftArm.pitch = MathHelper.cos(limbSwing * 0.6662f + (float)Math.PI) * 2.0f * limbSwingAmount * 0.5f;
+        this.leftArm.yaw = 0.0f;
+        this.leftArm.roll = 0.0f;
 
         this.animateMovement(ElveGuardAnimations.ELVE_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
         this.updateAnimation(entity.idleAniState, ElveGuardAnimations.ELVE_IDLE, ageInTicks, 1f);
@@ -91,6 +95,20 @@ public class ElveGuardEntityModel<T extends ElveGuardEntity> extends SinglePartE
         this.head.yaw = headYaw * 0.017453292F;
         this.head.pitch = headPitch * 0.017453292F;
     }
+    private ModelPart getAttackingArm(Arm arm) {
+        if (arm == Arm.LEFT) {
+            return this.leftArm;
+        }
+        return this.rightArm;
+    }
+    @Override
+    public void setArmAngle(Arm arm, MatrixStack matrices) {
+        float f = arm == Arm.RIGHT ? 1.0f : -1.0f;
+        ModelPart modelPart = this.getAttackingArm(arm);
+        modelPart.pivotX += f;
+        modelPart.rotate(matrices);
+        modelPart.pivotX -= f;
+    }
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
         elve.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
@@ -101,16 +119,9 @@ public class ElveGuardEntityModel<T extends ElveGuardEntity> extends SinglePartE
     public ModelPart getPart() {
         return elve;
     }
-    private ModelPart getAttackingArm(Arm arm) {
-        if (arm == Arm.LEFT) {
-            return this.leftArm;
-        }
-        return this.rightArm;
-    }
-    @Override
-    public void setArmAngle(Arm arm, MatrixStack matrices) {
-        this.getAttackingArm(arm).rotate(matrices);
-    }
+
+
+
 
 
 }

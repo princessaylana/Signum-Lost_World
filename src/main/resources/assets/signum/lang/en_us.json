@@ -63,7 +63,6 @@
   "item.signum.tiberium_staff.info1": "Repair Material",
   "item.signum.tiberium_staff.info2": "Uses",
 
-
   "item.signum.freeze_staff": "Ice Staff",
   "item.signum.freeze_staff.info": "Magic Staff that Freezes Targets",
   "item.signum.transmute_staff": "Transmute Staff",
@@ -106,7 +105,8 @@
   "item.signum.ghost_spawn_egg": "Ghost Spawn Egg",
   "item.signum.pidgeon_spawn_egg": "Pidgeon Spawn Egg",
 
-  "item.signum.elve_soldier_spawn_egg": "Elve Spawn Egg",
+  "item.signum.elve_guard_spawn_egg": "Elve Guard Spawn Egg",
+  "item.signum.wizard_spawn_egg": "Wizard Spawn Egg",
   "item.signum.airballoon_spawn_egg": "Airballoon",
 
   "block.signum.manganese_ore": "Manganese Ore",
@@ -218,7 +218,9 @@
   "entity.signum.unicorn": "Unicorn",
   "entity.signum.pidgeon": "Pidgeon",
   "entity.signum.espider_entity": "Deadly Spider",
+
   "entity.signum.elve_guard_entity": "Elven Guard",
+  "entity.signum.wizard": "Wizard",
 
   "entity.signum.tiberium_worm": "Tiberium Worm",
   "entity.signum.tiberium_floater": "Tiberium Floater",

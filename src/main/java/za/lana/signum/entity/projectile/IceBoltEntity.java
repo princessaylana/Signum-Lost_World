@@ -51,6 +51,7 @@ public class IceBoltEntity extends ThrownItemEntity {
         }
     }
 
+
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult){
         super.onEntityHit(entityHitResult);

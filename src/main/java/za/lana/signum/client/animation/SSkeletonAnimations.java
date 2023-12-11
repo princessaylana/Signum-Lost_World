@@ -10,8 +10,6 @@ import net.minecraft.client.render.entity.animation.Transformation;
 @Environment(value= EnvType.CLIENT)
 public class SSkeletonAnimations {
 
-
-
     public static final Animation SSKELETON_WALK = Animation.Builder.create(1f).looping()
             .addBoneAnimation("mainBody",
                     new Transformation(Transformation.Targets.TRANSLATE,

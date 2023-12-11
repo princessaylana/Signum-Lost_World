@@ -1,50 +1,50 @@
+// Made with Blockbench 4.9.1
+// Exported for Minecraft version 1.17+ for Yarn
+// Paste this class into your mod and generate all required imports
+
 package za.lana.signum.client.model;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
+import net.minecraft.client.model.*;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.util.math.MatrixStack;
+import za.lana.signum.client.animation.BoltAnimations;
+import za.lana.signum.entity.projectile.GravityBoltEntity;
+import za.lana.signum.entity.projectile.SpiderSpitEntity;
 
-@Environment(value=EnvType.CLIENT)
-public class SpiderSpitModel<T extends Entity>
-        extends SinglePartEntityModel<T> {
+public class SpiderSpitModel extends SinglePartEntityModel<SpiderSpitEntity> {
 
-    private static final String MAIN = "main";
-    private final ModelPart root;
+	private final ModelPart bolt;
+	public SpiderSpitModel(ModelPart root) {
+		this.bolt = root.getChild("mainBody");
+	}
 
-    public SpiderSpitModel(ModelPart root) {
-        this.root = root;
-    }
+	public static TexturedModelData getTexturedModelData() {
+		ModelData modelData = new ModelData();
+		ModelPartData modelPartData = modelData.getRoot();
+		ModelPartData mainBody = modelPartData.addChild("mainBody", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 15.5F, -0.5F));
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
-        int i = 2;
-        modelPartData.addChild(MAIN, ModelPartBuilder.create().uv(0, 0)
-                .cuboid(-4.0f, 0.0f, 0.0f, 2.0f, 2.0f, 2.0f)
-                .cuboid(0.0f, -4.0f, 0.0f, 2.0f, 2.0f, 2.0f)
-                .cuboid(0.0f, 0.0f, -4.0f, 2.0f, 2.0f, 2.0f)
-                .cuboid(0.0f, 0.0f, 0.0f, 2.0f, 2.0f, 2.0f)
-                .cuboid(2.0f, 0.0f, 0.0f, 2.0f, 2.0f, 2.0f)
-                .cuboid(0.0f, 2.0f, 0.0f, 2.0f, 2.0f, 2.0f)
-                .cuboid(0.0f, 0.0f, 2.0f, 2.0f, 2.0f, 2.0f),
-                ModelTransform.NONE);
-        return TexturedModelData.of(modelData, 64, 32);
-    }
+		ModelPartData center = mainBody.addChild("center", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-    @Override
-    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-    }
+		ModelPartData cube_r1 = center.addChild("cube_r1", ModelPartBuilder.create().uv(0, 0).cuboid(-2.5F, -2.5F, -2.5F, 5.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.7854F));
 
-    @Override
-    public ModelPart getPart() {
-        return this.root;
-    }
+		ModelPartData cube_r2 = center.addChild("cube_r2", ModelPartBuilder.create().uv(0, 11).cuboid(-2.5F, -2.5F, -2.5F, 5.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
+
+		ModelPartData cube_r3 = center.addChild("cube_r3", ModelPartBuilder.create().uv(16, 17).cuboid(-2.5F, -2.5F, -2.5F, 5.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, -0.7854F, 0.0F, 0.0F));
+		return TexturedModelData.of(modelData, 64, 64);
+	}
+	@Override
+	public void setAngles(SpiderSpitEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.getPart().traverse().forEach(ModelPart::resetTransform);
+		this.animateMovement(BoltAnimations.BOLT_MOVE, limbSwing, limbSwingAmount, 2f, 2.5f);
+	}
+	@Override
+	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
+		bolt.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public ModelPart getPart() {
+		return this.bolt;
+	}
 }
-

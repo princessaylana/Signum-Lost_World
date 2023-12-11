@@ -8,16 +8,15 @@ package za.lana.signum.entity.hostile;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.client.util.ParticleUtil;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.FuzzyTargeting;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
-import net.minecraft.entity.ai.goal.FlyGoal;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.pathing.BirdNavigation;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -28,18 +27,24 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.*;
+import net.minecraft.entity.mob.Angerable;
+import net.minecraft.entity.mob.FlyingEntity;
+import net.minecraft.entity.mob.Monster;
+import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.sound.SoundCategory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.TimeHelper;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Difficulty;
@@ -47,69 +52,152 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
-import za.lana.signum.constant.SignumAnimations;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
-import za.lana.signum.entity.projectile.TiberiumBoltEntity;
-import za.lana.signum.particle.ModParticles;
+import za.lana.signum.entity.ai.TiberiumFloaterRestGoal;
+import za.lana.signum.entity.control.TiberiumFloaterFlightControl;
 import za.lana.signum.sound.ModSounds;
-import za.lana.signum.tag.ModBlockTags;
 import za.lana.signum.tag.ModEntityTypeTags;
 
-import java.util.*;
+import java.util.EnumSet;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 public class TiberiumFloaterEntity
-        extends  FlyingEntity
-        implements GeoEntity, Monster, Angerable {
+        extends AnimalEntity
+        implements Monster, Angerable {
+
+    public int attackAniTimeout = 0;
+    private int idleAniTimeout = 0;
+    public int spellAniTimeout = 0;
+    public int rangeAniTimeout = 0;
+    private int prevSleepAnimation;
+
+    public final AnimationState attackAniState = new AnimationState();
+    public final AnimationState idleAniState = new AnimationState();
+    //public final AnimationState spitAniState = new AnimationState();
+    //public final AnimationState rangeAniState = new AnimationState();
 
     @Nullable
     private UUID angryAt;
     private int angerTime;
     private int ageWhenTargetSet;
-    private int boltStrength = 1;
     private static final UniformIntProvider ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
     private int lastAngrySoundAge = Integer.MIN_VALUE;
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private static final TrackedData<Boolean> SHOOTING = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> ANGRY = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> PROVOKED = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> NO_GRAVITY = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> SLEEPING = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final UUID ATTACKING_SPEED_BOOST_ID = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
     private static final EntityAttributeModifier ATTACKING_SPEED_BOOST = new EntityAttributeModifier(ATTACKING_SPEED_BOOST_ID, "Attacking speed boost", 0.15f, EntityAttributeModifier.Operation.ADDITION);
     public TiberiumFloaterEntity(EntityType<? extends TiberiumFloaterEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 10;
-        this.moveControl = new FloaterMoveControl(this);
+        this.moveControl = new TiberiumFloaterFlightControl(this, 30, false);
         this.tryCheckBlockCollision();
-        this.setPathfindingPenalty(PathNodeType.WATER, -1.0f);
-        this.dataTracker.startTracking(NO_GRAVITY, false);
-        this.noClip = true;
+        this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, 16.0f);
+        this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0f);
+        //this.noClip = true;
+        this.setNoGravity(true);
     }
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new LookAtTargetGoal(this));
-        this.goalSelector.add(2, new FlyRandomlyGoal(this));
-        this.goalSelector.add(3, new ShootBoltGoal(this));
-        this.goalSelector.add(4, new TeleportToTargetGoal(this, this::shouldAngerAt));
-        //this.goalSelector.add(6, new LandMushroomGoal(this, 1.0));
+        this.goalSelector.add(1, new TiberiumFloaterRestGoal(this, 1.2f, 64));
+        //this.goalSelector.add(2, new FlyRandomlyGoal(this));
+        this.goalSelector.add(3, new TeleportToTargetGoal(this, this::shouldAngerAt));
+        //this.goalSelector.add(3, new ShootBoltGoal(this));
+        this.goalSelector.add(7, new FlyRandomlyGoal(this));
+
 
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, 10, true, false, entity -> Math.abs(entity.getY() - this.getY()) <= 4.0));
         //this.targetSelector.add(2, new TiberiumFloaterEntity.ProtectTroopersGoal());
+        this.targetSelector.add(2, new RevengeGoal(this));
         this.targetSelector.add(3, new TeleportToTargetGoal(this, this::shouldAngerAt));
         this.targetSelector.add(4, new ActiveTargetGoal<>(this, VillagerEntity.class, true));
         this.targetSelector.add(5, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+        //this.targetSelector.add(6, new ActiveTargetGoal<>(this, WizardEntity.class, true));
     }
-    public int getBoltStrength() {
-        return this.boltStrength;
+
+    public static DefaultAttributeContainer.Builder setAttributes() {
+        return FlyingEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.3f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0f)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0);
+    }
+    @Nullable
+    @Override
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return null;
+    }
+
+    @Override
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(ATTACKING, false);
+        this.dataTracker.startTracking(SLEEPING, false);
+        this.dataTracker.startTracking(ANGRY, false);
+        this.dataTracker.startTracking(PROVOKED, false);
+
+    }
+    protected EntityNavigation createNavigation(World world) {
+        BirdNavigation birdNavigation = new BirdNavigation(this, world);
+        birdNavigation.setCanPathThroughDoors(false);
+        birdNavigation.setCanSwim(true);
+        birdNavigation.setCanEnterOpenDoors(true);
+        return birdNavigation;
+    }
+    //ANIMATIONS
+    private void setupAnimationStates() {
+        if (this.idleAniTimeout <= 0) {
+            this.idleAniTimeout = this.random.nextInt(40) + 80;
+            this.idleAniState.start(this.age);
+        } else {
+            --this.idleAniTimeout;
+        }
+        if(this.isAttacking() && attackAniTimeout <= 0) {
+            attackAniTimeout = 40;
+            attackAniState.start(this.age);
+        } else {
+            --this.attackAniTimeout;
+        }
+        if(!this.isAttacking()) {
+            attackAniState.stop();
+        }
+    }
+    protected void updateLimbs(float posDelta) {
+        float f;
+        if (this.getPose() == EntityPose.STANDING) {
+            f = Math.min(posDelta * 6.0F, 1.0F);
+        } else {
+            f = 0.0F;
+        }
+        this.limbAnimator.updateLimbs(f, 0.2F);
+    }
+    @Override
+    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
+    }
+    @Override
+    public void tick() {
+        super.tick();
+        if(this.getWorld().isClient()) {
+            setupAnimationStates();
+        }
+    }
+
+    // DATA
+    public void setAttacking(boolean attacking) {
+        this.dataTracker.set(ATTACKING, attacking);
+    }
+    @Override
+    public boolean isAttacking() {
+        return this.dataTracker.get(ATTACKING);
     }
     @Override
     public void setTarget(@Nullable LivingEntity target) {
@@ -131,13 +219,31 @@ public class TiberiumFloaterEntity
         }
     }
 
-    public boolean isShooting() {
-        return this.dataTracker.get(SHOOTING);
+    @Override
+    public void onTrackedDataSet(TrackedData<?> data) {
+        if (ANGRY.equals(data) && this.isProvoked() && this.getWorld().isClient) {
+            this.playAngrySound();
+        }
+        super.onTrackedDataSet(data);
     }
-    public void setShooting(boolean shooting) {
-        this.dataTracker.set(SHOOTING, shooting);
+    public void setInSleepingPose(boolean sleeping) {
+        this.dataTracker.set(SLEEPING, sleeping);
     }
-    // GROUP ATTRIBUTES
+    public boolean isInSleepingPose() {
+        return this.dataTracker.get(SLEEPING);
+    }
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        this.writeAngerToNbt(nbt);
+    }
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        this.readAngerFromNbt(this.getWorld(), nbt);
+    }
+
+    // ATTRIBUTES
     public EntityGroup getGroup() {
         return ModEntityGroup.TIBERIUM;
     }
@@ -149,44 +255,6 @@ public class TiberiumFloaterEntity
         return super.canHaveStatusEffect(effect);
     }
 
-
-    // IMUMME TO TIBERIUM ATTACK
-    private static boolean isBoltFromPlayer(DamageSource damageSource) {
-        return damageSource.getSource() instanceof TiberiumBoltEntity && damageSource.getAttacker() instanceof PlayerEntity;
-    }
-    @Override
-    public boolean isInvulnerableTo(DamageSource damageSource) {
-        return !TiberiumFloaterEntity.isBoltFromPlayer(damageSource) && super.isInvulnerableTo(damageSource);
-    }
-    @Override
-    public boolean damage(DamageSource source, float amount) {
-        if (TiberiumFloaterEntity.isBoltFromPlayer(source)) {
-            super.damage(source, 250.0f);
-           // super.damage(source, 1000.0f);
-            return true;
-        }
-        if (this.isInvulnerableTo(source)) {
-            return false;
-        }
-        return super.damage(source, amount);
-    }
-
-    // ATTRIBUTES
-    public static DefaultAttributeContainer.Builder setAttributes() {
-        return FlyingEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.3f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0f)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0);
-    }
-    @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(SHOOTING, false);
-        this.dataTracker.startTracking(ANGRY, false);
-        this.dataTracker.startTracking(PROVOKED, false);
-    }
     // hitbox width must be 2, height must be 3.5
     @Override
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
@@ -194,7 +262,11 @@ public class TiberiumFloaterEntity
     }
     @Override
     protected SoundEvent getAmbientSound() {
-        return ModSounds.FLOATER_AMBIENT;
+        World level = this.getWorld();
+        if (level.isNight()){
+            return ModSounds.FLOATER_AMBIENT;
+        }
+        return  null;
     }
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
@@ -215,79 +287,7 @@ public class TiberiumFloaterEntity
     public static boolean canSpawn(EntityType<TiberiumFloaterEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return world.getDifficulty() != Difficulty.PEACEFUL && random.nextInt(15) == 0 && TiberiumFloaterEntity.canMobSpawn(type, world, spawnReason, pos, random);
     }
-    //ANIMATIONS
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "fly",2, this::flyController));
-        controllerRegistrar.add(new AnimationController<>(this, "idle", 10, this::idleController));
-        //controllerRegistrar.add(new AnimationController<>(this, "attack",4, this::attackController));
-    }
-    private PlayState flyController(AnimationState<TiberiumFloaterEntity> tsAnimationState) {
-        if (tsAnimationState.isMoving()) {
-            if (this.getEntityWorld().isClient){
-                ParticleUtil.spawnParticle(getWorld(), BlockPos.ofFloored(getPos()), random, ModParticles.TOXIC_SHROOM_PARTICLE);
-            }
-            return tsAnimationState.setAndContinue(SignumAnimations.TIBERIUM_FLOATER_FLY);
-        }
-        return PlayState.STOP;
-    }
-    private PlayState idleController(AnimationState<TiberiumFloaterEntity> tsAnimationState) {
-        if (this.getEntityWorld().isClient){
-            ParticleUtil.spawnParticle(getWorld(), BlockPos.ofFloored(getPos()), random, ModParticles.BLACK_SHROOM_PARTICLE);
-        }
-        return tsAnimationState.setAndContinue(tsAnimationState.isMoving() ? SignumAnimations.TIBERIUM_FLOATER_FLY : SignumAnimations.TIBERIUM_FLOATER_IDLE);
-    }
-    private PlayState attackController(AnimationState<TiberiumFloaterEntity> tsAnimationState) {
-        if (tsAnimationState.getAnimatable().handSwinging
-                && tsAnimationState.getController().getAnimationState().equals(AnimationController.State.STOPPED)){
-            if (this.getEntityWorld().isClient){
-                ParticleUtil.spawnParticle(getWorld(), BlockPos.ofFloored(getPos()), random, ModParticles.TIBERIUM_PARTICLE);
-            }
-            return tsAnimationState.setAndContinue(SignumAnimations.TIBERIUM_FLOATER_FLY);
-        }
-        tsAnimationState.getController().forceAnimationReset();
-        return PlayState.CONTINUE;
-    }
-    // CONTROL
-    static class FloaterMoveControl
-            extends MoveControl {
-        private final TiberiumFloaterEntity floater;
-        private int collisionCheckCooldown;
-        public FloaterMoveControl(TiberiumFloaterEntity floater) {
-            super(floater);
-            this.floater = floater;
-            //this.setGravity
-        }
-        @Override
-        public void tick() {
-            if (this.state != MoveControl.State.MOVE_TO) {
-                return;
-            }
-            if (this.collisionCheckCooldown-- <= 0) {
-                this.collisionCheckCooldown += this.floater.getRandom().nextInt(5) + 2;
-                Vec3d vec3d = new Vec3d(this.targetX - this.floater.getX(), this.targetY - this.floater.getY(), this.targetZ - this.floater.getZ());
-                double d = vec3d.length();
-                if (this.willCollide(vec3d = vec3d.normalize(), MathHelper.ceil(d))) {
-                    this.floater.setVelocity(this.floater.getVelocity().add(vec3d.multiply(0.1)));
-                } else {
-                    this.state = MoveControl.State.WAIT;
-                }
-            }
-        }
-        private boolean willCollide(Vec3d direction, int steps) {
-            Box box = this.floater.getBoundingBox();
-            for (int i = 1; i < steps; ++i) {
-                box = box.offset(direction);
-                if (this.floater.getWorld().isSpaceEmpty(this.floater, box)) continue;
-                return false;
-            }
-            return true;
-        }
-    }
+
     // ANGER
     @Override
     public void chooseRandomAngerTime() {
@@ -336,35 +336,6 @@ public class TiberiumFloaterEntity
             }
         }
     }
-    // DATA
-    public void setNoGravity(boolean noGravity) {
-        this.dataTracker.set(NO_GRAVITY, noGravity);
-    }
-    @Override
-    public boolean hasNoGravity() {
-        return true;
-    }
-    @Override
-    public void onTrackedDataSet(TrackedData<?> data) {
-        if (ANGRY.equals(data) && this.isProvoked() && this.getWorld().isClient) {
-            this.playAngrySound();
-        }
-        super.onTrackedDataSet(data);
-    }
-    @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-        nbt.putByte("ExplosionPower", (byte)this.boltStrength);
-        this.writeAngerToNbt(nbt);
-    }
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        if (nbt.contains("ExplosionPower", NbtElement.NUMBER_TYPE)) {
-            this.boltStrength = nbt.getByte("ExplosionPower");
-        }
-        this.readAngerFromNbt(this.getWorld(), nbt);
-    }
     boolean isPlayerStaring(PlayerEntity player) {
         ItemStack itemStack = player.getInventory().armor.get(3);
         // need to change this to something else
@@ -385,7 +356,6 @@ public class TiberiumFloaterEntity
     }
 
     // TELEPORTATION
-    //TODO - fix the teleportation, random and goal
     @Override
     protected void mobTick() {
         float f;
@@ -393,11 +363,22 @@ public class TiberiumFloaterEntity
                 (f = this.getAngerTime()) > 0.5f
                 && this.getWorld().isSkyVisible(this.getBlockPos())
                 && this.random.nextFloat() * 30.0f < (f - 0.4f) * 2.0f) {
-            this.setTarget(null);
+            this.setTelePortTarget();
             this.teleportRandomly();
         }
         super.mobTick();
     }
+
+    private void setTelePortTarget() {
+        LivingEntity target = this.getTarget();
+        super.setTarget(target);
+        if (target == null) {
+            this.ageWhenTargetSet = 0;
+        } else {
+            this.ageWhenTargetSet = this.age;
+        }
+    }
+
     protected void teleportRandomly() {
         if (this.getWorld().isClient() || !this.isAlive()) {
             return;
@@ -438,33 +419,8 @@ public class TiberiumFloaterEntity
         }
         return bl3;
     }
+
     // GOALS
-    /**
-    class ProtectTroopersGoal
-            extends ActiveTargetGoal<PlayerEntity> {
-        public ProtectTroopersGoal() {
-            super(TiberiumFloaterEntity.this, PlayerEntity.class, 20, true, true, null);
-        }
-
-        @Override
-        public boolean canStart() {
-            if (super.canStart()) {
-                List<TTrooperEntity> list = TiberiumFloaterEntity.this.getWorld().getNonSpectatingEntities(TTrooperEntity.class, TiberiumFloaterEntity.this.getBoundingBox().expand(8.0, 4.0, 8.0));
-                for (TTrooperEntity tTrooperEntity : list) {
-                    if (!tTrooperEntity.isBaby()) continue;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        protected double getFollowRange() {
-            return super.getFollowRange() * 0.7;
-        }
-    }
-
-        **/
     static class LookAtTargetGoal
             extends Goal {
         private final TiberiumFloaterEntity floater;
@@ -540,87 +496,7 @@ public class TiberiumFloaterEntity
             this.floater.getMoveControl().moveTo(d, e, f, 1.0);
         }
     }
-    //TODO Needs to shoot ToxicBallEntity
-    static class ShootBoltGoal
-            extends Goal {
-        private final TiberiumFloaterEntity floater;
-        public int cooldown;
 
-        public ShootBoltGoal(TiberiumFloaterEntity floater) {
-            this.floater = floater;
-        }
-
-        @Override
-        public boolean canStart() {
-            return this.floater.getTarget() != null;
-        }
-
-        @Override
-        public void start() {
-            this.cooldown = 0;
-        }
-
-        @Override
-        public void stop() {
-            this.floater.setShooting(false);
-        }
-
-        @Override
-        public boolean shouldRunEveryTick() {
-            return true;
-        }
-
-        @Override
-        public void tick() {
-            LivingEntity livingTarget = this.floater.getTarget();
-            if (livingTarget == null) {
-                return;
-            }
-            double d = 64.0;
-            if (livingTarget.squaredDistanceTo(this.floater) < 4096.0 && this.floater.canSee(livingTarget)) {
-                World world = this.floater.getWorld();
-                ++this.cooldown;
-                if (this.cooldown == 10 && !this.floater.isSilent()) {
-                    //
-                    world.playSound(null, livingTarget.getX(), livingTarget.getY(), livingTarget.getZ(),
-                            ModSounds.FLOATER_WARNS, SoundCategory.NEUTRAL,
-                            2.0f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
-                }
-                if (this.cooldown == 20) {
-                    //
-                    double e = 4.0;
-                    Vec3d vec3d = this.floater.getRotationVec(1.0f);
-                    double f = livingTarget.getX() - (this.floater.getX() + vec3d.x * 4.0);
-                    double g = livingTarget.getBodyY(0.5) - (0.5 + this.floater.getBodyY(0.5));
-                    double h = livingTarget.getZ() - (this.floater.getZ() + vec3d.z * 4.0);
-
-                    if (!this.floater.isSilent()) {
-                        //
-                        world.playSound(null, livingTarget.getX(), livingTarget.getY(), livingTarget.getZ(),
-                                ModSounds.FLOATER_SHOOT, SoundCategory.NEUTRAL,
-                                1.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
-                    }
-                    if (!world.isClient()) {
-                        SnowballEntity snowballEntity = new SnowballEntity(world, this.floater);
-                        snowballEntity.setPosition(this.floater.getX() + vec3d.x * 4.0, this.floater.getBodyY(0.5) + 0.5, snowballEntity.getZ() + vec3d.z * 4.0);
-                        snowballEntity.setVelocity(floater, floater.getPitch(), floater.getYaw(), 0, 2, 1);
-                        world.spawnEntity(snowballEntity);
-                    }
-                    /**
-                     FireballEntity fireballEntity = new FireballEntity(world, this.floater, f, g, h, this.floater.getBoltStrength());
-                     fireballEntity.setPosition(this.floater.getX() + vec3d.x * 4.0, this.floater.getBodyY(0.5) + 0.5, fireballEntity.getZ() + vec3d.z * 4.0);
-                     world.spawnEntity(fireballEntity);
-                     **/
-
-                    this.cooldown = -40;
-                }
-            } else if (this.cooldown > 0) {
-                --this.cooldown;
-            }
-            this.floater.setShooting(this.cooldown > 10);
-        }
-
-    }
     static class TeleportToTargetGoal
             extends ActiveTargetGoal<PlayerEntity> {
         private final TiberiumFloaterEntity floater;
@@ -703,48 +579,6 @@ public class TiberiumFloaterEntity
                 }
                 super.tick();
             }
-        }
-    }
-    private static class LandMushroomGoal extends FlyGoal {
-        public LandMushroomGoal(PathAwareEntity pathAwareEntity, double d) {
-            super(pathAwareEntity, d);
-        }
-        @Nullable
-        protected Vec3d getWanderTarget() {
-            Vec3d vec3d = null;
-            if (this.mob.isTouchingWater()) {
-                vec3d = FuzzyTargeting.find(this.mob, 32, 32);
-            }
-            if (this.mob.getRandom().nextFloat() >= this.probability) {
-                vec3d = this.locateTree();
-            }
-            return vec3d == null ? super.getWanderTarget() : vec3d;
-        }
-
-        @Nullable
-        private Vec3d locateTree() {
-            BlockPos blockPos = this.mob.getBlockPos();
-            BlockPos.Mutable mutable = new BlockPos.Mutable();
-            BlockPos.Mutable mutable2 = new BlockPos.Mutable();
-            Iterable<BlockPos> iterable = BlockPos.iterate(MathHelper.floor(this.mob.getX() - 3.0), MathHelper.floor(this.mob.getY() - 6.0), MathHelper.floor(this.mob.getZ() - 3.0), MathHelper.floor(this.mob.getX() + 3.0), MathHelper.floor(this.mob.getY() + 6.0), MathHelper.floor(this.mob.getZ() + 3.0));
-            Iterator var5 = iterable.iterator();
-
-            BlockPos blockPos2;
-            boolean bl;
-            do {
-                do {
-                    if (!var5.hasNext()) {
-                        return null;
-                    }
-
-                    blockPos2 = (BlockPos)var5.next();
-                } while(blockPos.equals(blockPos2));
-
-                BlockState blockState = this.mob.getWorld().getBlockState(mutable2.set(blockPos2, Direction.DOWN));
-                bl = blockState.getBlock() instanceof MushroomBlock || blockState.isIn(ModBlockTags.FLOATER_LANDING_BLOCKS);
-            } while(!bl || !this.mob.getWorld().isAir(blockPos2) || !this.mob.getWorld().isAir(mutable.set(blockPos2, Direction.UP)));
-
-            return Vec3d.ofBottomCenter(blockPos2);
         }
     }
 }

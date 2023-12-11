@@ -1,16 +1,14 @@
-// Made with Blockbench 4.8.3
+// Made with Blockbench 4.9.1
+// Exported for Minecraft version 1.17+ for Yarn
+// Paste this class into your mod and generate all required imports
+
 package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.animation.CamelAnimations;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.passive.CamelEntity;
-import net.minecraft.util.math.MathHelper;
 import za.lana.signum.client.animation.AirBalloonAnimations;
-import za.lana.signum.client.animation.UnicornAnimations;
-import za.lana.signum.entity.mob.UnicornEntity;
 import za.lana.signum.entity.transport.AirBalloonEntity;
 
 public class AirBalloonModel<T extends AirBalloonEntity> extends SinglePartEntityModel<T> {

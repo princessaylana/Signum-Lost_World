@@ -19,6 +19,7 @@ import net.minecraft.util.math.RotationAxis;
 import za.lana.signum.Signum;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.GravityBoltEntityModel;
+import za.lana.signum.entity.projectile.FireBoltEntity;
 import za.lana.signum.entity.projectile.GravityBoltEntity;
 
 public class GravityBoltRenderer extends EntityRenderer<GravityBoltEntity> {
@@ -31,17 +32,19 @@ public class GravityBoltRenderer extends EntityRenderer<GravityBoltEntity> {
     }
 
     @Override
-    public void render(GravityBoltEntity entity, float yaw, float tickDelta, MatrixStack matrices,
+    public void render(GravityBoltEntity bolt, float yaw, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw()) - 90.0F));
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevPitch, entity.getPitch()) + 90.0F));
-        VertexConsumer vertexconsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, this.model.getLayer(TEXTURE), false, false);
-        this.model.render(matrices, vertexconsumer, light, OverlayTexture.DEFAULT_UV, 0.0F, 0.05F, 1.0F, 1.0F);
-
+        matrices.translate(0.0f, 0.15f, 0.0f);
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(yaw, bolt.prevYaw, bolt.getYaw()) - 90.0f));
+        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(yaw, bolt.prevPitch, bolt.getPitch())));
+        this.model.setAngles(bolt, yaw, 0.0f, -0.1f, 0.0f, 0.0f);
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(TEXTURE));
+        this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
         matrices.pop();
-        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
+        super.render(bolt, yaw, tickDelta, matrices, vertexConsumers, light);
     }
+
 
     @Override
     public Identifier getTexture(GravityBoltEntity entity) {

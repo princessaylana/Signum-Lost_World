@@ -25,6 +25,9 @@ public class ModModelLayers {
 
     public static final EntityModelLayer TTROOPER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "ttrooper_entity"), "waist");
+
+    public static final EntityModelLayer TIBERIUM_FLOATER =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_floater_entity"), "main");
     public static final EntityModelLayer SSKELETON =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "sskeleton_entity"), "mainBody");
 
@@ -44,6 +47,14 @@ public class ModModelLayers {
     public static final EntityModelLayer DARKSKELETON =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "darkskeleton_entity"), "mainBody");
 
+    public static final EntityModelLayer GHOST_ENTITY =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "ghost_entity"), "mainBody");
+
+    public static final EntityModelLayer WIZARD_ENTITY =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "wizard_entity"), "mainBody");
+    public static final EntityModelLayer SPELLBOLT_ENTITY =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "spellbolt_entity"), "mainBody");
+
 
     public static final EntityModelLayer TCOMMANDER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "tcommander_entity"), "waist");
@@ -51,19 +62,21 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "elve_guard_entity"), "waist");
 
     public static final EntityModelLayer TIBERIUM_BOLT =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_bolt"), "main");
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_bolt"), "mainBody");
     public static final EntityModelLayer ICE_BOLT =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "ice_bolt"), "main");
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "ice_bolt"), "mainBody");
     public static final EntityModelLayer TRANSMUTE_BOLT =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "transmute_bolt"), "main");
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "transmute_bolt"), "mainBody");
     public static final EntityModelLayer FIRE_BOLT =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "fire_bolt"), "main");
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "fire_bolt"), "mainBody");
     public static final EntityModelLayer SHOCK_BOLT =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "shock_bolt"), "main");
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "shock_bolt"), "mainBody");
     public static final EntityModelLayer GRAVITY_BOLT =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "gravity_bolt"), "main");
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "gravity_bolt"), "mainBody");
     public static final EntityModelLayer SPIDER_SPIT =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "spiderspit"), "main");
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "spiderspit"), "mainBody");
+    public static final EntityModelLayer TIBERIUM_SPIT =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_spit"), "mainBody");
 
 
 }

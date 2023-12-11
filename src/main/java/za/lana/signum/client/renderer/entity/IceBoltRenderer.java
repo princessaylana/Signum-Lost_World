@@ -19,9 +19,7 @@ import net.minecraft.util.math.RotationAxis;
 import za.lana.signum.Signum;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.IceBoltEntityModel;
-import za.lana.signum.client.model.TiberiumBoltEntityModel;
 import za.lana.signum.entity.projectile.IceBoltEntity;
-import za.lana.signum.entity.projectile.TiberiumBoltEntity;
 
 public class IceBoltRenderer extends EntityRenderer<IceBoltEntity> {
     public static final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/projectile/ice_bolt_texture.png");
