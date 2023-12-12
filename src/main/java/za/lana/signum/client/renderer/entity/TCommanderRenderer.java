@@ -11,7 +11,7 @@ import za.lana.signum.client.model.TCommanderModel;
 import za.lana.signum.entity.hostile.TCommanderEntity;
 
 public class TCommanderRenderer extends MobEntityRenderer<TCommanderEntity, TCommanderModel<TCommanderEntity>> {
-    private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/tcommander_texture.png");
+    private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/tiberium/tcommander_texture.png");
     public TCommanderRenderer(EntityRendererFactory.Context context) {
         super(context, new TCommanderModel<>(context.getPart(ModModelLayers.TCOMMANDER)), 0.6f); //entity shadow
     }

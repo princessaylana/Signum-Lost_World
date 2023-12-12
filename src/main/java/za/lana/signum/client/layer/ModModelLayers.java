@@ -7,13 +7,14 @@
 package za.lana.signum.client.layer;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 
 public class ModModelLayers {
     public static final EntityModelLayer AIRBALLOON =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "airballoon"), "MainBody");
+    public static final EntityModelLayer TIBERIUM_WORM =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_worm_entity"), "mainBody");
     public static final EntityModelLayer UNICORN =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "unicorn"), "mainbody");
     public static final EntityModelLayer PIDGEON =

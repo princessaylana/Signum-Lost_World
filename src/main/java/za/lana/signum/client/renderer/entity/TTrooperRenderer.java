@@ -14,7 +14,7 @@ import za.lana.signum.client.model.TTrooperModel;
 import za.lana.signum.entity.hostile.TTrooperEntity;
 
 public class TTrooperRenderer extends MobEntityRenderer<TTrooperEntity, TTrooperModel<TTrooperEntity>> {
-    private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/ttrooper_texture.png");
+    private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/tiberium/ttrooper_texture.png");
     public TTrooperRenderer(EntityRendererFactory.Context context) {
         super(context, new TTrooperModel<>(context.getPart(ModModelLayers.TTROOPER)), 0.6f); //entity shadow
         this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));

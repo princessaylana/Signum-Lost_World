@@ -13,9 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
 import za.lana.signum.client.animation.IceSkeletonAnimations;
-import za.lana.signum.client.animation.TibSkeletonAnimations;
 import za.lana.signum.entity.hostile.IceSkeletonEntity;
-import za.lana.signum.entity.hostile.TibSkeletonEntity;
 
 public class IceSkeletonModel<T extends IceSkeletonEntity>
         extends SinglePartEntityModel<T> implements ModelWithArms {
@@ -69,6 +67,7 @@ public class IceSkeletonModel<T extends IceSkeletonEntity>
         ModelPartData rl_armor = rightLeg.addChild("rl_armor", ModelPartBuilder.create().uv(32, 0).cuboid(-2.1F, -0.2F, -2.5F, 4.6F, 11.7F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
         return TexturedModelData.of(modelData, 128, 128);
     }
+
     @Override
     public void setAngles(IceSkeletonEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);

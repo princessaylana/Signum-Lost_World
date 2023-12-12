@@ -70,26 +70,26 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
 
     public void initGoals(){
 
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new WizardSleepGoal(this, 1.1D, 64));
-        this.goalSelector.add(1, new WizardAttackGoal(this, 1.0D, true));
-        this.goalSelector.add(2, new LookAroundGoal(this));
-        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
-        this.goalSelector.add(2, new WanderAroundGoal(this, 1.0));
-        this.goalSelector.add(4, new FollowMobGoal(this, 1.0, 3.0F, 7.0F));
+
+        this.goalSelector.add(2, new WizardAttackGoal(this, 1.0D, true));
+        this.goalSelector.add(3, new LookAroundGoal(this));
+        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
+        this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
+
+        this.goalSelector.add(5, new FollowMobGoal(this, 1.0, 2.0F, 8.0F));
         //
-        this.targetSelector.add(0, new RevengeGoal(this));
+        this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new WizardEntity.ProtectHordeGoal());
-
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
 
-        //this.initCustomGoals();
+        this.initCustomGoals();
     }
     //
     protected void initCustomGoals() {
-        //this.goalSelector.add(5, new WizardEntity.SearchAndDestroyGoal(this, 10.0f));
-        //this.targetSelector.add(5, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new WizardSleepGoal(this, 1.2f, 256));
+
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){

@@ -18,7 +18,7 @@ import za.lana.signum.client.renderer.feature.TiberiumFloaterEyeFeatureRenderer;
 import za.lana.signum.entity.hostile.TiberiumFloaterEntity;
 
 public class TiberiumFloaterEntityRenderer extends MobEntityRenderer<TiberiumFloaterEntity, TiberiumFloaterEntityModel<TiberiumFloaterEntity>> {
-private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/tiberium_floater_texture.png");
+private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/tiberium/tiberium_floater_texture.png");
 
     public TiberiumFloaterEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new TiberiumFloaterEntityModel<>(context.getPart(ModModelLayers.TIBERIUM_FLOATER)), 0.6f); //entity shadow

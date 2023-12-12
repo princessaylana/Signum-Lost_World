@@ -87,12 +87,12 @@ public class TiberiumFloaterEntityModel<T extends TiberiumFloaterEntity> extends
 		this.animateMovement(TiberiumFloaterEntityAnimations.TFLOATER_FLY, limbSwing, limbSwingAmount, 2f, 2.5f);
 		this.updateAnimation(floater.idleAniState, TiberiumFloaterEntityAnimations.TFLOATER_IDLE, ageInTicks, 1f);
 		this.updateAnimation(floater.attackAniState, TiberiumFloaterEntityAnimations.TFLOATER_MELEE_ATTACK, ageInTicks, 1f);
-		//this.updateAnimation(floater.rangeAniState, TiberiumFloaterEntityAnimations.TFLOATER_RANGE_ATTACK, ageInTicks, 1f);
+		this.updateAnimation(floater.spitAniState, TiberiumFloaterEntityAnimations.TFLOATER_RANGE_ATTACK, ageInTicks, 1f);
 
 	}
 	public void setHeadAngles(float headYaw, float headPitch){
 		headYaw = MathHelper.clamp(headYaw, -30.0f, 30.0f);
-		headPitch = MathHelper.clamp(headPitch, -25.0f, 45.0f);
+		headPitch = MathHelper.clamp(headPitch, -30.0f, 30.0f);
 
 		this.head.yaw = headYaw * 0.017453292F;
 		this.head.pitch = headPitch * 0.017453292F;

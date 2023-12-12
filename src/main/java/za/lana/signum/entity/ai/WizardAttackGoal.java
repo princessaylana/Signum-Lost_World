@@ -52,7 +52,6 @@ public class WizardAttackGoal extends MeleeAttackGoal {
             shouldCountTillNextAttack = true;
             if(isTimeToStartAttackAnimation()) {
                 entity.setAttacking(true);
-
             }
             if(isTimeToAttack()) {
                 this.mob.getLookControl().lookAt(pTarget.getX(), pTarget.getEyeY(), pTarget.getZ());

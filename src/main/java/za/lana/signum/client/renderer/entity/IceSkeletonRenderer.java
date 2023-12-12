@@ -20,6 +20,7 @@ import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.IceSkeletonModel;
 import za.lana.signum.client.renderer.feature.IceSkeletonOverlayFeatureRenderer;
 import za.lana.signum.entity.hostile.IceSkeletonEntity;
+import za.lana.signum.entity.hostile.TibSkeletonEntity;
 
 public class IceSkeletonRenderer extends MobEntityRenderer<IceSkeletonEntity, IceSkeletonModel<IceSkeletonEntity>> {
     private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/skeletons/iceskeleton_texture.png");
@@ -27,7 +28,6 @@ public class IceSkeletonRenderer extends MobEntityRenderer<IceSkeletonEntity, Ic
         super(context, new IceSkeletonModel<>(context.getPart(ModModelLayers.ICESKELETON)), 0.4f); //entity shadow
         this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
         this.addFeature(new IceSkeletonOverlayFeatureRenderer<>(this, context.getModelLoader()));
-
     }
 
     @Override
@@ -38,14 +38,11 @@ public class IceSkeletonRenderer extends MobEntityRenderer<IceSkeletonEntity, Ic
     @Override
     public void render(IceSkeletonEntity mobEntity, float f, float g, MatrixStack matrixStack,
                        VertexConsumerProvider vertexConsumerProvider, int i) {
-        //VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutout(this.getTexture(mobEntity)));
-        VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(mobEntity)));
-        this.model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
-        matrixStack.pop();
-        //
         super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
+    /**
     public RenderLayer getRenderType(IceSkeletonEntity mobEntity, Identifier texture) {
         return RenderLayer.getEntityTranslucent(this.getTexture(mobEntity));
     }
+     **/
 }

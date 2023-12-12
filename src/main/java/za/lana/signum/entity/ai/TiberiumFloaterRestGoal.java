@@ -1,5 +1,8 @@
 package za.lana.signum.entity.ai;
 
+import net.minecraft.block.BedBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.enums.BedPart;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
@@ -7,9 +10,8 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.hostile.TiberiumFloaterEntity;
-import za.lana.signum.entity.mob.PidgeonEntity;
-import za.lana.signum.tag.ModBlockTags;
 
 import java.util.EnumSet;
 
@@ -19,9 +21,9 @@ public class TiberiumFloaterRestGoal
     private final TiberiumFloaterEntity mob;
 
     public TiberiumFloaterRestGoal(MobEntity mob, double speed, int range) {
-        super((PathAwareEntity) mob, speed, range, 6);
+        super((PathAwareEntity) mob, speed, range);
         this.mob = (TiberiumFloaterEntity) mob;
-        this.lowestY = -2;
+        //this.lowestY = -2;
         this.setControls(EnumSet.of(Control.TARGET, Control.MOVE));
     }
 
@@ -34,7 +36,6 @@ public class TiberiumFloaterRestGoal
     @Override
     public void start() {
         super.start();
-        //this.mob.setInSittingPose(false);
     }
 
     @Override
@@ -45,12 +46,7 @@ public class TiberiumFloaterRestGoal
     @Override
     public void stop() {
         World level = this.mob.getWorld();
-        if (level.isNight()){
-        super.stop();
-        this.mob.setInSleepingPose(false);
-        this.mob.wakeUp();
-        }
-        if (this.mob.isAttacking() || !(this.mob.getAttacker() == null)){
+        if (level.isNight() || !(this.mob.getAttacker() == null)){
             super.stop();
             this.mob.setInSleepingPose(false);
             this.mob.wakeUp();
@@ -60,18 +56,41 @@ public class TiberiumFloaterRestGoal
     @Override
     public void tick() {
         super.tick();
-        //this.mob.setInSittingPose(false);
+        mob.setAttacking(false);
+        mob.setSpitting(false);
+
         if (!this.hasReached()) {
             this.mob.setInSleepingPose(false);
-        } else if (!this.mob.isInSleepingPose()) {
+
+        } else if (this.mob.isInSleepingPose()) {
+            this.mob.sleep(targetPos);
             this.mob.setInSleepingPose(true);
+            this.setSleepingStill();
         }
     }
 
     @Override
     protected boolean isTargetPos(WorldView world, BlockPos pos) {
-        //return world.isAir(pos.up()) && world.getBlockState(pos).isIn(BlockTags.LEAVES);
-        return world.isAir(pos.up()) && world.getBlockState(pos).isIn(BlockTags.BEDS);
+        if (!world.isAir(pos.up())) {
+            return false;
+        }
+        BlockState blockState = world.getBlockState(pos);
+        if (blockState.isOf(ModBlocks.TOXIC_SHROOM_BLOCK)) {
+            return true;
+        }
+        return blockState.isIn(BlockTags.BEDS, state -> state.getOrEmpty(BedBlock.PART).map(part -> part != BedPart.HEAD).orElse(true));
+        //return world.isAir(pos.up()) && world.getBlockState(pos).isIn(BlockTags.BEDS);
+    }
+
+    private void setSleepingStill(){
+        if (!this.mob.getWorld().isClient()) {
+            double x = this.mob.getX();
+            double y = this.mob.getY();
+            double z = this.mob.getZ();
+
+            this.mob.teleport(x, y, z);
+            this.mob.setVelocity(0, 0, 0);
+        }
     }
 }
 

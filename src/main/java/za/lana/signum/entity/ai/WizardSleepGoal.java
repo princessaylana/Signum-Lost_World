@@ -2,6 +2,9 @@ package za.lana.signum.entity.ai;
 
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FurnaceBlock;
+import net.minecraft.block.enums.BedPart;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
 import net.minecraft.entity.mob.MobEntity;
@@ -11,6 +14,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.hostile.WizardEntity;
 
 import java.util.EnumSet;
@@ -40,7 +44,7 @@ public class WizardSleepGoal
 
     @Override
     protected int getInterval(PathAwareEntity mob) {
-        return 80;
+        return 40;
     }
 
     @Override
@@ -48,10 +52,8 @@ public class WizardSleepGoal
         World level = this.mob.getWorld();
         if (level.isNight() || !(this.mob.getAttacker() == null)) {
             super.stop();
-            this.mob.setAiDisabled(false);
             this.mob.setInSleepingPose(false);
             this.mob.wakeUp();
-            //this.mob.setPose(EntityPose.STANDING);
         }
     }
 
@@ -60,27 +62,25 @@ public class WizardSleepGoal
         super.tick();
         mob.setAttacking(false);
         mob.setSpellShooting(false);
+
         if (!this.hasReached()) {
             this.mob.setInSleepingPose(false);
-            this.mob.setAiDisabled(false);
 
         } else if (!this.mob.isInSleepingPose()) {
-            this.mob.setInSleepingPose(true);
             this.mob.sleep(targetPos);
-            // oveControl.State.MOVE_TO
-            this.mob.setAiDisabled(true);
+            this.mob.setInSleepingPose(true);
             this.setSleepingStill();
         }
     }
 
     @Override
     protected boolean isTargetPos(WorldView world, BlockPos pos) {
-        return world.isAir(pos.up()) && world.getBlockState(pos).isIn(BlockTags.BEDS);
-        //return level.isAir(pos.up()) && !isBedOccupiedByOthers((ServerWorld) level, pos, this.mob)
-    }
-    private static boolean isBedOccupiedByOthers(ServerWorld world, BlockPos pos, LivingEntity entity) {
+        if (!world.isAir(pos.up())) {
+            return false;
+        }
         BlockState blockState = world.getBlockState(pos);
-        return blockState.isIn(BlockTags.BEDS) && blockState.get(BedBlock.OCCUPIED) && !entity.isSleeping();
+        return blockState.isIn(BlockTags.BEDS, state -> state.getOrEmpty(BedBlock.PART).map(part -> part != BedPart.HEAD).orElse(true));
+        //return world.isAir(pos.up()) && world.getBlockState(pos).isIn(BlockTags.BEDS);
     }
 
     private void setSleepingStill(){

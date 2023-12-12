@@ -21,7 +21,7 @@ import za.lana.signum.entity.mob.UnicornEntity;
 @Environment(value=EnvType.CLIENT)
 public class TiberiumFloaterEyeFeatureRenderer<T extends TiberiumFloaterEntity>
         extends EyesFeatureRenderer<T, TiberiumFloaterEntityModel<T>> {
-    private static final RenderLayer SKIN = RenderLayer.getEyes(new Identifier(Signum.MOD_ID, "textures/entity/hostile/tiberium_floater_glow_texture.png"));
+    private static final RenderLayer SKIN = RenderLayer.getEyes(new Identifier(Signum.MOD_ID, "textures/entity/hostile/tiberium/tiberium_floater_glow_texture.png"));
 
     public TiberiumFloaterEyeFeatureRenderer(FeatureRendererContext<T, TiberiumFloaterEntityModel<T>> featureRendererContext) {
         super(featureRendererContext);

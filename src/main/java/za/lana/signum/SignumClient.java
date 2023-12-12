@@ -174,12 +174,15 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TIBERIUM_FLOATER, TiberiumFloaterEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterEntityRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TIBERIUM_WORM, TiberiumWormEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);
+
         // VEHICLES
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AIRBALLOON, AirBalloonModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.AIRBALLOON, AirBalloonRenderer::new);
 
         // Gecko
-        EntityRendererRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormRenderer::new);
+
         // PARTICLES
         ParticleFactoryRegistry.getInstance().register(ModParticles.BlUE_DUST_PARTICLE, BlueDustParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.TIBERIUM_PARTICLE, TiberiumParticle.Factory::new);
