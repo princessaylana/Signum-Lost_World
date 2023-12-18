@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "signum:exotic_crystal"
+    },
+    "title": "Exotic Crystal",
+    "description": "A Magikal Transmutation",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "signum:lost_world",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "signum:exotic_crystal_shard"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

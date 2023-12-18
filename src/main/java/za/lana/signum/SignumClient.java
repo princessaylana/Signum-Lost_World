@@ -10,17 +10,25 @@ import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.*;
 import za.lana.signum.client.networking.ABKeyInputPacket;
 import za.lana.signum.client.networking.ABKeyInputSyncPacket;
+import za.lana.signum.client.renderer.dimension.LostWorldRenderer;
 import za.lana.signum.client.renderer.entity.*;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
+import za.lana.signum.client.renderer.transport.AirShipRenderer;
+import za.lana.signum.client.shaders.SignumShaders;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.networking.ModMessages;
@@ -129,20 +137,21 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TTROOPER, TTrooperModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperRenderer::new);
 
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TCOMMANDER, TCommanderModel::getTexturedModelData);
-        EntityRendererRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderRenderer::new);
-
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ELVE_GUARD_ENTITY, ElveGuardEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ELVE_GUARD_ENTITY, ElveGuardEntityRenderer::new);
 
-        //
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.WIZARD_ENTITY, WizardEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.WIZARD_ENTITY, WizardEntityRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TIBERIUM_WIZARD_ENTITY, TiberiumWizardEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.TIBERIUM_WIZARD_ENTITY, TiberiumWizardEntityRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.POISONBOLT_ENTITY, PoisonBoltEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.POISONBOLT_ENTITY, PoisonBoltRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SPELLBOLT_ENTITY, SpellBoltEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.SPELLBOLT_ENTITY, SpellBoltRenderer::new);
 
-        //
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER, ESpiderModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER_SADDLE, ESpiderModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderRenderer::new);
@@ -181,7 +190,8 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AIRBALLOON, AirBalloonModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.AIRBALLOON, AirBalloonRenderer::new);
 
-        // Gecko
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AIRSHIP, AirShipModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.AIRSHIP, AirShipRenderer::new);
 
         // PARTICLES
         ParticleFactoryRegistry.getInstance().register(ModParticles.BlUE_DUST_PARTICLE, BlueDustParticle.Factory::new);
@@ -205,15 +215,24 @@ public class SignumClient implements ClientModInitializer {
 
         ABKeyInputPacket.init();
         ABKeyInputSyncPacket.init();
+
         // VANILLA/FABRIC SCREENS
         HandledScreens.register(ModScreenHandlers.SKYFORGE_SCREENHANDLER, SkyForgeScreen::new);
         HandledScreens.register(ModScreenHandlers.AIRBALLOON_SCREENHANDLER, AirBalloonVScreen::new);
+
+        // DIMENSION RENDERING - TESTING (For Future Use)
+        DimensionRenderingRegistry.registerSkyRenderer(RegistryKey.of(RegistryKeys.WORLD, new Identifier(Signum.MOD_ID, "lostsky")), LostWorldRenderer::render);
+        DimensionRenderingRegistry.registerDimensionEffects(new Identifier(Signum.MOD_ID, "lost_world"), new DimensionEffects.Overworld());
+
+        //
+
+        //
         // LIBGUI SCREENS
         HandledScreens.<ExampleDescription, CottonInventoryScreen<ExampleDescription>>register(
                 GuiScreens.EXAMPLE_GUI, ExampleBlockScreen::new);
-        HandledScreens.<AirBalloonDescription, CottonInventoryScreen<AirBalloonDescription>>register(
-                GuiScreens.AB_GUI, AirBalloonScreen::new);
 
+        // SHADERS
+        SignumShaders.register();
         Signum.LOGGER.info("Client Initialized " + Signum.MOD_ID);
     }
 }

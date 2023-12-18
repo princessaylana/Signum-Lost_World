@@ -49,7 +49,6 @@ Models and Texures are not covered by the MIT License, Assets.
 ![Discord](https://img.shields.io/discord/:serverId)
 
 
-![Signum Poster](https://images2.imgbox.com/4e/f3/AKGqbLyZ_o.png "Signum Minecraft Fabric Mod")
 ...
 
 

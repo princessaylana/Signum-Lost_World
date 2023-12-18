@@ -12,10 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
 import za.lana.signum.client.animation.TTrooperAnimations;
-import za.lana.signum.client.animation.UnicornAnimations;
-import za.lana.signum.entity.hostile.TCommanderEntity;
 import za.lana.signum.entity.hostile.TTrooperEntity;
-import za.lana.signum.entity.mob.UnicornEntity;
 public class TTrooperModel<T extends TTrooperEntity> extends SinglePartEntityModel<T> implements ModelWithArms {
     private final ModelPart ttrooper;
     private final ModelPart head;

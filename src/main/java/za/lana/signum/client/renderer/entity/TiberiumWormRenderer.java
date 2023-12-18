@@ -20,8 +20,7 @@ public class TiberiumWormRenderer extends MobEntityRenderer<TiberiumWormEntity, 
 private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/tiberium/tiberium_worm_texture.png");
 
     public TiberiumWormRenderer(EntityRendererFactory.Context context) {
-        super(context, new TiberiumWormEntityModel<>(context.getPart(ModModelLayers.TIBERIUM_WORM)), 0.6f); //entity shadow
-        //this.addFeature(new UnicornEyesFeatureRenderer<>(this));
+        super(context, new TiberiumWormEntityModel<>(context.getPart(ModModelLayers.TIBERIUM_WORM)), 0.1f); //entity shadow
     }
 
     @Override

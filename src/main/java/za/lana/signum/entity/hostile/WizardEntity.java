@@ -16,9 +16,9 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.*;
+import net.minecraft.entity.passive.FrogEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -31,6 +31,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.WizardAttackGoal;
 import za.lana.signum.entity.ai.WizardSleepGoal;
@@ -58,7 +59,7 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
     private static final TrackedData<Boolean> SLEEPING = DataTracker.registerData(WizardEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public final Random random = Random.create();
-    //private static final TrackedData<Optional<BlockPos>> SLEEPING_POSITION = DataTracker.registerData(WizardEntity.class, TrackedDataHandlerRegistry.OPTIONAL_BLOCK_POS);
+
     public WizardEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
@@ -70,7 +71,6 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
 
     public void initGoals(){
 
-
         this.goalSelector.add(2, new WizardAttackGoal(this, 1.0D, true));
         this.goalSelector.add(3, new LookAroundGoal(this));
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
@@ -81,14 +81,33 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new WizardEntity.ProtectHordeGoal());
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, FrogEntity.class, true));
 
         this.initCustomGoals();
+        this.initCustomTargets();
+
     }
     //
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new WizardSleepGoal(this, 1.2f, 256));
+    }
+
+    protected void initCustomTargets() {
+        // BLACK FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.BLACK_FOREST));
+        // DEATHLANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.DEATH_LANDS));
+        // FROZEN LANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.FROZEN_LANDS));
+        // GOLDEN KINGDOM
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // MAGIC FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // RAINBOW MUSHROOMS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // TIBERIUM WASTELAND
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.TIBERIUM_WASTELAND));
 
     }
 
@@ -107,7 +126,6 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
         this.dataTracker.startTracking(ATTACKING, false);
         this.dataTracker.startTracking(SPELL_SHOOTING, false);
         this.dataTracker.startTracking(SLEEPING, false);
-        //this.dataTracker.startTracking(SLEEPING_POSITION, Optional.empty());
     }
 
     private void setupAnimationStates() {
@@ -177,7 +195,6 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return 1.75f;
     }
-
     // SLEEP
     public void setInSleepingPose(boolean sleeping) {
         this.dataTracker.set(SLEEPING, sleeping);
@@ -186,7 +203,6 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
         return this.dataTracker.get(SLEEPING);
     }
 
-    //
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
     }
@@ -208,20 +224,28 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
             setupAnimationStates();
         }
     }
-
+    //
     public EntityGroup getGroup() {
-        return ModEntityGroup.WIZARDS;
+        return ModEntityGroup.GOLDEN_KINGDOM;
     }
     @Override
     public boolean isTeammate(Entity other) {
         if (super.isTeammate(other)) {
             return true;
         }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.WIZARDS) {
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.GOLDEN_KINGDOM) {
             return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
         }
         return false;
     }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
     @Override
     protected SoundEvent getAmbientSound() {
         if (!this.isInSleepingPose()){
@@ -278,7 +302,6 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
     private ItemStack makeInitialWeapon() {
         return new ItemStack(Items.IRON_SWORD);
     }
-
     // GOALS
     protected static class NavDoorInteractGoal
             extends LongDoorInteractGoal {

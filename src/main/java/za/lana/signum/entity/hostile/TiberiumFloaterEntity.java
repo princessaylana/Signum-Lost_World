@@ -20,8 +20,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.FlyingEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -40,7 +39,6 @@ import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.FloaterAttackGoal;
 import za.lana.signum.entity.ai.TiberiumFloaterRestGoal;
-import za.lana.signum.entity.ai.WizardSleepGoal;
 import za.lana.signum.entity.control.TiberiumFloaterFlightControl;
 import za.lana.signum.entity.projectile.TiberiumSpitEntity;
 import za.lana.signum.particle.ModParticles;
@@ -85,16 +83,33 @@ public class TiberiumFloaterEntity
         this.goalSelector.add(4, new FlyRandomlyGoal(this));
 
         this.targetSelector.add(1, new RevengeGoal(this));
-        //this.targetSelector.add(1, new WizardEntity.ProtectHordeGoal());
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
 
         this.initCustomGoals();
+        this.initCustomTargets();
     }
     //
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new TiberiumFloaterRestGoal(this, 1.2f, 256));
+    }
+
+    protected void initCustomTargets() {
+        // BLACK FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.BLACK_FOREST));
+        // DEATHLANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.DEATH_LANDS));
+        // FROZEN LANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.FROZEN_LANDS));
+        // GOLDEN KINGDOM
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // MAGIC FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // RAINBOW MUSHROOMS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // TIBERIUM WASTELAND
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.TIBERIUM_WASTELAND));
+
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -187,7 +202,31 @@ public class TiberiumFloaterEntity
             setupAnimationStates();
         }
     }
+    //
+//
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TIBERIUM_WASTELAND;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TIBERIUM_WASTELAND) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
 
+    //
     @Override
     public void tickMovement() {
         World level = this.getWorld();
@@ -247,27 +286,6 @@ public class TiberiumFloaterEntity
             this.getWorld().spawnEntity(tiberiumSpit);
             this.playSound(ModSounds.FLOATER_SHOOT, 0.15F, 1.0F);
         }
-    }
-    // ATTRIBUTES
-    public EntityGroup getGroup() {
-        return ModEntityGroup.TIBERIUM;
-    }
-    @Override
-    public boolean isTeammate(Entity other) {
-        if (super.isTeammate(other)) {
-            return true;
-        }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TIBERIUM) {
-            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
-        }
-        return false;
-    }
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
     }
 
     // hitbox width must be 2, height must be 3.5

@@ -74,8 +74,6 @@ public class UnicornEntityModel<T extends UnicornEntity> extends SinglePartEntit
 		unicorn.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
 	}
 
-
-
 	@Override
 	public ModelPart getPart() {
 		return unicorn;

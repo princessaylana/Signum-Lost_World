@@ -6,10 +6,7 @@
  * */
 package za.lana.signum.entity.mob;
 
-import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -17,7 +14,10 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,7 +29,9 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.UnicornAttackGoal;
 
 public class UnicornEntity extends AnimalEntity {
@@ -77,6 +79,27 @@ public class UnicornEntity extends AnimalEntity {
             setupAnimationStates();
         }
     }
+    //
+    //public EntityGroup getGroup() {return ModEntityGroup.GOLDEN_KINGDOM;}
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.GOLDEN_KINGDOM) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
+
     @Override
     protected void initGoals(){
         this.goalSelector.add(0, new SwimGoal(this));
@@ -90,7 +113,27 @@ public class UnicornEntity extends AnimalEntity {
 
         this.targetSelector.add(1, new RevengeGoal(this));
 
+        //this.initCustomTargets();
     }
+
+    protected void initCustomTargets() {
+        // BLACK FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.BLACK_FOREST));
+        // DEATHLANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.DEATH_LANDS));
+        // FROZEN LANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.FROZEN_LANDS));
+        // GOLDEN KINGDOM
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // MAGIC FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // RAINBOW MUSHROOMS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // TIBERIUM WASTELAND
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.TIBERIUM_WASTELAND));
+
+    }
+
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isOf(Items.APPLE);

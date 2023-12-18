@@ -18,10 +18,6 @@ public class GuiScreens {
             Registry.register(Registries.SCREEN_HANDLER,  new Identifier(Signum.MOD_ID, "example_gui"),
                     new ScreenHandlerType<>((syncId, inventory) -> new ExampleDescription(syncId, inventory, ScreenHandlerContext.EMPTY),
                             FeatureFlags.VANILLA_FEATURES));
-    public static ScreenHandlerType<AirBalloonDescription> AB_GUI =
-            Registry.register(Registries.SCREEN_HANDLER, new Identifier (Signum.MOD_ID, "ab_gui"),
-                    new ScreenHandlerType<>((syncId, inventory) -> new AirBalloonDescription(syncId, inventory, ScreenHandlerContext.EMPTY),
-                            FeatureFlags.VANILLA_FEATURES));
 
     public static void registerGuiScreens(){
         Signum.LOGGER.info("Registering GuiScreens for " + Signum.MOD_ID);

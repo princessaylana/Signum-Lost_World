@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "signum:moissanite_crystal"
+    },
+    "title": "Moissanite Crystal",
+    "description": "Heal the World",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "signum:lost_world",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "signum:moissanite_ore"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

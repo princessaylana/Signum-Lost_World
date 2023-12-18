@@ -17,12 +17,8 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -74,8 +70,25 @@ public class TiberiumWormEntity extends HostileEntity {
 		this.targetSelector.add(1, new TiberiumWormEntity.TiberiumWormRevengeGoal());
 		this.targetSelector.add(2, new TiberiumWormEntity.ProtectHordeGoal());
 		this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.add(5, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
-		this.targetSelector.add(4, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+
+		this.initCustomTargets();
+	}
+
+	protected void initCustomTargets() {
+		// BLACK FOREST
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.BLACK_FOREST));
+		// DEATHLANDS
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.DEATH_LANDS));
+		// FROZEN LANDS
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.FROZEN_LANDS));
+		// GOLDEN KINGDOM
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+		// MAGIC FOREST
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+		// RAINBOW MUSHROOMS
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+		// TIBERIUM WASTELAND
+		//this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.TIBERIUM_WASTELAND));
 
 	}
 
@@ -114,6 +127,29 @@ public class TiberiumWormEntity extends HostileEntity {
 			setupAnimationStates();
 		}
 	}
+	//
+	public EntityGroup getGroup() {
+		return ModEntityGroup.TIBERIUM_WASTELAND;
+	}
+	@Override
+	public boolean isTeammate(Entity other) {
+		if (super.isTeammate(other)) {
+			return true;
+		}
+		if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TIBERIUM_WASTELAND) {
+			return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+		}
+		return false;
+	}
+	@Override
+	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+		if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
+			return false;
+		}
+		return super.canHaveStatusEffect(effect);
+	}
+	//
+
 	public void setAttacking(boolean attacking) {
 		this.dataTracker.set(ATTACKING, attacking);
 	}
@@ -127,7 +163,6 @@ public class TiberiumWormEntity extends HostileEntity {
 		this.dataTracker.startTracking(ATTACKING, false);
 	}
 	//
-	// HORSE SOUNDS
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.ENTITY_ENDERMITE_AMBIENT;
 	}
@@ -140,19 +175,6 @@ public class TiberiumWormEntity extends HostileEntity {
 	@Override
 	protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
 		return 1.85f;
-	}
-
-
-	// GROUP ATTRIBUTES
-	public EntityGroup getGroup() {
-		return ModEntityGroup.TIBERIUM;
-	}
-	@Override
-	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-		if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
-			return false;
-		}
-		return super.canHaveStatusEffect(effect);
 	}
 
 	static class WanderAndInfestGoal

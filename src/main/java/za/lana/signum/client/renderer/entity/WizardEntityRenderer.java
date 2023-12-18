@@ -18,7 +18,7 @@ import za.lana.signum.client.model.WizardEntityModel;
 import za.lana.signum.entity.hostile.WizardEntity;
 
 public class WizardEntityRenderer extends MobEntityRenderer<WizardEntity, WizardEntityModel<WizardEntity>> {
-    private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/wizards/blue_wizard_texture.png");
+    private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/wizards/orange_wizard_texture.png");
     public WizardEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new WizardEntityModel<>(context.getPart(ModModelLayers.WIZARD_ENTITY)), 0.6f); //entity shadow
         this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));

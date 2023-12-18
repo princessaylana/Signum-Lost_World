@@ -6,8 +6,9 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 
-public class ModBlockTags {
+public final class ModBlockTags {
     public static final TagKey<Block> FLOATER_LANDING_BLOCKS = ModBlockTags.of("floater_landing_blocks");
+    public static final TagKey<Block> AIRSHIP_LANDING_BLOCKS = ModBlockTags.of("airship_landing_blocks");
 
 
     private ModBlockTags() {

@@ -13,6 +13,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -31,6 +32,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.TrackSumSkeletonTargetGoal;
 import za.lana.signum.item.ModItems;
@@ -70,9 +72,8 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(2, new AvoidSunlightGoal(this));
         this.goalSelector.add(3, new EscapeSunlightGoal(this, 1.2));
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, SkeletonEntity.class, true));
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
         //this.targetSelector.add(4, new ActiveTargetGoal<>(this, SkeletonEntity.class, true));
+
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
@@ -130,6 +131,28 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         }
         //
     }
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.GOLDEN_KINGDOM;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.GOLDEN_KINGDOM) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
 
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
@@ -142,9 +165,6 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     @Override
     public SimpleInventory getInventory() {
         return this.inventory;
-    }
-    public EntityGroup getGroup() {
-        return ModEntityGroup.GOLDEN_KINGDOM;
     }
 
     @Override

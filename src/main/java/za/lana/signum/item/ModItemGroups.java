@@ -203,18 +203,16 @@ public class ModItemGroups {
                         entries.add(ModItems.MIXED_MUSHROOM_STEW);
 
                         // SPAWN EGGS
+                        entries.add(ModItems.AIRBALOON_SPAWN_EGG);
+                        entries.add(ModItems.AIRSHIP_SPAWN_EGG);
+
                         entries.add(ModItems.PIDGEON_SPAWN_EGG);
                         entries.add(ModItems.UNICORN_SPAWN_EGG);
-                        entries.add(ModItems.ESPIDER_SPAWN_EGG);
 
-                        entries.add(ModItems.TIBERIUM_WORM_SPAWN_EGG);
-                        entries.add(ModItems.TTROOPER_SPAWN_EGG);
-                        entries.add(ModItems.TCOMMANDER_SPAWN_EGG);
-                        entries.add(ModItems.TIBERIUM_FLOATER_SPAWN_EGG);
                         entries.add(ModItems.ELVE_GUARD_SPAWN_EGG);
-
                         entries.add(ModItems.WIZARD_SPAWN_EGG);
 
+                        entries.add(ModItems.ESPIDER_SPAWN_EGG);
                         entries.add(ModItems.GHOST_SPAWN_EGG);
                         //entries.add(ModItems.SUMSKELETON_SPAWN_EGG);
                         entries.add(ModItems.TIBSKELETON_SPAWN_EGG);
@@ -223,7 +221,10 @@ public class ModItemGroups {
                         entries.add(ModItems.ENDERSKELETON_SPAWN_EGG);
                         entries.add(ModItems.DARKSKELETON_SPAWN_EGG);
 
-                        entries.add(ModItems.AIRBALOON_SPAWN_EGG);
+                        entries.add(ModItems.TIBERIUM_FLOATER_SPAWN_EGG);
+                        entries.add(ModItems.TIBERIUM_WIZARD_SPAWN_EGG);
+                        entries.add(ModItems.TTROOPER_SPAWN_EGG);
+                        entries.add(ModItems.TIBERIUM_WORM_SPAWN_EGG);
 
                         //TODO: BELOW TO BE REMOVED - FOR TESTING ONLY
                         entries.add(ModBlocks.EXAMPLE_BLOCK);

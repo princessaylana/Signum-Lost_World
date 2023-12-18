@@ -14,9 +14,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -58,12 +56,24 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new TTrooperEntity.ProtectHordeGoal());
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
         this.targetSelector.add(4, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.initCustomGoals();
+        initCustomTargets();
     }
     protected void initCustomGoals() {
         this.goalSelector.add(3, new AvoidSunlightGoal(this));
+    }
+
+    protected void initCustomTargets() {
+        // DEATHLANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.DEATH_LANDS));
+        // TIBERIUM WASTELAND
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.TIBERIUM_WASTELAND));
+        // FROZEN LANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.FROZEN_LANDS));
+        // GOLDEN KINGDOM
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
@@ -119,16 +129,35 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
         }
     }
 
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TIBERIUM_WASTELAND;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TIBERIUM_WASTELAND) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
+
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
     }
     @Override
     public boolean isAttacking() {
         return this.dataTracker.get(ATTACKING);
-    }
-
-    public EntityGroup getGroup() {
-        return ModEntityGroup.TIBERIUM;
     }
 
     @Override
@@ -160,26 +189,6 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
         }
         return new ItemStack(ModItems.TIBERIUM_SWORD);
         //return new ItemStack(Items.IRON_SWORD);
-    }
-
-
-    @Override
-    public boolean isTeammate(Entity other) {
-        if (super.isTeammate(other)) {
-            return true;
-        }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TIBERIUM) {
-            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
     }
 
     @Override

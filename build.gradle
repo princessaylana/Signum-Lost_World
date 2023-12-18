@@ -32,6 +32,7 @@ repositories {
 	}
 	// REI
 	maven { url "https://maven.shedaniel.me" }
+
 }
 
 def dataOutput = 'src/main/generated'
@@ -72,6 +73,9 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation (include('net.kyrptonaught:customportalapi:0.0.1-beta64-1.20.2'))
 	modImplementation include("io.github.cottonmc:LibGui:9.0.0+1.20.2")
+
+	//modImplementation include("com.github.0x3C50:Renderer:c4faf83b35")
+
 
 	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:13.0.666"
 	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:13.0.666"

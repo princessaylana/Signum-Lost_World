@@ -14,10 +14,12 @@ import za.lana.signum.entity.hostile.*;
 import za.lana.signum.entity.mob.PidgeonEntity;
 import za.lana.signum.entity.mob.UnicornEntity;
 import za.lana.signum.entity.transport.AirBalloonEntity;
+import za.lana.signum.entity.transport.AirShipEntity;
 import za.lana.signum.item.ModFuels;
 import za.lana.signum.item.ModItems;
 
 public class RunInitMain {
+
 
 
     public static void registerInits(){
@@ -44,6 +46,7 @@ public class RunInitMain {
     private static void registerAttributes() {
 
         FabricDefaultAttributeRegistry.register(ModEntities.AIRBALLOON, AirBalloonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.AIRSHIP, AirShipEntity.setAttributes());
 
         FabricDefaultAttributeRegistry.register(ModEntities.UNICORN, UnicornEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.PIDGEON, PidgeonEntity.setAttributes());
@@ -61,11 +64,10 @@ public class RunInitMain {
         FabricDefaultAttributeRegistry.register(ModEntities.ENDERSKELETON_ENTITY, IceSkeletonEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.DARKSKELETON_ENTITY, IceSkeletonEntity.setAttributes());
 
-        FabricDefaultAttributeRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WIZARD_ENTITY, TiberiumWizardEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormEntity.setAttributes());
-
     }
 
     public static void registerStrippableBlocks(){

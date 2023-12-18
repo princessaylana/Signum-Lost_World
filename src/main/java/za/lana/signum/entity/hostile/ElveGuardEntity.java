@@ -55,15 +55,25 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new ElveGuardEntity.ProtectHordeGoal());
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false,
-                false, entity ->
-                entity instanceof Monster && !(entity instanceof CreeperEntity)
-                        && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
 
-        this.initCustomGoals();
+        this.initCustomTargets();
     }
-    protected void initCustomGoals() {
-        //this.goalSelector.add(3, new AvoidSunlightGoal(this));
+    protected void initCustomTargets() {
+        // BLACK FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.BLACK_FOREST));
+        // DEATHLANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.DEATH_LANDS));
+        // FROZEN LANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.FROZEN_LANDS));
+        // GOLDEN KINGDOM
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // MAGIC FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // RAINBOW MUSHROOMS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // TIBERIUM WASTELAND
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.TIBERIUM_WASTELAND));
+
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
@@ -118,6 +128,28 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
             setupAnimationStates();
         }
     }
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.GOLDEN_KINGDOM;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.GOLDEN_KINGDOM) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
 
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
@@ -126,10 +158,6 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
     @Override
     public boolean isAttacking() {
         return this.dataTracker.get(ATTACKING);
-    }
-
-    public EntityGroup getGroup() {
-        return ModEntityGroup.GOLDEN_KINGDOM;
     }
 
     @Override
@@ -173,24 +201,7 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
     }
 
 
-    @Override
-    public boolean isTeammate(Entity other) {
-        if (super.isTeammate(other)) {
-            return true;
-        }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.GOLDEN_KINGDOM) {
-            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
-        }
-        return false;
-    }
 
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
-    }
 
     @Override
     public SimpleInventory getInventory() {

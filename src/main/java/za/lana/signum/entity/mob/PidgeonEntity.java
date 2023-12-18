@@ -43,6 +43,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.effect.ModEffects;
+import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.*;
 import za.lana.signum.entity.control.PidgeonFlightControl;
 import za.lana.signum.sound.ModSounds;
@@ -131,19 +132,37 @@ public class PidgeonEntity extends AnimalEntity {
         this.goalSelector.add(4, new PidgeonFlyGoal(this, 1.0));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 16.0F));
         this.goalSelector.add(7, new AnimalFindHomeGoal(this, 1.05f, 1));
-        //this.goalSelector.add(8, new AlertTargetGoal(this));
-        //this.goalSelector.add(5, new PidgeonSitOnTreeGoal(this, 1.0));
+
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new PidgeonEntity.ProtectHordeGoal());
 
-        initCustomGoals();
+        this.initCustomGoals();
+        this.initCustomTargets();
     }
     protected void initCustomGoals(){
         this.goalSelector.add(0, new PidgeonSleepGoal(this, 1.1, 16));
         this.goalSelector.add(1, new TemptGoal(this, 1.2, Ingredient.ofItems(Items.WHEAT_SEEDS), false));
         this.goalSelector.add(3, new FleeEntityGoal<>(this, OcelotEntity.class, 6.0f, 1.0, 1.2));
         this.goalSelector.add(3, new FleeEntityGoal<>(this, CatEntity.class, 6.0f, 1.0, 1.2));
+    }
+
+    protected void initCustomTargets() {
+        // BLACK FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.BLACK_FOREST));
+        // DEATHLANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.DEATH_LANDS));
+        // FROZEN LANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.FROZEN_LANDS));
+        // GOLDEN KINGDOM
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // MAGIC FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // RAINBOW MUSHROOMS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // TIBERIUM WASTELAND
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.TIBERIUM_WASTELAND));
+
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
@@ -154,7 +173,6 @@ public class PidgeonEntity extends AnimalEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.32f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0);
-
     }
 
     protected EntityNavigation createNavigation(World world) {
@@ -215,7 +233,6 @@ public class PidgeonEntity extends AnimalEntity {
     public float getSleepAnimation(float tickDelta) {
         return MathHelper.lerp(tickDelta, this.prevSleepAnimation, this.sleepAnimation);
     }
-
     //
     @Override
     public void tick() {
@@ -224,11 +241,32 @@ public class PidgeonEntity extends AnimalEntity {
             setupAnimationStates();
         }
     }
-
     public void tickMovement() {
         super.tickMovement();
         this.flapWings();
     }
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.GOLDEN_KINGDOM;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.GOLDEN_KINGDOM) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
     public boolean tryAttack(Entity target) {
         return target.damage(this.getDamageSources().mobAttack(this), 3.0F);
     }
@@ -243,18 +281,10 @@ public class PidgeonEntity extends AnimalEntity {
     public boolean isPushable() {
         return true;
     }
-
     protected void pushAway(Entity entity) {
         if (!(entity instanceof PlayerEntity)) {
             super.pushAway(entity);
         }
-    }
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.GRAVITY_EFFECT) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
     }
 
     @Nullable

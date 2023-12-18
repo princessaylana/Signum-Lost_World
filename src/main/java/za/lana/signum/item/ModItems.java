@@ -130,15 +130,16 @@ public class ModItems {
     public static final Item AIRBALOON_SPAWN_EGG = registerItem("airballoon_spawn_egg", new SpawnEggItem(
             ModEntities.AIRBALLOON, 0xD83E36, 0x1D0550, new FabricItemSettings()));
 
+    public static final Item AIRSHIP_SPAWN_EGG = registerItem("airship_spawn_egg", new SpawnEggItem(
+            ModEntities.AIRSHIP, 0xD83E36, 0x1D0550, new FabricItemSettings()));
+
     public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_WORM, 0x70F427, 0x73FA5B, new FabricItemSettings()));
     public static final Item TIBERIUM_FLOATER_SPAWN_EGG = registerItem("tiberium_floater_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_FLOATER, 0x70F427, 0xC3F802, new FabricItemSettings()));
     public static final Item TTROOPER_SPAWN_EGG = registerItem("ttrooper_spawn_egg", new SpawnEggItem(
             ModEntities.TTROOPER_ENTITY, 0x70F427, 0xA3BE40, new FabricItemSettings()));
-    public static final Item TCOMMANDER_SPAWN_EGG = registerItem("tcommander_spawn_egg", new SpawnEggItem(
-            ModEntities.TCOMMANDER_ENTITY, 0x70F427, 0x3D8A3E, new FabricItemSettings()));
-    public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
+     public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
             ModEntities.ESPIDER_ENTITY, 0x484240, 0xF03C00, new FabricItemSettings()));
 
     // SKELETONS
@@ -157,6 +158,8 @@ public class ModItems {
             ModEntities.ELVE_GUARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
     public static final Item WIZARD_SPAWN_EGG = registerItem("wizard_spawn_egg", new SpawnEggItem(
             ModEntities.WIZARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
+    public static final Item TIBERIUM_WIZARD_SPAWN_EGG = registerItem("tiberium_wizard_spawn_egg", new SpawnEggItem(
+            ModEntities.TIBERIUM_WIZARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
 
     public static final Item ROTTEN_FLESH_ON_A_STICK = registerItem("rotten_flesh_on_a_stick",
             new OnAStickItem<>(new FabricItemSettings().maxDamage(25), ModEntities.ESPIDER_ENTITY, 7));
@@ -236,7 +239,6 @@ public class ModItems {
         // TIBERIUM
         entries.add(TIBERIUM_WORM_SPAWN_EGG);
         entries.add(TTROOPER_SPAWN_EGG);
-        entries.add(TCOMMANDER_SPAWN_EGG);
         entries.add(TIBERIUM_FLOATER_SPAWN_EGG);
         entries.add(ELVE_GUARD_SPAWN_EGG);
 

@@ -19,6 +19,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -38,6 +39,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.block.ModBlocks;
+import za.lana.signum.effect.ModEffects;
+import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.AnimalFindHomeGoal;
 import za.lana.signum.entity.ai.ESpiderAttackGoal;
 import za.lana.signum.entity.ai.MonsterFindHomeGoal;
@@ -73,6 +76,7 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         this.setCanPickUpLoot(true);
         this.saddledComponent = new SaddledComponent(this.dataTracker, BOOST_TIME, SADDLED);
     }
+
 
     private void setupAnimationStates() {
         if (this.idleAniTimeout <= 0) {
@@ -133,6 +137,35 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
             setupAnimationStates();
         }
     }
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.DEATH_LANDS;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.DEATH_LANDS) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
+    public static DefaultAttributeContainer.Builder setAttributes(){
+        return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32f)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.5);
+    }
     @Override
     protected void initGoals(){
 
@@ -146,26 +179,36 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         this.targetSelector.add(2, new ESpiderEntity.ProtectHordeGoal());
         // SPIDERS MUST KILL AND EAT VANILLA ZOMBIES
         this.targetSelector.add(3, new ESpiderEntity.TargetGoal<>(this, ZombieEntity.class));
-        this.targetSelector.add(4, new ESpiderEntity.TargetGoal<>(this, PlayerEntity.class));
-        // TESTING
-        //this.targetSelector.add(5, new ESpiderEntity.TargetGoal<>(this, SlimeEntity.class));
+        this.targetSelector.add(3, new ESpiderEntity.TargetGoal<>(this, PlayerEntity.class));
+
 
         this.initCustomGoals();
+        this.initCustomTargets();
     }
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(2, new TemptGoal(this, 1.2, Ingredient.ofItems(ModItems.ROTTEN_FLESH_ON_A_STICK), false));
         this.goalSelector.add(2, new TemptGoal(this, 1.2, BREEDING_INGREDIENT, false));
-        this.goalSelector.add(4, new AvoidSunlightGoal(this));
+        this.goalSelector.add(2, new AvoidSunlightGoal(this));
+    }
+    protected void initCustomTargets() {
+        // BLACK FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.BLACK_FOREST));
+        // DEATHLANDS
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.DEATH_LANDS));
+        // FROZEN LANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.FROZEN_LANDS));
+        // GOLDEN KINGDOM
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // MAGIC FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // RAINBOW MUSHROOMS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // TIBERIUM WASTELAND
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.TIBERIUM_WASTELAND));
+
     }
 
-    public static DefaultAttributeContainer.Builder setAttributes(){
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32f)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.5);
-    }
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
     }
@@ -291,10 +334,6 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         super.tickMovement();
     }
 
-    @Nullable
-    public ESpiderEntity createChild(ServerWorld server, HostileEntity hostile) {
-        return null;
-    }
     public boolean isBreedingItem(ItemStack stack) {
         return BREEDING_INGREDIENT.test(stack);
     }
@@ -381,10 +420,6 @@ public class ESpiderEntity extends HostileEntity implements ItemSteerable, Saddl
         return new Vec3d(0.0, 0.0, 1.0);
     }
 
-    @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.ARTHROPOD;
-    }
     @Override
     public boolean consumeOnAStickItem() {
         return this.saddledComponent.boost(this.getRandom());

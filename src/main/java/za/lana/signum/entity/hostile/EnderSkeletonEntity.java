@@ -6,7 +6,6 @@
  * */
 package za.lana.signum.entity.hostile;
 
-import com.google.gson.stream.JsonReader;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
@@ -18,9 +17,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -77,12 +74,29 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
 
         this.initCustomGoals();
+        this.initCustomTargets();
     }
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.targetSelector.add(4, new ActiveTargetGoal<>(this, SumSkeletonEntity.class, true));
-        // TESTING
-        //this.targetSelector.add(4, new ActiveTargetGoal<>(this, SkeletonEntity.class, true));
+    }
+
+    protected void initCustomTargets() {
+        // BLACK FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.BLACK_FOREST));
+        // DEATHLANDS
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.DEATH_LANDS));
+        // FROZEN LANDS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.FROZEN_LANDS));
+        // GOLDEN KINGDOM
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // MAGIC FOREST
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // RAINBOW MUSHROOMS
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.GOLDEN_KINGDOM));
+        // TIBERIUM WASTELAND
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity) && entity.getGroup() == ModEntityGroup.TIBERIUM_WASTELAND));
+
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
@@ -138,6 +152,28 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
             setupAnimationStates();
         }
     }
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.DEATH_LANDS;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.DEATH_LANDS) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
 
     public void setTeleporting(boolean teleport) {
         this.dataTracker.set(TELEPORTING, teleport);
@@ -154,9 +190,6 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
         return this.dataTracker.get(ATTACKING);
     }
 
-    public EntityGroup getGroup() {
-        return ModEntityGroup.SSKELETONS;
-    }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
@@ -190,25 +223,6 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
             return new ItemStack(Items.IRON_HELMET);
         }
         return new ItemStack(Items.LEATHER_HELMET);
-    }
-
-    @Override
-    public boolean isTeammate(Entity other) {
-        if (super.isTeammate(other)) {
-            return true;
-        }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.SSKELETONS) {
-            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.FREEZE_EFFECT) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
     }
 
     // BURNS IN DAYTIME

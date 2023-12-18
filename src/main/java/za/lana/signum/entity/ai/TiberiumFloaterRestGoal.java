@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.hostile.TiberiumFloaterEntity;
+import za.lana.signum.tag.ModBlockTags;
 
 import java.util.EnumSet;
 
@@ -78,7 +79,7 @@ public class TiberiumFloaterRestGoal
         if (blockState.isOf(ModBlocks.TOXIC_SHROOM_BLOCK)) {
             return true;
         }
-        return blockState.isIn(BlockTags.BEDS, state -> state.getOrEmpty(BedBlock.PART).map(part -> part != BedPart.HEAD).orElse(true));
+        return blockState.isIn(ModBlockTags.FLOATER_LANDING_BLOCKS);
         //return world.isAir(pos.up()) && world.getBlockState(pos).isIn(BlockTags.BEDS);
     }
 
