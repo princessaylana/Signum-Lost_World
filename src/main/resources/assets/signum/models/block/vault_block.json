@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "signum:block/vault_front",
+    "side": "signum:block/vault_side",
+    "top": "signum:block/vault_side"
+  }
+}

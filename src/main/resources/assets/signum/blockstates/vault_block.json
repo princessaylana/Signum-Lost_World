@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "signum:block/vault_block"
+    },
+    "facing=south": {
+      "model": "signum:block/vault_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "signum:block/vault_block",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "signum:block/vault_block",
+      "y": 90
+    }
+  }
+}

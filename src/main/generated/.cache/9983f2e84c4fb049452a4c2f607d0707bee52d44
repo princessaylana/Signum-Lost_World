@@ -1,7 +1,7 @@
-// 1.20.2	2023-12-05T20:01:07.204097482	Signum/Tags for minecraft:block
-dd6926840490a4b69b037737e9f24c5249a04279 data/minecraft/tags/blocks/needs_iron_tool.json
+// 1.20.2	2023-12-28T20:11:32.87533169	Signum/Tags for minecraft:block
+851f62e0f0c3194be52f4722fd3dced51d92998b data/minecraft/tags/blocks/needs_iron_tool.json
 a21c8ecbad8aa28f66742bf1fb5f7d32665f6cff data/minecraft/tags/blocks/fence_gates.json
-dd6926840490a4b69b037737e9f24c5249a04279 data/minecraft/tags/blocks/mineable/pickaxe.json
+851f62e0f0c3194be52f4722fd3dced51d92998b data/minecraft/tags/blocks/mineable/pickaxe.json
 98eafe9b43a4f0984c489e170d20468987e71672 data/minecraft/tags/blocks/needs_stone_tool.json
 98eafe9b43a4f0984c489e170d20468987e71672 data/minecraft/tags/blocks/mineable/shovel.json
 46159b37d5d985ebeebf570803c068a60fb3aabe data/minecraft/tags/blocks/walls.json

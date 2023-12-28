@@ -23,7 +23,6 @@ public class ModItemGroups {
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.signum"))
                     .icon(() -> new ItemStack(ModBlocks.EXAMPLE_BLOCK)).entries((displayContext, entries) -> {
                         // BUIDLING BLOCKS
-
                         entries.add(ModBlocks.RAZORWIRE_BLOCK);
                         entries.add(ModBlocks.BLIGHT_BLOCK);
                         entries.add(ModBlocks.SKY_ICE_BLOCK);
@@ -31,8 +30,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.ASH_BLOCK);
                         entries.add(ModBlocks.ROCK_BLOCK);
                         entries.add(ModBlocks.RAINBOW_MARBLE_BLOCK);
+                        entries.add(ModBlocks.AIRSHIP_LANDING_BLOCK);
                         entries.add(ModBlocks.SPIDERWEB_BLOCK);
-
                         // ORES
                         entries.add(ModBlocks.BLACK_DIAMOND_ORE);
                         entries.add(ModBlocks.DEEPSLATE_BLACK_DIAMOND_ORE);
@@ -44,7 +43,6 @@ public class ModItemGroups {
                         entries.add(ModBlocks.MOISSANITE_ORE);
                         entries.add(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
                         entries.add(ModBlocks.ENDSTONE_MANGANESE_ORE);
-
                         // MAIN BLOCKS
                         entries.add(ModBlocks.BLACK_DIAMOND_BLOCK);
                         entries.add(ModBlocks.ELEMENT_ZERO_BLOCK);
@@ -61,7 +59,6 @@ public class ModItemGroups {
                         entries.add(ModBlocks.BUDDING_EXOTIC_CRYSTAL);
                         entries.add(ModBlocks.BUDDING_ICE_CRYSTAL);
                         entries.add(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
-
                         // PLANTBLOCKS
                         entries.add(ModBlocks.ORANGE_SHROOM_BLOCK);
                         entries.add(ModBlocks.YELLOW_SHROOM_BLOCK);
@@ -82,10 +79,6 @@ public class ModItemGroups {
                         entries.add(ModBlocks.SOULWOOD_PLANKS);
                         entries.add(ModBlocks.SOULWOOD_LEAVES);
                         entries.add(ModBlocks.SOULWOOD_SAPLING);
-
-                        // BLOCKENTITIES
-                        entries.add(ModBlocks.SKYFORGE);
-
                         // DECORATION
                         entries.add(ModBlocks.MANGANESE_STAIRS);
                         entries.add(ModBlocks.MANGANESE_WALL);
@@ -108,6 +101,11 @@ public class ModItemGroups {
                         entries.add(ModItems.MANGANESE_NUGGET);
                         entries.add(ModItems.MOISSANITE);
                         entries.add(ModItems.ELEMENT_ZERO);
+                        // COINS
+                        entries.add(ModItems.COPPER_COIN);
+                        entries.add(ModItems.IRON_COIN);
+                        entries.add(ModItems.GOLD_COIN);
+
                         // FUEL ITEMS
                         entries.add(ModItems.COKECOAL);
                         entries.add(ModItems.TIBERIUMCOAL);
@@ -153,6 +151,7 @@ public class ModItemGroups {
                         entries.add(ModItems.QUARTZ_CRYSTAL);
                         entries.add(ModItems.MOISSANITE_CRYSTAL);
                         entries.add(ModItems.ELEMENT_ZERO_CRYSTAL);
+                        entries.add(ModItems.ENDER_CRYSTAL);
                         // DUSTS
                         entries.add(ModItems.MANGANESE_DUST);
                         entries.add(ModItems.TIBERIUM_DUST);
@@ -176,8 +175,6 @@ public class ModItemGroups {
                         entries.add(ModItems.STEEL_CHESTPLATE);
                         entries.add(ModItems.STEEL_LEGGINGS);
                         entries.add(ModItems.STEEL_BOOTS);
-                        //entries.add(ModItems.STEEL_SHIELD);
-
                         // STAFFS
                         entries.add(ModItems.TIBERIUM_STAFF);
                         entries.add(ModItems.FIRE_STAFF);
@@ -197,24 +194,21 @@ public class ModItemGroups {
                         entries.add(ModBlocks.BLUE_MUSHROOM);
                         entries.add(ModBlocks.PURPLE_MUSHROOM);
                         entries.add(ModBlocks.PINK_MUSHROOM);
-
                         // FOODS
                         entries.add(ModItems.TOXIC_SOUP);
                         entries.add(ModItems.MIXED_MUSHROOM_STEW);
-
                         // SPAWN EGGS
+                        entries.add(ModItems.AIRBALOON_SPAWN_EGG);
+                        entries.add(ModItems.AIRSHIP_SPAWN_EGG);
+
                         entries.add(ModItems.PIDGEON_SPAWN_EGG);
                         entries.add(ModItems.UNICORN_SPAWN_EGG);
-                        entries.add(ModItems.ESPIDER_SPAWN_EGG);
+                        entries.add(ModItems.CURSED_WOLF_SPAWN_EGG);
 
-                        entries.add(ModItems.TIBERIUM_WORM_SPAWN_EGG);
-                        entries.add(ModItems.TTROOPER_SPAWN_EGG);
-                        entries.add(ModItems.TCOMMANDER_SPAWN_EGG);
-                        entries.add(ModItems.TIBERIUM_FLOATER_SPAWN_EGG);
                         entries.add(ModItems.ELVE_GUARD_SPAWN_EGG);
-
                         entries.add(ModItems.WIZARD_SPAWN_EGG);
 
+                        entries.add(ModItems.ESPIDER_SPAWN_EGG);
                         entries.add(ModItems.GHOST_SPAWN_EGG);
                         //entries.add(ModItems.SUMSKELETON_SPAWN_EGG);
                         entries.add(ModItems.TIBSKELETON_SPAWN_EGG);
@@ -223,15 +217,21 @@ public class ModItemGroups {
                         entries.add(ModItems.ENDERSKELETON_SPAWN_EGG);
                         entries.add(ModItems.DARKSKELETON_SPAWN_EGG);
 
-                        entries.add(ModItems.AIRBALOON_SPAWN_EGG);
+                        entries.add(ModItems.TIBERIUM_FLOATER_SPAWN_EGG);
+                        entries.add(ModItems.TIBERIUM_WIZARD_SPAWN_EGG);
+                        entries.add(ModItems.TTROOPER_SPAWN_EGG);
+                        entries.add(ModItems.TIBERIUM_WORM_SPAWN_EGG);
+
+                        // BLOCKENTITIES
+                        entries.add(ModBlocks.SKYFORGE);
+                        entries.add(ModBlocks.VAULT_BLOCK);
 
                         //TODO: BELOW TO BE REMOVED - FOR TESTING ONLY
                         entries.add(ModBlocks.EXAMPLE_BLOCK);
-                        entries.add(ModItems.DETECTOR_ITEM);
-                        entries.add(ModItems.ROTTEN_FLESH_ON_A_STICK);
-
                         // disabled
+                        //entries.add(ModItems.STEEL_SHIELD);
                         //entries.add(ModBlocks.TIBERIUM_FIRE);
+                        //entries.add(ModItems.DETECTOR_ITEM);
 
                     }).build());
     public static void registerItemGroups(){

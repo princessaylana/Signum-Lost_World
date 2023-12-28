@@ -11,6 +11,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.poi.PointOfInterestStorage;
 import net.minecraft.world.poi.PointOfInterestTypes;
+import za.lana.signum.entity.hostile.ESpiderEntity;
 
 import java.util.EnumSet;
 import java.util.List;

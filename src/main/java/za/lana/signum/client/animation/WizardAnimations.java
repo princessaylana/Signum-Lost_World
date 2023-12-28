@@ -79,7 +79,7 @@ public class WizardAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(2f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
-    public static final Animation WIZARD_SLEEP = Animation.Builder.create(0f).looping().build();
+    public static final Animation WIZARD_SLEEP = Animation.Builder.create(3.0f).looping().build();
     public static final Animation WIZARD_MELEE = Animation.Builder.create(1f).looping()
             .addBoneAnimation("mainBody",
                     new Transformation(Transformation.Targets.TRANSLATE,

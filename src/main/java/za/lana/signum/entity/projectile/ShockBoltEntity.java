@@ -50,6 +50,11 @@ public class ShockBoltEntity extends ThrownItemEntity {
         if (this.age >= age1) {
             this.discard();
         }
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+            }
+        }
     }
 
     @Override
@@ -72,10 +77,11 @@ public class ShockBoltEntity extends ThrownItemEntity {
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.SHOCK_EFFECT, 60 * 2 , 1 / 4)));
             this.discard();
         }
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.FLAME_PARTICLE, this.getX(), this.getY(), this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);}
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            }
         }
     }
 
@@ -95,10 +101,10 @@ public class ShockBoltEntity extends ThrownItemEntity {
                 }   this.discard();
             }
         }
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.FLAME_PARTICLE, this.getX(), this.getY() + 0.5, this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             }
         }
     }

@@ -22,13 +22,13 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.Angerable;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundEvent;
@@ -41,7 +41,10 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.block.ModBlocks;
+import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
+import za.lana.signum.item.ModItems;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 
@@ -87,9 +90,15 @@ public class GhostEntity extends HostileEntity implements Angerable {
         this.targetSelector.add(1, new GhostEntity.TeleportTowardsPlayerGoal(this, this::shouldAngerAt));
         this.targetSelector.add(1, new GhostEntity.TeleportTowardsEntityGoal(this, this::shouldAngerAt));
         this.targetSelector.add(2, new RevengeGoal(this));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+
+        this.initCustomTargets();
     }
+    protected void initCustomTargets() {
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, false,
+                entity -> entity instanceof LivingEntity && entity.getGroup() == ModEntityGroup.TEAM_LIGHT));
+    }
+
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0)
@@ -120,6 +129,7 @@ public class GhostEntity extends HostileEntity implements Angerable {
             this.idleAniState.stop();
             this.attackAniTimeout = 40; // 2 seconds, length of spell attack
             this.attackAniState.start(this.age);
+            this.playSound(this.getAttackSound(), 1.0f, 1.0f);
         } else {
             --this.attackAniTimeout;
         }
@@ -159,18 +169,29 @@ public class GhostEntity extends HostileEntity implements Angerable {
     }
 
     public EntityGroup getGroup() {
-        return ModEntityGroup.DEATH_LANDS;
+        return ModEntityGroup.TEAM_DARK;
     }
     @Override
     public boolean isTeammate(Entity other) {
         if (super.isTeammate(other)) {
             return true;
         }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.DEATH_LANDS) {
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TEAM_DARK) {
             return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
         }
         return false;
     }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
+            return false;
+        }
+        if (effect.getEffectType() == ModEffects.HEALING_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
     @Override
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return 1.75f;
@@ -216,7 +237,7 @@ public class GhostEntity extends HostileEntity implements Angerable {
         if (!this.canTarget(entity)) {
             return false;
         }
-        if (entity.getType() == EntityType.PLAYER || !(entity.getGroup() == ModEntityGroup.DEATH_LANDS) && this.isUniversallyAngry(entity.getWorld())) {
+        if (entity.getType() == EntityType.PLAYER || !(entity.getGroup() == ModEntityGroup.TEAM_DARK) && this.isUniversallyAngry(entity.getWorld())) {
             return true;
         }
         return entity.getUuid().equals(this.getAngryAt());
@@ -276,6 +297,25 @@ public class GhostEntity extends HostileEntity implements Angerable {
         super.readCustomDataFromNbt(nbt);
         this.readAngerFromNbt(this.getWorld(), nbt);
     }
+    @Override
+    protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
+        super.dropEquipment(source, lootingMultiplier, allowDrops);
+        this.dropInventory();
+        if ((double)this.random.nextFloat() < 0.75) {
+            this.dropItem(ModItems.GOLD_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.65) {
+            this.dropItem(ModItems.IRON_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            this.dropItem(ModItems.COPPER_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.35) {
+            this.dropItem(ModItems.BLACK_DIAMOND_SHARD);
+        }
+        this.dropItem(Items.PHANTOM_MEMBRANE);
+    }
+
     // SOUND
     @Override
     protected SoundEvent getAmbientSound() {
@@ -287,6 +327,9 @@ public class GhostEntity extends HostileEntity implements Angerable {
     @Override
     protected SoundEvent getDeathSound() {
         return ModSounds.GHOST_DIE;
+    }
+    protected SoundEvent getAttackSound() {
+        return ModSounds.GHOST_ATTACK;
     }
     @Override
     public void tickMovement() {

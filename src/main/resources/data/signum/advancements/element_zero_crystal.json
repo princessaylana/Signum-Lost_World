@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "signum:element_zero_crystal"
+    },
+    "title": "Element Zero Crystal",
+    "description": {
+      "translate": "advancements.signum.element_zero_crystal.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "signum:lost_world",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "signum:element_zero_ore"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

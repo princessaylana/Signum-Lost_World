@@ -5,6 +5,8 @@
  * */
 package za.lana.signum.entity.transport;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.UnmodifiableIterator;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
@@ -17,6 +19,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -26,6 +29,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -42,12 +46,17 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.BlockLocating;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.effect.ModEffects;
+import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.networking.packet.ABKeyInputSyncS2CPacket;
@@ -55,6 +64,9 @@ import za.lana.signum.particle.ModParticles;
 import za.lana.signum.screen.AirBalloonScreenHandler;
 import za.lana.signum.sound.ModSounds;
 import za.lana.signum.util.ImplementedInventory;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class AirBalloonEntity
         extends AnimalEntity
@@ -68,7 +80,6 @@ public class AirBalloonEntity
     public boolean isFlyUpPressed = false;
     public boolean isFlyDownPressed = false;
     public boolean onGround;
-
     private int lastAge;
     private int fuel;
     public int fuelTime = 0;
@@ -79,7 +90,6 @@ public class AirBalloonEntity
     public int fuelEmptyAniTimeout = 0;
     private float lastIntensity;
     protected final PropertyDelegate propertyDelegate;
-    public AnimationState flyAniState = new AnimationState();
     public AnimationState landAniState = new AnimationState();
     public AnimationState floatingFuelEmptyAniState = new AnimationState();
     public AnimationState floatingFuelAniState = new AnimationState();
@@ -92,7 +102,6 @@ public class AirBalloonEntity
     public static final String AIRBALLOON_WIND = "message.signum.airballoon.wind";
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
     private static final TrackedData<Boolean> BURNINGFUEL = DataTracker.registerData(AirBalloonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-
     public
     AirBalloonEntity(EntityType<? extends AnimalEntity> entityType, World level) {
         super(entityType, level);
@@ -130,7 +139,6 @@ public class AirBalloonEntity
         this.burnFuelAnimation();
         this.flyUpAnimation();
         this.flyDownAnimation();
-
     }
     // TODO FLOATING ANIMATION NOT WORKING
     private void floatingAnimation(){
@@ -156,7 +164,6 @@ public class AirBalloonEntity
         }
         if(!this.isBurningFuel()) {
             floatingFuelAniState.stop();
-
         }
     }
     private void flyUpAnimation(){
@@ -230,7 +237,6 @@ public class AirBalloonEntity
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
     }
-
     // SHAPE
     public static boolean canCollide(Entity entity, Entity other) {
         return (other.isCollidable() || other.isPushable()) && !entity.isConnectedThroughVehicle(other);
@@ -240,6 +246,16 @@ public class AirBalloonEntity
     }
     public boolean collidesWith(Entity other) {
         return canCollide(this, other);
+    }
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TEAM_LIGHT;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
     }
     // INVENTORY / STORAGE
     @Override
@@ -268,7 +284,6 @@ public class AirBalloonEntity
             this.dataTracker.set(BURNINGFUEL, true);
         }
     }
-
     // TRAVEL
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
@@ -326,7 +341,7 @@ public class AirBalloonEntity
                 float x = (float) (passenger.sidewaysSpeed * V / 2.0f); // 0.5f
                 float y = (float) (passenger.upwardSpeed * V / 2.5f); // 0.5
                 float z = (float) (passenger.forwardSpeed * V / 0.25f);
-
+                //
                 // y is less than or equal to
                 if (y <= 0)
                     // y * float (0.25f)
@@ -387,24 +402,97 @@ public class AirBalloonEntity
         }
     }
     // PASSENGERS
-    public void onPassengerLookAround(Entity passenger) {
-    }
+    // TODO CHECK IF THE BALLLOON CAN TAKE TWO PASSENGERS
     @Nullable
     @Override
     public LivingEntity getControllingPassenger() {
         return getFirstPassenger() instanceof LivingEntity entity ? entity : null;
     }
     protected boolean canAddPassenger(Entity passenger) {
-        return this.getPassengerList().size() <= 2;
+        return this.getPassengerList().size() < this.getMaxPassengers() && !this.isSubmergedIn(FluidTags.WATER);
     }
-    @Override
-    public void updatePassengerPosition(Entity entity, PositionUpdater moveFunction) {
-        super.updatePassengerPosition(entity, moveFunction);
-        if (entity instanceof LivingEntity passenger) {
-            moveFunction.accept(entity, getX(), getY() - 0.1f, getZ());
-            this.prevPitch = passenger.prevPitch;
+    protected int getMaxPassengers() {
+        return 2;
+    }
+    protected void updatePassengerPosition(Entity passenger, Entity.PositionUpdater positionUpdater) {
+        super.updatePassengerPosition(passenger, positionUpdater);
+        passenger.setYaw(passenger.getYaw());
+        passenger.setHeadYaw(passenger.getHeadYaw());
+        //
+        this.prevPitch = passenger.prevPitch;
+        positionUpdater.accept(passenger, getX(), getY() - 0.1f, getZ());
+        this.clampPassengerYaw(passenger);
+
+        if (passenger instanceof AnimalEntity && this.getPassengerList().size() == this.getMaxPassengers()) {
+            int i = passenger.getId() % 2 == 0 ? 90 : 270;
+            passenger.setBodyYaw(((AnimalEntity)passenger).bodyYaw + (float)i);
+            passenger.setHeadYaw(passenger.getHeadYaw() + (float)i);
+            positionUpdater.accept(passenger, getX(), getY() - 0.1f, getZ() - 1.0f);
         }
     }
+    protected Vec3d positionInPortal(Direction.Axis portalAxis, BlockLocating.Rectangle portalRect) {
+        return LivingEntity.positionInPortal(super.positionInPortal(portalAxis, portalRect));
+    }
+    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
+        Vec3d vec3d = getPassengerDismountOffset((double)(this.getWidth() * MathHelper.SQUARE_ROOT_OF_TWO), (double)passenger.getWidth(), passenger.getYaw());
+        double d = this.getX() + vec3d.x;
+        double e = this.getZ() + vec3d.z;
+        BlockPos blockPos = BlockPos.ofFloored(d, this.getBoundingBox().maxY, e);
+        BlockPos blockPos2 = blockPos.down();
+        if (!this.getWorld().isWater(blockPos2)) {
+            List<Vec3d> list = Lists.newArrayList();
+            double f = this.getWorld().getDismountHeight(blockPos);
+            if (Dismounting.canDismountInBlock(f)) {
+                list.add(new Vec3d(d, (double)blockPos.getY() + f, e));
+            }
+
+            double g = this.getWorld().getDismountHeight(blockPos2);
+            if (Dismounting.canDismountInBlock(g)) {
+                list.add(new Vec3d(d, (double)blockPos2.getY() + g, e));
+            }
+
+            UnmodifiableIterator var14 = passenger.getPoses().iterator();
+
+            while(var14.hasNext()) {
+                EntityPose entityPose = (EntityPose)var14.next();
+                Iterator var16 = list.iterator();
+
+                while(var16.hasNext()) {
+                    Vec3d vec3d2 = (Vec3d)var16.next();
+                    if (Dismounting.canPlaceEntityAt(this.getWorld(), vec3d2, passenger, entityPose)) {
+                        passenger.setPose(entityPose);
+                        return vec3d2;
+                    }
+                }
+            }
+        }
+
+        return super.updatePassengerForDismount(passenger);
+    }
+    protected void clampPassengerYaw(Entity passenger) {
+        passenger.setBodyYaw(this.getYaw());
+        float f = MathHelper.wrapDegrees(passenger.getYaw() - this.getYaw());
+        float g = MathHelper.clamp(f, -105.0F, 105.0F);
+        passenger.prevYaw += g - f;
+        passenger.setYaw(passenger.getYaw() + g - f);
+        passenger.setHeadYaw(passenger.getYaw());
+    }
+    public void onPassengerLookAround(Entity passenger) {
+        this.clampPassengerYaw(passenger);
+    }
+
+    /**
+     *     @Override
+     *     public void updatePassengerPosition(Entity entity, PositionUpdater moveFunction) {
+     *         super.updatePassengerPosition(entity, moveFunction);
+     *         if (entity instanceof LivingEntity passenger) {
+     *             int i = this.getPassengerList().indexOf(passenger);
+     *             moveFunction.accept(entity, getX(), getY() - 0.1f, getZ());
+     *             this.prevPitch = passenger.prevPitch;
+     *         }
+     *     }
+     */
+
     // DROPS
     public boolean damage(DamageSource source, float amount) {
         if (this.isInvulnerableTo(source)) {
@@ -435,11 +523,10 @@ public class AirBalloonEntity
         }
         super.remove(reason);
     }
-
     // VANILLA GUI
     @Override
     public Text getDisplayName() {
-        return Text.literal("Air Balloon");
+        return Text.translatable("entity.signum.airballoon");
     }
     @Nullable
     @Override
@@ -459,8 +546,6 @@ public class AirBalloonEntity
         if (random.nextDouble() < 0.1) {
             level.playSound(null, d, e, f, ModSounds.SNOWY_WIND,
                     SoundCategory.NEUTRAL,1.0f, 0.5f + this.random.nextFloat() * 1.2f);
-            LivingEntity passenger = this.getControllingPassenger();
-            //
         }
     }
     @Override
@@ -497,7 +582,6 @@ public class AirBalloonEntity
             ParticleUtil.spawnParticle(getWorld(), BlockPos.ofFloored(getPos()), random, ModParticles.BLACK_SHROOM_PARTICLE);
         }
     }
-
     private void airDeflate(World world, BlockPos pos) {
         playDeflateSound();
     }

@@ -22,6 +22,8 @@ import za.lana.signum.Signum;
 import za.lana.signum.block.custom.ExampleBlock;
 import za.lana.signum.block.custom.RazorWireBlock;
 import za.lana.signum.block.custom.SkyForgeBlock;
+import za.lana.signum.block.custom.VaultBlock;
+import za.lana.signum.block.custom.props.TransLucentBlock;
 import za.lana.signum.block.custom.crystal.*;
 import za.lana.signum.block.custom.modore.ElementZeroOreBlock;
 import za.lana.signum.block.custom.plants.*;
@@ -131,6 +133,8 @@ public class ModBlocks {
     public static final Block ROCK_BLOCK = registerBlock("rock_block",
             new Block(FabricBlockSettings.copyOf(Blocks.STONE).sounds(BlockSoundGroup.STONE)));
     public static final Block RAINBOW_MARBLE_BLOCK = registerBlock("rainbow_marble",
+            new Block(FabricBlockSettings.copyOf(Blocks.ANDESITE).sounds(BlockSoundGroup.STONE)));
+    public static final Block AIRSHIP_LANDING_BLOCK = registerBlock("airship_landing_block",
             new Block(FabricBlockSettings.copyOf(Blocks.ANDESITE).sounds(BlockSoundGroup.STONE)));
 
     public static final Block SPIDERWEB_BLOCK = registerBlock("spiderweb_block",
@@ -319,9 +323,11 @@ public class ModBlocks {
 
     public static final Block RAZORWIRE_BLOCK = registerBlock("razorwire_block",
             new RazorWireBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(8.0f,100.0f)));
+
     public static final Block SKYFORGE = registerBlock("skyforge",
             new SkyForgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
-
+    public static final Block VAULT_BLOCK = registerBlock("vault_block",
+            new VaultBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
     public static final Block EXAMPLE_BLOCK = registerBlock("example_block",
             new ExampleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
 

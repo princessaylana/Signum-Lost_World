@@ -24,7 +24,6 @@ public class SignumBioKeys extends BiomeKeys {
 
     //public static final RegistryKey<Biome> SIGNUM_SUNFLOWERS = SignumBioKeys.register("signum_sunflowers");
 
-
     private static RegistryKey<Biome> register(String name) {
         return RegistryKey.of(RegistryKeys.BIOME, new Identifier(Signum.MOD_ID, name));
     }

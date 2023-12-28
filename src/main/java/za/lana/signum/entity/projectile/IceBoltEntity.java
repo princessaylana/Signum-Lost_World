@@ -25,6 +25,8 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.hostile.FireSkeletonEntity;
+import za.lana.signum.entity.hostile.IceSkeletonEntity;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 
@@ -49,6 +51,11 @@ public class IceBoltEntity extends ThrownItemEntity {
         if (this.age >= age1) {
             this.discard();
         }
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.FREEZE_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+            }
+        }
     }
 
 
@@ -63,17 +70,20 @@ public class IceBoltEntity extends ThrownItemEntity {
             entity.damage(getWorld().getDamageSources().magic(), dam * 2);
             this.discard();
         }
+        if (entity instanceof IceSkeletonEntity){
+            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.HEALING_EFFECT, 60, 1/4)));
+        }
         if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.FREEZE_EFFECT, 60 * 2 , 1 / 4)));
             entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             entity.damage(getWorld().getDamageSources().magic(), dam);
             this.discard();
         }
-
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.FREEZE_PARTICLE, this.getX(), this.getY(), this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);}
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.FREEZE_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            }
         }
     }
 
@@ -90,10 +100,10 @@ public class IceBoltEntity extends ThrownItemEntity {
                 }   this.discard();
             }
         }
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.FREEZE_PARTICLE, this.getX(), this.getY() + 0.5, this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.FREEZE_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             }
         }
     }

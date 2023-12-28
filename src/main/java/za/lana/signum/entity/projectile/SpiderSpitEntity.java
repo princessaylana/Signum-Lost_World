@@ -25,6 +25,7 @@ import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.ESpiderEntity;
 import za.lana.signum.particle.ModParticles;
+import za.lana.signum.sound.ModSounds;
 
 import java.util.Collection;
 
@@ -38,7 +39,11 @@ public class SpiderSpitEntity
     public SpiderSpitEntity(World world, ESpiderEntity owner) {
         this(ModEntities.SPIDERSPIT_PROJECTILE, world);
         this.setOwner(owner);
-
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.BLACK_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+            }
+        }
         this.setPosition(
                 owner.getX() - (double)(owner.getWidth() + 1.0f) * 0.5 * (double)MathHelper.sin(owner.bodyYaw * ((float)Math.PI / 180)),
                 owner.getEyeY() - (double)0.1f,
@@ -84,7 +89,13 @@ public class SpiderSpitEntity
         }
         if (entity instanceof ESpiderEntity){
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.HEALING_EFFECT, 60, 1/4)));
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 10 , 1/2)));
+            //((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 10 , 1/2)));
+        }
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.BLACK_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            }
         }
     }
 
@@ -98,22 +109,13 @@ public class SpiderSpitEntity
                 this.getWorld().setBlockState(blockPos, ModBlocks.SPIDERWEB_BLOCK.getDefaultState());
             }
             this.discard();
-            //this.spawnEffectsCloud();
         }
-
-        if (!this.getWorld().isClient) {
-            this.discard();
-
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.BLACK_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            }
         }
-    }
-    private void spawnEffectsCloud() {
-            AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(this.getWorld(), this.getX(), this.getY(), this.getZ());
-            areaEffectCloudEntity.setRadius(2.5f);
-            areaEffectCloudEntity.setRadiusOnUse(-0.5f);
-            areaEffectCloudEntity.setWaitTime(10);
-            areaEffectCloudEntity.setDuration(areaEffectCloudEntity.getDuration() / 2);
-            areaEffectCloudEntity.setRadiusGrowth(-areaEffectCloudEntity.getRadius() / (float)areaEffectCloudEntity.getDuration());
-            this.getWorld().spawnEntity(areaEffectCloudEntity);
     }
 
     @Override

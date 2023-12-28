@@ -40,6 +40,5 @@ private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entit
         }
 
         super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
-
     }
 }

@@ -58,7 +58,12 @@ public class GravityBoltEntity extends ThrownItemEntity {
         double d1 = (double)blockpos.getY() + 1.75D;
         double d2 = (double)blockpos.getZ() + 0.5D;
         this.refreshPositionAndAngles(d0, d1, d2, this.getYaw(), this.getPitch());
-        this.entityTick();
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.BlUE_DUST_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+            }
+        }
+        //this.entityTick();
         if (this.age >= age1) {
             this.discard();
         }
@@ -85,10 +90,11 @@ public class GravityBoltEntity extends ThrownItemEntity {
             entity.damage(getWorld().getDamageSources().magic(), dam);
             this.discard();
         }
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.BlUE_DUST_PARTICLE, this.getX(), this.getY(), this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);}
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.BlUE_DUST_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            }
         }
     }
 
@@ -111,10 +117,10 @@ public class GravityBoltEntity extends ThrownItemEntity {
                 this.discard();
             }
         }
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.BlUE_DUST_PARTICLE, this.getX(), this.getY() + 0.5, this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.BlUE_DUST_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             }
         }
     }

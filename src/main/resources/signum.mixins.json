@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ModEntityDataSaverMixin",
-    "PlayerEntityMixin",
-    "SignumMixin"
+    "SignumMixin",
+    "PlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

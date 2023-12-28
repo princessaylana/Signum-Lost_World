@@ -34,7 +34,7 @@ public class TiberiumStaff
     private float attackDamage = 2.0f;
 
     // default is 100 = 5 seconds
-    private static final int STAFFCOOLDOWN = 100;
+    private static final int STAFFCOOLDOWN = 60;
     private final int coolDown;
 
 

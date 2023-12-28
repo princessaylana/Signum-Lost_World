@@ -6,11 +6,11 @@
  * */
 package za.lana.signum.entity.hostile;
 
-import com.google.gson.stream.JsonReader;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -18,9 +18,8 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.entity.mob.*;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -61,6 +60,7 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
     public EnderSkeletonEntity(EntityType<? extends EnderSkeletonEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
+        ((MobNavigation)this.getNavigation()).setCanPathThroughDoors(true);
     }
 
     public void initGoals(){
@@ -75,14 +75,16 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
         this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
         this.targetSelector.add(2, new EnderSkeletonEntity.ProtectHordeGoal());
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        //this.targetSelector.add(3, new ActiveTargetGoal<>(this, VillagerEntity.class, true));
+        //
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, false,
+                entity -> entity instanceof LivingEntity && entity.getGroup() == ModEntityGroup.TEAM_LIGHT));
 
         this.initCustomGoals();
+        //this.initCustomTargets();
     }
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, SumSkeletonEntity.class, true));
-        // TESTING
-        //this.targetSelector.add(4, new ActiveTargetGoal<>(this, SkeletonEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
@@ -138,6 +140,31 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
             setupAnimationStates();
         }
     }
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TEAM_DARK;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TEAM_DARK) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.GRAVITY_EFFECT) {
+            return false;
+        }
+        if (effect.getEffectType() == ModEffects.HEALING_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
 
     public void setTeleporting(boolean teleport) {
         this.dataTracker.set(TELEPORTING, teleport);
@@ -152,10 +179,6 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
     @Override
     public boolean isAttacking() {
         return this.dataTracker.get(ATTACKING);
-    }
-
-    public EntityGroup getGroup() {
-        return ModEntityGroup.SSKELETONS;
     }
 
     @Override
@@ -176,7 +199,6 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
         this.initEquipment(random, difficulty);
         this.updateEnchantments(random, difficulty);
         this.equipStack(EquipmentSlot.MAINHAND, this.makeInitialWeapon());
-        //this.equipStack(EquipmentSlot.HEAD, this.makeInitialHeadArmor());
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
     private ItemStack makeInitialWeapon() {
@@ -185,39 +207,20 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
         }
         return new ItemStack(Items.IRON_SWORD);
     }
-    private ItemStack makeInitialHeadArmor() {
-        if ((double)this.random.nextFloat() < 0.5) {
-            return new ItemStack(Items.IRON_HELMET);
-        }
-        return new ItemStack(Items.LEATHER_HELMET);
-    }
-
-    @Override
-    public boolean isTeammate(Entity other) {
-        if (super.isTeammate(other)) {
-            return true;
-        }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.SSKELETONS) {
-            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.FREEZE_EFFECT) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
-    }
 
     // BURNS IN DAYTIME
     @Override
     public void tickMovement() {
         if (this.getWorld().isClient) {
             for (int i = 0; i < 2; ++i) {
-                this.getWorld().addParticle(ParticleTypes.PORTAL, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.getWorld().addParticle(ParticleTypes.PORTAL,
+                        this.getParticleX(0.5),
+                        this.getRandomBodyY() - 0.50,
+                        this.getParticleZ(0.5),
+                        (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(),
+                        (this.random.nextDouble() - 0.5) * 2.0);
             }
+
         }
         if (this.isAlive() && this.isAffectedByDaylight()) {
             this.setOnFireFor(8);
@@ -236,10 +239,25 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.5) {
-            this.dropItem(ModItems.ICE_CRYSTAL_DUST);
+        if ((double)this.random.nextFloat() < 0.75) {
+            this.dropItem(ModItems.GOLD_COIN);
         }
-        this.dropItem(Items.BONE);
+        if ((double)this.random.nextFloat() < 0.65) {
+            this.dropItem(ModItems.IRON_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            this.dropItem(ModItems.COPPER_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.35) {
+            this.dropItem(ModItems.ELEMENT_ZERO_DUST);
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            this.dropItem(Items.IRON_SWORD);
+        }
+        if ((double)this.random.nextFloat() < 0.15) {
+            this.dropItem(Items.BONE);
+        }
+        //this.dropItem(Items.ROTTEN_FLESH);
     }
     @Override
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
@@ -395,7 +413,7 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
         }
     }
 
-    //
+    // WORK IN PROGRESS
     protected static class SearchAndDestroyGoal
             extends Goal {
         private final EnderSkeletonEntity enderSkeleton;

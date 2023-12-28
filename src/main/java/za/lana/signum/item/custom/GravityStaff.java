@@ -30,7 +30,7 @@ import java.util.List;
 public class GravityStaff
         extends Item {
     private final ToolMaterial material;
-    private static final int STAFFCOOLDOWN = 40;
+    private static final int STAFFCOOLDOWN = 60;
     private final int durability;
     private final int coolDown;
 

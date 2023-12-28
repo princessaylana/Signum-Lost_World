@@ -25,6 +25,7 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextContent;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -92,7 +93,7 @@ public class SkyForgeBlockEntity extends BlockEntity implements NamedScreenHandl
 
     @Override
     public Text getDisplayName() {
-        return Text.literal("Sky Forge");
+        return Text.translatable("block.signum.skyforge.info");
     }
 
     @Nullable

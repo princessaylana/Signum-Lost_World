@@ -23,9 +23,9 @@ import net.minecraft.world.World;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
-import za.lana.signum.entity.hostile.ESpiderEntity;
-import za.lana.signum.entity.hostile.TiberiumFloaterEntity;
+import za.lana.signum.entity.hostile.*;
 import za.lana.signum.particle.ModParticles;
+import za.lana.signum.sound.ModSounds;
 
 public class TiberiumSpitEntity
         extends ProjectileEntity {
@@ -37,7 +37,11 @@ public class TiberiumSpitEntity
     public TiberiumSpitEntity(World world, TiberiumFloaterEntity owner) {
         this(ModEntities.TIBERIUMSPIT_PROJECTILE, world);
         this.setOwner(owner);
-
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.TIBERIUM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+            }
+        }
         this.setPosition(
                 owner.getX() - (double)(owner.getWidth() + 1.0f) * 0.5 * (double)MathHelper.sin(owner.bodyYaw * ((float)Math.PI / 180)),
                 owner.getEyeY() - (double)0.1f,
@@ -76,14 +80,19 @@ public class TiberiumSpitEntity
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        Entity entity = this.getOwner();
-        if (entity instanceof LivingEntity livingEntity && !(entity instanceof TiberiumFloaterEntity)) {
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
+        Entity target = entityHitResult.getEntity();
+        if (target instanceof TibSkeletonEntity || target instanceof TiberiumWormEntity || target instanceof TiberiumFloaterEntity || target instanceof TiberiumWizardEntity){
+            ((LivingEntity) target).addStatusEffect((new StatusEffectInstance(ModEffects.HEALING_EFFECT, 60, 1/4)));
+        }
+        if (target instanceof LivingEntity livingEntity && !(target instanceof TiberiumFloaterEntity)) {
+            ((LivingEntity) target).addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
             entityHitResult.getEntity().damage(this.getDamageSources().mobProjectile(this, livingEntity), 1.5f * 2);
         }
-        if (entity instanceof TiberiumFloaterEntity){
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.HEALING_EFFECT, 60, 1/4)));
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 10 , 1/2)));
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.TIBERIUM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            }
         }
     }
 
@@ -91,13 +100,22 @@ public class TiberiumSpitEntity
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
         if (!this.getWorld().isClient) {
-            this.discard();
-
+            this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            this.getWorld().addParticle(ModParticles.TIBERIUM_PARTICLE, this.getX(), this.getY() + 0.5, this.getZ(),
+                    0.5, 0.5 * 0.25d * 0.5f, 0.5);
+            // spawn tiberium fire
+            Entity entity = this.getOwner();
+            if (!(entity instanceof MobEntity) || this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+                BlockPos blockPos = blockHitResult.getBlockPos().offset(blockHitResult.getSide());
+                if (this.getWorld().isAir(blockPos)) {
+                    this.getWorld().setBlockState(blockPos, ModBlocks.TIBERIUM_FIRE.getDefaultState());
+                }   this.discard();
+            }
         }
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getX(), this.getY() + 0.5, this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.TIBERIUM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             }
         }
     }

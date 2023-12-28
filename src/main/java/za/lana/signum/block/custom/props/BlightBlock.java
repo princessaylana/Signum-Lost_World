@@ -17,17 +17,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import za.lana.signum.Signum;
-import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.TiberiumWormEntity;
 import za.lana.signum.particle.ModParticles;
@@ -87,24 +84,13 @@ public class BlightBlock
     }
 
     private static BlockState copyProperties(Map<BlockState, BlockState> stateMap, BlockState fromState, Supplier<BlockState> toStateSupplier) {
-        return stateMap.computeIfAbsent(fromState, infestedState -> {
-            BlockState blockState = toStateSupplier.get();
-            for (Property<?> property : infestedState.getProperties()) {
-                //blockState = blockState.contains(property) ? blockState.with(property, infestedState.get(property)) : blockState;
-            }
-            return blockState;
-        });
+        return stateMap.computeIfAbsent(fromState, infestedState -> toStateSupplier.get());
     }
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (random.nextInt(5) != 0) {
             return;
         }
-        Direction direction = Direction.UP;
-        BlockPos blockPos = pos.offset(direction);
-        BlockState blockState = world.getBlockState(blockPos);
-        Block block = null;
-
         if (world.getLightLevel(pos.up()) >= 9) {
             BlockState blockState2 = this.getDefaultState();
             for (int i = 0; i < 4; ++i) {

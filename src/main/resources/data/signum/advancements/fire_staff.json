@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "signum:fire_staff"
+    },
+    "title": "Fire Staff",
+    "description": "The Power of Fire",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "signum:fire_crystal",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "signum:fire_staff"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

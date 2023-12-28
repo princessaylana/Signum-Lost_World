@@ -5,12 +5,12 @@
 
 ### Biomes:
 - Black Forest
-- Death Lands (80% Complete)
+- Death Lands
 - Frozen Lands
-- Golden Kingdom (80% Complete)
+- Golden Kingdom
 - Magic Forest
-- Rainbow Mushrooms (80% Complete)
-- Tiberium wastes (80% Complete)
+- Rainbow Mushrooms
+- Tiberium wastes
 
 ### Blocks:
 - Blight Block (Infested with Tiberium Worms)
@@ -18,7 +18,7 @@
 - Sky Forge (Alloy Smelter)
 - Razorwire (Hurts Mobs)
 - Manganese Blocks
-- 
+- Vault - Private Storage
 
 ### Ores:
 - Element Zero (Gravity version of Redstone)
@@ -64,6 +64,7 @@
 - Ingots
 - Nuggets
 - Dusts
+- Coins (Copper, Iron and Gold)
 
 ### Armors:
 - Steel Armor
@@ -71,7 +72,7 @@
 ### Swords:
 - Tiberium Sword
 - Steel Sword
-- 
+- Plasma Sword
 
 ### Staffs:
 - Tiberium Staff
@@ -82,6 +83,11 @@
 - Death Staff
 
 ### Mobs:
+There are two main groups of Mobs,
+Light and Dark.
+Light types are Friendly towards the player.
+Dark types works together, against the player and light types.
+
 - Evolved Spider
 - Unicorn
 
@@ -90,13 +96,13 @@
 
 ### Tiberium Mob Types:
 - Tiberium Trooper
-- Tiberium Commander
-- Tiberium Worm (90%)
-- Tiberium Floater
+- Tiberium Worm
+- Tiberium Floater (sleeps during the day)
+- Tiberium Wizard (sleeps during the day)
 
 ### Golden Kingdom Mob Types:
 - Elve Guard
-- Wizard
+- Wizard (sleeps during the day)
 
 ### Skeleton Mob Types:
 - Dark Skeleton
@@ -108,17 +114,22 @@
 
 ### Transport:
 - Air Balloon
+- Airship that randomly flies around, lands on landing blocks at night.
 
 ### Structures:
-- Lost Cities
+- Lost Cities (Generated fantasy cities, found in the golden kingdom)
 - Bones
 - Signum Temple
 
 ### Custom Effects:
+- Burn Effect
+- Freeze Effect
+- Gravity Effect
+- Healing Effect
+- Shock Effect
+- Teleport Effect (WIP)
 - Tiberium Poison
-- Freeze
-- Fire
-- Transmute 
+- Transmute Effect
 
 ### Particles, Projectiles, Sounds and More.
 

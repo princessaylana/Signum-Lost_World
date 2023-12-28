@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -17,13 +18,13 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.MerchantEntity;
+import net.minecraft.entity.passive.FrogEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -41,8 +42,9 @@ import za.lana.signum.item.ModItems;
 import java.util.EnumSet;
 import java.util.List;
 
-public class TiberiumWormEntity extends HostileEntity {
+public class TiberiumWormEntity extends HostileEntity implements InventoryOwner{
 
+	private int eatingTime;
 	public int attackAniTimeout = 0;
 	private int idleAniTimeout = 0;
 	public final net.minecraft.entity.AnimationState attackAniState = new net.minecraft.entity.AnimationState();
@@ -52,6 +54,8 @@ public class TiberiumWormEntity extends HostileEntity {
 	public TiberiumWormEntity(EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
 		this.experiencePoints = 3;
+		this.setCanPickUpLoot(true);
+		((MobNavigation)this.getNavigation()).setCanPathThroughDoors(true);
 	}
 
 	public static DefaultAttributeContainer.Builder setAttributes() {
@@ -74,9 +78,15 @@ public class TiberiumWormEntity extends HostileEntity {
 		this.targetSelector.add(1, new TiberiumWormEntity.TiberiumWormRevengeGoal());
 		this.targetSelector.add(2, new TiberiumWormEntity.ProtectHordeGoal());
 		this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.add(5, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
-		this.targetSelector.add(4, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
+		this.targetSelector.add(4, new ActiveTargetGoal<>(this, FrogEntity.class, true));
+		this.targetSelector.add(5, new ActiveTargetGoal<>(this, SlimeEntity.class, true));
 
+		this.initCustomTargets();
+	}
+
+	protected void initCustomTargets() {
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, false,
+				entity -> entity instanceof LivingEntity && entity.getGroup() == ModEntityGroup.TEAM_LIGHT));
 	}
 
 	// ANIMATIONS
@@ -114,6 +124,59 @@ public class TiberiumWormEntity extends HostileEntity {
 			setupAnimationStates();
 		}
 	}
+	// EATING
+	public void tickMovement() {
+		if (!this.getWorld().isClient && this.isAlive() && this.canMoveVoluntarily()) {
+			++this.eatingTime;
+			ItemStack itemStack = this.getEquippedStack(EquipmentSlot.MAINHAND);
+			if (this.canEat(itemStack)) {
+				if (this.eatingTime > 600) {
+					ItemStack itemStack2 = itemStack.finishUsing(this.getWorld(), this);
+					if (!itemStack2.isEmpty()) {
+						this.equipStack(EquipmentSlot.MAINHAND, itemStack2);
+					}
+					this.eatingTime = 0;
+				} else if (this.eatingTime > 560 && this.random.nextFloat() < 0.1F) {
+					this.playSound(this.getEatSound(itemStack), 1.0F, 1.0F);
+					this.getWorld().sendEntityStatus(this, (byte)45);
+					boolean bl = this.getHealth() < this.getMaxHealth();
+					if (bl) {
+						this.heal(2.0F);
+					}
+				}
+			}
+		}
+		super.tickMovement();
+	}
+	private boolean canEat(ItemStack stack) {
+		return stack.getItem().isFood() && this.getTarget() == null && this.isOnGround();
+	}
+	//
+	public EntityGroup getGroup() {
+		return ModEntityGroup.TEAM_DARK;
+	}
+	@Override
+	public boolean isTeammate(Entity other) {
+		if (super.isTeammate(other)) {
+			return true;
+		}
+		if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TEAM_DARK) {
+			return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+		}
+		return false;
+	}
+	@Override
+	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+		if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
+			return false;
+		}
+		if (effect.getEffectType() == ModEffects.HEALING_EFFECT) {
+			return false;
+		}
+		return super.canHaveStatusEffect(effect);
+	}
+	//
+
 	public void setAttacking(boolean attacking) {
 		this.dataTracker.set(ATTACKING, attacking);
 	}
@@ -126,8 +189,25 @@ public class TiberiumWormEntity extends HostileEntity {
 		super.initDataTracker();
 		this.dataTracker.startTracking(ATTACKING, false);
 	}
+	@Override
+	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
+		super.dropEquipment(source, lootingMultiplier, allowDrops);
+		this.dropInventory();
+		if ((double)this.random.nextFloat() < 0.75) {
+			this.dropItem(ModItems.GOLD_COIN);
+		}
+		if ((double)this.random.nextFloat() < 0.65) {
+			this.dropItem(ModItems.IRON_COIN);
+		}
+		if ((double)this.random.nextFloat() < 0.55) {
+			this.dropItem(ModItems.COPPER_COIN);
+		}
+		if ((double)this.random.nextFloat() < 0.35) {
+			this.dropItem(ModItems.TIBERIUM_DUST);
+		}
+		this.dropItem(Items.ROTTEN_FLESH);
+	}
 	//
-	// HORSE SOUNDS
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.ENTITY_ENDERMITE_AMBIENT;
 	}
@@ -142,17 +222,9 @@ public class TiberiumWormEntity extends HostileEntity {
 		return 1.85f;
 	}
 
-
-	// GROUP ATTRIBUTES
-	public EntityGroup getGroup() {
-		return ModEntityGroup.TIBERIUM;
-	}
 	@Override
-	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-		if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
-			return false;
-		}
-		return super.canHaveStatusEffect(effect);
+	public SimpleInventory getInventory() {
+		return null;
 	}
 
 	static class WanderAndInfestGoal
@@ -259,13 +331,4 @@ public class TiberiumWormEntity extends HostileEntity {
 			return super.getFollowRange() * 0.5;
 		}
 	}
-
-	@Override
-	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
-		TiberiumWormEntity tiberiumWormEntity;
-		super.dropEquipment(source, lootingMultiplier, allowDrops);
-		Entity entity = source.getAttacker();
-		this.dropItem(ModItems.TIBERIUM_DUST);
-	}
-
 }

@@ -39,7 +39,7 @@ public class ShockBoltEntityModel extends SinglePartEntityModel<ShockBoltEntity>
 	}
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		bolt.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+		bolt.render(matrices, vertexConsumer, light, overlay, red, green, blue, 0.50F);
 	}
 
 	@Override

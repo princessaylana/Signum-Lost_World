@@ -55,6 +55,12 @@
         "weight": 8,
         "minCount": 4,
         "maxCount": 4
+      },
+      {
+        "type": "signum:cursed_wolf",
+        "weight": 50,
+        "minCount": 2,
+        "maxCount": 4
       }
     ],
     "misc": [],

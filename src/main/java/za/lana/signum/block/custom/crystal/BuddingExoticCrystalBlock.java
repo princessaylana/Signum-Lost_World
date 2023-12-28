@@ -9,16 +9,18 @@ package za.lana.signum.block.custom.crystal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.EnchantingTableBlock;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
@@ -87,6 +89,18 @@ public class BuddingExoticCrystalBlock
                     (float)blockPos.getY() - random.nextFloat() - 1.0f,
                     (double)((float)blockPos.getZ() + random.nextFloat()) - 0.5);
         }
+    }
+    // TRANSPARENCY
+    public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return VoxelShapes.empty();
+    }
+
+    public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
+        return 1.0F;
+    }
+
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+        return true;
     }
 
 }

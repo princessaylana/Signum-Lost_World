@@ -38,6 +38,7 @@ implements Vanishable {
     private final float attackDamage;
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
+    // TODO WIP
     public SSwordItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, settings);
         this.attackDamage = (float)attackDamage + toolMaterial.getAttackDamage();

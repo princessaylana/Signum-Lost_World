@@ -10,8 +10,11 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.server.world.ServerWorld;
@@ -21,7 +24,10 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
@@ -35,6 +41,7 @@ import org.jetbrains.annotations.Nullable;
 import za.lana.signum.block.entity.ModBlockEntities;
 import za.lana.signum.block.entity.SkyForgeBlockEntity;
 
+import java.util.List;
 import java.util.function.ToIntFunction;
 
 
@@ -119,7 +126,6 @@ public class SkyForgeBlock
     }
 
     // block entity stuff
-
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
@@ -138,5 +144,15 @@ public class SkyForgeBlock
                 (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
 
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        if(Screen.hasShiftDown()) {
+            tooltip.add(Text.translatable("block.signum.skyforge.tooltip")
+                    .fillStyle(Style.EMPTY.withColor(Formatting.YELLOW).withBold(true)));
+        }else {
+            tooltip.add(Text.translatable("key.signum.shift")
+                    .fillStyle(Style.EMPTY.withColor(Formatting.GOLD)));
+        }
+        super.appendTooltip(stack, world, tooltip, context);
+    }
 
 }

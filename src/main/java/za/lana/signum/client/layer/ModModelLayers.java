@@ -13,16 +13,18 @@ import za.lana.signum.Signum;
 public class ModModelLayers {
     public static final EntityModelLayer AIRBALLOON =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "airballoon"), "MainBody");
+    public static final EntityModelLayer AIRSHIP =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "airship"), "mainBody");
     public static final EntityModelLayer TIBERIUM_WORM =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_worm_entity"), "mainBody");
     public static final EntityModelLayer UNICORN =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "unicorn"), "mainbody");
+    public static final EntityModelLayer CURSED_WOLF =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "cursed_wolf"), "mainBody");
     public static final EntityModelLayer PIDGEON =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "pidgeon"), "mainBody");
     public static final EntityModelLayer ESPIDER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "espider_entity"), "mainbody");
-    public static final EntityModelLayer ESPIDER_SADDLE =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "espider_entity"), "saddle");
 
     public static final EntityModelLayer TTROOPER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "ttrooper_entity"), "waist");
@@ -37,9 +39,6 @@ public class ModModelLayers {
 
     public static final EntityModelLayer ICESKELETON =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "iceskeleton_entity"), "mainBody");
-
-    public static final EntityModelLayer ICESKELETON_OUTER =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "iceskeleton_entity"), "body");
 
     public static final EntityModelLayer FIRESKELETON =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "fireskeleton_entity"), "mainBody");
@@ -56,9 +55,12 @@ public class ModModelLayers {
     public static final EntityModelLayer SPELLBOLT_ENTITY =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "spellbolt_entity"), "mainBody");
 
+    public static final EntityModelLayer TIBERIUM_WIZARD_ENTITY =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_wizard_entity"), "mainBody");
 
-    public static final EntityModelLayer TCOMMANDER =
-            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tcommander_entity"), "waist");
+    public static final EntityModelLayer POISONBOLT_ENTITY =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "poisonbolt_entity"), "mainBody");
+
     public static final EntityModelLayer ELVE_GUARD_ENTITY =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "elve_guard_entity"), "waist");
 

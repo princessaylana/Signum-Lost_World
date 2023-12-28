@@ -31,7 +31,6 @@ public class Signum implements ModInitializer {
 	public static final String MOD_ID = "signum";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-
 	@Override
 	public void onInitialize() {
 		RunInitMain.registerInits();
@@ -59,6 +58,6 @@ public class Signum implements ModInitializer {
 
 		ABKeyInputC2SPacket.init();
 
-		LOGGER.info("Signum Loaded");
+		LOGGER.info("Server Initialized " + Signum.MOD_ID +":Lost World");
 	}
 }

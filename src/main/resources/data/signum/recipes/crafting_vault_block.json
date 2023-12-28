@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "steel",
+  "pattern": [
+    "CBC",
+    " A ",
+    "CBC"
+  ],
+  "key": {
+    "A": {
+      "item": "signum:manganese_block"
+    },
+    "B": {
+      "item": "signum:stainless_steel_ingot"
+    },
+    "C": {
+      "item": "signum:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "signum:vault_block",
+    "count": 1
+  }
+}

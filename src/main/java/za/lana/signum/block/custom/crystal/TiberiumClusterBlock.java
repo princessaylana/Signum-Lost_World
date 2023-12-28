@@ -109,6 +109,9 @@ public class TiberiumClusterBlock
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(WATERLOGGED, FACING);
     }
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+        return true;
+    }
 
     /**
     // Ion Storm work in progress
@@ -151,6 +154,8 @@ public class TiberiumClusterBlock
         world.spawnEntity(lightningBolt);
         }
      **/
+    // TRANSPARENCY
+
 
 }
 

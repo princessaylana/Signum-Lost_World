@@ -17,6 +17,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
@@ -87,6 +88,10 @@ public class BuddingQuartzCrystalBlock
                     (float)blockPos.getY() - random.nextFloat() - 1.0f,
                     (double)((float)blockPos.getZ() + random.nextFloat()) - 0.5);
         }
+    }
+    // TRANSPARENCY
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+        return true;
     }
 
 }

@@ -18,7 +18,7 @@ import za.lana.signum.sound.ModSounds;
 public class ShockEffect extends StatusEffect {
 
     private final int CHANCE = 10; // chance of spread and amplifier
-    private final int DURATION_SHOCK = 100; // duration & random ticks
+    private final int DURATION_SHOCK = 20; // duration & random ticks
     protected ShockEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }

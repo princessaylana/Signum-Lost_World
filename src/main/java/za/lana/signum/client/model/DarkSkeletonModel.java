@@ -5,6 +5,7 @@
 package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
@@ -22,6 +23,7 @@ public class DarkSkeletonModel<T extends DarkSkeletonEntity>
     private final ModelPart leftArm;
 
     public DarkSkeletonModel(ModelPart root) {
+        super(RenderLayer::getEntityTranslucent);
         this.darkskeleton = root.getChild("mainBody");
         this.head = darkskeleton.getChild("body").getChild("head");
         this.rightArm = darkskeleton.getChild("body").getChild("rightArm");
@@ -82,7 +84,7 @@ public class DarkSkeletonModel<T extends DarkSkeletonEntity>
     }
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-        darkskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        darkskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, 0.50F);
     }
 
     @Override

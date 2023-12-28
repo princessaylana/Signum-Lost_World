@@ -1,3 +1,9 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * 2023
+ * */
 package za.lana.signum.entity.ai;
 
 import net.minecraft.entity.ai.goal.Goal;
@@ -18,7 +24,7 @@ public class PidgeonSleepGoal
     private final PidgeonEntity mob;
 
     public PidgeonSleepGoal(MobEntity mob, double speed, int range) {
-        super((PathAwareEntity) mob, speed, range, 6);
+        super((PathAwareEntity) mob, speed, range, 12);
         this.mob = (PidgeonEntity) mob;
         this.lowestY = -2;
         this.setControls(EnumSet.of(Control.TARGET, Goal.Control.MOVE));

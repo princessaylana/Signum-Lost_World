@@ -5,6 +5,7 @@
 package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
@@ -18,6 +19,7 @@ public class TiberiumFloaterEntityModel<T extends TiberiumFloaterEntity> extends
 	private final ModelPart head;
 
 	public TiberiumFloaterEntityModel(ModelPart root) {
+		super(RenderLayer::getEntityTranslucent);
 		this.floater = root.getChild("main");
 		this.head = this.floater.getChild("body").getChild("eye");
 	}
@@ -99,6 +101,7 @@ public class TiberiumFloaterEntityModel<T extends TiberiumFloaterEntity> extends
 	}
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
+		// ADD A BIT OF TRANSPARENCY
 		this.floater.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
 	}
 

@@ -1,9 +1,8 @@
 /**
  * SIGNUM
- * Register the Mod Items
  * MIT License
  * Lana
- *
+ * 2023
  */
 
 package za.lana.signum.item;
@@ -16,11 +15,16 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
+import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.item.custom.*;
 
 public class ModItems {
-
+    //
+    public static final Item COPPER_COIN = registerItem("copper_coin", new Item(new FabricItemSettings()));
+    public static final Item IRON_COIN = registerItem("iron_coin", new Item(new FabricItemSettings()));
+    public static final Item GOLD_COIN = registerItem("gold_coin", new Item(new FabricItemSettings()));
+    //
     public static final Item BLACK_DIAMOND_SHARD = registerItem("black_diamond_shard", new Item(new FabricItemSettings()));
     public static final Item BLACK_DIAMOND_CRYSTAL = registerItem("black_diamond_crystal", new Item(new FabricItemSettings()));
 
@@ -56,6 +60,8 @@ public class ModItems {
     public static final Item MOISSANITE_CRYSTAL = registerItem("moissanite_crystal", new Item(new FabricItemSettings()));
     public static final Item ELEMENT_ZERO_CRYSTAL = registerItem("element_zero_crystal", new Item(new FabricItemSettings()));
 
+    public static final Item ENDER_CRYSTAL = registerItem("ender_crystal", new EnderCrystalItem(new FabricItemSettings()));
+
     public static final Item MANGANESE_DUST = registerItem("manganese_dust", new Item(new FabricItemSettings()));
     public static final Item TIBERIUM_DUST = registerItem("tiberium_dust", new Item(new FabricItemSettings()));
     public static final Item FIRE_CRYSTAL_DUST = registerItem("fire_crystal_dust", new Item(new FabricItemSettings()));
@@ -70,8 +76,6 @@ public class ModItems {
     public static final Item MANGANESE_SHOVEL = registerItem("manganese_shovel", new ShovelItem(ModToolMaterials.MANGANESE, 2,3f, new FabricItemSettings()));
     public static final Item MANGANESE_HOE = registerItem("manganese_hoe", new HoeItem(ModToolMaterials.MANGANESE, 1,3f, new FabricItemSettings()));
     public static final Item MANGANESE_SWORD = registerItem("manganese_sword", new SwordItem(ModToolMaterials.MANGANESE, 7,7f, new FabricItemSettings()));
-
-
 
     // Armor
     public static final Item STEEL_HELMET = registerItem("steel_helmet",
@@ -122,6 +126,9 @@ public class ModItems {
     //
     public static final Item UNICORN_SPAWN_EGG = registerItem("unicorn_spawn_egg", new SpawnEggItem(
             ModEntities.UNICORN, 0xDCE8E8, 0xEEFC69, new FabricItemSettings()));
+
+    public static final Item CURSED_WOLF_SPAWN_EGG = registerItem("cursed_wolf_spawn_egg", new SpawnEggItem(
+            ModEntities.CURSED_WOLF, 0xDCE8E8, 0xEEFC69, new FabricItemSettings()));
     public static final Item PIDGEON_SPAWN_EGG = registerItem("pidgeon_spawn_egg", new SpawnEggItem(
             ModEntities.PIDGEON, 0xDCE8E8, 0xACADAB, new FabricItemSettings()));
 
@@ -130,15 +137,16 @@ public class ModItems {
     public static final Item AIRBALOON_SPAWN_EGG = registerItem("airballoon_spawn_egg", new SpawnEggItem(
             ModEntities.AIRBALLOON, 0xD83E36, 0x1D0550, new FabricItemSettings()));
 
+    public static final Item AIRSHIP_SPAWN_EGG = registerItem("airship_spawn_egg", new SpawnEggItem(
+            ModEntities.AIRSHIP, 0xD83E36, 0x1D0550, new FabricItemSettings()));
+
     public static final Item TIBERIUM_WORM_SPAWN_EGG = registerItem("tiberium_worm_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_WORM, 0x70F427, 0x73FA5B, new FabricItemSettings()));
     public static final Item TIBERIUM_FLOATER_SPAWN_EGG = registerItem("tiberium_floater_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_FLOATER, 0x70F427, 0xC3F802, new FabricItemSettings()));
     public static final Item TTROOPER_SPAWN_EGG = registerItem("ttrooper_spawn_egg", new SpawnEggItem(
             ModEntities.TTROOPER_ENTITY, 0x70F427, 0xA3BE40, new FabricItemSettings()));
-    public static final Item TCOMMANDER_SPAWN_EGG = registerItem("tcommander_spawn_egg", new SpawnEggItem(
-            ModEntities.TCOMMANDER_ENTITY, 0x70F427, 0x3D8A3E, new FabricItemSettings()));
-    public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
+     public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
             ModEntities.ESPIDER_ENTITY, 0x484240, 0xF03C00, new FabricItemSettings()));
 
     // SKELETONS
@@ -157,9 +165,8 @@ public class ModItems {
             ModEntities.ELVE_GUARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
     public static final Item WIZARD_SPAWN_EGG = registerItem("wizard_spawn_egg", new SpawnEggItem(
             ModEntities.WIZARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
-
-    public static final Item ROTTEN_FLESH_ON_A_STICK = registerItem("rotten_flesh_on_a_stick",
-            new OnAStickItem<>(new FabricItemSettings().maxDamage(25), ModEntities.ESPIDER_ENTITY, 7));
+    public static final Item TIBERIUM_WIZARD_SPAWN_EGG = registerItem("tiberium_wizard_spawn_egg", new SpawnEggItem(
+            ModEntities.TIBERIUM_WIZARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
 
     public static void addItemsToIngredientGroup(FabricItemGroupEntries entries) {
         entries.add(BLACK_DIAMOND_SHARD);
@@ -204,28 +211,8 @@ public class ModItems {
         entries.add(QUARTZ_CRYSTAL_DUST);
         entries.add(MOISSANITE_DUST);
         entries.add(ELEMENT_ZERO_DUST);
-
-        entries.add(PLASMA_SWORD);
-
-        entries.add(TIBERIUM_STAFF);
-        entries.add(FREEZE_STAFF);
-        entries.add(TRANSMUTE_STAFF);
-        entries.add(FIRE_STAFF);
-        entries.add(LIGHTNING_STAFF);
-        entries.add(HEALING_STAFF);
-        entries.add(DEATH_STAFF);
-        entries.add(TELEPORT_STAFF);
-        entries.add(GRAVITY_STAFF);
-
-        entries.add(WATER_STAFF);
-
-        entries.add(TOXIC_SOUP);
-        entries.add(MIXED_MUSHROOM_STEW);
-
-
-        entries.add(DETECTOR_ITEM);
-
-        entries.add(ROTTEN_FLESH_ON_A_STICK);
+    }
+    public static void addItemsToSpawnEggsGroup(FabricItemGroupEntries entries){
 
         // ANIMALS
         entries.add(UNICORN_SPAWN_EGG);
@@ -236,7 +223,6 @@ public class ModItems {
         // TIBERIUM
         entries.add(TIBERIUM_WORM_SPAWN_EGG);
         entries.add(TTROOPER_SPAWN_EGG);
-        entries.add(TCOMMANDER_SPAWN_EGG);
         entries.add(TIBERIUM_FLOATER_SPAWN_EGG);
         entries.add(ELVE_GUARD_SPAWN_EGG);
 
@@ -251,7 +237,121 @@ public class ModItems {
 
         //vehicles
         entries.add(AIRBALOON_SPAWN_EGG);
+    }
 
+    public static void addItemsToCombatGroup(FabricItemGroupEntries entries){
+        entries.add(STEEL_HELMET);
+        entries.add(STEEL_CHESTPLATE);
+        entries.add(STEEL_LEGGINGS);
+        entries.add(STEEL_BOOTS);
+
+        entries.add(MANGANESE_SWORD);
+
+        entries.add(PLASMA_SWORD);
+        entries.add(TIBERIUM_SWORD);
+
+        entries.add(TIBERIUM_STAFF);
+        entries.add(FREEZE_STAFF);
+        entries.add(TRANSMUTE_STAFF);
+        entries.add(FIRE_STAFF);
+        entries.add(LIGHTNING_STAFF);
+        entries.add(HEALING_STAFF);
+        entries.add(DEATH_STAFF);
+        entries.add(TELEPORT_STAFF);
+        entries.add(GRAVITY_STAFF);
+
+        entries.add(WATER_STAFF);
+
+    }
+
+    public static void addItemsToToolGroup(FabricItemGroupEntries entries){
+        entries.add(DETECTOR_ITEM);
+        entries.add(MANGANESE_AXE);
+        entries.add(MANGANESE_HOE);
+        entries.add(MANGANESE_PICKAXE);
+        entries.add(MANGANESE_SHOVEL);
+    }
+
+    public static void addItemsToFoodGroup(FabricItemGroupEntries entries){
+        entries.add(TOXIC_SOUP);
+        entries.add(MIXED_MUSHROOM_STEW);
+    }
+    public static void addItemsToNaturalGroup(FabricItemGroupEntries entries){
+        // ORES
+        entries.add(ModBlocks.BLACK_DIAMOND_ORE);
+        entries.add(ModBlocks.DEEPSLATE_BLACK_DIAMOND_ORE);
+        entries.add(ModBlocks.ELEMENT_ZERO_ORE);
+        entries.add(ModBlocks.DEEPSLATE_ELEMENT_ZERO_ORE);
+        entries.add(ModBlocks.MANGANESE_ORE);
+        entries.add(ModBlocks.DEEPSLATE_MANGANESE_ORE);
+        entries.add(ModBlocks.NETHERRACK_MANGANESE_ORE);
+        entries.add(ModBlocks.MOISSANITE_ORE);
+        entries.add(ModBlocks.DEEPSLATE_MOISSANITE_ORE);
+        entries.add(ModBlocks.ENDSTONE_MANGANESE_ORE);
+
+        entries.add(ModBlocks.BLIGHT_BLOCK);
+        entries.add(ModBlocks.SKY_ICE_BLOCK);
+        entries.add(ModBlocks.FROSTED_SKY_ICE_BLOCK);
+        entries.add(ModBlocks.ASH_BLOCK);
+        entries.add(ModBlocks.ROCK_BLOCK);
+        //
+        entries.add(ModBlocks.BUDDING_TIBERIUM);
+        entries.add(ModBlocks.BUDDING_FIRE_CRYSTAL);
+        entries.add(ModBlocks.BUDDING_EXOTIC_CRYSTAL);
+        entries.add(ModBlocks.BUDDING_ICE_CRYSTAL);
+        entries.add(ModBlocks.BUDDING_QUARTZ_CRYSTAL);
+        // PLANTBLOCKS
+        entries.add(ModBlocks.ORANGE_SHROOM_BLOCK);
+        entries.add(ModBlocks.YELLOW_SHROOM_BLOCK);
+        entries.add(ModBlocks.TOXIC_SHROOM_BLOCK);
+        entries.add(ModBlocks.BLUE_SHROOM_BLOCK);
+        entries.add(ModBlocks.PURPLE_SHROOM_BLOCK);
+        entries.add(ModBlocks.PINK_SHROOM_BLOCK);
+        entries.add(ModBlocks.RED_SHROOM_BLOCK);
+        entries.add(ModBlocks.BROWN_SHROOM_BLOCK);
+
+        entries.add(ModBlocks.TOXIC_SHROOM_STEM);
+        entries.add(ModBlocks.GENERIC_SHROOM_STEM);
+
+        entries.add(ModBlocks.SOULWOOD_LOG);
+        entries.add(ModBlocks.STRIPPED_SOULWOOD_LOG);
+        entries.add(ModBlocks.SOULWOOD_WOOD);
+        entries.add(ModBlocks.STRIPPED_SOULWOOD_WOOD);
+        entries.add(ModBlocks.SOULWOOD_PLANKS);
+        entries.add(ModBlocks.SOULWOOD_LEAVES);
+        entries.add(ModBlocks.SOULWOOD_SAPLING);
+    }
+    public static void addItemsToBuildingBlocksGroup(FabricItemGroupEntries entries){
+        entries.add(ModBlocks.RAZORWIRE_BLOCK);
+        entries.add(ModBlocks.RAINBOW_MARBLE_BLOCK);
+        entries.add(ModBlocks.AIRSHIP_LANDING_BLOCK);
+        entries.add(ModBlocks.SPIDERWEB_BLOCK);
+        //
+        // MAIN BLOCKS
+        entries.add(ModBlocks.BLACK_DIAMOND_BLOCK);
+        entries.add(ModBlocks.ELEMENT_ZERO_BLOCK);
+        entries.add(ModBlocks.EXOTIC_CRYSTAL_BLOCK);
+        entries.add(ModBlocks.FIRE_CRYSTAL_BLOCK);
+        entries.add(ModBlocks.ICE_CRYSTAL_BLOCK);
+        entries.add(ModBlocks.MANGANESE_BLOCK);
+        entries.add(ModBlocks.MOISSANITE_BLOCK);
+        entries.add(ModBlocks.QUARTZ_CRYSTAL_BLOCK);
+        entries.add(ModBlocks.TIBERIUM_BLOCK);
+        // DECORATION
+        entries.add(ModBlocks.MANGANESE_STAIRS);
+        entries.add(ModBlocks.MANGANESE_WALL);
+        entries.add(ModBlocks.MANGANESE_SLAB);
+        entries.add(ModBlocks.MANGANESE_FENCE);
+        entries.add(ModBlocks.MANGANESE_GATE);
+        entries.add(ModBlocks.MANGANESE_DOOR);
+        entries.add(ModBlocks.MANGANESE_TRAPDOOR);
+        entries.add(ModBlocks.MANGANESE_BUTTON);
+        entries.add(ModBlocks.MANGANESE_PRESSURE_PLATE);
+    }
+    public static void addItemsToFunctionalGroup(FabricItemGroupEntries entries){
+        // BLOCKENTITIES
+        entries.add(ModBlocks.SKYFORGE);
+        entries.add(ModBlocks.EXAMPLE_BLOCK);
     }
 
     //add new items above
@@ -261,7 +361,13 @@ public class ModItems {
     }
     public static void registerModItems(){
         Signum.LOGGER.info("Registering ModItems for " + Signum.MOD_ID);
-
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsToIngredientGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(ModItems::addItemsToSpawnEggsGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(ModItems::addItemsToCombatGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(ModItems::addItemsToToolGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(ModItems::addItemsToFoodGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(ModItems::addItemsToNaturalGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(ModItems::addItemsToBuildingBlocksGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(ModItems::addItemsToFunctionalGroup);
     }
 }

@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -17,15 +18,12 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -53,6 +51,7 @@ public class TibSkeletonEntity extends HostileEntity implements InventoryOwner {
     public TibSkeletonEntity(EntityType<? extends TibSkeletonEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
+        ((MobNavigation)this.getNavigation()).setCanPathThroughDoors(true);
     }
 
     public void initGoals(){
@@ -69,12 +68,15 @@ public class TibSkeletonEntity extends HostileEntity implements InventoryOwner {
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
 
         this.initCustomGoals();
+        this.initCustomTargets();
     }
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        //this.targetSelector.add(4, new ActiveTargetGoal<>(this, SumSkeletonEntity.class, true));
-        // TESTING
-        //this.targetSelector.add(4, new ActiveTargetGoal<>(this, SkeletonEntity.class, true));
+
+    }
+    protected void initCustomTargets() {
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, false,
+                entity -> entity instanceof LivingEntity && entity.getGroup() == ModEntityGroup.TEAM_LIGHT));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
@@ -129,6 +131,31 @@ public class TibSkeletonEntity extends HostileEntity implements InventoryOwner {
             setupAnimationStates();
         }
     }
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TEAM_DARK;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TIBERIUM_WASTELAND) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
+            return false;
+        }
+        if (effect.getEffectType() == ModEffects.HEALING_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
 
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
@@ -136,10 +163,6 @@ public class TibSkeletonEntity extends HostileEntity implements InventoryOwner {
     @Override
     public boolean isAttacking() {
         return this.dataTracker.get(ATTACKING);
-    }
-
-    public EntityGroup getGroup() {
-        return ModEntityGroup.SSKELETONS;
     }
 
     @Override
@@ -170,24 +193,6 @@ public class TibSkeletonEntity extends HostileEntity implements InventoryOwner {
     }
 
     @Override
-    public boolean isTeammate(Entity other) {
-        if (super.isTeammate(other)) {
-            return true;
-        }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.SSKELETONS) {
-            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
-    }
-    @Override
     public void tickMovement() {
         if (this.getWorld().isClient) {
             for (int i = 0; i < 2; ++i) {
@@ -209,11 +214,27 @@ public class TibSkeletonEntity extends HostileEntity implements InventoryOwner {
     }
     @Override
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
-        TibSkeletonEntity tibSkeleton;
         super.dropEquipment(source, lootingMultiplier, allowDrops);
-        Entity entity = source.getAttacker();
         this.dropInventory();
-        this.dropItem(ModItems.TIBERIUM_DUST);
+        if ((double)this.random.nextFloat() < 0.75) {
+            this.dropItem(ModItems.GOLD_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.65) {
+            this.dropItem(ModItems.IRON_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            this.dropItem(ModItems.COPPER_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.35) {
+            this.dropItem(ModItems.TIBERIUM_DUST);
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            this.dropItem(Items.IRON_SWORD);
+        }
+        if ((double)this.random.nextFloat() < 0.15) {
+            this.dropItem(Items.BONE);
+        }
+        //this.dropItem(Items.ROTTEN_FLESH);
     }
 
     @Override

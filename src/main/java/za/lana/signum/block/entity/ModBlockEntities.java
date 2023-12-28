@@ -16,6 +16,7 @@ import za.lana.signum.block.ModBlocks;
 
 public class ModBlockEntities {
     public static BlockEntityType<SkyForgeBlockEntity> SKYFORGE;
+    public static BlockEntityType<VaultBlockEntity> VAULT_BLOCK;
     public static BlockEntityType<ExampleBlockEntity> EXAMPLE_BLOCK_ENTITY;
    // public static BlockEntityType<ExampleBlockEntity> EXAMPLE_BLOCK_ENTITY;
 
@@ -24,6 +25,11 @@ public class ModBlockEntities {
                 new Identifier(Signum.MOD_ID, "skyforge"),
                 FabricBlockEntityTypeBuilder.create(SkyForgeBlockEntity::new,
                         ModBlocks.SKYFORGE).build(null));
+
+        VAULT_BLOCK = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+                new Identifier(Signum.MOD_ID, "vault_block"),
+                FabricBlockEntityTypeBuilder.create(VaultBlockEntity::new,
+                        ModBlocks.VAULT_BLOCK).build(null));
 
 
 

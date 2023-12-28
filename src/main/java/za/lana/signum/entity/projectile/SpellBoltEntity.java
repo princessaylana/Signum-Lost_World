@@ -7,16 +7,25 @@
 package za.lana.signum.entity.projectile;
 
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.entity.mob.GhastEntity;
+import net.minecraft.entity.mob.WardenEntity;
+import net.minecraft.entity.passive.FrogEntity;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -26,14 +35,16 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.hostile.ElveGuardEntity;
 import za.lana.signum.entity.hostile.WizardEntity;
 import za.lana.signum.particle.ModParticles;
+import za.lana.signum.sound.ModSounds;
 
 public class SpellBoltEntity
         extends ProjectileEntity {
     protected final int age1 = 200;
-    protected final float dam = 1.5f * 2;
-    private static final TrackedData<Boolean> HIT = DataTracker.registerData(SpellBoltEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    protected final float dam = 1.5f * 3;
+    private final SpellBoltEntity entity = this;
 
     public SpellBoltEntity(EntityType<? extends SpellBoltEntity> entityType, World world) {
         super(entityType, world);
@@ -51,7 +62,11 @@ public class SpellBoltEntity
         if (this.age >= age1) {
             this.discard();
         }
-
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+            }
+        }
         this.setPosition(
                 owner.getX() - (double)(owner.getWidth() + 1.0f) * 0.5 * (double)MathHelper.sin(owner.bodyYaw * ((float)Math.PI / 180)),
                 owner.getEyeY() - (double)0.1f,
@@ -90,30 +105,51 @@ public class SpellBoltEntity
             //this.setVelocity(this.getVelocity().add(0.0, -0.03f, 0.0));
         }
         if (this.getWorld().isClient) {
-            for (int i = 0; i < 2; ++i) {
-                this.getWorld().addParticle(ModParticles.BLUE_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.TRANSMUTE_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
             }
         }
         this.setPosition(d, e, f);
     }
 
     @Override
-    protected void onEntityHit(EntityHitResult entityHitResult) {
+    protected void onEntityHit(EntityHitResult entityHitResult){
         super.onEntityHit(entityHitResult);
-        Entity entity = this.getOwner();
+        Entity entity = entityHitResult.getEntity();
+        World level = getEntityWorld();
 
+        int i = entity instanceof EndermanEntity ? 6 : 0;
+        entity.damage(this.getDamageSources().thrown(this, this.getOwner()), i);
 
-        if (entity instanceof LivingEntity livingEntity && !(entity instanceof WizardEntity)) {
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.FREEZE_EFFECT, 60 * 2 , 1 / 4)));
-            entityHitResult.getEntity().damage(this.getDamageSources().mobProjectile(this, livingEntity), 1.5f * 2);
-            //entity.damage(getWorld().getDamageSources().magic(), dam * 2);
+        if (entity instanceof ClientPlayerEntity) {
+            // PLAYER
+            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
             entity.damage(getWorld().getDamageSources().magic(), dam);
+            this.entity.playSpawnEffects();
             this.discard();
         }
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.FREEZE_PARTICLE, this.getX(), this.getY(), this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);}
+        if (entity instanceof EnderDragonEntity || entity instanceof WitherEntity || entity instanceof GhastEntity || entity instanceof FrogEntity || entity instanceof WardenEntity){
+            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
+            entity.damage(getWorld().getDamageSources().magic(), dam);
+            this.entity.playSpawnEffects();
+            this.discard();
+        }
+        if (entity instanceof WizardEntity || entity instanceof ElveGuardEntity || entity instanceof VillagerEntity ){
+            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.HEALING_EFFECT, 60, 1/4)));
+            this.discard();
+        }
+        else{
+            // JUST PURE MAGIC DAMAGE
+            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
+            entity.damage(getWorld().getDamageSources().magic(), dam);
+            this.entity.playSpawnEffects();
+            this.discard();
+        }
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+            }
         }
     }
 
@@ -121,14 +157,15 @@ public class SpellBoltEntity
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
+        // EFFECT - DISABLED FOR NOW
         if (!this.getWorld().isClient) {
             this.discard();
-
         }
-        for(int x = 0; x < 18; ++x) {
-            for(int y = 0; y < 18; ++y) {
-                this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getX(), this.getY() + 0.5, this.getZ(),
-                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d * 0.5f);
+        // PARTICLES AND SOUND
+        if (this.getWorld().isClient) {
+            for (int j = 0; j < 2; ++j) {
+                this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getParticleX(0.5), this.getRandomBodyY() - 0.50, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, -this.random.nextDouble(), (this.random.nextDouble() - 0.5) * 2.0);
+                this.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
             }
         }
     }
@@ -149,6 +186,19 @@ public class SpellBoltEntity
             this.getWorld().addParticle(ModParticles.WHITE_SHROOM_PARTICLE, this.getX(), this.getY(), this.getZ(), d * g, e, f * g);
         }
         this.setVelocity(d, e, f);
+    }
+    public void playSpawnEffects() {
+        if (this.getWorld().isClient) {
+            for(int i = 0; i < 20; ++i) {
+                double d = this.random.nextGaussian() * 0.02;
+                double e = this.random.nextGaussian() * 0.02;
+                double f = this.random.nextGaussian() * 0.02;
+                double g = 10.0;
+                this.getWorld().addParticle(ParticleTypes.POOF, this.offsetX(1.0) - d * 10.0, this.getRandomBodyY() - e * 10.0, this.getParticleZ(1.0) - f * 10.0, d, e, f);
+            }
+        } else {
+            this.getWorld().sendEntityStatus(this, (byte)20);
+        }
     }
 }
 

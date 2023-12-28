@@ -36,7 +36,7 @@ public class LightningStaff
     private float attackDamage = 2.0f;
     private final int durability;
     private final int coolDown;
-    private static final int STAFFCOOLDOWN = 40;
+    private static final int STAFFCOOLDOWN = 120;
 
 
     public LightningStaff(ToolMaterial material, Settings settings) {

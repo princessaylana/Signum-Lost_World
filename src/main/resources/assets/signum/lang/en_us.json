@@ -1,8 +1,16 @@
 {
+  "advancements.signum.death_crystal.description": "Obtain Death in a Crystal",
+  "advancements.signum.element_zero_crystal.description": "Obtain Gravity in a Crystal",
+  "advancements.signum.exotic_crystal.description": "Obtain Transmutation in a Crystal",
+  "advancements.signum.fire_crystal.description": "Obtain Fire in a Crystal",
+
   "itemgroup.signum": "Signum",
+  "item.signum.copper_coin": "Copper Coin",
+  "item.signum.iron_coin": "Iron Coin",
+  "item.signum.gold_coin": "Gold Coin",
+
   "item.signum.cokecoal": "Coke Coal",
   "item.signum.element_zero": "Element Zero",
-
   "item.signum.raw_manganese": "Raw Manganese",
   "item.signum.manganese_ingot": "Manganese Ingot",
   "item.signum.steel_ingot": "Steel Ingot",
@@ -98,9 +106,12 @@
 
   "item.signum.tiberium_worm_spawn_egg": "Tiberium Worm Spawn Egg",
   "item.signum.ttrooper_spawn_egg": "Tiberium Trooper Spawn Egg",
-  "item.signum.tcommander_spawn_egg": "Tiberium Commander Spawn Egg",
+  "item.signum.tiberium_wizard_spawn_egg": "Tiberium Wizard Spawn Egg",
   "item.signum.tiberium_floater_spawn_egg": "Tiberium Floater Spawn Egg",
+
+
   "item.signum.unicorn_spawn_egg": "Unicorn Spawn Egg",
+  "item.signum.cursed_wolf_spawn_egg": "Cursed Wolf Spawn Egg",
   "item.signum.espider_spawn_egg": "Evolved Spider Egg",
   "item.signum.ghost_spawn_egg": "Ghost Spawn Egg",
   "item.signum.pidgeon_spawn_egg": "Pidgeon Spawn Egg",
@@ -108,6 +119,7 @@
   "item.signum.elve_guard_spawn_egg": "Elve Guard Spawn Egg",
   "item.signum.wizard_spawn_egg": "Wizard Spawn Egg",
   "item.signum.airballoon_spawn_egg": "Airballoon",
+  "item.signum.airship_spawn_egg": "AirShip",
 
   "block.signum.manganese_ore": "Manganese Ore",
   "block.signum.deepslate_manganese_ore": "Deepslate Manganese Ore",
@@ -206,27 +218,40 @@
   "block.signum.rainbow_marble": "Rainbow Marble Block",
   "block.signum.spiderweb_block": "Spiderweb Block",
   "block.signum.blight_block.tooltip": "Tiberium Infested Dirt",
-  "block.signum.skyforge": "Sky Forge",
-  "block.signum.skyforge.tooltip": "Very Powerful Alloy Furnace",
+
   "block.signum.razorwire_block": "Razor Wire",
   "block.signum.razorwire.tooltip": "Very Sharp and Dangerous Wire",
-  "block.signum.assembly_station_block": "Razor Wire",
+
+  "block.signum.skyforge": "Sky Forge",
+  "block.signum.skyforge.tooltip": "Very Powerful Alloy Furnace",
+  "block.signum.skyforge.info": "Sky Forge",
+
+  "block.signum.vault_block": "Vault Block",
+  "block.signum.vault_block.screen": "Personal Vault Storage",
+  "block.signum.vault_block.info": "WIP Personal Vault Storage",
+  "block.signum.vault_block.test": "Success Test",
+  "block.signum.vault.tooltip": "Keep all your belongings safe from others",
+  "block.signum.vault.tooltip2": "Only you can open or break your vault",
 
   "block.signum.example_block": "Example Block",
 
   "entity.signum.airballoon": "AirBalloon",
+  "entity.signum.airship": "AirShip",
   "entity.signum.unicorn": "Unicorn",
+  "entity.signum.cursed_wolf": "Cursed Wolf",
   "entity.signum.pidgeon": "Pidgeon",
   "entity.signum.espider_entity": "Deadly Spider",
+  "entity.signum.elve_guard_entity": "Elven Soldier",
+  "entity.signum.wizard_entity": "Wizard",
+  "entity.signum.spellbolt_entity": "Wizard Magick",
 
-  "entity.signum.elve_guard_entity": "Elven Guard",
-  "entity.signum.wizard": "Wizard",
+  "entity.signum.tiberium_wizard_entity": "Tiberium Wizard",
+  "entity.signum.poisonbolt_entity": "Tiberium Magick",
+  "entity.signum.ttrooper_entity": "Tiberium Trooper",
 
   "entity.signum.tiberium_worm": "Tiberium Worm",
   "entity.signum.tiberium_floater": "Tiberium Floater",
   "entity.signum.ghost": "Ghost",
-  "entity.signum.ttrooper_entity": "Tiberium Trooper",
-  "entity.signum.tcommander_entity": "Tiberium Commander",
 
   "entity.signum.sskeleton_entity": "Summoned Skeleton",
   "entity.signum.tibskeleton_entity": "Tiberium Skeleton",
@@ -235,20 +260,53 @@
   "entity.signum.enderskeleton_entity": "Ender Skeleton",
   "entity.signum.fireskeleton_entityentity": "Fire Skeleton",
 
+  "entity.signum.tiberium_projectile": "Tiberium Magick",
+  "entity.signum.ice_projectile": "Ice Magick",
+  "entity.signum.transmute_projectile": "Transmute Magick",
+  "entity.signum.fire_projectile": "Fire Magick",
+  "entity.signum.shock_projectile": "Shock Magick",
+  "entity.signum.gravity_projectile": "Gravity Magick",
+  "entity.signum.spiderspit_projectile": "Spider Spit",
+  "entity.signum.tiberiumspit_projectile": "Floater Spit",
+
   "dimension.signum_dim": "SkyLand",
   "dimension.lost_world": "Lost World",
-  "biome.signum.signum_mangrove": "Tiberium Wasteland",
 
-  "effect.signum.sigteleport": "Teleport",
+  "biome.signum.frozen_lands": "Frozen Lands",
+  "biome.signum.magic_forest": "Magic Forest",
+  "biome.signum.golden_kingdom": "Golden Kingdom",
+  "biome.signum.black_forest": "Black Forest",
+  "biome.signum.tiberium_wasteland": "Tiberium Wasteland",
+  "biome.signum.rainbow_mushrooms": "Rainbow Mushrooms",
+  "biome.signum.death_lands": "Death Lands",
+
+  "effect.signum.burn_effect": "Burn Effect",
+  "effect.signum.freeze_effect": "Freeze Effect",
+  "effect.signum.gravity_effect": "Gravity Effect",
+  "effect.signum.healing_effect": "Healing Effect",
+  "effect.signum.shock_effect": "Shock Effect",
+  "effect.signum.teleport_effect": "Teleport Effect",
+  "effect.signum.tiberium_poison": "Tiberium Poison",
+  "effect.signum.transmute_effect": "Transmute Effect",
+
   "example_gui.signum.examplebutton":"Test Button",
   "message.signum.airballoon.mount":"Press Y to go up, B to go down, H for Airballoon Inventory",
   "message.signum.airballoon.empty":"Out of Fuel",
   "message.signum.airballoon.wind":"Winds are Blowing",
+
+  "message.signum.vault_info": "Vault Owner",
+  "message.signum.vault_block.test":"Testing Success",
+  "message.signum.vault_block_break": "Only Owner can Break this Block",
+  "message.signum.vault_block.granted": "Access Granted",
+  "message.signum.vault_block.denied": "Access Denied",
+
   "key.category.signum.modkeys":"Signum ModKeys",
   "key.signum.openinventory":"AirBalloon Inventory",
   "key.signum.flyup":"Fly Up",
   "key.signum.flydown":"Fly Down",
   "key.signum.shift": "Press Shift for Info",
+
+
 
   "sounds.signum.snowy_wind": "Freezing Cold"
 

@@ -5,6 +5,7 @@
 package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
@@ -22,6 +23,7 @@ public class FireSkeletonModel<T extends FireSkeletonEntity>
     private final ModelPart leftArm;
 
     public FireSkeletonModel(ModelPart root) {
+        super(RenderLayer::getEntityTranslucent);
         this.fireskeleton = root.getChild("mainBody");
         this.head = fireskeleton.getChild("body").getChild("head");
         this.rightArm = fireskeleton.getChild("body").getChild("rightArm");
@@ -82,7 +84,7 @@ public class FireSkeletonModel<T extends FireSkeletonEntity>
     }
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-        fireskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        fireskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, 0.75F);
     }
 
     @Override

@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -43,8 +44,10 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.effect.ModEffects;
+import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.*;
 import za.lana.signum.entity.control.PidgeonFlightControl;
+import za.lana.signum.item.ModItems;
 import za.lana.signum.sound.ModSounds;
 
 import java.util.List;
@@ -131,13 +134,13 @@ public class PidgeonEntity extends AnimalEntity {
         this.goalSelector.add(4, new PidgeonFlyGoal(this, 1.0));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 16.0F));
         this.goalSelector.add(7, new AnimalFindHomeGoal(this, 1.05f, 1));
-        //this.goalSelector.add(8, new AlertTargetGoal(this));
-        //this.goalSelector.add(5, new PidgeonSitOnTreeGoal(this, 1.0));
+
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new PidgeonEntity.ProtectHordeGoal());
 
-        initCustomGoals();
+        this.initCustomGoals();
+        this.initCustomTargets();
     }
     protected void initCustomGoals(){
         this.goalSelector.add(0, new PidgeonSleepGoal(this, 1.1, 16));
@@ -145,6 +148,12 @@ public class PidgeonEntity extends AnimalEntity {
         this.goalSelector.add(3, new FleeEntityGoal<>(this, OcelotEntity.class, 6.0f, 1.0, 1.2));
         this.goalSelector.add(3, new FleeEntityGoal<>(this, CatEntity.class, 6.0f, 1.0, 1.2));
     }
+
+    protected void initCustomTargets() {
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, false,
+                entity -> entity instanceof LivingEntity && entity.getGroup() == ModEntityGroup.TEAM_DARK));
+    }
+
 
     public static DefaultAttributeContainer.Builder setAttributes(){
         return MobEntity.createMobAttributes()
@@ -154,7 +163,6 @@ public class PidgeonEntity extends AnimalEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.32f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0);
-
     }
 
     protected EntityNavigation createNavigation(World world) {
@@ -215,7 +223,6 @@ public class PidgeonEntity extends AnimalEntity {
     public float getSleepAnimation(float tickDelta) {
         return MathHelper.lerp(tickDelta, this.prevSleepAnimation, this.sleepAnimation);
     }
-
     //
     @Override
     public void tick() {
@@ -224,11 +231,32 @@ public class PidgeonEntity extends AnimalEntity {
             setupAnimationStates();
         }
     }
-
     public void tickMovement() {
         super.tickMovement();
         this.flapWings();
     }
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TEAM_LIGHT;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TEAM_LIGHT) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TRANSMUTE_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
     public boolean tryAttack(Entity target) {
         return target.damage(this.getDamageSources().mobAttack(this), 3.0F);
     }
@@ -243,18 +271,10 @@ public class PidgeonEntity extends AnimalEntity {
     public boolean isPushable() {
         return true;
     }
-
     protected void pushAway(Entity entity) {
         if (!(entity instanceof PlayerEntity)) {
             super.pushAway(entity);
         }
-    }
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.GRAVITY_EFFECT) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
     }
 
     @Nullable
@@ -299,12 +319,12 @@ public class PidgeonEntity extends AnimalEntity {
         return true;
     }
 
-    public boolean isAlert() {
-        return this.dataTracker.get(ALERT);
-    }
-
-    public void setAlert(boolean alert) {
-        this.dataTracker.set(ALERT, alert);
+    @Override
+    protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
+        super.dropEquipment(source, lootingMultiplier, allowDrops);
+        if ((double)this.random.nextFloat() < 0.50) {
+            this.dropItem(Items.FEATHER);
+        }
     }
 
     public class JumpChasingGoal extends DiveJumpingGoal {

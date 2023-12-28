@@ -5,6 +5,7 @@
 package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
@@ -15,6 +16,7 @@ public class FireBoltEntityModel extends SinglePartEntityModel<FireBoltEntity> {
 
 	private final ModelPart bolt;
 	public FireBoltEntityModel(ModelPart root) {
+		super(RenderLayer::getEntityTranslucent);
 		this.bolt = root.getChild("mainBody");
 	}
 
@@ -39,7 +41,7 @@ public class FireBoltEntityModel extends SinglePartEntityModel<FireBoltEntity> {
 	}
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		bolt.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+		bolt.render(matrices, vertexConsumer, light, overlay, red, green, blue, 0.50F);
 	}
 
 	@Override

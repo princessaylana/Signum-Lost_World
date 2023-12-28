@@ -4,6 +4,7 @@
 package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
@@ -17,6 +18,7 @@ public class TiberiumWormEntityModel<T extends TiberiumWormEntity> extends Singl
 	private final ModelPart head;
 
 	public TiberiumWormEntityModel(ModelPart root) {
+		super(RenderLayer::getEntityTranslucent);
 		this.worm = root.getChild("mainBody");
 		this.head = worm.getChild("head");
 	}

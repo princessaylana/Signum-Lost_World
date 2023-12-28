@@ -84,6 +84,7 @@ public class SumSkeletonModel<T extends SumSkeletonEntity> extends SinglePartEnt
     }
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
+        // ADD SOME TRANSPARENCY
         sskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
     }
 

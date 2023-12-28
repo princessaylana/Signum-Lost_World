@@ -21,10 +21,11 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.FlyingEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -38,11 +39,11 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
-import za.lana.signum.entity.ai.FloaterAttackGoal;
+import za.lana.signum.entity.ai.TiberiumFloaterAttackGoal;
 import za.lana.signum.entity.ai.TiberiumFloaterRestGoal;
-import za.lana.signum.entity.ai.WizardSleepGoal;
 import za.lana.signum.entity.control.TiberiumFloaterFlightControl;
 import za.lana.signum.entity.projectile.TiberiumSpitEntity;
+import za.lana.signum.item.ModItems;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 
@@ -54,18 +55,15 @@ public class TiberiumFloaterEntity
     public int attackAniTimeout = 0;
     private int idleAniTimeout = 0;
     public int spitAniTimeout = 0;
-    private int prevSleepAnimation;
 
     public final AnimationState attackAniState = new AnimationState();
     public final AnimationState idleAniState = new AnimationState();
     public final AnimationState spitAniState = new AnimationState();
-
     private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> SPITTING = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Boolean> NO_GRAVITY = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> SLEEPING = DataTracker.registerData(TiberiumFloaterEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-
     public final Random random = Random.create();
+
     public TiberiumFloaterEntity(EntityType<? extends TiberiumFloaterEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 10;
@@ -78,23 +76,27 @@ public class TiberiumFloaterEntity
     @Override
     protected void initGoals() {
 
-        this.goalSelector.add(2, new FloaterAttackGoal(this, 1.0D, true));
+        this.goalSelector.add(2, new TiberiumFloaterAttackGoal(this, 1.0D, true));
         this.goalSelector.add(2, new TiberiumFloaterEntity.LookAtTargetGoal(this));
-        this.goalSelector.add(3, new LookAroundGoal(this));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 24f));
-        this.goalSelector.add(4, new FlyRandomlyGoal(this));
+        this.goalSelector.add(3, new FlyRandomlyGoal(this));
+        this.goalSelector.add(4, new LookAroundGoal(this));
+        //this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 16.0f));
 
         this.targetSelector.add(1, new RevengeGoal(this));
-        //this.targetSelector.add(1, new WizardEntity.ProtectHordeGoal());
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
 
         this.initCustomGoals();
+        this.initCustomTargets();
     }
     //
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new TiberiumFloaterRestGoal(this, 1.2f, 256));
+    }
+
+    protected void initCustomTargets() {
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, false,
+                entity -> entity instanceof LivingEntity && entity.getGroup() == ModEntityGroup.TEAM_LIGHT));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -118,8 +120,8 @@ public class TiberiumFloaterEntity
         this.dataTracker.startTracking(ATTACKING, false);
         this.dataTracker.startTracking(SLEEPING, false);
         this.dataTracker.startTracking(SPITTING, false);
-
     }
+
     protected EntityNavigation createNavigation(World world) {
         BirdNavigation birdNavigation = new BirdNavigation(this, world);
         birdNavigation.setCanPathThroughDoors(false);
@@ -130,7 +132,6 @@ public class TiberiumFloaterEntity
     //ANIMATIONS
     private void setupAnimationStates() {
         if (this.idleAniTimeout <= 0 && !this.isInSleepingPose()) {
-            //this.sleepAniState.stop();
             this.idleAniTimeout = this.random.nextInt(80) + 160;
             this.idleAniState.start(this.age);
         } else {
@@ -140,7 +141,6 @@ public class TiberiumFloaterEntity
         if(this.isAttacking() && attackAniTimeout <= 0) {
             this.spitAniState.stop();
             this.idleAniState.stop();
-            //this.sleepAniState.stop();
             //
             this.attackAniTimeout = 40; // 2 seconds, length of spell attack
             this.attackAniState.start(this.age);
@@ -154,8 +154,7 @@ public class TiberiumFloaterEntity
         if(this.isSpitting() && spitAniTimeout <= 0) {
             this.attackAniState.stop();
             this.idleAniState.stop();
-            //this.sleepAniState.stop();
-            //
+
             this.spitAniTimeout = 40;
             this.spitAniState.start(this.age);
         } else {
@@ -164,8 +163,6 @@ public class TiberiumFloaterEntity
         if(!this.isSpitting()) {
             this.spitAniState.stop();
         }
-        // SLEEPING isInSleepingPose() ?
-        //
     }
 
     protected void updateLimbs(float posDelta) {
@@ -187,7 +184,31 @@ public class TiberiumFloaterEntity
             setupAnimationStates();
         }
     }
-
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TEAM_DARK;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TEAM_DARK) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
+            return false;
+        }
+        if (effect.getEffectType() == ModEffects.HEALING_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
     @Override
     public void tickMovement() {
         World level = this.getWorld();
@@ -219,7 +240,6 @@ public class TiberiumFloaterEntity
     public boolean isInSleepingPose() {
         return this.dataTracker.get(SLEEPING);
     }
-
     // NBT
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
@@ -229,6 +249,28 @@ public class TiberiumFloaterEntity
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
     }
+
+    // TODO NEED TO DOUBLE CHECK ALL ENTITIES DROPS RATIOS
+    @Override
+    protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
+        super.dropEquipment(source, lootingMultiplier, allowDrops);
+        this.dropInventory();
+        if ((double)this.random.nextFloat() < 0.65) {
+            this.dropItem(ModItems.GOLD_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            this.dropItem(ModItems.IRON_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.45) {
+            this.dropItem(ModItems.COPPER_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.35) {
+            this.dropItem(ModItems.TIBERIUM_DUST);
+        }
+        this.dropItem(Items.ROTTEN_FLESH);
+    }
+
+
 
     //RANGE ATTACK
     public void spit(LivingEntity target) {
@@ -248,27 +290,20 @@ public class TiberiumFloaterEntity
             this.playSound(ModSounds.FLOATER_SHOOT, 0.15F, 1.0F);
         }
     }
-    // ATTRIBUTES
-    public EntityGroup getGroup() {
-        return ModEntityGroup.TIBERIUM;
-    }
-    @Override
-    public boolean isTeammate(Entity other) {
-        if (super.isTeammate(other)) {
-            return true;
+
+    /**
+    // INFECT close to DEATH
+    private void infectMob(){
+        LivingEntity entity = this.getAttacker();
+        if (entity instanceof LivingEntity) {
+            int boxSize = 5;
+            World level = this.getWorld();
+            level.getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(boxSize), e -> true).forEach(e -> e
+                    //
+                    .addStatusEffect(new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 10, 2), entity));
         }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TIBERIUM) {
-            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
-        }
-        return false;
     }
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
-    }
+     **/
 
     // hitbox width must be 2, height must be 3.5
     @Override
@@ -364,8 +399,6 @@ public class TiberiumFloaterEntity
             double d = moveControl.getTargetX() - this.floater.getX();
             double g = d * d + (e = moveControl.getTargetY() - this.floater.getY()) * e + (f = moveControl.getTargetZ() - this.floater.getZ()) * f;
             return g < 1.0 || g > 3600.0;
-
-
         }
 
         @Override
@@ -382,6 +415,5 @@ public class TiberiumFloaterEntity
             this.floater.getMoveControl().moveTo(d, e, f, 1.0);
         }
     }
-
 }
 

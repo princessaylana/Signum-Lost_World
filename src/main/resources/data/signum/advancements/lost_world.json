@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "signum:manganese_ingot"
+    },
+    "title": "The Lost World",
+    "description": "a New metal",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "background": "signum:textures/block/manganese_block.png"
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "signum:manganese_ingot"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

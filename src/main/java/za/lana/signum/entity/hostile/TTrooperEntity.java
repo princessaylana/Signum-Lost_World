@@ -8,15 +8,15 @@ package za.lana.signum.entity.hostile;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -29,6 +29,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.item.ModItems;
@@ -47,6 +48,7 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
     public TTrooperEntity(EntityType<? extends TTrooperEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
+        ((MobNavigation)this.getNavigation()).setCanPathThroughDoors(true);
     }
 
     public void initGoals(){
@@ -58,12 +60,17 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new TTrooperEntity.ProtectHordeGoal());
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.initCustomGoals();
+        initCustomTargets();
     }
     protected void initCustomGoals() {
         this.goalSelector.add(3, new AvoidSunlightGoal(this));
+    }
+
+    protected void initCustomTargets() {
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, false,
+                entity -> entity instanceof LivingEntity && entity.getGroup() == ModEntityGroup.TEAM_LIGHT));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes(){
@@ -119,16 +126,39 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
         }
     }
 
+    //
+    public EntityGroup getGroup() {
+        return ModEntityGroup.TEAM_DARK;
+    }
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (super.isTeammate(other)) {
+            return true;
+        }
+        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TEAM_DARK) {
+            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
+        }
+        return false;
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
+            return false;
+        }
+        if (effect.getEffectType() == ModEffects.HEALING_EFFECT) {
+            return false;
+        }
+        return super.canHaveStatusEffect(effect);
+    }
+    //
+
+
     public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
     }
     @Override
     public boolean isAttacking() {
         return this.dataTracker.get(ATTACKING);
-    }
-
-    public EntityGroup getGroup() {
-        return ModEntityGroup.TIBERIUM;
     }
 
     @Override
@@ -162,26 +192,6 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
         //return new ItemStack(Items.IRON_SWORD);
     }
 
-
-    @Override
-    public boolean isTeammate(Entity other) {
-        if (super.isTeammate(other)) {
-            return true;
-        }
-        if (other instanceof LivingEntity && ((LivingEntity)other).getGroup() == ModEntityGroup.TIBERIUM) {
-            return this.getScoreboardTeam() == null && other.getScoreboardTeam() == null;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == ModEffects.TIBERIUM_POISON) {
-            return false;
-        }
-        return super.canHaveStatusEffect(effect);
-    }
-
     @Override
     public SimpleInventory getInventory() {
         return this.inventory;
@@ -189,6 +199,21 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
     @Override
     public boolean canPickupItem(ItemStack stack) {
         return super.canPickupItem(stack);
+    }
+    @Override
+    protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
+        super.dropEquipment(source, lootingMultiplier, allowDrops);
+        this.dropInventory();
+        if ((double)this.random.nextFloat() < 0.10) {
+            this.dropItem(ModItems.TIBERIUM_DUST);
+        }
+        if ((double)this.random.nextFloat() < 0.15) {
+            this.dropItem(Items.SHIELD);
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            this.dropItem(Items.IRON_SWORD);
+        }
+        //this.dropItem(Items.ROTTEN_FLESH);
     }
 
     @Override

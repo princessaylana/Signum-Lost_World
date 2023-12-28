@@ -300,5 +300,8 @@ public class TiberiumFireBlock
     private static int getFireTickDelay(Random random) {
         return 30 + random.nextInt(10);
     }
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+        return true;
+    }
 }
 

@@ -109,5 +109,9 @@ public class IceCrystalClusterBlock
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(WATERLOGGED, FACING);
     }
+    // TRANSPARENCY
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+        return true;
+    }
 }
 

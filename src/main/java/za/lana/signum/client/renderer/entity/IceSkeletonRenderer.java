@@ -6,9 +6,7 @@
  * */
 package za.lana.signum.client.renderer.entity;
 
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
@@ -18,16 +16,15 @@ import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.IceSkeletonModel;
-import za.lana.signum.client.renderer.feature.IceSkeletonOverlayFeatureRenderer;
+import za.lana.signum.client.renderer.feature.IceSkeletonEyesFeatureRenderer;
 import za.lana.signum.entity.hostile.IceSkeletonEntity;
-import za.lana.signum.entity.hostile.TibSkeletonEntity;
 
 public class IceSkeletonRenderer extends MobEntityRenderer<IceSkeletonEntity, IceSkeletonModel<IceSkeletonEntity>> {
-    private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/skeletons/iceskeleton_texture.png");
+    public static final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/skeletons/iceskeleton_texture.png");
     public IceSkeletonRenderer(EntityRendererFactory.Context context) {
         super(context, new IceSkeletonModel<>(context.getPart(ModModelLayers.ICESKELETON)), 0.4f); //entity shadow
         this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
-        this.addFeature(new IceSkeletonOverlayFeatureRenderer<>(this, context.getModelLoader()));
+        this.addFeature(new IceSkeletonEyesFeatureRenderer<>(this));
     }
 
     @Override
@@ -38,11 +35,10 @@ public class IceSkeletonRenderer extends MobEntityRenderer<IceSkeletonEntity, Ic
     @Override
     public void render(IceSkeletonEntity mobEntity, float f, float g, MatrixStack matrixStack,
                        VertexConsumerProvider vertexConsumerProvider, int i) {
+        //
+        MinecraftClient minecraftClient = MinecraftClient.getInstance();
+        boolean hasShape = minecraftClient.hasOutline(mobEntity) && mobEntity.isInvisible();
         super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
-    /**
-    public RenderLayer getRenderType(IceSkeletonEntity mobEntity, Identifier texture) {
-        return RenderLayer.getEntityTranslucent(this.getTexture(mobEntity));
-    }
-     **/
+
 }

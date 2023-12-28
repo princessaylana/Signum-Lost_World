@@ -21,7 +21,7 @@ import za.lana.signum.entity.hostile.DarkSkeletonEntity;
 public class DarkSkeletonRenderer extends MobEntityRenderer<DarkSkeletonEntity, DarkSkeletonModel<DarkSkeletonEntity>> {
     private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/skeletons/darkskeleton_texture.png");
     public DarkSkeletonRenderer(EntityRendererFactory.Context context) {
-        super(context, new DarkSkeletonModel<>(context.getPart(ModModelLayers.DARKSKELETON)), 0.4f); //entity shadow
+        super(context, new DarkSkeletonModel<>(context.getPart(ModModelLayers.DARKSKELETON)), 0.0f); //entity shadow
         this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
         this.addFeature(new DarkSkeletonEyesFeatureRenderer<>(this));
     }

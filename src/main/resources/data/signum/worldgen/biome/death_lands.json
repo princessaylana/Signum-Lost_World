@@ -38,13 +38,13 @@
     "monster": [
       {
         "type": "signum:espider_entity",
-        "weight": 100,
+        "weight": 50,
         "minCount": 4,
         "maxCount": 6
       },
       {
         "type": "signum:ghost",
-        "weight": 80,
+        "weight": 50,
         "minCount": 2,
         "maxCount": 4
       },
@@ -52,13 +52,13 @@
         "type": "minecraft:zombie",
         "weight": 95,
         "minCount": 4,
-        "maxCount": 4
+        "maxCount": 6
       },
       {
         "type": "minecraft:skeleton",
         "weight": 100,
         "minCount": 4,
-        "maxCount": 4
+        "maxCount": 6
       },
       {
         "type": "signum:darkskeleton_entity",
@@ -79,6 +79,18 @@
         "maxCount": 4
       },
       {
+        "type": "signum:tibskeleton_entity",
+        "weight": 50,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "signum:iceskeleton_entity",
+        "weight": 50,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
         "type": "minecraft:enderman",
         "weight": 10,
         "minCount": 1,
@@ -89,6 +101,12 @@
         "weight": 5,
         "minCount": 1,
         "maxCount": 1
+      },
+      {
+        "type": "minecraft:phantom",
+        "weight": 50,
+        "minCount": 4,
+        "maxCount": 8
       }
     ],
     "underground_water_creature": [

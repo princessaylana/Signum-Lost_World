@@ -11,26 +11,25 @@ import za.lana.signum.Signum;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.*;
+import za.lana.signum.entity.mob.CursedWolfEntity;
 import za.lana.signum.entity.mob.PidgeonEntity;
 import za.lana.signum.entity.mob.UnicornEntity;
 import za.lana.signum.entity.transport.AirBalloonEntity;
+import za.lana.signum.entity.transport.AirShipEntity;
 import za.lana.signum.item.ModFuels;
 import za.lana.signum.item.ModItems;
 
 public class RunInitMain {
-
-
     public static void registerInits(){
         registerAttributes();
-        createPortal();
+        createLostWorldPortal();
         ModFuels.registerModFuels();
         registerStrippableBlocks();
         registerFlammableBlocks();
         registerBlockEntities();
-
         Signum.LOGGER.debug("RUNINIT for " + Signum.MOD_ID);
     }
-    private static void createPortal(){
+    private static void createLostWorldPortal(){
         CustomPortalBuilder.beginPortal()
                 .frameBlock(ModBlocks.MANGANESE_BLOCK)
                 .lightWithItem(ModItems.FIRE_CRYSTAL)
@@ -40,13 +39,14 @@ public class RunInitMain {
                 .registerPortal();
     }
 
-
     private static void registerAttributes() {
 
         FabricDefaultAttributeRegistry.register(ModEntities.AIRBALLOON, AirBalloonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.AIRSHIP, AirShipEntity.setAttributes());
 
         FabricDefaultAttributeRegistry.register(ModEntities.UNICORN, UnicornEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.PIDGEON, PidgeonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.CURSED_WOLF, CursedWolfEntity.setAttributes());
 
         FabricDefaultAttributeRegistry.register(ModEntities.ELVE_GUARD_ENTITY, ElveGuardEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.WIZARD_ENTITY, WizardEntity.setAttributes());
@@ -61,11 +61,10 @@ public class RunInitMain {
         FabricDefaultAttributeRegistry.register(ModEntities.ENDERSKELETON_ENTITY, IceSkeletonEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.DARKSKELETON_ENTITY, IceSkeletonEntity.setAttributes());
 
-        FabricDefaultAttributeRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.TCOMMANDER_ENTITY, TCommanderEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WIZARD_ENTITY, TiberiumWizardEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.TTROOPER_ENTITY, TTrooperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TIBERIUM_WORM, TiberiumWormEntity.setAttributes());
-
     }
 
     public static void registerStrippableBlocks(){
@@ -84,10 +83,4 @@ public class RunInitMain {
     public static void registerBlockEntities(){
 
     }
-
-
-
-
-
-
 }

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exotic_crystal",
+  "pattern": [
+    "ABA",
+    " C ",
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:green_carpet"
+    },
+    "B": {
+      "item": "minecraft:minecraft:white_carpet",
+      "tag": "minecraft:wool_carpets"
+    },
+    "C": {
+      "item": "minecraft:oak_planks"
+    }
+  },
+  "result": {
+    "item": "signum:airship_landing_block",
+    "count": 1
+  }
+}

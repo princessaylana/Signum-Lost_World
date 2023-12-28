@@ -89,9 +89,11 @@ public class IceSkeletonModel<T extends IceSkeletonEntity>
         this.head.yaw = headYaw * 0.017453292F;
         this.head.pitch = headPitch * 0.017453292F;
     }
+    //
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-        iceskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        // RENDER IT TRANSPARENT
+        iceskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, 0.50F);
 
     }
 

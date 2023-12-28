@@ -5,6 +5,7 @@
 package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
@@ -24,6 +25,7 @@ public class EnderSkeletonModel<T extends EnderSkeletonEntity>
     private final ModelPart leftArm;
 
     public EnderSkeletonModel(ModelPart root) {
+        super(RenderLayer::getEntityTranslucent);
         this.enderskeleton = root.getChild("mainBody");
         this.head = enderskeleton.getChild("body").getChild("head");
         this.rightArm = enderskeleton.getChild("body").getChild("rightArm");
@@ -84,7 +86,7 @@ public class EnderSkeletonModel<T extends EnderSkeletonEntity>
     }
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-        enderskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        enderskeleton.render(matrices, vertexConsumer, light, overlay, red, green, blue, 0.80F);
     }
 
     @Override

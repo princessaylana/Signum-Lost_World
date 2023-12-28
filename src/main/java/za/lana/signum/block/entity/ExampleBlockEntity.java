@@ -18,14 +18,15 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import za.lana.signum.Signum;
 import za.lana.signum.screen.gui.ExampleDescription;
+import za.lana.signum.screen.gui.GuiScreens;
 import za.lana.signum.util.ImplementedInventory;
 
 public class ExampleBlockEntity
         extends BlockEntity
         implements ImplementedInventory, NamedScreenHandlerFactory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    public static final int INVENTORY_SIZE = 8;
+    private final DefaultedList<ItemStack> inventory =  DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY);
     public ExampleBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.EXAMPLE_BLOCK_ENTITY, pos, state);
     }
@@ -61,6 +62,8 @@ public class ExampleBlockEntity
 
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        return new ExampleDescription(syncId, inventory, ScreenHandlerContext.create(world, pos));
+        // GuiScreens.EXAMPLE_GUI
+        //return new ExampleDescription(syncId, inventory, ScreenHandlerContext.create(world, pos));
+        return new ExampleDescription(GuiScreens.EXAMPLE_GUI, syncId, inventory, ScreenHandlerContext.create(world, pos));
     }
 }

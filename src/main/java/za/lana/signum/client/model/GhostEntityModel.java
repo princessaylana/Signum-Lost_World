@@ -5,6 +5,7 @@
 package za.lana.signum.client.model;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
@@ -23,7 +24,7 @@ public class GhostEntityModel<T extends GhostEntity> extends SinglePartEntityMod
     private final ModelPart leftArm;
 
 	public GhostEntityModel(ModelPart root) {
-
+        super(RenderLayer::getEntityTranslucent);
 		ghost = root.getChild("mainBody");
         this.head = ghost.getChild("body").getChild("head");
         this.rightArm = ghost.getChild("body").getChild("rightArm");
@@ -88,11 +89,6 @@ public class GhostEntityModel<T extends GhostEntity> extends SinglePartEntityMod
 
     }
 
-	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		ghost.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-	}
-
     @Override
     public ModelPart getPart() {
         return ghost;
@@ -111,5 +107,10 @@ public class GhostEntityModel<T extends GhostEntity> extends SinglePartEntityMod
         modelPart.pivotX += f;
         modelPart.rotate(matrices);
         modelPart.pivotX -= f;
+    }
+    @Override
+    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
+        // RENDER IT TRANSPARENT IT IS A GHOST AFTER ALL :)
+        ghost.render(matrices, vertexConsumer, light, overlay, red, green, blue, 0.25F);
     }
 }
