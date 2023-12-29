@@ -28,9 +28,9 @@ public class ExampleDescription extends SyncedGuiDescription {
 	//private final static String DESTINATIONX = "";
 	//private final static String DESTINATIONY = "";
 	//private final static String DESTINATIONZ = "";
-	public final static String DESTINATIONX = String.valueOf(Integer.parseInt(""));
-	public final static String DESTINATIONY = String.valueOf(Integer.parseInt(""));
-	public final static String DESTINATIONZ = String.valueOf(Integer.parseInt(""));
+	public final static String DESTINATIONX = String.valueOf(Integer.parseInt("enterX"));
+	public final static String DESTINATIONY = String.valueOf(Integer.parseInt("enterY"));
+	public final static String DESTINATIONZ = String.valueOf(Integer.parseInt("enterZ"));
 
     public ExampleDescription(ScreenHandlerType<ExampleDescription> exampleDescription, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
 		super(GuiScreens.EXAMPLE_GUI, syncId, playerInventory, getBlockInventory(context, INVENTORY_SIZE), null);
