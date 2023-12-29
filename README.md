@@ -24,6 +24,9 @@ Lana 2023
 
 [Wiki](https://github.com/princessaylana/Signum-1.20/wiki)
 
+Current Minecraft Version:
+1.20.2
+
 Dependancies:
 - Fabric Loader 0.14.24
 - Fabric API 0.90.7

@@ -26,6 +26,9 @@ public class ExampleBlockEntity
         extends BlockEntity
         implements ImplementedInventory, NamedScreenHandlerFactory {
     public static final int INVENTORY_SIZE = 8;
+    public int destinationX;
+    public int destinationY;
+    public int destinationZ;
     private final DefaultedList<ItemStack> inventory =  DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY);
     public ExampleBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.EXAMPLE_BLOCK_ENTITY, pos, state);
@@ -43,15 +46,21 @@ public class ExampleBlockEntity
         //return ImplementedInventory.super.canPlayerUse(player);
     }
     @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
+    protected void writeNbt(NbtCompound nbtData) {
+        super.writeNbt(nbtData);
+        Inventories.writeNbt(nbtData, inventory);
+        //nbtData.putInt("destination.x", ExampleDescription.DESTINATIONX("enterX"));
+        //nbtData.putInt("destination.y", ExampleDescription.DESTINATIONY("enterY"));
+        //nbtData.putInt("destination.z", ExampleDescription.DESTINATIONZ("enterZ"));
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, inventory);
+    public void readNbt(NbtCompound nbtData) {
+        super.readNbt(nbtData);
+        Inventories.readNbt(nbtData, inventory);
+        destinationX = nbtData.getInt("destination.x");
+        destinationY = nbtData.getInt("destination.y");
+        destinationZ = nbtData.getInt("destination.z");
     }
 
     @Override
@@ -62,8 +71,6 @@ public class ExampleBlockEntity
 
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        // GuiScreens.EXAMPLE_GUI
-        //return new ExampleDescription(syncId, inventory, ScreenHandlerContext.create(world, pos));
         return new ExampleDescription(GuiScreens.EXAMPLE_GUI, syncId, inventory, ScreenHandlerContext.create(world, pos));
     }
 }

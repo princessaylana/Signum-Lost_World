@@ -9,6 +9,7 @@ import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.block.ModBlocks;
+import za.lana.signum.block.entity.ModBlockEntities;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.*;
 import za.lana.signum.entity.mob.CursedWolfEntity;
@@ -81,6 +82,8 @@ public class RunInitMain {
 
     }
     public static void registerBlockEntities(){
+        ModBlockEntities.registerBlockEntities();
+        ModBlockEntities.registerLibGuiBlockEntities();
 
     }
 }

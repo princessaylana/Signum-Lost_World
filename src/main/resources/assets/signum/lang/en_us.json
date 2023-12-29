@@ -289,7 +289,7 @@
   "effect.signum.tiberium_poison": "Tiberium Poison",
   "effect.signum.transmute_effect": "Transmute Effect",
 
-  "example_gui.signum.examplebutton":"Test Button",
+  "example_gui.signum.examplebutton":"Send",
   "message.signum.airballoon.mount":"Press Y to go up, B to go down, H for Airballoon Inventory",
   "message.signum.airballoon.empty":"Out of Fuel",
   "message.signum.airballoon.wind":"Winds are Blowing",

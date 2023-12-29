@@ -1,79 +1,82 @@
+/**
+ * SIGNUM
+ * MIT License
+ * Lana
+ * */
 package za.lana.signum.screen.gui;
+// this would be equivalent to a normal screen handler
 
+import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
+import io.github.cottonmc.cotton.gui.widget.*;
+import io.github.cottonmc.cotton.gui.widget.data.Insets;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import za.lana.signum.networking.ModMessages;
 
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
-import io.github.cottonmc.cotton.gui.networking.NetworkSide;
-import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
-import io.github.cottonmc.cotton.gui.widget.WButton;
-import io.github.cottonmc.cotton.gui.widget.WGridPanel;
-import io.github.cottonmc.cotton.gui.widget.WItemSlot;
-import io.github.cottonmc.cotton.gui.widget.WLabel;
-import io.github.cottonmc.cotton.gui.widget.WTextField;
-import io.github.cottonmc.cotton.gui.widget.WToggleButton;
-import io.github.cottonmc.cotton.gui.widget.data.Texture;
-import io.github.cottonmc.cotton.gui.widget.icon.TextureIcon;
-import za.lana.signum.block.entity.ExampleBlockEntity;
 
 public class ExampleDescription extends SyncedGuiDescription {
-	private static final Identifier TEST_MESSAGE = new Identifier("libgui", "test");
-	private static final Identifier UNREGISTERED_ON_SERVER = new Identifier("libgui", "unregistered_on_server");
+	private static final int INVENTORY_SIZE = 8;
+	//private static final int TEXT; = Integer.valueOf(("PlayerName"));
 
-	public ExampleDescription(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-		super(type, syncId, playerInventory, getBlockInventory(context, ExampleBlockEntity.INVENTORY_SIZE), null);
+	// get string
 
-		WGridPanel root = (WGridPanel)this.getRootPanel();
+	//private final static String DESTINATIONX = "";
+	//private final static String DESTINATIONY = "";
+	//private final static String DESTINATIONZ = "";
+	public final static String DESTINATIONX = String.valueOf(Integer.parseInt(""));
+	public final static String DESTINATIONY = String.valueOf(Integer.parseInt(""));
+	public final static String DESTINATIONZ = String.valueOf(Integer.parseInt(""));
 
-		WItemSlot slot = WItemSlot.of(blockInventory, 0, 4, 1);
+    public ExampleDescription(ScreenHandlerType<ExampleDescription> exampleDescription, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
+		super(GuiScreens.EXAMPLE_GUI, syncId, playerInventory, getBlockInventory(context, INVENTORY_SIZE), null);
+		this.world = playerInventory.player.getWorld();
+		WGridPanel root = new WGridPanel();
+		setRootPanel(root);
+		root.setSize(200, 225);
+		root.setInsets(Insets.ROOT_PANEL);
+		// HEADER
+		WSprite icon = new WSprite(new Identifier("signum:textures/item/iron_coin.png"));
+		root.add(icon, 8, 0, 1, 1);
+		// INVENTORY OF BLOCKENTITY
+		WItemSlot slot = WItemSlot.of(blockInventory, 0, 8, 1);
 		root.add(slot, 0, 1);
-
-		WButton buttonA = new WButton(Text.literal("Send Message"));
-
-		buttonA.setOnClick(() -> {
-			ScreenNetworking.of(this, NetworkSide.CLIENT).send(TEST_MESSAGE, buf -> {});
-			ScreenNetworking.of(this, NetworkSide.CLIENT).send(UNREGISTERED_ON_SERVER, buf -> {});
+		// BUTTON
+		WButton button = new WButton(Text.translatable("example_gui.signum.examplebutton"));
+		button.setOnClick(() -> {
+			// This code runs on the client when you click the button.
+			// NEED TO SEND A PACKET TO SERVER TO WRITE NBT INFO INTO THE BLOCKENTITY
+			ClientPlayNetworking.send(ModMessages.EXAMPLE_NBT, PacketByteBufs.create());
+			System.out.println("Destination Packet Sent");
 		});
-
-		root.add(buttonA, 0, 3, 4, 1);
-
-		WButton buttonB = new WButton(Text.literal("Show Warnings"));
-		buttonB.setOnClick(() -> slot.setIcon(new TextureIcon(new Identifier("libgui-test", "saddle.png"))));
-
-		root.add(buttonB, 5, 3, 4, 1);
-		TextureIcon testIcon = new TextureIcon(new Texture(new Identifier("libgui-test", "icon.png")));
-		root.add(new WButton(testIcon, Text.literal("Button C")), 0, 5, 4, 1);
-		root.add(new WButton(Text.literal("Button D")), 5, 5, 4, 1);
-		root.add(new WTextField(Text.literal("Type something...")).setMaxLength(64), 0, 7, 5, 1);
-
-		root.add(new WLabel(Text.literal("Large Glass-only output:")), 0, 9);
-		WItemSlot glassOutputSlot = WItemSlot.outputOf(blockInventory, 0).setOutputFilter(stack -> stack.isOf(Items.GLASS));
-		glassOutputSlot.setIcon(new TextureIcon(new Identifier("minecraft:textures/block/glass.png")));
-		root.add(glassOutputSlot, 4, 9);
-		WToggleButton glassIconToggle = new WToggleButton(Text.literal("Show glass icon only when empty?"));
-		glassIconToggle.setOnToggle(glassOutputSlot::setIconOnlyPaintedForEmptySlots);
-		root.add(glassIconToggle, 0, 10);
-
-		root.add(WItemSlot.of(blockInventory, 7).setIcon(new TextureIcon(new Identifier("libgui-test", "saddle.png"))).setInputFilter(stack -> stack.isOf(Items.SADDLE)), 7, 10);
-
-		root.add(createPlayerInventoryPanel(), 0, 11);
-		System.out.println(root.toString());
-
-		this.getRootPanel().validate(this);
-
-		ScreenNetworking.of(this, NetworkSide.SERVER).receive(TEST_MESSAGE, buf -> {
-			System.out.println("Received on the server!");
-		});
-
-		try {
-			slot.onHidden();
-			slot.onShown();
-		} catch (Throwable t) {
-			throw new AssertionError("ValidatedSlot.setVisible crashed", t);
-		}
+		root.add(button, 5, 2, 3, 1);
+		// TEXT INPUT
+		//root.add(new WTextField(Text.literal("PlayerName")).setMaxLength(64), 0, 2, 5, 1);
+		root.add(new WTextField(Text.literal("enterX")).setMaxLength(64), 0, 3, 5, 1);
+		root.add(new WTextField(Text.literal("enterY")).setMaxLength(64), 0, 4, 5, 1);
+		root.add(new WTextField(Text.literal("enterZ")).setMaxLength(64), 0, 5, 5, 1);
+		// PLAYER INVENTORY
+		root.add(this.createPlayerInventoryPanel(), 0, 6);
+		root.validate(this);
 	}
+	/**
+	 * public static int getText(String enterX) {
+	 * return text;
+	 * }
+	 **/
+	public static String getXdestination(String enterx){
+		//int destinationx = 0 int("enterX");
+		return DESTINATIONX;
+	}
+	public static String getYdestination(String entery){
+		return DESTINATIONY;
+	}
+	public static String getZdestination(String enterz){
+		return DESTINATIONZ;
+	}
+
 }
