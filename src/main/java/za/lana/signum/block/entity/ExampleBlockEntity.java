@@ -49,9 +49,9 @@ public class ExampleBlockEntity
     protected void writeNbt(NbtCompound nbtData) {
         super.writeNbt(nbtData);
         Inventories.writeNbt(nbtData, inventory);
-        //nbtData.putInt("destination.x", ExampleDescription.DESTINATIONX("enterX"));
-        //nbtData.putInt("destination.y", ExampleDescription.DESTINATIONY("enterY"));
-        //nbtData.putInt("destination.z", ExampleDescription.DESTINATIONZ("enterZ"));
+        //nbtData.putInt("destination.x", Integer.parseInt(ExampleDescription.getXpos("enterX")));
+        //nbtData.putInt("destination.y", Integer.parseInt(ExampleDescription.getYpos("enterY")));
+        //nbtData.putInt("destination.z", Integer.parseInt(ExampleDescription.getZpos("enterZ")));
     }
 
     @Override

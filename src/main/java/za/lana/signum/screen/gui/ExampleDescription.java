@@ -16,21 +16,14 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.math.NumberUtils;
 import za.lana.signum.networking.ModMessages;
 
 
 public class ExampleDescription extends SyncedGuiDescription {
 	private static final int INVENTORY_SIZE = 8;
-	//private static final int TEXT; = Integer.valueOf(("PlayerName"));
+	private static String text = "";
 
-	// get string
-
-	//private final static String DESTINATIONX = "";
-	//private final static String DESTINATIONY = "";
-	//private final static String DESTINATIONZ = "";
-	public final static String DESTINATIONX = String.valueOf(Integer.parseInt("enterX"));
-	public final static String DESTINATIONY = String.valueOf(Integer.parseInt("enterY"));
-	public final static String DESTINATIONZ = String.valueOf(Integer.parseInt("enterZ"));
 
     public ExampleDescription(ScreenHandlerType<ExampleDescription> exampleDescription, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
 		super(GuiScreens.EXAMPLE_GUI, syncId, playerInventory, getBlockInventory(context, INVENTORY_SIZE), null);
@@ -50,7 +43,9 @@ public class ExampleDescription extends SyncedGuiDescription {
 		button.setOnClick(() -> {
 			// This code runs on the client when you click the button.
 			// NEED TO SEND A PACKET TO SERVER TO WRITE NBT INFO INTO THE BLOCKENTITY
+
 			ClientPlayNetworking.send(ModMessages.EXAMPLE_NBT, PacketByteBufs.create());
+
 			System.out.println("Destination Packet Sent");
 		});
 		root.add(button, 5, 2, 3, 1);
@@ -63,20 +58,30 @@ public class ExampleDescription extends SyncedGuiDescription {
 		root.add(this.createPlayerInventoryPanel(), 0, 6);
 		root.validate(this);
 	}
-	/**
-	 * public static int getText(String enterX) {
-	 * return text;
-	 * }
-	 **/
-	public static String getXdestination(String enterx){
-		//int destinationx = 0 int("enterX");
-		return DESTINATIONX;
-	}
-	public static String getYdestination(String entery){
-		return DESTINATIONY;
-	}
-	public static String getZdestination(String enterz){
-		return DESTINATIONZ;
-	}
 
+	  public static String getXpos(String enterX) {
+		if (enterX != null && enterX.matches("[0-9.]+")){
+			NumberUtils.toInt(enterX);{
+				return enterX;
+			}
+		}
+		return null;
+	}
+	public static String getYpos(String enterY) {
+		if (enterY != null && enterY.matches("[0-9.]+")){
+			NumberUtils.toInt(enterY);{
+				return enterY;
+			}
+		}
+		return null;
+	}
+	public static String getZpos(String enterZ) {
+		if (enterZ != null && enterZ.matches("[0-9.]+")){
+			NumberUtils.toInt(enterZ);{
+				return enterZ;
+			}
+		}
+		return null;
+	}
+	//
 }
