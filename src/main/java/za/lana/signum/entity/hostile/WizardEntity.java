@@ -293,7 +293,6 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
         if ((double)this.random.nextFloat() < 0.15) {
             this.dropItem(ModItems.GOLD_COIN);
         }
-        //this.dropItem(Items.ROTTEN_FLESH);
     }
     // GENERAL
     public EntityGroup getGroup() {
@@ -321,32 +320,25 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
     @Override
     protected SoundEvent getAmbientSound() {
         if (!this.isInSleepingPose()){
-            if ((double)this.random.nextFloat() < 0.75) {
-                return ModSounds.WIZARD_AMBIENT1;
-            }
             if ((double)this.random.nextFloat() < 0.55) {
                 return ModSounds.WIZARD_AMBIENT2;
             }
             if ((double)this.random.nextFloat() < 0.25) {
                 return ModSounds.WIZARD_AMBIENT3;
             }
-            return null;
-            //return SoundEvents.ENTITY_WITCH_AMBIENT;
+            return ModSounds.WIZARD_AMBIENT1;
         }
         return null;
     }
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        if ((double)this.random.nextFloat() < 0.75) {
-            return ModSounds.WIZARD_HELP1;
-        }
         if ((double)this.random.nextFloat() < 0.55) {
             return ModSounds.WIZARD_HELP2;
         }
         if ((double)this.random.nextFloat() < 0.25) {
             return ModSounds.WIZARD_HELP3;
         }
-        return null;
+        return ModSounds.WIZARD_HELP1;
     }
 
     public void spellCast(LivingEntity target) {

@@ -281,17 +281,17 @@
     ],
     "volume":"0.15"
   },
-  "tiberium_walk": {
-    "subtitle": "sounds.signum.tiberium_walk",
-    "sounds": [
-      "signum:tiberium_walk"
-    ],
-    "volume":"0.15"
-  },
   "tiberium_break": {
     "subtitle": "sounds.signum.tiberium_break",
     "sounds": [
       "signum:tiberium_break"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_hit": {
+    "subtitle": "sounds.signum.tiberium_hit",
+    "sounds": [
+      "signum:tiberium_hit"
     ],
     "volume":"0.15"
   },
@@ -302,10 +302,111 @@
     ],
     "volume":"0.15"
   },
-  "tiberium_hit": {
-    "subtitle": "sounds.signum.tiberium_hit",
+  "tiberium_walk": {
+    "subtitle": "sounds.signum.tiberium_walk",
     "sounds": [
-      "signum:tiberium_hit"
+      "signum:tiberium_walk"
+    ],
+    "volume":"0.15"
+  },
+
+  "tiberium_wizard_ambient1": {
+    "subtitle": "sounds.signum.tiberium_wizard_ambient1",
+    "sounds": [
+      "signum:tiberium_wizard_ambient1"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_ambient2": {
+    "subtitle": "sounds.signum.tiberium_wizard_ambient2",
+    "sounds": [
+      "signum:tiberium_wizard_ambient2"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_ambient3": {
+    "subtitle": "sounds.signum.tiberium_wizard_ambient3",
+    "sounds": [
+      "signum:tiberium_wizard_ambient3"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_attack1": {
+    "subtitle": "sounds.signum.tiberium_wizard_attack1",
+    "sounds": [
+      "signum:tiberium_wizard_attack1"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_attack2": {
+    "subtitle": "sounds.signum.tiberium_wizard_attack2",
+    "sounds": [
+      "signum:tiberium_wizard_attack2"
+    ],
+    "volume":"0.15"
+  },
+
+  "tiberium_wizard_death1": {
+    "subtitle": "sounds.signum.tiberium_wizard_death1",
+    "sounds": [
+      "signum:tiberium_wizard_death1"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_death2": {
+    "subtitle": "sounds.signum.tiberium_wizard_death2",
+    "sounds": [
+      "signum:tiberium_wizard_death2"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_gethelp": {
+    "subtitle": "sounds.signum.tiberium_wizard_gethelp",
+    "sounds": [
+      "signum:tiberium_wizard_gethelp"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_hurt1": {
+    "subtitle": "sounds.signum.tiberium_wizard_hurt1",
+    "sounds": [
+      "signum:tiberium_wizard_hurt1"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_hurt2": {
+    "subtitle": "sounds.signum.tiberium_wizard_hurt2",
+    "sounds": [
+      "signum:tiberium_wizard_hurt2"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_hurt3": {
+    "subtitle": "sounds.signum.tiberium_wizard_hurt3",
+    "sounds": [
+      "signum:tiberium_wizard_hurt3"
+    ],
+    "volume":"0.15"
+  },
+
+  "tiberium_wizard_range_attack1": {
+    "subtitle": "sounds.signum.tiberium_wizard_range_attack1",
+    "sounds": [
+      "signum:tiberium_wizard_range_attack1"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_range_attack2": {
+    "subtitle": "sounds.signum.tiberium_wizard_range_attack2",
+    "sounds": [
+      "signum:tiberium_wizard_range_attack2"
+    ],
+    "volume":"0.15"
+  },
+  "tiberium_wizard_range_attack3": {
+    "subtitle": "sounds.signum.tiberium_wizard_range_attack3",
+    "sounds": [
+      "signum:tiberium_wizard_range_attack3"
     ],
     "volume":"0.15"
   },
@@ -331,6 +432,7 @@
     ],
     "volume":"0.15"
   },
+
   "wizard_help1": {
     "subtitle": "sounds.signum.wizard_help1",
     "sounds": [

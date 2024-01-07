@@ -245,7 +245,6 @@ public class FireSkeletonEntity extends HostileEntity implements InventoryOwner 
         //this.dropItem(Items.ROTTEN_FLESH);
     }
 
-
     @Override
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return 1.75f;
@@ -254,51 +253,40 @@ public class FireSkeletonEntity extends HostileEntity implements InventoryOwner 
     // SKELETON SOUNDS
     @Override
     protected SoundEvent getAmbientSound() {
-        //return SoundEvents.ENTITY_SKELETON_AMBIENT;
         return SoundEvents.BLOCK_FIRE_AMBIENT;
+
     }
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        //
-        if ((double)this.random.nextFloat() < 0.75) {
-            return ModSounds.SKELETON_HURT1;
-        }
         if ((double)this.random.nextFloat() < 0.55) {
             return ModSounds.SKELETON_HURT2;
         }
         if ((double)this.random.nextFloat() < 0.25) {
             return ModSounds.SKELETON_HURT3;
         }
-        return null;
+        return ModSounds.SKELETON_HURT1;
     }
     @Override
     protected SoundEvent getDeathSound() {
-        if ((double)this.random.nextFloat() < 0.75) {
-            return ModSounds.SKELETON_DEATH1;
-        }
         if ((double)this.random.nextFloat() < 0.55) {
             return ModSounds.SKELETON_DEATH2;
         }
         if ((double)this.random.nextFloat() < 0.25) {
             return ModSounds.SKELETON_DEATH3;
         }
-        return null;
+        return ModSounds.SKELETON_DEATH1;
     }
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(this.getStepSound(), 0.15f, 1.0f);
     }
     SoundEvent getStepSound() {
-        //
-        if ((double)this.random.nextFloat() < 0.75) {
-            return ModSounds.SKELETON_WALK1;
-        }
         if ((double)this.random.nextFloat() < 0.55) {
             return ModSounds.SKELETON_WALK2;
         }
         if ((double)this.random.nextFloat() < 0.25) {
             return ModSounds.SKELETON_WALK3;
         }
-        return SoundEvents.ENTITY_SKELETON_STEP;
+        return ModSounds.SKELETON_WALK1;
     }
     //
 

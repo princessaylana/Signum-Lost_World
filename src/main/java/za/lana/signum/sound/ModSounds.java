@@ -55,9 +55,25 @@ public class ModSounds {
     public static SoundEvent SKELETON_WALK3 = registerSoundEvent("skeleton_walk3");
     public static SoundEvent TIBERIUM_AMBIENT = registerSoundEvent("tiberium_ambient");
     public static SoundEvent TIBERIUM_BREAK = registerSoundEvent("tiberium_break");
-    public static SoundEvent TIBERIUM_WALK = registerSoundEvent("tiberium_walk");
-    public static SoundEvent TIBERIUM_PLACE = registerSoundEvent("tiberium_place");
     public static SoundEvent TIBERIUM_HIT = registerSoundEvent("tiberium_hit");
+    public static SoundEvent TIBERIUM_PLACE = registerSoundEvent("tiberium_place");
+    public static SoundEvent TIBERIUM_WALK = registerSoundEvent("tiberium_walk");
+    public static SoundEvent TIBERIUM_WIZARD_AMBIENT1 = registerSoundEvent("tiberium_wizard_ambient1");
+    public static SoundEvent TIBERIUM_WIZARD_AMBIENT2 = registerSoundEvent("tiberium_wizard_ambient2");
+    public static SoundEvent TIBERIUM_WIZARD_AMBIENT3 = registerSoundEvent("tiberium_wizard_ambient3");
+    public static SoundEvent TIBERIUM_WIZARD_ATTACK1 = registerSoundEvent("tiberium_wizard_attack1");
+    public static SoundEvent TIBERIUM_WIZARD_ATTACK2 = registerSoundEvent("tiberium_wizard_attack2");
+    public static SoundEvent TIBERIUM_WIZARD_DEATH1 = registerSoundEvent("tiberium_wizard_death1");
+    public static SoundEvent TIBERIUM_WIZARD_DEATH2 = registerSoundEvent("tiberium_wizard_death2");
+    public static SoundEvent TIBERIUM_WIZARD_GETHELP = registerSoundEvent("tiberium_wizard_gethelp");
+    public static SoundEvent TIBERIUM_WIZARD_HURT1 = registerSoundEvent("tiberium_wizard_hurt1");
+    public static SoundEvent TIBERIUM_WIZARD_HURT2 = registerSoundEvent("tiberium_wizard_hurt2");
+    public static SoundEvent TIBERIUM_WIZARD_HURT3 = registerSoundEvent("tiberium_wizard_hurt3");
+
+    public static SoundEvent TIBERIUM_WIZARD_RANGE_ATTACK1 = registerSoundEvent("tiberium_wizard_range_attack1");
+    public static SoundEvent TIBERIUM_WIZARD_RANGE_ATTACK2 = registerSoundEvent("tiberium_wizard_range_attack2");
+    public static SoundEvent TIBERIUM_WIZARD_RANGE_ATTACK3 = registerSoundEvent("tiberium_wizard_range_attack3");
+
     public static SoundEvent SNOWY_WIND = registerSoundEvent("snowy_wind");
     public static SoundEvent WIZARD_AMBIENT1 = registerSoundEvent("wizard_ambient1");
     public static SoundEvent WIZARD_AMBIENT2 = registerSoundEvent("wizard_ambient2");

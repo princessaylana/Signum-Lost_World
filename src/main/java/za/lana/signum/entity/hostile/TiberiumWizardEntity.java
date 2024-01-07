@@ -6,6 +6,7 @@
  * */
 package za.lana.signum.entity.hostile;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
@@ -27,6 +28,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -231,13 +233,73 @@ public class TiberiumWizardEntity extends HostileEntity implements InventoryOwne
         }
         return super.canHaveStatusEffect(effect);
     }
-    //
+    //TODO SOUNDS
+    // EVIL WIZARD SOUNDS
     @Override
     protected SoundEvent getAmbientSound() {
         if (!this.isInSleepingPose()){
-            return SoundEvents.ENTITY_WITCH_AMBIENT;
+            if ((double)this.random.nextFloat() < 0.55) {
+                return ModSounds.TIBERIUM_WIZARD_AMBIENT2;
+            }
+            if ((double)this.random.nextFloat() < 0.25) {
+                return ModSounds.TIBERIUM_WIZARD_AMBIENT3;
+            }
+            return ModSounds.TIBERIUM_WIZARD_AMBIENT1;
         }
         return null;
+    }
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.TIBERIUM_WIZARD_HURT2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.TIBERIUM_WIZARD_HURT3;
+        }
+        return ModSounds.TIBERIUM_WIZARD_HURT1;
+    }
+    @Override
+    protected SoundEvent getDeathSound() {
+        if ((double)this.random.nextFloat() < 0.50) {
+            return ModSounds.TIBERIUM_WIZARD_DEATH2;
+        }
+        return ModSounds.TIBERIUM_WIZARD_DEATH1;
+    }
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(this.getStepSound(), 0.15f, 1.0f);
+    }
+    SoundEvent getStepSound() {
+        return SoundEvents.ENTITY_DROWNED_STEP;
+    }
+    protected void playHelpSound() {
+        this.playSound(this.getHelpSound(), 0.15f, 1.0f);
+    }
+    SoundEvent getHelpSound() {
+        return ModSounds.TIBERIUM_WIZARD_GETHELP;
+    }
+    //
+    public void playAttackSound(){
+        if (this.isAttacking()){
+            this.playSound(this.getAttackSound(), 0.15f, 1.0f);
+        }
+        if (this.isSpellShooting()){
+            this.playSound(this.getSpellSound(), 0.15f, 1.0f);
+        }
+    }
+    protected SoundEvent getAttackSound(){
+        if ((double)this.random.nextFloat() < 0.50) {
+            return ModSounds.TIBERIUM_WIZARD_ATTACK2;
+        }
+        return ModSounds.TIBERIUM_WIZARD_ATTACK1;
+    }
+    protected SoundEvent getSpellSound(){
+        if ((double)this.random.nextFloat() < 0.50) {
+            return ModSounds.TIBERIUM_WIZARD_RANGE_ATTACK2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.TIBERIUM_WIZARD_RANGE_ATTACK3;
+        }
+        return ModSounds.TIBERIUM_WIZARD_RANGE_ATTACK1;
     }
 
     @Override
@@ -342,6 +404,8 @@ public class TiberiumWizardEntity extends HostileEntity implements InventoryOwne
                 List<TiberiumWizardEntity> list = TiberiumWizardEntity.this.getWorld().getNonSpectatingEntities(TiberiumWizardEntity.class, TiberiumWizardEntity.this.getBoundingBox().expand(16.0, 4.0, 16.0));
                 for (TiberiumWizardEntity wizard : list) {
                     if (!wizard.isBaby()) continue;
+                    //
+                    playHelpSound();
                     return true;
                 }
             }

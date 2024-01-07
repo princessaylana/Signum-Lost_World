@@ -191,19 +191,13 @@ public class CursedWolfEntity extends AnimalEntity {
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(ModItems.GOLD_COIN);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
+        if ((double)this.random.nextFloat() < 0.25) {
             this.dropItem(ModItems.IRON_COIN);
         }
-        if ((double)this.random.nextFloat() < 0.55) {
+        if ((double)this.random.nextFloat() < 0.15) {
             this.dropItem(ModItems.COPPER_COIN);
         }
-        if ((double)this.random.nextFloat() < 0.35) {
-            this.dropItem(Items.BONE);
-        }
-        this.dropItem(Items.ROTTEN_FLESH);
+        this.dropItem(Items.BONE);
     }
 
     @Nullable

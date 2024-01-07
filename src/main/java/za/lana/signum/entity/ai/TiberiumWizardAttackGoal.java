@@ -9,11 +9,15 @@ package za.lana.signum.entity.ai;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.random.Random;
 import za.lana.signum.entity.hostile.TiberiumWizardEntity;
-import za.lana.signum.entity.hostile.WizardEntity;
+import za.lana.signum.sound.ModSounds;
+
 
 public class TiberiumWizardAttackGoal extends MeleeAttackGoal {
+    private Random random;
     private final TiberiumWizardEntity entity;
     //wait 20ticks till attack happens, 1sec into attack animation
     private int attackDelay = 20;
@@ -23,6 +27,7 @@ public class TiberiumWizardAttackGoal extends MeleeAttackGoal {
     //protected float range = 16;
     protected float attackDistance = 1.0f;
     protected float maxSpellDistance = 24.0f;
+
 
     public TiberiumWizardAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
         super(mob, speed, pauseWhenMobIdle);
@@ -58,6 +63,7 @@ public class TiberiumWizardAttackGoal extends MeleeAttackGoal {
             if(isTimeToAttack()) {
                 this.mob.getLookControl().lookAt(pTarget.getX(), pTarget.getEyeY(), pTarget.getZ());
                 performAttack(pTarget);
+                this.entity.playAttackSound();
             }
         }
         // RANGED ATTACK WHEN TARGET OUT OF RANGE
@@ -69,6 +75,7 @@ public class TiberiumWizardAttackGoal extends MeleeAttackGoal {
             if(isTimeToAttack()) {
                 this.mob.getLookControl().lookAt(pTarget.getX(), pTarget.getEyeY(), pTarget.getZ());
                 performSpelltAttack(pTarget);
+                this.entity.playAttackSound();
             }
         }
         // RESET
@@ -112,10 +119,10 @@ public class TiberiumWizardAttackGoal extends MeleeAttackGoal {
         this.mob.tryAttack(pEnemy);
     }
     protected void performSpelltAttack(LivingEntity pEnemy) {
-        //this.entity.getNavigation().stop();
         this.entity.spellCast(pEnemy);
         this.resetAttackCooldown();
     }
+
     @Override
     public void tick() {
         super.tick();
