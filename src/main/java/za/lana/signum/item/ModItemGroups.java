@@ -225,6 +225,8 @@ public class ModItemGroups {
                         // BLOCKENTITIES
                         entries.add(ModBlocks.SKYFORGE);
                         entries.add(ModBlocks.VAULT_BLOCK);
+                        // ENABLE TO TEST DRONE
+                        //entries.add(ModBlocks.DRONEBOX_BLOCK);
 
                         //TODO: BELOW TO BE REMOVED - FOR TESTING ONLY
                         entries.add(ModBlocks.EXAMPLE_BLOCK);

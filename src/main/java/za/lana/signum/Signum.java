@@ -39,7 +39,7 @@ public class Signum implements ModInitializer {
 		ModItems.registerModItems();
 
 		ModBlocks.registerModBlocks();
-		ModBlockEntities.registerBlockEntities();
+		//ModBlockEntities.registerBlockEntities();
 
 		ModRecipes.registerRecipes();
 		ModScreenHandlers.registerScreenHandler();

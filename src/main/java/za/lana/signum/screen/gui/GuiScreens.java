@@ -19,6 +19,12 @@ public class GuiScreens {
     new ScreenHandlerType<>((syncId, inventory) ->
             new ExampleDescription(GuiScreens.EXAMPLE_GUI, syncId, inventory, ScreenHandlerContext.EMPTY),
                             FeatureFlags.VANILLA_FEATURES));
+    //
+    public static ScreenHandlerType<DroneBoxDescription> DRONEBOX_GUI =
+            Registry.register(Registries.SCREEN_HANDLER,  new Identifier(Signum.MOD_ID, "dronebox_gui"),
+                    new ScreenHandlerType<>((syncId, inventory) ->
+                            new DroneBoxDescription(GuiScreens.DRONEBOX_GUI, syncId, inventory, ScreenHandlerContext.EMPTY),
+                            FeatureFlags.VANILLA_FEATURES));
 
     public static void registerGuiScreens(){
         Signum.LOGGER.info("Registering GuiScreens for " + Signum.MOD_ID);

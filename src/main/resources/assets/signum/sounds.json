@@ -146,41 +146,77 @@
     ],
     "volume":"0.15"
   },
-  "tcommander_death": {
-    "subtitle": "sounds.signum.tcommander_death",
+  "cargodrone_fly": {
+    "subtitle": "sounds.signum.cargodrone_fly",
     "sounds": [
-      "signum:tcommander_death"
+      "signum:cargodrone_fly"
     ],
     "volume":"0.15"
   },
-  "tcommander_hurt": {
-    "subtitle": "sounds.signum.tcommander_hurt",
+  "cargodrone_hurt": {
+    "subtitle": "sounds.signum.cargodrone_hurt",
     "sounds": [
-      "signum:tcommander_hurt"
+      "signum:cargodrone_hurt"
     ],
     "volume":"0.15"
   },
-  "tcommander_hurt2": {
-    "subtitle": "sounds.signum.tcommander_hurt2",
+  "cargodrone_idle": {
+    "subtitle": "sounds.signum.cargodrone_idle",
     "sounds": [
-      "signum:tcommander_hurt2"
+      "signum:cargodrone_idle"
     ],
     "volume":"0.15"
   },
-  "tcommander_idle": {
-    "subtitle": "sounds.signum.tcommander_idle",
+  "cargodrone_cant_land": {
+    "subtitle": "sounds.signum.cargodrone_cant_land",
     "sounds": [
-      "signum:tcommander_idle"
+      "signum:cargodrone_cant_land"
     ],
     "volume":"0.15"
   },
-  "tcommander_walk": {
-    "subtitle": "sounds.signum.tcommander_walk",
+  "cargodrone_flying_to_landing": {
+    "subtitle": "sounds.signum.cargodrone_flying_to_landing",
     "sounds": [
-      "signum:tcommander_walk"
+      "signum:cargodrone_flying_to_landing"
+    ],
+    "volume":"0.15"
+  },
+  "cargodrone_found_station": {
+    "subtitle": "sounds.signum.cargodrone_found_station",
+    "sounds": [
+      "signum:cargodrone_found_station"
+    ],
+    "volume":"0.15"
+  },
+  "cargodrone_found_targetpos": {
+    "subtitle": "sounds.signum.cargodrone_found_targetpos",
+    "sounds": [
+      "signum:cargodrone_found_targetpos"
+    ],
+    "volume":"0.15"
+  },
+  "cargodrone_landed": {
+    "subtitle": "sounds.signum.cargodrone_landed",
+    "sounds": [
+      "signum:cargodrone_landed"
+    ],
+    "volume":"0.15"
+  },
+  "cargodrone_takeoff": {
+    "subtitle": "sounds.signum.cargodrone_takeoff",
+    "sounds": [
+      "signum:cargodrone_takeoff"
+    ],
+    "volume":"0.15"
+  },
+  "cargodrone_trying_land": {
+    "subtitle": "sounds.signum.cargodrone_trying_land",
+    "sounds": [
+      "signum:cargodrone_trying_land"
     ],
     "volume":"0.15"
   }
+
 
 
 }

@@ -15,6 +15,8 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "airballoon"), "MainBody");
     public static final EntityModelLayer AIRSHIP =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "airship"), "mainBody");
+    public static final EntityModelLayer CARGODRONE =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "cargodrone"), "mainBody");
     public static final EntityModelLayer TIBERIUM_WORM =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "tiberium_worm_entity"), "mainBody");
     public static final EntityModelLayer UNICORN =

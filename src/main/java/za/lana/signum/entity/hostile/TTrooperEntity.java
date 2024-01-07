@@ -204,14 +204,23 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.10) {
+        if ((double)this.random.nextFloat() < 0.75) {
             this.dropItem(ModItems.TIBERIUM_DUST);
         }
-        if ((double)this.random.nextFloat() < 0.15) {
-            this.dropItem(Items.SHIELD);
+        if ((double)this.random.nextFloat() < 0.65) {
+            this.dropItem(Items.BONE);
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            this.dropItem(Items.IRON_SWORD);
+        }
+        if ((double)this.random.nextFloat() < 0.35) {
+            this.dropItem(ModItems.IRON_COIN);
         }
         if ((double)this.random.nextFloat() < 0.25) {
-            this.dropItem(Items.IRON_SWORD);
+            this.dropItem(ModItems.COPPER_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.15) {
+            this.dropItem(ModItems.GOLD_COIN);
         }
         //this.dropItem(Items.ROTTEN_FLESH);
     }

@@ -27,7 +27,7 @@ import za.lana.signum.util.ImplementedInventory;
 
 public class VaultBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
 
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> inventory;
     private String ownerUUID, ownerName;
     public VaultBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.VAULT_BLOCK, pos, state);

@@ -11,16 +11,20 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.enums.ChestType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import za.lana.signum.block.entity.ExampleBlockEntity;
 
 public class ExampleBlock extends BlockWithEntity {
     public static ExampleBlock EXAMPLE_BLOCK;
+    //public static final DirectionProperty FACING;
     public ExampleBlock(FabricBlockSettings fabricBlockSettings) {
         super(FabricBlockSettings.copy(Blocks.IRON_BLOCK));
     }

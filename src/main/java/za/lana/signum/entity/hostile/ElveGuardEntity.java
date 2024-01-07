@@ -52,9 +52,9 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
     public void initGoals(){
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.2D, false));
-        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
-        this.goalSelector.add(3, new LookAroundGoal(this));
-        this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
+        //this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
+        this.goalSelector.add(2, new LookAroundGoal(this));
+        this.goalSelector.add(3, new WanderAroundGoal(this, 1.0));
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new ElveGuardEntity.ProtectHordeGoal());
@@ -202,22 +202,22 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
         if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(ModItems.GOLD_COIN);
+            this.dropItem(Items.BREAD);
         }
         if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(ModItems.IRON_COIN);
+            this.dropItem(Items.BONE);
         }
         if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(ModItems.COPPER_COIN);
-        }
-        if ((double)this.random.nextFloat() < 0.35) {
-            this.dropItem(Items.SHIELD);
-        }
-        if ((double)this.random.nextFloat() < 0.25) {
             this.dropItem(Items.IRON_SWORD);
         }
+        if ((double)this.random.nextFloat() < 0.35) {
+            this.dropItem(ModItems.IRON_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            this.dropItem(ModItems.COPPER_COIN);
+        }
         if ((double)this.random.nextFloat() < 0.15) {
-            this.dropItem(Items.BONE);
+            this.dropItem(ModItems.GOLD_COIN);
         }
         //this.dropItem(Items.ROTTEN_FLESH);
     }
@@ -233,17 +233,20 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
     }
     // GOALS
     class ProtectHordeGoal
-            extends ActiveTargetGoal<PlayerEntity> {
+            extends ActiveTargetGoal<LivingEntity> {
         public ProtectHordeGoal() {
-            super(ElveGuardEntity.this, PlayerEntity.class, 20, true, true, null);
+            super(ElveGuardEntity.this, LivingEntity.class, 20, true, false, null);
         }
 
         @Override
         public boolean canStart() {
             if (super.canStart()) {
+                if (this.mob.isSleeping()){
+                    return false;
+                }
                 List<ElveGuardEntity> list = ElveGuardEntity.this.getWorld().getNonSpectatingEntities(ElveGuardEntity.class, ElveGuardEntity.this.getBoundingBox().expand(16.0, 4.0, 16.0));
-                for (ElveGuardEntity tTrooperEntity : list) {
-                    if (!tTrooperEntity.isBaby()) continue;
+                for (ElveGuardEntity elveGuard : list) {
+                    if (!elveGuard.isBaby()) continue;
                     return true;
                 }
             }

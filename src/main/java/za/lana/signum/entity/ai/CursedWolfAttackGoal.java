@@ -58,6 +58,7 @@ public class CursedWolfAttackGoal extends MeleeAttackGoal {
     }
     protected void performAttack(LivingEntity pEnemy) {
         this.resetAttackCooldown();
+        // TODO ADD SOUND
         this.mob.swingHand(Hand.MAIN_HAND);
         this.mob.tryAttack(pEnemy);
     }

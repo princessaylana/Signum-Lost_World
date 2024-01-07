@@ -295,22 +295,22 @@ public class TiberiumWizardEntity extends HostileEntity implements InventoryOwne
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
         if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(ModItems.GOLD_COIN);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(ModItems.IRON_COIN);
-        }
-        if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(ModItems.COPPER_COIN);
-        }
-        if ((double)this.random.nextFloat() < 0.35) {
             this.dropItem(ModItems.TIBERIUM_DUST);
         }
+        if ((double)this.random.nextFloat() < 0.65) {
+            this.dropItem(Items.POISONOUS_POTATO);
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            this.dropItem(Items.POTION);
+        }
+        if ((double)this.random.nextFloat() < 0.35) {
+            this.dropItem(ModItems.IRON_COIN);
+        }
         if ((double)this.random.nextFloat() < 0.25) {
-            this.dropItem(Items.SPLASH_POTION);
+            this.dropItem(ModItems.COPPER_COIN);
         }
         if ((double)this.random.nextFloat() < 0.15) {
-            this.dropItem(Items.BONE);
+            this.dropItem(ModItems.GOLD_COIN);
         }
         //this.dropItem(Items.ROTTEN_FLESH);
     }

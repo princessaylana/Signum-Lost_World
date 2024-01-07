@@ -45,6 +45,7 @@ import za.lana.signum.sound.ModSounds;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 public class WizardEntity extends HostileEntity implements InventoryOwner{
     public int attackAniTimeout = 0;
@@ -274,22 +275,22 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
         if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(ModItems.GOLD_COIN);
+            this.dropItem(Items.BREAD);
         }
         if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(ModItems.IRON_COIN);
+            this.dropItem(Items.BONE);
         }
         if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(ModItems.COPPER_COIN);
+            this.dropItem(Items.LEATHER_HELMET);
         }
         if ((double)this.random.nextFloat() < 0.35) {
-            this.dropItem(ModItems.EXOTIC_CRYSTAL_DUST);
+            this.dropItem(ModItems.IRON_COIN);
         }
         if ((double)this.random.nextFloat() < 0.25) {
-            this.dropItem(Items.SPLASH_POTION);
+            this.dropItem(ModItems.COPPER_COIN);
         }
         if ((double)this.random.nextFloat() < 0.15) {
-            this.dropItem(Items.BONE);
+            this.dropItem(ModItems.GOLD_COIN);
         }
         //this.dropItem(Items.ROTTEN_FLESH);
     }
@@ -357,7 +358,7 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
     class ProtectHordeGoal
             extends ActiveTargetGoal<LivingEntity> {
         public ProtectHordeGoal() {
-            super(WizardEntity.this, LivingEntity.class, 20, true, true, null);
+            super(WizardEntity.this, LivingEntity.class, 20, true, false, Objects::nonNull);
         }
 
         @Override

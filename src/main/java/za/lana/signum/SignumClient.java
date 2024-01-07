@@ -28,6 +28,7 @@ import za.lana.signum.client.renderer.dimension.LostWorldRenderer;
 import za.lana.signum.client.renderer.entity.*;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
 import za.lana.signum.client.renderer.transport.AirShipRenderer;
+import za.lana.signum.client.renderer.transport.CargoDroneRenderer;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.networking.ModMessages;
@@ -205,6 +206,9 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AIRSHIP, AirShipModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.AIRSHIP, AirShipRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CARGODRONE, CargoDroneModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.CARGODRONE, CargoDroneRenderer::new);
+
         // PARTICLES
         ParticleFactoryRegistry.getInstance().register(ModParticles.BlUE_DUST_PARTICLE, BlueDustParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.TIBERIUM_PARTICLE, TiberiumParticle.Factory::new);
@@ -242,6 +246,8 @@ public class SignumClient implements ClientModInitializer {
         // LIBGUI SCREENS
         HandledScreens.<ExampleDescription, CottonInventoryScreen<ExampleDescription>>register(
                 GuiScreens.EXAMPLE_GUI, ExampleBlockScreen::new);
+        HandledScreens.<DroneBoxDescription, CottonInventoryScreen<DroneBoxDescription>>register(
+                GuiScreens.DRONEBOX_GUI, DroneBoxBlockScreen::new);
 
         // SHADERS
         //SignumShaders.register();

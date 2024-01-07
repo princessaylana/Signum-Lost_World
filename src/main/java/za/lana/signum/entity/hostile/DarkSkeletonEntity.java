@@ -223,22 +223,22 @@ public class DarkSkeletonEntity extends HostileEntity implements InventoryOwner 
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
         if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(ModItems.GOLD_COIN);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(ModItems.IRON_COIN);
-        }
-        if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(ModItems.COPPER_COIN);
-        }
-        if ((double)this.random.nextFloat() < 0.35) {
             this.dropItem(ModItems.BLACK_DIAMOND_SHARD);
         }
-        if ((double)this.random.nextFloat() < 0.25) {
+        if ((double)this.random.nextFloat() < 0.65) {
+            this.dropItem(Items.BONE);
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
             this.dropItem(Items.IRON_SWORD);
         }
+        if ((double)this.random.nextFloat() < 0.35) {
+            this.dropItem(ModItems.IRON_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            this.dropItem(ModItems.COPPER_COIN);
+        }
         if ((double)this.random.nextFloat() < 0.15) {
-            this.dropItem(Items.BONE);
+            this.dropItem(ModItems.GOLD_COIN);
         }
         //this.dropItem(Items.ROTTEN_FLESH);
     }

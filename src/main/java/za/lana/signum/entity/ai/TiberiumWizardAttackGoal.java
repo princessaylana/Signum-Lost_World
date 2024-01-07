@@ -108,6 +108,7 @@ public class TiberiumWizardAttackGoal extends MeleeAttackGoal {
     protected void performAttack(LivingEntity pEnemy) {
         this.resetAttackCooldown();
         this.mob.swingHand(Hand.MAIN_HAND);
+        // TODO ADD SOUND
         this.mob.tryAttack(pEnemy);
     }
     protected void performSpelltAttack(LivingEntity pEnemy) {

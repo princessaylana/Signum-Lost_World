@@ -22,6 +22,7 @@ import za.lana.signum.entity.mob.UnicornEntity;
 import za.lana.signum.entity.projectile.*;
 import za.lana.signum.entity.transport.AirBalloonEntity;
 import za.lana.signum.entity.transport.AirShipEntity;
+import za.lana.signum.entity.transport.CargoDroneEntity;
 
 public class ModEntities {
 
@@ -33,6 +34,11 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "airship"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, AirShipEntity::new)
                     .dimensions(EntityDimensions.fixed(3.0f, 3.0f)).build());
+    public static final EntityType<CargoDroneEntity> CARGODRONE = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "cargodrone"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, CargoDroneEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+
     public static final EntityType<UnicornEntity> UNICORN = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "unicorn"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, UnicornEntity::new)

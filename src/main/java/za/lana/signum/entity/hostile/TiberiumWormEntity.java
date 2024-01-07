@@ -194,18 +194,24 @@ public class TiberiumWormEntity extends HostileEntity implements InventoryOwner{
 		super.dropEquipment(source, lootingMultiplier, allowDrops);
 		this.dropInventory();
 		if ((double)this.random.nextFloat() < 0.75) {
-			this.dropItem(ModItems.GOLD_COIN);
-		}
-		if ((double)this.random.nextFloat() < 0.65) {
-			this.dropItem(ModItems.IRON_COIN);
-		}
-		if ((double)this.random.nextFloat() < 0.55) {
-			this.dropItem(ModItems.COPPER_COIN);
-		}
-		if ((double)this.random.nextFloat() < 0.35) {
 			this.dropItem(ModItems.TIBERIUM_DUST);
 		}
-		this.dropItem(Items.ROTTEN_FLESH);
+		if ((double)this.random.nextFloat() < 0.65) {
+			this.dropItem(Items.BONE);
+		}
+		if ((double)this.random.nextFloat() < 0.55) {
+			this.dropItem(Items.SLIME_BALL);
+		}
+		if ((double)this.random.nextFloat() < 0.35) {
+			this.dropItem(ModItems.IRON_COIN);
+		}
+		if ((double)this.random.nextFloat() < 0.25) {
+			this.dropItem(ModItems.COPPER_COIN);
+		}
+		if ((double)this.random.nextFloat() < 0.15) {
+			this.dropItem(ModItems.GOLD_COIN);
+		}
+		//this.dropItem(Items.ROTTEN_FLESH);
 	}
 	//
 	protected SoundEvent getAmbientSound() {

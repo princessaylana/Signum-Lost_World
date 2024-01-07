@@ -9,6 +9,7 @@ import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.block.ModBlocks;
+import za.lana.signum.block.entity.ModBlockEntities;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.*;
 import za.lana.signum.entity.mob.CursedWolfEntity;
@@ -16,6 +17,7 @@ import za.lana.signum.entity.mob.PidgeonEntity;
 import za.lana.signum.entity.mob.UnicornEntity;
 import za.lana.signum.entity.transport.AirBalloonEntity;
 import za.lana.signum.entity.transport.AirShipEntity;
+import za.lana.signum.entity.transport.CargoDroneEntity;
 import za.lana.signum.item.ModFuels;
 import za.lana.signum.item.ModItems;
 
@@ -43,6 +45,7 @@ public class RunInitMain {
 
         FabricDefaultAttributeRegistry.register(ModEntities.AIRBALLOON, AirBalloonEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.AIRSHIP, AirShipEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.CARGODRONE, CargoDroneEntity.setAttributes());
 
         FabricDefaultAttributeRegistry.register(ModEntities.UNICORN, UnicornEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.PIDGEON, PidgeonEntity.setAttributes());
@@ -81,6 +84,8 @@ public class RunInitMain {
 
     }
     public static void registerBlockEntities(){
+        ModBlockEntities.registerBlockEntities();
+        ModBlockEntities.registerLibGuiBlockEntities();
 
     }
 }

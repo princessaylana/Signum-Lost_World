@@ -46,8 +46,7 @@ import za.lana.signum.entity.control.AirshipFlightControl;
 import java.util.List;
 
 public class AirShipEntity extends AnimalEntity {
-    public int maxFuelTime = 4;
-    public String landingPos;
+
     private int idleAniTimeout = 0;
     //private int sleepingAniTimeout = 0;
     public final AnimationState idleAniState= new AnimationState();
@@ -121,7 +120,7 @@ public class AirShipEntity extends AnimalEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 50)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f)
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.3f)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100d);
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0D);
     }
 
     @Override

@@ -39,7 +39,6 @@ public class PidgeonSleepGoal
     @Override
     public void start() {
         super.start();
-        //this.mob.setInSittingPose(false);
     }
 
     @Override
@@ -68,6 +67,7 @@ public class PidgeonSleepGoal
         //this.mob.setInSittingPose(false);
         if (!this.hasReached()) {
             this.mob.setInSleepingPose(false);
+
         } else if (!this.mob.isInSleepingPose()) {
             this.mob.setInSleepingPose(true);
             this.mob.sleep(targetPos);

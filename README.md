@@ -24,6 +24,9 @@ Lana 2023
 
 [Wiki](https://github.com/princessaylana/Signum-1.20/wiki)
 
+Current Minecraft Version:
+1.20.2
+
 Dependancies:
 - Fabric Loader 0.14.24
 - Fabric API 0.90.7
@@ -44,7 +47,7 @@ For now, Coins are only obtainable from mobs.
 
 Code falls under the MIT License 
 
-(Excluding Java Assets(models), Sounds, Java Animations & GL Assets(shaders) and Textures are Private, or differently Licensed.
+(Excluding some code which has a different license, Java Assets(models), Sounds, Java Animations & GL Assets(shaders) and Textures are Private, or differently Licensed.
 For more information view Credits).
 
 [RoadMap](https://github.com/princessaylana/Signum-1.20/blob/master/docs/Roadmap.md)

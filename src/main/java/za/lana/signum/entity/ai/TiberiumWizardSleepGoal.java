@@ -67,7 +67,8 @@ public class TiberiumWizardSleepGoal
         super.tick();
         if (!this.hasReached()) {
             this.mob.setInSleepingPose(false);
-        } else if (!this.mob.isInSleepingPose()) {
+        }
+        else if (!this.mob.isInSleepingPose()) {
             this.mob.setInSleepingPose(true);
             //
             this.mob.getNavigation().stop();

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "signum:block/dronebox/dronebox_front_off",
+    "side": "signum:block/dronebox/dronebox_side",
+    "top": "signum:block/dronebox/dronebox_top"
+  }
+}

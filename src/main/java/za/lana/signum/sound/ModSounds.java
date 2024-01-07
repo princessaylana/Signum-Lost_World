@@ -35,6 +35,19 @@ public class ModSounds {
     public static SoundEvent FLOATER_TELEPORT = registerSoundEvent("floater_teleport");
     public static SoundEvent FLOATER_WARNS = registerSoundEvent("floater_warns");
 
+    public static SoundEvent CARGODRONE_FLY= registerSoundEvent("cargodrone_fly");
+    public static SoundEvent CARGODRONE_HURT = registerSoundEvent("cargodrone_hurt");
+    public static SoundEvent CARGODRONE_IDLE = registerSoundEvent("cargodrone_idle");
+    //
+    public static SoundEvent CARGODRONE_CANT_LAND = registerSoundEvent("cargodrone_cant_land");
+    public static SoundEvent CARGODRONE_FLYING_TO_LANDING = registerSoundEvent("cargodrone_flying_to_landing");
+    public static SoundEvent CARGODRONE_FOUND_STATION = registerSoundEvent("cargodrone_found_station");
+    public static SoundEvent CARGODRONE_FOUND_TARGETPOS = registerSoundEvent("cargodrone_found_targetpos");
+    public static SoundEvent CARGODRONE_LANDED = registerSoundEvent("cargodrone_landed");
+    public static SoundEvent CARGODRONE_TAKEOFF = registerSoundEvent("cargodrone_takeoff");
+    public static SoundEvent CARGODRONE_TRYING_LAND = registerSoundEvent("cargodrone_trying_land");
+    //
+
     public static final BlockSoundGroup TIBERIUM_BLOCK_SOUNDS = new BlockSoundGroup(1f, 1f,
             ModSounds.TIBERIUM_BREAK, ModSounds.TIBERIUM_WALK, ModSounds.TIBERIUM_PLACE,
             ModSounds.TIBERIUM_HIT, ModSounds.TIBERIUM_WALK);
