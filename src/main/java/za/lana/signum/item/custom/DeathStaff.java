@@ -56,7 +56,7 @@ public class DeathStaff
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemstack = user.getStackInHand(hand);
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.GHOST_AMBIENT, SoundCategory.NEUTRAL,1.5F, 1F);
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.SKELETON_RAISE, SoundCategory.NEUTRAL,1.5F, 1F);
         user.getItemCooldownManager().set(this, STAFFCOOLDOWN);
 
         if (!world.isClient()) {

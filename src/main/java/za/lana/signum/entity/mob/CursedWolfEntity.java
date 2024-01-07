@@ -23,6 +23,9 @@ import org.jetbrains.annotations.Nullable;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.CursedWolfAttackGoal;
 import za.lana.signum.item.ModItems;
+import za.lana.signum.sound.ModSounds;
+
+import java.util.List;
 
 public class CursedWolfEntity extends AnimalEntity {
 
@@ -80,6 +83,7 @@ public class CursedWolfEntity extends AnimalEntity {
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
 
         this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(2, new CursedWolfEntity.ProtectHordeGoal());
 
         this.initCustomTargets();
     }
@@ -125,18 +129,55 @@ public class CursedWolfEntity extends AnimalEntity {
     }
     // SOUND
     protected SoundEvent getAmbientSound() {
+        World level = this.getWorld();
         if (this.isAttacking()) {
+            if ((double)this.random.nextFloat() < 0.75) {
+                return ModSounds.CURSEDWOLF_ATTACK1;
+            }
+            if ((double)this.random.nextFloat() < 0.55) {
+                return ModSounds.CURSEDWOLF_ATTACK2;
+            }
+            if ((double)this.random.nextFloat() < 0.25) {
+                return ModSounds.CURSEDWOLF_ATTACK3;
+            }
             return SoundEvents.ENTITY_WOLF_GROWL;
         } else if (this.random.nextInt(3) == 0) {
             return this.getHealth() < 10.0F ? SoundEvents.ENTITY_WOLF_WHINE : SoundEvents.ENTITY_WOLF_PANT;
-        } else {
-            return SoundEvents.ENTITY_WOLF_AMBIENT;
+        } else if(level.isNight()) {
+            if ((double)this.random.nextFloat() < 0.75) {
+                return ModSounds.CURSEDWOLF_HOWL1;
+            }
+            if ((double)this.random.nextFloat() < 0.55) {
+                return ModSounds.CURSEDWOLF_HOWL2;
+            }
+            if ((double)this.random.nextFloat() < 0.25) {
+                return ModSounds.CURSEDWOLF_HOWL3;
+            }
+            return null;
+        } else if ((double)this.random.nextFloat() < 0.75) {
+            return ModSounds.CURSEDWOLF_AMBIENT1;
         }
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.CURSEDWOLF_AMBIENT2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.CURSEDWOLF_AMBIENT3;
+        }
+        return SoundEvents.ENTITY_WOLF_AMBIENT;
     }
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(SoundEvents.ENTITY_WOLF_STEP, 0.15F, 1.0F);
     }
     protected SoundEvent getHurtSound(DamageSource source) {
+        if ((double)this.random.nextFloat() < 0.75) {
+            return ModSounds.CURSEDWOLF_HURT1;
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.CURSEDWOLF_HURT2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.CURSEDWOLF_HURT3;
+        }
         return SoundEvents.ENTITY_WOLF_HURT;
     }
     protected SoundEvent getDeathSound() {
@@ -177,6 +218,27 @@ public class CursedWolfEntity extends AnimalEntity {
         }
         protected boolean isInDanger() {
             return this.mob.shouldEscapePowderSnow() || this.mob.isOnFire();
+        }
+    }
+    class ProtectHordeGoal
+            extends ActiveTargetGoal<LivingEntity> {
+        public ProtectHordeGoal() {
+            super(CursedWolfEntity.this, LivingEntity.class, 20, true, false, null);
+        }
+        @Override
+        public boolean canStart() {
+            if (super.canStart()) {
+                List<CursedWolfEntity> list = CursedWolfEntity.this.getWorld().getNonSpectatingEntities(CursedWolfEntity.class, CursedWolfEntity.this.getBoundingBox().expand(24.0, 8.0, 24.0));
+                for (CursedWolfEntity cursedWolf : list) {
+                    if (!cursedWolf.isBaby()) continue;
+                    return true;
+                }
+            }
+            return false;
+        }
+        @Override
+        protected double getFollowRange() {
+            return super.getFollowRange() * 0.5;
         }
     }
 }

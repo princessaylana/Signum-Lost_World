@@ -6,6 +6,7 @@
  * */
 package za.lana.signum.entity.hostile;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
@@ -28,6 +29,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -210,7 +212,6 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
     private void setVariant(WizardEntityVariant variant) {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
-
     // SLEEP
     public void setInSleepingPose(boolean sleeping) {
         this.dataTracker.set(SLEEPING, sleeping);
@@ -320,11 +321,33 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
     @Override
     protected SoundEvent getAmbientSound() {
         if (!this.isInSleepingPose()){
-            return SoundEvents.ENTITY_WITCH_AMBIENT;
+            if ((double)this.random.nextFloat() < 0.75) {
+                return ModSounds.WIZARD_AMBIENT1;
+            }
+            if ((double)this.random.nextFloat() < 0.55) {
+                return ModSounds.WIZARD_AMBIENT2;
+            }
+            if ((double)this.random.nextFloat() < 0.25) {
+                return ModSounds.WIZARD_AMBIENT3;
+            }
+            return null;
+            //return SoundEvents.ENTITY_WITCH_AMBIENT;
         }
         return null;
     }
-    //
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        if ((double)this.random.nextFloat() < 0.75) {
+            return ModSounds.WIZARD_HELP1;
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.WIZARD_HELP2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.WIZARD_HELP3;
+        }
+        return null;
+    }
 
     public void spellCast(LivingEntity target) {
         if (this.canSee(target)) {

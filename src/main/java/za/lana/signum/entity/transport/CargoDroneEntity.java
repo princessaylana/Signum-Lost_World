@@ -179,22 +179,17 @@ public class CargoDroneEntity extends AnimalEntity implements ImplementedInvento
     protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
     }
     // SOUNDS
-    SoundEvent getStepSound() {return ModSounds.CARGODRONE_FLY;}
+    SoundEvent getStepSound() {return null;}
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return ModSounds.CARGODRONE_HURT;
+        return null;
     }
     @Override
     protected SoundEvent getAmbientSound() {
-        World level = this.getWorld();
-        if(level.isDay()) {
-            return ModSounds.CARGODRONE_IDLE;
-        }
         return null;
     }
     protected SoundEvent getDeathSound() {
-        //disConnectFromDroneBox();
-        return ModSounds.CARGODRONE_HURT;
+        return null;
     }
 
     /**

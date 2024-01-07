@@ -6,11 +6,13 @@
  * */
 package za.lana.signum.entity.hostile;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -27,6 +29,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.LocalDifficulty;
@@ -38,6 +41,7 @@ import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.TrackSumSkeletonTargetGoal;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.particle.ModParticles;
+import za.lana.signum.sound.ModSounds;
 
 import java.util.List;
 
@@ -203,11 +207,6 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     }
 
     @Override
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT;
-    }
-
-    @Override
     @Nullable
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         Random random = world.getRandom();
@@ -267,6 +266,56 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     public EntityView method_48926() {
         return getWorld();
     }
+    // SKELETON SOUNDS
+    @Override
+    protected SoundEvent getAmbientSound() {
+        //return SoundEvents.ENTITY_SKELETON_AMBIENT;
+        return null;
+    }
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        //
+        if ((double)this.random.nextFloat() < 0.75) {
+            return ModSounds.SKELETON_HURT1;
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.SKELETON_HURT2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.SKELETON_HURT3;
+        }
+        return null;
+    }
+    @Override
+    protected SoundEvent getDeathSound() {
+        if ((double)this.random.nextFloat() < 0.75) {
+            return ModSounds.SKELETON_DEATH1;
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.SKELETON_DEATH2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.SKELETON_DEATH3;
+        }
+        return null;
+    }
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(this.getStepSound(), 0.15f, 1.0f);
+    }
+    SoundEvent getStepSound() {
+        //
+        if ((double)this.random.nextFloat() < 0.75) {
+            return ModSounds.SKELETON_WALK1;
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.SKELETON_WALK2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.SKELETON_WALK3;
+        }
+        return SoundEvents.ENTITY_SKELETON_STEP;
+    }
+    //
     public boolean isShaking() {
         return this.isFrozen();
     }

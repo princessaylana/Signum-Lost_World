@@ -1,53 +1,4 @@
 {
-  "tiberium_ambient": {
-    "subtitle": "sounds.signum.tiberium_ambient",
-    "sounds": [
-      "signum:tiberium_ambient"
-    ],
-    "volume":"0.15"
-  },
-  "tiberium_walk": {
-    "subtitle": "sounds.signum.tiberium_walk",
-    "sounds": [
-      "signum:tiberium_walk"
-    ],
-    "volume":"0.15"
-  },
-  "tiberium_break": {
-    "subtitle": "sounds.signum.tiberium_break",
-    "sounds": [
-      "signum:tiberium_break"
-    ],
-    "volume":"0.15"
-  },
-  "tiberium_place": {
-    "subtitle": "sounds.signum.tiberium_place",
-    "sounds": [
-      "signum:tiberium_place"
-    ],
-    "volume":"0.15"
-  },
-  "tiberium_hit": {
-    "subtitle": "sounds.signum.tiberium_hit",
-    "sounds": [
-      "signum:tiberium_hit"
-    ],
-    "volume":"0.15"
-  },
-  "snowy_wind": {
-    "subtitle": "sounds.signum.wind0",
-    "sounds": [
-      "signum:wind0"
-    ],
-    "volume":"-3.0"
-  },
-  "pidgeon_call": {
-    "subtitle": "sounds.signum.pidgeon_call",
-    "sounds": [
-      "signum:pidgeon_call"
-    ],
-    "volume":"-3.0"
-  },
   "airballoon_down": {
     "subtitle": "sounds.signum.airballoon_down",
     "sounds": [
@@ -55,6 +6,138 @@
     ],
     "volume":"-12.00"
   },
+
+  "cursedwolf_ambient1": {
+    "subtitle": "sounds.signum.cursedwolf_ambient1",
+    "sounds": [
+      "signum:cursedwolf_ambient1"
+    ],
+    "volume":"0.15"
+  },
+  "cursedwolf_ambient2": {
+    "subtitle": "sounds.signum.cursedwolf_ambient2",
+    "sounds": [
+      "signum:cursedwolf_ambient2"
+    ],
+    "volume":"0.15"
+  },
+  "cursedwolf_ambient3": {
+    "subtitle": "sounds.signum.cursedwolf_ambient3",
+    "sounds": [
+      "signum:cursedwolf_ambient3"
+    ],
+    "volume":"0.15"
+  },
+
+  "cursedwolf_attack1": {
+    "subtitle": "sounds.signum.cursedwolf_attack1",
+    "sounds": [
+      "signum:cursedwolf_attack1"
+    ],
+    "volume":"0.15"
+  },
+  "cursedwolf_attack2": {
+    "subtitle": "sounds.signum.cursedwolf_attack2",
+    "sounds": [
+      "signum:cursedwolf_attack2"
+    ],
+    "volume":"0.15"
+  },
+  "cursedwolf_attack3": {
+    "subtitle": "sounds.signum.cursedwolf_attack3",
+    "sounds": [
+      "signum:cursedwolf_attack3"
+    ],
+    "volume":"0.15"
+  },
+
+  "cursedwolf_howl1": {
+    "subtitle": "sounds.signum.cursedwolf_howl1",
+    "sounds": [
+      "signum:cursedwolf_howl1"
+    ],
+    "volume":"0.15"
+  },
+  "cursedwolf_howl2": {
+    "subtitle": "sounds.signum.cursedwolf_howl2",
+    "sounds": [
+      "signum:cursedwolf_howl2"
+    ],
+    "volume":"0.15"
+  },
+  "cursedwolf_howl3": {
+    "subtitle": "sounds.signum.cursedwolf_howl3",
+    "sounds": [
+      "signum:cursedwolf_howl3"
+    ],
+    "volume":"0.15"
+  },
+
+  "cursedwolf_hurt1": {
+    "subtitle": "sounds.signum.cursedwolf_hurt1",
+    "sounds": [
+      "signum:cursedwolf_hurt1"
+    ],
+    "volume":"0.15"
+  },
+  "cursedwolf_hurt2": {
+    "subtitle": "sounds.signum.cursedwolf_hurt2",
+    "sounds": [
+      "signum:cursedwolf_hurt2"
+    ],
+    "volume":"0.15"
+  },
+  "cursedwolf_hurt3": {
+    "subtitle": "sounds.signum.cursedwolf_hurt3",
+    "sounds": [
+      "signum:cursedwolf_hurt3"
+    ],
+    "volume":"0.15"
+  },
+
+  "floater_ambient": {
+    "subtitle": "sounds.signum.floater_ambient",
+    "sounds": [
+      "signum:floater_ambient"
+    ],
+    "volume":"0.15"
+  },
+  "floater_die": {
+    "subtitle": "sounds.signum.floater_die",
+    "sounds": [
+      "signum:floater_die"
+    ],
+    "volume":"0.15"
+  },
+  "floater_hurt": {
+    "subtitle": "sounds.signum.floater_hurt",
+    "sounds": [
+      "signum:floater_hurt"
+    ],
+    "volume":"0.15"
+  },
+  "floater_shoot": {
+    "subtitle": "sounds.signum.floater_shoot",
+    "sounds": [
+      "signum:floater_shoot"
+    ],
+    "volume":"0.15"
+  },
+  "floater_teleport": {
+    "subtitle": "sounds.signum.floater_teleport",
+    "sounds": [
+      "signum:floater_teleport"
+    ],
+    "volume":"0.15"
+  },
+  "floater_warns": {
+    "subtitle": "sounds.signum.floater_warns",
+    "sounds": [
+      "signum:floater_warns"
+    ],
+    "volume":"0.15"
+  },
+
   "ghost_ambient": {
     "subtitle": "sounds.signum.ghost_ambient",
     "sounds": [
@@ -104,119 +187,169 @@
     ],
     "volume":"0.15"
   },
-  "floater_ambient": {
-    "subtitle": "sounds.signum.floater_ambient",
+
+  "pidgeon_call": {
+    "subtitle": "sounds.signum.pidgeon_call",
     "sounds": [
-      "signum:floater_ambient"
+      "signum:pidgeon_call"
+    ],
+    "volume":"-3.0"
+  },
+  "snowy_wind": {
+    "subtitle": "sounds.signum.wind0",
+    "sounds": [
+      "signum:wind0"
+    ],
+    "volume":"-3.0"
+  },
+
+  "skeleton_death1": {
+    "subtitle": "sounds.signum.skeleton_death1",
+    "sounds": [
+      "signum:skeleton_death1"
     ],
     "volume":"0.15"
   },
-  "floater_die": {
-    "subtitle": "sounds.signum.floater_die",
+  "skeleton_death2": {
+    "subtitle": "sounds.signum.skeleton_death2",
     "sounds": [
-      "signum:floater_die"
+      "signum:skeleton_death2"
     ],
     "volume":"0.15"
   },
-  "floater_hurt": {
-    "subtitle": "sounds.signum.floater_hurt",
+  "skeleton_death3": {
+    "subtitle": "sounds.signum.skeleton_death3",
     "sounds": [
-      "signum:floater_hurt"
+      "signum:skeleton_death3"
     ],
     "volume":"0.15"
   },
-  "floater_shoot": {
-    "subtitle": "sounds.signum.floater_shoot",
+  "skeleton_hurt1": {
+    "subtitle": "sounds.signum.skeleton_hurt1",
     "sounds": [
-      "signum:floater_shoot"
+      "signum:skeleton_hurt1"
     ],
     "volume":"0.15"
   },
-  "floater_teleport": {
-    "subtitle": "sounds.signum.floater_teleport",
+  "skeleton_hurt2": {
+    "subtitle": "sounds.signum.skeleton_hurt2",
     "sounds": [
-      "signum:floater_teleport"
+      "signum:skeleton_hurt2"
     ],
     "volume":"0.15"
   },
-  "floater_warns": {
-    "subtitle": "sounds.signum.floater_warns",
+  "skeleton_hurt3": {
+    "subtitle": "sounds.signum.skeleton_hurt3",
     "sounds": [
-      "signum:floater_warns"
+      "signum:skeleton_hurt3"
     ],
     "volume":"0.15"
   },
-  "cargodrone_fly": {
-    "subtitle": "sounds.signum.cargodrone_fly",
+  "skeleton_raise": {
+    "subtitle": "sounds.signum.skeleton_raise",
     "sounds": [
-      "signum:cargodrone_fly"
+      "signum:skeleton_raise"
     ],
     "volume":"0.15"
   },
-  "cargodrone_hurt": {
-    "subtitle": "sounds.signum.cargodrone_hurt",
+  "skeleton_walk1": {
+    "subtitle": "sounds.signum.skeleton_walk1",
     "sounds": [
-      "signum:cargodrone_hurt"
+      "signum:skeleton_walk1"
     ],
     "volume":"0.15"
   },
-  "cargodrone_idle": {
-    "subtitle": "sounds.signum.cargodrone_idle",
+  "skeleton_walk2": {
+    "subtitle": "sounds.signum.skeleton_walk2",
     "sounds": [
-      "signum:cargodrone_idle"
+      "signum:skeleton_walk2"
     ],
     "volume":"0.15"
   },
-  "cargodrone_cant_land": {
-    "subtitle": "sounds.signum.cargodrone_cant_land",
+  "skeleton_walk3": {
+    "subtitle": "sounds.signum.skeleton_walk3",
     "sounds": [
-      "signum:cargodrone_cant_land"
+      "signum:skeleton_walk3"
     ],
     "volume":"0.15"
   },
-  "cargodrone_flying_to_landing": {
-    "subtitle": "sounds.signum.cargodrone_flying_to_landing",
+
+  "tiberium_ambient": {
+    "subtitle": "sounds.signum.tiberium_ambient",
     "sounds": [
-      "signum:cargodrone_flying_to_landing"
+      "signum:tiberium_ambient"
     ],
     "volume":"0.15"
   },
-  "cargodrone_found_station": {
-    "subtitle": "sounds.signum.cargodrone_found_station",
+  "tiberium_walk": {
+    "subtitle": "sounds.signum.tiberium_walk",
     "sounds": [
-      "signum:cargodrone_found_station"
+      "signum:tiberium_walk"
     ],
     "volume":"0.15"
   },
-  "cargodrone_found_targetpos": {
-    "subtitle": "sounds.signum.cargodrone_found_targetpos",
+  "tiberium_break": {
+    "subtitle": "sounds.signum.tiberium_break",
     "sounds": [
-      "signum:cargodrone_found_targetpos"
+      "signum:tiberium_break"
     ],
     "volume":"0.15"
   },
-  "cargodrone_landed": {
-    "subtitle": "sounds.signum.cargodrone_landed",
+  "tiberium_place": {
+    "subtitle": "sounds.signum.tiberium_place",
     "sounds": [
-      "signum:cargodrone_landed"
+      "signum:tiberium_place"
     ],
     "volume":"0.15"
   },
-  "cargodrone_takeoff": {
-    "subtitle": "sounds.signum.cargodrone_takeoff",
+  "tiberium_hit": {
+    "subtitle": "sounds.signum.tiberium_hit",
     "sounds": [
-      "signum:cargodrone_takeoff"
+      "signum:tiberium_hit"
     ],
     "volume":"0.15"
   },
-  "cargodrone_trying_land": {
-    "subtitle": "sounds.signum.cargodrone_trying_land",
+
+  "wizard_ambient1": {
+    "subtitle": "sounds.signum.wizard_ambient1",
     "sounds": [
-      "signum:cargodrone_trying_land"
+      "signum:wizard_ambient1"
+    ],
+    "volume":"0.15"
+  },
+  "wizard_ambient2": {
+    "subtitle": "sounds.signum.wizard_ambient2",
+    "sounds": [
+      "signum:wizard_ambient2"
+    ],
+    "volume":"0.15"
+  },
+  "wizard_ambient3": {
+    "subtitle": "sounds.signum.wizard_ambient3",
+    "sounds": [
+      "signum:wizard_ambient3"
+    ],
+    "volume":"0.15"
+  },
+  "wizard_help1": {
+    "subtitle": "sounds.signum.wizard_help1",
+    "sounds": [
+      "signum:wizard_help1"
+    ],
+    "volume":"0.15"
+  },
+  "wizard_help2": {
+    "subtitle": "sounds.signum.wizard_help3",
+    "sounds": [
+      "signum:wizard_help3"
+    ],
+    "volume":"0.15"
+  },
+  "wizard_help3": {
+    "subtitle": "sounds.signum.wizard_help3",
+    "sounds": [
+      "signum:wizard_help3"
     ],
     "volume":"0.15"
   }
-
-
-
 }

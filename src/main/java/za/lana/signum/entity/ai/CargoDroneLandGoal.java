@@ -40,7 +40,7 @@ public class CargoDroneLandGoal
         World level = this.mob.getWorld();
         if (!level.isDay() && !this.mob.isInLandingPose() && super.canStart()) {
             System.out.println("signum:CDrone:Landing Mode");
-            this.mob.playSound(ModSounds.CARGODRONE_FLYING_TO_LANDING, 1.0f,1.0f);
+            //this.mob.playSound(ModSounds.CARGODRONE_FLYING_TO_LANDING, 1.0f,1.0f);
             return true;
         }
         System.out.println("signum:CDrone:Flying Mode");
@@ -67,7 +67,7 @@ public class CargoDroneLandGoal
             this.mob.velocityDirty = false;
             this.mob.setNoGravity(true);
             System.out.println("signum:CDrone:Stopped - Success");
-            this.mob.playSound(ModSounds.CARGODRONE_LANDED, 1.0f,1.0f);
+            //this.mob.playSound(ModSounds.CARGODRONE_LANDED, 1.0f,1.0f);
             super.stop();
         }
     }
@@ -151,7 +151,7 @@ public class CargoDroneLandGoal
                  this.mob.fallDistance *= 0.0f;
                  this.mob.setInLandingPose(true);
                  // LANDED
-                 this.mob.playSound(ModSounds.CARGODRONE_LANDED, 1.0f,1.0f);
+                 //this.mob.playSound(ModSounds.CARGODRONE_LANDED, 1.0f,1.0f);
              }else if (this.mob.isOnGround() && level.isDay()){
                  this.mob.setInLandingPose(false);
                  System.out.println("signum:CDrone:Stopping");

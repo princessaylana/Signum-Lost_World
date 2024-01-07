@@ -42,6 +42,7 @@ import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.EnderSkeletonAttackGoal;
 import za.lana.signum.item.ModItems;
+import za.lana.signum.sound.ModSounds;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -264,26 +265,56 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
         return 1.75f;
     }
 
+    // SKELETON SOUNDS
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_SKELETON_AMBIENT;
+        //return SoundEvents.ENTITY_SKELETON_AMBIENT;
+        return null;
     }
-
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_SKELETON_HURT;
+        //
+        if ((double)this.random.nextFloat() < 0.75) {
+            return ModSounds.SKELETON_HURT1;
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.SKELETON_HURT2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.SKELETON_HURT3;
+        }
+        return null;
     }
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_SKELETON_DEATH;
+        if ((double)this.random.nextFloat() < 0.75) {
+            return ModSounds.SKELETON_DEATH1;
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.SKELETON_DEATH2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.SKELETON_DEATH3;
+        }
+        return null;
     }
-
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(this.getStepSound(), 0.15f, 1.0f);
     }
     SoundEvent getStepSound() {
+        //
+        if ((double)this.random.nextFloat() < 0.75) {
+            return ModSounds.SKELETON_WALK1;
+        }
+        if ((double)this.random.nextFloat() < 0.55) {
+            return ModSounds.SKELETON_WALK2;
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
+            return ModSounds.SKELETON_WALK3;
+        }
         return SoundEvents.ENTITY_SKELETON_STEP;
     }
+    //
 
     public boolean isShaking() {
         return this.isFrozen();
