@@ -95,6 +95,139 @@
     "volume":"0.15"
   },
 
+  "fallen_ambient1": {
+    "subtitle": "sounds.signum.fallen_ambient1",
+    "sounds": [
+      "signum:fallen_ambient1"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_ambient2": {
+    "subtitle": "sounds.signum.fallen_ambient2",
+    "sounds": [
+      "signum:fallen_ambient2"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_ambient3": {
+    "subtitle": "sounds.signum.fallen_ambient3",
+    "sounds": [
+      "signum:fallen_ambient3"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_attack1": {
+    "subtitle": "sounds.signum.fallen_attack1",
+    "sounds": [
+      "signum:fallen_attack1"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_attack2": {
+    "subtitle": "sounds.signum.fallen_attack2",
+    "sounds": [
+      "signum:fallen_attack2"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_attack3": {
+    "subtitle": "sounds.signum.fallen_attack3",
+    "sounds": [
+      "signum:fallen_attack3"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_death1": {
+    "subtitle": "sounds.signum.fallen_death1",
+    "sounds": [
+      "signum:fallen_death1"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_death2": {
+    "subtitle": "sounds.signum.fallen_death2",
+    "sounds": [
+      "signum:fallen_death2"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_death3": {
+    "subtitle": "sounds.signum.fallen_death3",
+    "sounds": [
+      "signum:fallen_death3"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_flee1": {
+    "subtitle": "sounds.signum.fallen_flee1",
+    "sounds": [
+      "signum:fallen_flee1"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_flee2": {
+    "subtitle": "sounds.signum.fallen_flee2",
+    "sounds": [
+      "signum:fallen_flee2"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_flee3": {
+    "subtitle": "sounds.signum.fallen_flee3",
+    "sounds": [
+      "signum:fallen_flee3"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_hurt1": {
+    "subtitle": "sounds.signum.fallen_hurt1",
+    "sounds": [
+      "signum:fallen_hurt1"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_hurt2": {
+    "subtitle": "sounds.signum.fallen_hurt2",
+    "sounds": [
+      "signum:fallen_hurt2"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_hurt3": {
+    "subtitle": "sounds.signum.fallen_hurt3",
+    "sounds": [
+      "signum:fallen_hurt3"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_warcry1": {
+    "subtitle": "sounds.signum.fallen_warcry1",
+    "sounds": [
+      "signum:fallen_warcry1"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_warcry2": {
+    "subtitle": "sounds.signum.fallen_warcry2",
+    "sounds": [
+      "signum:fallen_warcry2"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_warcry3": {
+    "subtitle": "sounds.signum.fallen_warcry3",
+    "sounds": [
+      "signum:fallen_warcry3"
+    ],
+    "volume":"0.15"
+  },
+  "fallen_warcry4": {
+    "subtitle": "sounds.signum.fallen_warcry4",
+    "sounds": [
+      "signum:fallen_warcry4"
+    ],
+    "volume":"0.15"
+  },
   "floater_ambient": {
     "subtitle": "sounds.signum.floater_ambient",
     "sounds": [

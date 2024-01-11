@@ -51,11 +51,14 @@ public class RunInitMain {
         FabricDefaultAttributeRegistry.register(ModEntities.PIDGEON, PidgeonEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.CURSED_WOLF, CursedWolfEntity.setAttributes());
 
+        FabricDefaultAttributeRegistry.register(ModEntities.FALLEN_ENTITY, FallenEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ELVE_GUARD_ENTITY, ElveGuardEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.WIZARD_ENTITY, WizardEntity.setAttributes());
 
         FabricDefaultAttributeRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.GIANTESPIDER_ENTITY, ESpiderEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.GHOST, GhostEntity.setAttributes());
+
 
         FabricDefaultAttributeRegistry.register(ModEntities.SSKELETON_ENTITY, SumSkeletonEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TIBSKELETON_ENTITY, TibSkeletonEntity.setAttributes());

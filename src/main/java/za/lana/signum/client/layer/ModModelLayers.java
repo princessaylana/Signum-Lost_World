@@ -27,6 +27,11 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "pidgeon"), "mainBody");
     public static final EntityModelLayer ESPIDER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "espider_entity"), "mainbody");
+    public static final EntityModelLayer FALLEN =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "fallen_entity"), "mainBody");
+
+    public static final EntityModelLayer GIANTESPIDER =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "giantespider_entity"), "mainbody");
 
     public static final EntityModelLayer TTROOPER =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "ttrooper_entity"), "waist");

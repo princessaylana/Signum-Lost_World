@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.mob.GiantEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -25,7 +26,6 @@ import za.lana.signum.entity.transport.AirShipEntity;
 import za.lana.signum.entity.transport.CargoDroneEntity;
 
 public class ModEntities {
-
     public static final EntityType<AirBalloonEntity> AIRBALLOON = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "airballoon"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, AirBalloonEntity::new)
@@ -52,10 +52,19 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "pidgeon"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PidgeonEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
+    public static final EntityType<FallenEntity> FALLEN_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "fallen_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, FallenEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.9f)).build());
     public static final EntityType<ESpiderEntity> ESPIDER_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "espider_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ESpiderEntity::new)
                     .dimensions(EntityDimensions.fixed(2.0f, 1.3f)).build());
+    //mutliply box by 3.0: Giant Scaled 3.0f
+    public static final EntityType<GiantESpiderEntity> GIANTESPIDER_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "giantespider_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GiantESpiderEntity::new)
+                    .dimensions(EntityDimensions.fixed(2.0f * GiantESpiderEntity.SCALED, 1.3f * GiantESpiderEntity.SCALED)).build());
     public static final EntityType<ElveGuardEntity> ELVE_GUARD_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "elve_guard_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ElveGuardEntity::new)

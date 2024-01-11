@@ -201,14 +201,8 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.75) {
+        if ((double)this.random.nextFloat() < 0.45) {
             this.dropItem(Items.BREAD);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(Items.BONE);
-        }
-        if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(Items.IRON_SWORD);
         }
         if ((double)this.random.nextFloat() < 0.35) {
             this.dropItem(ModItems.IRON_COIN);
@@ -218,6 +212,12 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
         }
         if ((double)this.random.nextFloat() < 0.15) {
             this.dropItem(ModItems.GOLD_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.10) {
+            this.dropItem(Items.IRON_SWORD);
+        }
+        if ((double)this.random.nextFloat() < 0.05) {
+            this.dropItem(Items.SHIELD);
         }
         //this.dropItem(Items.ROTTEN_FLESH);
     }

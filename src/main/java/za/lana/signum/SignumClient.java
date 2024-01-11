@@ -16,6 +16,9 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.EntityRenderers;
+import net.minecraft.client.render.entity.GiantEntityRenderer;
+import net.minecraft.entity.EntityType;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
@@ -124,6 +127,9 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CURSED_WOLF, CursedWolfEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.CURSED_WOLF, CursedWolfRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.FALLEN, FallenEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.FALLEN_ENTITY, FallenEntityRenderer::new);
+
         // PROJECTILES
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TIBERIUM_BOLT, TiberiumBoltEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TIBERIUM_PROJECTILE, TiberiumBoltRenderer::new);
@@ -170,6 +176,11 @@ public class SignumClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ESPIDER, ESpiderModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GIANTESPIDER, GiantESpiderModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.GIANTESPIDER_ENTITY, GiantESpiderRenderer::new);
+
+        //EntityRenderers.register(EntityType.GIANT, context -> new GiantEntityRenderer(context, 6.0f));
 
         // SKELETONS
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SSKELETON, SumSkeletonModel::getTexturedModelData);

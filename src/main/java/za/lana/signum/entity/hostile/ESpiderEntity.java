@@ -398,13 +398,7 @@ public class ESpiderEntity extends HostileEntity implements Mount {
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(Items.STRING);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(Items.SPIDER_EYE);
-        }
-        if ((double)this.random.nextFloat() < 0.55) {
+        if ((double)this.random.nextFloat() < 0.45) {
             this.dropItem(ModBlocks.SPIDERWEB_BLOCK);
         }
         if ((double)this.random.nextFloat() < 0.35) {

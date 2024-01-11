@@ -39,11 +39,11 @@ public class CargoDroneLandGoal
     public boolean canStart() {
         World level = this.mob.getWorld();
         if (!level.isDay() && !this.mob.isInLandingPose() && super.canStart()) {
-            System.out.println("signum:CDrone:Landing Mode");
+            //System.out.println("signum:CDrone:Landing Mode");
             //this.mob.playSound(ModSounds.CARGODRONE_FLYING_TO_LANDING, 1.0f,1.0f);
             return true;
         }
-        System.out.println("signum:CDrone:Flying Mode");
+        //System.out.println("signum:CDrone:Flying Mode");
         return false;
     }
 

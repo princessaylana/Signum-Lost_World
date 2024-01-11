@@ -30,6 +30,26 @@ public class ModSounds {
     public static SoundEvent CURSEDWOLF_HURT2 = registerSoundEvent("cursedwolf_hurt2");
     public static SoundEvent CURSEDWOLF_HURT3 = registerSoundEvent("cursedwolf_hurt3");
     //
+    public static SoundEvent FALLEN_AMBIENT1 = registerSoundEvent("fallen_ambient1");
+    public static SoundEvent FALLEN_AMBIENT2 = registerSoundEvent("fallen_ambient2");
+    public static SoundEvent FALLEN_AMBIENT3 = registerSoundEvent("fallen_ambient3");
+    public static SoundEvent FALLEN_ATTACK1 = registerSoundEvent("fallen_attack1");
+    public static SoundEvent FALLEN_ATTACK2 = registerSoundEvent("fallen_attack2");
+    public static SoundEvent FALLEN_ATTACK3 = registerSoundEvent("fallen_attack3");
+    public static SoundEvent FALLEN_DEATH1 = registerSoundEvent("fallen_death1");
+    public static SoundEvent FALLEN_DEATH2 = registerSoundEvent("fallen_death2");
+    public static SoundEvent FALLEN_DEATH3 = registerSoundEvent("fallen_death3");
+    public static SoundEvent FALLEN_FLEE1 = registerSoundEvent("fallen_flee1");
+    public static SoundEvent FALLEN_FLEE2 = registerSoundEvent("fallen_flee2");
+    public static SoundEvent FALLEN_FLEE3 = registerSoundEvent("fallen_flee3");
+    public static SoundEvent FALLEN_HURT1 = registerSoundEvent("fallen_hurt1");
+    public static SoundEvent FALLEN_HURT2 = registerSoundEvent("fallen_hurt2");
+    public static SoundEvent FALLEN_HURT3 = registerSoundEvent("fallen_hurt3");
+    public static SoundEvent FALLEN_WARCRY1 = registerSoundEvent("fallen_warcry1");
+    public static SoundEvent FALLEN_WARCRY2 = registerSoundEvent("fallen_warcry2");
+    public static SoundEvent FALLEN_WARCRY3 = registerSoundEvent("fallen_warcry3");
+    public static SoundEvent FALLEN_WARCRY4 = registerSoundEvent("fallen_warcry4");;
+    //
     public static SoundEvent FLOATER_AMBIENT = registerSoundEvent("floater_ambient");
     public static SoundEvent FLOATER_DIE = registerSoundEvent("floater_die");
     public static SoundEvent FLOATER_HURT = registerSoundEvent("floater_hurt");

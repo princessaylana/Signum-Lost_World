@@ -251,6 +251,7 @@
   "entity.signum.cursed_wolf": "Cursed Wolf",
   "entity.signum.pidgeon": "Pidgeon",
   "entity.signum.espider_entity": "Deadly Spider",
+
   "entity.signum.elve_guard_entity": "Elven Soldier",
   "entity.signum.wizard_entity": "Wizard",
   "entity.signum.spellbolt_entity": "Wizard Magick",
@@ -278,6 +279,8 @@
   "entity.signum.gravity_projectile": "Gravity Magick",
   "entity.signum.spiderspit_projectile": "Spider Spit",
   "entity.signum.tiberiumspit_projectile": "Floater Spit",
+
+  "entity.signum.giantespider_entity": "Giant Spider",
 
   "dimension.signum_dim": "SkyLand",
   "dimension.lost_world": "Lost World",

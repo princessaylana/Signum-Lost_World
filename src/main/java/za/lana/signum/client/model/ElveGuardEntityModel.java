@@ -70,7 +70,6 @@ public class ElveGuardEntityModel<T extends ElveGuardEntity> extends SinglePartE
         return TexturedModelData.of(modelData, 128, 128);
     }
 
-
     @Override
     public void setAngles(ElveGuardEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);

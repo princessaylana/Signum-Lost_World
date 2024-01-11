@@ -275,14 +275,11 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(Items.BREAD);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
+        if ((double)this.random.nextFloat() < 0.55) {
             this.dropItem(Items.BONE);
         }
-        if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(Items.LEATHER_HELMET);
+        if ((double)this.random.nextFloat() < 0.45) {
+            this.dropItem(Items.BREAD);
         }
         if ((double)this.random.nextFloat() < 0.35) {
             this.dropItem(ModItems.IRON_COIN);

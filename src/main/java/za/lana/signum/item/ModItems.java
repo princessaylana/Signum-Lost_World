@@ -21,9 +21,9 @@ import za.lana.signum.item.custom.*;
 
 public class ModItems {
     //
-    public static final Item COPPER_COIN = registerItem("copper_coin", new Item(new FabricItemSettings()));
-    public static final Item IRON_COIN = registerItem("iron_coin", new Item(new FabricItemSettings()));
-    public static final Item GOLD_COIN = registerItem("gold_coin", new Item(new FabricItemSettings()));
+    public static final Item COPPER_COIN = registerItem("copper_coin", new CoinItem(new FabricItemSettings()));
+    public static final Item IRON_COIN = registerItem("iron_coin", new CoinItem(new FabricItemSettings()));
+    public static final Item GOLD_COIN = registerItem("gold_coin", new CoinItem(new FabricItemSettings()));
     //
     public static final Item BLACK_DIAMOND_SHARD = registerItem("black_diamond_shard", new Item(new FabricItemSettings()));
     public static final Item BLACK_DIAMOND_CRYSTAL = registerItem("black_diamond_crystal", new Item(new FabricItemSettings()));
@@ -76,6 +76,8 @@ public class ModItems {
     public static final Item MANGANESE_SHOVEL = registerItem("manganese_shovel", new ShovelItem(ModToolMaterials.MANGANESE, 2,3f, new FabricItemSettings()));
     public static final Item MANGANESE_HOE = registerItem("manganese_hoe", new HoeItem(ModToolMaterials.MANGANESE, 1,3f, new FabricItemSettings()));
     public static final Item MANGANESE_SWORD = registerItem("manganese_sword", new SwordItem(ModToolMaterials.MANGANESE, 7,7f, new FabricItemSettings()));
+    public static final Item SPIKED_CLUB = registerItem("spiked_club", new SwordItem(ModToolMaterials.WOOD, 3,3f, new FabricItemSettings()));
+    public static final Item WOODEN_CLUB = registerItem("wooden_club", new SwordItem(ModToolMaterials.WOOD, 2,3.5f, new FabricItemSettings()));
 
     // Armor
     public static final Item STEEL_HELMET = registerItem("steel_helmet",
@@ -148,6 +150,10 @@ public class ModItems {
             ModEntities.TTROOPER_ENTITY, 0x70F427, 0xA3BE40, new FabricItemSettings()));
      public static final Item ESPIDER_SPAWN_EGG = registerItem("espider_spawn_egg", new SpawnEggItem(
             ModEntities.ESPIDER_ENTITY, 0x484240, 0xF03C00, new FabricItemSettings()));
+    public static final Item GIANT_ESPIDER_SPAWN_EGG = registerItem("giant_espider_spawn_egg", new SpawnEggItem(
+            ModEntities.GIANTESPIDER_ENTITY, 0x484240, 0xF03C00, new FabricItemSettings()));
+    public static final Item FALLEN_SPAWN_EGG = registerItem("fallen_spawn_egg", new SpawnEggItem(
+            ModEntities.FALLEN_ENTITY, 0x484240, 0xD64308, new FabricItemSettings()));
 
     // SKELETONS
     //public static final Item SUMSKELETON_SPAWN_EGG = registerItem("sskeleton_spawn_egg", new SpawnEggItem(ModEntities.SSKELETON_ENTITY, 0x70F427, 0x4F4F4F, new FabricItemSettings()));
@@ -219,6 +225,8 @@ public class ModItems {
         entries.add(PIDGEON_SPAWN_EGG);
 
         entries.add(ESPIDER_SPAWN_EGG);
+        entries.add(GIANT_ESPIDER_SPAWN_EGG);
+        entries.add(FALLEN_SPAWN_EGG);
 
         // TIBERIUM
         entries.add(TIBERIUM_WORM_SPAWN_EGG);

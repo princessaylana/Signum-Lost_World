@@ -3,7 +3,7 @@
  * MIT License
  * Lana
  * */
-package za.lana.signum.networking.packet;
+package za.lana.signum.client.networking;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.entity.Entity;

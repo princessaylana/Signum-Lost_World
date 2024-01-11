@@ -190,7 +190,7 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
     }
     @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
-        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(ModItems.WOODEN_CLUB));
         this.equipStack(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
     }
     @Override
@@ -204,9 +204,12 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
     }
     private ItemStack makeInitialWeapon() {
         if ((double)this.random.nextFloat() < 0.5) {
-            return new ItemStack(ModItems.PLASMA_SWORD);
+            return new ItemStack(ModItems.SPIKED_CLUB);
         }
-        return new ItemStack(Items.IRON_SWORD);
+        if ((double)this.random.nextFloat() < 0.25) {
+            return new ItemStack(Items.IRON_SWORD);
+        }
+        return new ItemStack(ModItems.WOODEN_CLUB);
     }
 
     // BURNS IN DAYTIME
@@ -240,15 +243,6 @@ public class EnderSkeletonEntity extends HostileEntity implements InventoryOwner
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(ModItems.ELEMENT_ZERO_DUST);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(Items.BONE);
-        }
-        if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(Items.IRON_SWORD);
-        }
         if ((double)this.random.nextFloat() < 0.35) {
             this.dropItem(ModItems.IRON_COIN);
         }

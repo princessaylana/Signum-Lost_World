@@ -8,10 +8,14 @@ package za.lana.signum.item;
 
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.ItemTags;
+import za.lana.signum.block.ModBlocks;
 
 import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
+    WOOD(0, 59, 2.0f, 0.75f, 26,
+            () -> Ingredient.fromTag(ItemTags.PLANKS)),
     MANGANESE(4, 650, 5.0f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.MANGANESE_INGOT)),
     SIGSTEEL(4, 1200, 8.5f, 3.5f, 26,
@@ -35,11 +39,6 @@ public enum ModToolMaterials implements ToolMaterial {
             () -> Ingredient.ofItems(ModItems.BLACK_DIAMOND_CRYSTAL)),
     ELEMENT_ZERO(4, 750, 7f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.ELEMENT_ZERO_CRYSTAL));
-
-
-
-
-
 
 
 

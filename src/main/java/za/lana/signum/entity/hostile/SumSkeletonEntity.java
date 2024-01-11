@@ -169,11 +169,6 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     }
 
     @Override
-    public SimpleInventory getInventory() {
-        return this.inventory;
-    }
-
-    @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         this.writeInventory(nbt);
@@ -189,7 +184,7 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
 
     @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
-        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(ModItems.WOODEN_CLUB));
         this.equipStack(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
 
         this.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
@@ -197,13 +192,25 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
     }
     private ItemStack makeInitialWeapon() {
         if ((double)this.random.nextFloat() < 0.5) {
+            return new ItemStack(ModItems.SPIKED_CLUB);
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
             return new ItemStack(Items.IRON_SWORD);
         }
-        return new ItemStack(ModItems.TIBERIUM_SWORD);
+        return new ItemStack(ModItems.WOODEN_CLUB);
+    }
+    @Override
+    public SimpleInventory getInventory() {
+        return this.inventory;
     }
     @Override
     public boolean canPickupItem(ItemStack stack) {
         return super.canPickupItem(stack);
+    }
+    @Override
+    protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
+        super.dropEquipment(source, lootingMultiplier, allowDrops);
+        this.dropInventory();
     }
 
     @Override
@@ -216,6 +223,7 @@ public class SumSkeletonEntity extends TameableEntity implements InventoryOwner 
         this.armorDropChances[EquipmentSlot.HEAD.getEntitySlotId()] = 0.0f;
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
+
     @Override
     public void tickMovement() {
         if (this.getWorld().isClient) {

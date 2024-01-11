@@ -301,13 +301,8 @@ public class GhostEntity extends HostileEntity implements Angerable {
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(Items.PHANTOM_MEMBRANE);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(Items.BONE);
-        }
-        if ((double)this.random.nextFloat() < 0.55) {
+
+        if ((double)this.random.nextFloat() < 0.45) {
             this.dropItem(Items.POTION);
         }
         if ((double)this.random.nextFloat() < 0.35) {
@@ -318,6 +313,9 @@ public class GhostEntity extends HostileEntity implements Angerable {
         }
         if ((double)this.random.nextFloat() < 0.15) {
             this.dropItem(ModItems.GOLD_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.05) {
+            this.dropItem(Items.PHANTOM_MEMBRANE);
         }
         //this.dropItem(Items.ROTTEN_FLESH);
     }

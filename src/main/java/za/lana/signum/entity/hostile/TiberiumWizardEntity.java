@@ -335,7 +335,7 @@ public class TiberiumWizardEntity extends HostileEntity implements InventoryOwne
     }
     @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
-        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(ModItems.WOODEN_CLUB));
         this.equipStack(EquipmentSlot.OFFHAND, new ItemStack(ModItems.TIBERIUM_STAFF));
     }
 
@@ -349,22 +349,16 @@ public class TiberiumWizardEntity extends HostileEntity implements InventoryOwne
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
     private ItemStack makeInitialWeapon() {
-        return new ItemStack(Items.IRON_SWORD);
+        if ((double)this.random.nextFloat() < 0.5) {
+            return new ItemStack(ModItems.SPIKED_CLUB);
+        }
+        return new ItemStack(ModItems.WOODEN_CLUB);
     }
 
     @Override
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(ModItems.TIBERIUM_DUST);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(Items.POISONOUS_POTATO);
-        }
-        if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(Items.POTION);
-        }
         if ((double)this.random.nextFloat() < 0.35) {
             this.dropItem(ModItems.IRON_COIN);
         }
@@ -373,6 +367,9 @@ public class TiberiumWizardEntity extends HostileEntity implements InventoryOwne
         }
         if ((double)this.random.nextFloat() < 0.15) {
             this.dropItem(ModItems.GOLD_COIN);
+        }
+        if ((double)this.random.nextFloat() < 0.05) {
+            this.dropItem(ModItems.TIBERIUM_DUST);
         }
         //this.dropItem(Items.ROTTEN_FLESH);
     }

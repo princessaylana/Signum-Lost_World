@@ -168,6 +168,8 @@ public class ModItemGroups {
                         entries.add(ModItems.MANGANESE_SHOVEL);
                         entries.add(ModItems.MANGANESE_SWORD);
                         // WEAPONS
+                        entries.add(ModItems.WOODEN_CLUB);
+                        entries.add(ModItems.SPIKED_CLUB);
                         entries.add(ModItems.PLASMA_SWORD);
                         entries.add(ModItems.TIBERIUM_SWORD);
                         // ARMORS
@@ -209,7 +211,9 @@ public class ModItemGroups {
                         entries.add(ModItems.WIZARD_SPAWN_EGG);
 
                         entries.add(ModItems.ESPIDER_SPAWN_EGG);
+                        entries.add(ModItems.GIANT_ESPIDER_SPAWN_EGG);
                         entries.add(ModItems.GHOST_SPAWN_EGG);
+                        entries.add(ModItems.FALLEN_SPAWN_EGG);
                         //entries.add(ModItems.SUMSKELETON_SPAWN_EGG);
                         entries.add(ModItems.TIBSKELETON_SPAWN_EGG);
                         entries.add(ModItems.ICESKELETON_SPAWN_EGG);

@@ -6,11 +6,11 @@
  * */
 package za.lana.signum.networking;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
+import za.lana.signum.client.networking.AirBalloonInvenC2SPacket;
+import za.lana.signum.client.networking.SignumTestC2SPacket;
 import za.lana.signum.networking.packet.*;
 
 

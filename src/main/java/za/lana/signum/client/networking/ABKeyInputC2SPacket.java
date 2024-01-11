@@ -1,4 +1,4 @@
-package za.lana.signum.networking.packet;
+package za.lana.signum.client.networking;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.LivingEntity;

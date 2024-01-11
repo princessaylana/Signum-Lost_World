@@ -255,14 +255,8 @@ public class TiberiumFloaterEntity
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.75) {
+        if ((double)this.random.nextFloat() < 0.45) {
             this.dropItem(ModItems.TIBERIUM_DUST);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(Items.PHANTOM_MEMBRANE);
-        }
-        if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(Items.SLIME_BALL);
         }
         if ((double)this.random.nextFloat() < 0.35) {
             this.dropItem(ModItems.IRON_COIN);

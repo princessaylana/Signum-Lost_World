@@ -174,7 +174,7 @@ public class DarkSkeletonEntity extends HostileEntity implements InventoryOwner 
     }
     @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
-        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(ModItems.WOODEN_CLUB));
         this.equipStack(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
     }
     @Override
@@ -188,9 +188,12 @@ public class DarkSkeletonEntity extends HostileEntity implements InventoryOwner 
     }
     private ItemStack makeInitialWeapon() {
         if ((double)this.random.nextFloat() < 0.5) {
+            return new ItemStack(ModItems.SPIKED_CLUB);
+        }
+        if ((double)this.random.nextFloat() < 0.25) {
             return new ItemStack(Items.IRON_SWORD);
         }
-        return new ItemStack(ModItems.TIBERIUM_SWORD);
+        return new ItemStack(ModItems.WOODEN_CLUB);
     }
 
     // BURNS IN DAYTIME
@@ -223,15 +226,6 @@ public class DarkSkeletonEntity extends HostileEntity implements InventoryOwner 
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
         this.dropInventory();
-        if ((double)this.random.nextFloat() < 0.75) {
-            this.dropItem(ModItems.BLACK_DIAMOND_SHARD);
-        }
-        if ((double)this.random.nextFloat() < 0.65) {
-            this.dropItem(Items.BONE);
-        }
-        if ((double)this.random.nextFloat() < 0.55) {
-            this.dropItem(Items.IRON_SWORD);
-        }
         if ((double)this.random.nextFloat() < 0.35) {
             this.dropItem(ModItems.IRON_COIN);
         }
@@ -241,6 +235,13 @@ public class DarkSkeletonEntity extends HostileEntity implements InventoryOwner 
         if ((double)this.random.nextFloat() < 0.15) {
             this.dropItem(ModItems.GOLD_COIN);
         }
+        if ((double)this.random.nextFloat() < 0.10) {
+            this.dropItem(ModItems.WOODEN_CLUB);
+        }
+        if ((double)this.random.nextFloat() < 0.05) {
+            this.dropItem(ModItems.SPIKED_CLUB);
+        }
+
         //this.dropItem(Items.ROTTEN_FLESH);
     }
 

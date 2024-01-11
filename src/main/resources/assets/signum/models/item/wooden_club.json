@@ -1,0 +1,105 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "signum:item/weapon/wooden_club_texture",
+		"particle": "signum:item/weapon/wooden_club_texture"
+	},
+	"elements": [
+		{
+			"name": "club",
+			"from": [6.75, 9, 8.75],
+			"to": [9.25, 14, 11.25],
+			"faces": {
+				"north": {"uv": [7.5, 8, 8.5, 10.5], "texture": "#0"},
+				"east": {"uv": [6.5, 8, 7.5, 10.5], "texture": "#0"},
+				"south": {"uv": [9.5, 8, 10.5, 10.5], "texture": "#0"},
+				"west": {"uv": [8.5, 8, 9.5, 10.5], "texture": "#0"},
+				"up": {"uv": [8.5, 8, 7.5, 7], "texture": "#0"},
+				"down": {"uv": [9.5, 7, 8.5, 8], "texture": "#0"}
+			}
+		},
+		{
+			"name": "club",
+			"from": [6.5, 24, 8.5],
+			"to": [9.5, 25, 11.5],
+			"faces": {
+				"north": {"uv": [8, 6, 9.5, 6.5], "texture": "#0"},
+				"east": {"uv": [6.5, 6, 8, 6.5], "texture": "#0"},
+				"south": {"uv": [11, 6, 12.5, 6.5], "texture": "#0"},
+				"west": {"uv": [9.5, 6, 11, 6.5], "texture": "#0"},
+				"up": {"uv": [9.5, 6, 8, 4.5], "texture": "#0"},
+				"down": {"uv": [11, 4.5, 9.5, 6], "texture": "#0"}
+			}
+		},
+		{
+			"name": "club",
+			"from": [6.5, 14, 8.5],
+			"to": [9.5, 19, 11.5],
+			"faces": {
+				"north": {"uv": [1.5, 6, 3, 8.5], "texture": "#0"},
+				"east": {"uv": [0, 6, 1.5, 8.5], "texture": "#0"},
+				"south": {"uv": [4.5, 6, 6, 8.5], "texture": "#0"},
+				"west": {"uv": [3, 6, 4.5, 8.5], "texture": "#0"},
+				"up": {"uv": [3, 6, 1.5, 4.5], "texture": "#0"},
+				"down": {"uv": [4.5, 4.5, 3, 6], "texture": "#0"}
+			}
+		},
+		{
+			"name": "club",
+			"from": [6.25, 19, 8.25],
+			"to": [9.75, 24, 11.75],
+			"faces": {
+				"north": {"uv": [1.5, 1.5, 3, 4], "texture": "#0"},
+				"east": {"uv": [0, 1.5, 1.5, 4], "texture": "#0"},
+				"south": {"uv": [4.5, 1.5, 6, 4], "texture": "#0"},
+				"west": {"uv": [3, 1.5, 4.5, 4], "texture": "#0"},
+				"up": {"uv": [3, 1.5, 1.5, 0], "texture": "#0"},
+				"down": {"uv": [4.5, 0, 3, 1.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "handle",
+			"from": [7, 3, 9],
+			"to": [9, 9, 11],
+			"faces": {
+				"north": {"uv": [7.5, 1, 8.5, 4], "texture": "#0"},
+				"east": {"uv": [6.5, 1, 7.5, 4], "texture": "#0"},
+				"south": {"uv": [9.5, 1, 10.5, 4], "texture": "#0"},
+				"west": {"uv": [8.5, 1, 9.5, 4], "texture": "#0"},
+				"up": {"uv": [8.5, 1, 7.5, 0], "texture": "#0"},
+				"down": {"uv": [9.5, 0, 8.5, 1], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"ground": {
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"gui": {
+			"translation": [0, -4.25, 0],
+			"scale": [1, 0.72266, 1]
+		},
+		"fixed": {
+			"rotation": [0, 0, 45],
+			"translation": [4.75, -4.25, -4]
+		}
+	},
+	"groups": [
+		{
+			"name": "spikedclubmain",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"nbt": "{}",
+			"children": [
+				{
+					"name": "club",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"nbt": "{}",
+					"children": [0, 1, 2, 3, 4]
+				}
+			]
+		}
+	]
+}
