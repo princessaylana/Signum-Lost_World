@@ -20,6 +20,8 @@ import za.lana.signum.entity.ModEntities;
 import za.lana.signum.item.custom.*;
 
 public class ModItems {
+    private static final int crystalDamage = 6;
+    private static final float crystalSpeed = 4.5f;
     //
     public static final Item COPPER_COIN = registerItem("copper_coin", new CoinItem(new FabricItemSettings()));
     public static final Item IRON_COIN = registerItem("iron_coin", new CoinItem(new FabricItemSettings()));
@@ -89,14 +91,104 @@ public class ModItems {
     public static final Item STEEL_BOOTS = registerItem("steel_boots",
             new ArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
+    public static final Item BLACK_DIAMOND_HELMET = registerItem("black_diamond_helmet",
+            new ArmorItem(ModArmorMaterials.BLACK_DIAMOND, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item BLACK_DIAMOND_CHESTPLATE = registerItem("black_diamond_chestplate",
+            new ArmorItem(ModArmorMaterials.BLACK_DIAMOND, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item BLACK_DIAMOND_LEGGINGS = registerItem("black_diamond_leggings",
+            new ArmorItem(ModArmorMaterials.BLACK_DIAMOND, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item BLACK_DIAMOND_BOOTS = registerItem("black_diamond_boots",
+            new ArmorItem(ModArmorMaterials.BLACK_DIAMOND, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+    //
+    public static final Item ELEMENT_ZERO_HELMET = registerItem("element_zero_helmet",
+            new ArmorItem(ModArmorMaterials.ELEMENT_ZERO, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item ELEMENT_ZERO_CHESTPLATE = registerItem("element_zero_chestplate",
+            new ArmorItem(ModArmorMaterials.ELEMENT_ZERO, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item ELEMENT_ZERO_LEGGINGS = registerItem("element_zero_leggings",
+            new ArmorItem(ModArmorMaterials.ELEMENT_ZERO, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item ELEMENT_ZERO_BOOTS = registerItem("element_zero_boots",
+            new ArmorItem(ModArmorMaterials.ELEMENT_ZERO, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+    //
+    public static final Item EXOTIC_HELMET = registerItem("exotic_helmet",
+            new ArmorItem(ModArmorMaterials.EXOTIC, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item EXOTIC_CHESTPLATE = registerItem("exotic_chestplate",
+            new ArmorItem(ModArmorMaterials.EXOTIC, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item EXOTIC_LEGGINGS = registerItem("exotic_leggings",
+            new ArmorItem(ModArmorMaterials.EXOTIC, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item EXOTIC_BOOTS = registerItem("exotic_boots",
+            new ArmorItem(ModArmorMaterials.EXOTIC, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+    //
+    public static final Item FIRE_HELMET = registerItem("fire_helmet",
+            new ArmorItem(ModArmorMaterials.FIRE, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item FIRE_CHESTPLATE = registerItem("fire_chestplate",
+            new ArmorItem(ModArmorMaterials.FIRE, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item FIRE_LEGGINGS = registerItem("fire_leggings",
+            new ArmorItem(ModArmorMaterials.FIRE, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item FIRE_BOOTS = registerItem("fire_boots",
+            new ArmorItem(ModArmorMaterials.FIRE, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+    //
+    public static final Item ICE_HELMET = registerItem("ice_helmet",
+            new ArmorItem(ModArmorMaterials.ICE, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item ICE_CHESTPLATE = registerItem("ice_chestplate",
+            new ArmorItem(ModArmorMaterials.ICE, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item ICE_LEGGINGS = registerItem("ice_leggings",
+            new ArmorItem(ModArmorMaterials.ICE, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item ICE_BOOTS = registerItem("ice_boots",
+            new ArmorItem(ModArmorMaterials.ICE, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+    //
+    public static final Item MOISSANITE_HELMET = registerItem("moissanite_helmet",
+            new ArmorItem(ModArmorMaterials.MOISSANITE, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item MOISSANITE_CHESTPLATE = registerItem("moissanite_chestplate",
+            new ArmorItem(ModArmorMaterials.MOISSANITE, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item MOISSANITE_LEGGINGS = registerItem("moissanite_leggings",
+            new ArmorItem(ModArmorMaterials.MOISSANITE, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item MOISSANITE_BOOTS = registerItem("moissanite_boots",
+            new ArmorItem(ModArmorMaterials.MOISSANITE, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+    //
+    public static final Item QUARTZ_HELMET = registerItem("quartz_helmet",
+            new ArmorItem(ModArmorMaterials.QUARTZ, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item QUARTZ_CHESTPLATE = registerItem("quartz_chestplate",
+            new ArmorItem(ModArmorMaterials.QUARTZ, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item QUARTZ_LEGGINGS = registerItem("quartz_leggings",
+            new ArmorItem(ModArmorMaterials.QUARTZ, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item QUARTZ_BOOTS = registerItem("quartz_boots",
+            new ArmorItem(ModArmorMaterials.QUARTZ, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+    //
+    public static final Item TIBERIUM_HELMET = registerItem("tiberium_helmet",
+            new ArmorItem(ModArmorMaterials.TIBERIUM, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item TIBERIUM_CHESTPLATE = registerItem("tiberium_chestplate",
+            new ArmorItem(ModArmorMaterials.TIBERIUM, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item TIBERIUM_LEGGINGS = registerItem("tiberium_leggings",
+            new ArmorItem(ModArmorMaterials.TIBERIUM, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item TIBERIUM_BOOTS = registerItem("tiberium_boots",
+            new ArmorItem(ModArmorMaterials.TIBERIUM, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+    //
     public static final Item STEEL_SHIELD = registerItem("steel_shield",
             new ShieldItem(new FabricItemSettings().maxDamage(500)));
 
     // Weapons
-    public static final Item PLASMA_SWORD = registerItem("plasma_sword", new SwordItem(ModToolMaterials.ELEMENT_ZERO, 10,6f, new FabricItemSettings()));
-    public static final Item TIBERIUM_SWORD = registerItem("tiberium_sword",
-            new SwordItem(ModToolMaterials.TIBERIUM_CRYSTAL, 10,6f, new FabricItemSettings()));
 
+    public static final Item BLACK_DIAMOND_SWORD = registerItem("black_diamond_sword",
+            new SSwordItem(ModToolMaterials.BLACK_DIAMOND_CRYSTAL, crystalDamage,crystalSpeed, new FabricItemSettings()));
+    public static final Item ELEMENT_ZERO_SWORD = registerItem("element_zero_sword",
+            new SSwordItem(ModToolMaterials.ELEMENT_ZERO, crystalDamage,crystalSpeed, new FabricItemSettings()));
+    public static final Item EXOTIC_CRYSTAL_SWORD = registerItem("exotic_crystal_sword",
+            new SSwordItem(ModToolMaterials.EXOTIC_CRYSTAL, crystalDamage,crystalSpeed, new FabricItemSettings()));
+    public static final Item FIRE_CRYSTAL_SWORD = registerItem("fire_crystal_sword",
+            new SSwordItem(ModToolMaterials.FIRE_CRYSTAL, crystalDamage,crystalSpeed, new FabricItemSettings()));
+    public static final Item ICE_CRYSTAL_SWORD = registerItem("ice_crystal_sword",
+            new SSwordItem(ModToolMaterials.ICE_CRYSTAL, crystalDamage,crystalSpeed, new FabricItemSettings()));
+    public static final Item MOISSANITE_SWORD = registerItem("moissanite_sword",
+            new SSwordItem(ModToolMaterials.MOISSANITE_CRYSTAL, crystalDamage,crystalSpeed, new FabricItemSettings()));
+    public static final Item PLASMA_SWORD = registerItem("plasma_sword",
+            new SSwordItem(ModToolMaterials.ELEMENT_ZERO, crystalDamage,crystalSpeed, new FabricItemSettings()));
+    public static final Item QUARTZ_CRYSTAL_SWORD = registerItem("quartz_crystal_sword",
+            new SSwordItem(ModToolMaterials.QUARTZ_CRYSTAL, crystalDamage,crystalSpeed, new FabricItemSettings()));
+    public static final Item TIBERIUM_SWORD = registerItem("tiberium_sword",
+            new SSwordItem(ModToolMaterials.TIBERIUM_CRYSTAL, crystalDamage,crystalSpeed, new FabricItemSettings()));
+
+
+    //
     public static final Item TIBERIUM_STAFF = registerItem("tiberium_staff",
             new TiberiumStaff(ModToolMaterials.TIBERIUM_CRYSTAL, new FabricItemSettings()));
     public static final Item FREEZE_STAFF = registerItem("freeze_staff",
@@ -253,8 +345,55 @@ public class ModItems {
         entries.add(STEEL_LEGGINGS);
         entries.add(STEEL_BOOTS);
 
+        entries.add(BLACK_DIAMOND_HELMET);
+        entries.add(BLACK_DIAMOND_CHESTPLATE);
+        entries.add(BLACK_DIAMOND_LEGGINGS);
+        entries.add(BLACK_DIAMOND_BOOTS);
+
+        entries.add(ELEMENT_ZERO_HELMET);
+        entries.add(ELEMENT_ZERO_CHESTPLATE);
+        entries.add(ELEMENT_ZERO_LEGGINGS);
+        entries.add(ELEMENT_ZERO_BOOTS);
+
+        entries.add(EXOTIC_HELMET);
+        entries.add(EXOTIC_CHESTPLATE);
+        entries.add(EXOTIC_LEGGINGS);
+        entries.add(EXOTIC_BOOTS);
+
+        entries.add(FIRE_HELMET);
+        entries.add(FIRE_CHESTPLATE);
+        entries.add(FIRE_LEGGINGS);
+        entries.add(FIRE_BOOTS);
+
+        entries.add(ICE_HELMET);
+        entries.add(ICE_CHESTPLATE);
+        entries.add(ICE_LEGGINGS);
+        entries.add(ICE_BOOTS);
+
+        entries.add(MOISSANITE_HELMET);
+        entries.add(MOISSANITE_CHESTPLATE);
+        entries.add(MOISSANITE_LEGGINGS);
+        entries.add(MOISSANITE_BOOTS);
+
+        entries.add(QUARTZ_HELMET);
+        entries.add(QUARTZ_CHESTPLATE);
+        entries.add(QUARTZ_LEGGINGS);
+        entries.add(QUARTZ_BOOTS);
+
+        entries.add(TIBERIUM_HELMET);
+        entries.add(TIBERIUM_CHESTPLATE);
+        entries.add(TIBERIUM_LEGGINGS);
+        entries.add(TIBERIUM_BOOTS);
+
         entries.add(MANGANESE_SWORD);
 
+        entries.add(BLACK_DIAMOND_SWORD);
+        entries.add(ELEMENT_ZERO_SWORD);
+        entries.add(EXOTIC_CRYSTAL_SWORD);
+        entries.add(FIRE_CRYSTAL_SWORD);
+        entries.add(ICE_CRYSTAL_SWORD);
+        entries.add(MOISSANITE_SWORD);
+        entries.add(QUARTZ_CRYSTAL_SWORD);
         entries.add(PLASMA_SWORD);
         entries.add(TIBERIUM_SWORD);
 

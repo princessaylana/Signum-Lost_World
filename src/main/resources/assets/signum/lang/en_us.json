@@ -59,12 +59,60 @@
   "item.signum.manganese_shovel": "Manganese Shovel",
   "item.signum.manganese_sword": "Manganese Sword",
 
+  "item.signum.black_diamond_sword": "Death Sword",
+  "item.signum.element_zero_sword": "Gravity Sword",
+  "item.signum.exotic_crystal_sword": "Transmute Sword",
+  "item.signum.fire_crystal_sword": "Fire Crystal Sword",
+  "item.signum.ice_crystal_sword": "Ice Crystal Sword",
+  "item.signum.moissanite_sword": "Moissanite Sword",
   "item.signum.plasma_sword": "Plasma Sword",
+  "item.signum.quartz_crystal_sword": "Quartz Crystal Sword",
+  "item.signum.tiberium_sword": "Tiberium Sword",
 
   "item.signum.steel_helmet": "Steel Helmet",
   "item.signum.steel_chestplate": "Steel Chestplate",
   "item.signum.steel_leggings": "Steel Leggings",
   "item.signum.steel_boots": "Steel Boots",
+
+  "item.signum.black_diamond_helmet": "Black Diamond Helmet",
+  "item.signum.black_diamond_chestplate": "Black Diamond Chestplate",
+  "item.signum.black_diamond_leggings": "Black Diamond Leggings",
+  "item.signum.black_diamond_boots": "Black Diamond Boots",
+
+  "item.signum.element_zero_helmet": "Element Zero Helmet",
+  "item.signum.element_zero_chestplate": "Element Zero Chestplate",
+  "item.signum.element_zero_leggings": "Element Zero Leggings",
+  "item.signum.element_zero_boots": "Element Zero Boots",
+
+  "item.signum.exotic_helmet": "Exotic Helmet",
+  "item.signum.exotic_chestplate": "Exotic Chestplate",
+  "item.signum.exotic_leggings": "Exotic Leggings",
+  "item.signum.exotic_boots": "Exotic Boots",
+
+  "item.signum.fire_helmet": "Fire Helmet",
+  "item.signum.fire_chestplate": "Fire Chestplate",
+  "item.signum.fire_leggings": "Fire Leggings",
+  "item.signum.fire_boots": "Fire Boots",
+
+  "item.signum.ice_helmet": "Ice Helmet",
+  "item.signum.ice_chestplate": "Ice Chestplate",
+  "item.signum.ice_leggings": "Ice Leggings",
+  "item.signum.ice_boots": "Ice Boots",
+
+  "item.signum.moissanite_helmet": "Moissanite Helmet",
+  "item.signum.moissanite_chestplate": "Moissanite Chestplate",
+  "item.signum.moissanite_leggings": "Moissanite Leggings",
+  "item.signum.moissanite_boots": "Moissanite Boots",
+
+  "item.signum.quartz_helmet": "Quartz Helmet",
+  "item.signum.quartz_chestplate": "Quartz Chestplate",
+  "item.signum.quartz_leggings": "Quartz Leggings",
+  "item.signum.quartz_boots": "Quartz Boots",
+
+  "item.signum.tiberium_helmet": "Tiberium Helmet",
+  "item.signum.tiberium_chestplate": "Tiberium Chestplate",
+  "item.signum.tiberium_leggings": "Tiberium Leggings",
+  "item.signum.tiberium_boots": "Tiberium Boots",
 
   "item.signum.tiberium_staff": "Tiberium Staff",
   "item.signum.tiberium_staff.info": "Magic Staff that Poisons Targets",
@@ -93,7 +141,6 @@
   "item.signum.mixed_mushroom_stew": "Mixed Mushroom Stew",
 
   "item.signum.detector_item": "Ore Detector",
-  "item.signum.tiberium_sword": "Tiberium Sword",
   "item.signum.detector_item.info": "Item Used to Test Ore WorldGen",
   "item.signum.rotten_flesh_on_a_stick": "Rotten Flesh on a Stick",
 
@@ -318,9 +365,7 @@
   "key.signum.flyup":"Fly Up",
   "key.signum.flydown":"Fly Down",
   "key.signum.shift": "Press Shift for Info",
-
-
-
+  
   "sounds.signum.snowy_wind": "Freezing Cold"
 
 }

@@ -5,12 +5,16 @@
  * */
 package za.lana.signum.effect;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import za.lana.signum.particle.ModParticles;
+import za.lana.signum.sound.ModSounds;
 import za.lana.signum.tag.ModEntityTypeTags;
 
 public class TiberiumPoison extends StatusEffect {
@@ -25,6 +29,9 @@ public class TiberiumPoison extends StatusEffect {
         if (this == ModEffects.TIBERIUM_POISON) {
             if (entity.getHealth() > 1.0f && !entity.getType().isIn(ModEntityTypeTags.TIBERIUM_TYPE)) {
                 entity.damage(entity.getDamageSources().magic(), 2.0f);
+                World level = entity.getWorld();
+                spawnParticles(entity, level);
+                entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
 
             } else if (entity.getType().isIn(ModEntityTypeTags.TIBERIUM_TYPE)){
                 if (entity.getHealth() < entity.getMaxHealth()) {
@@ -58,5 +65,13 @@ public class TiberiumPoison extends StatusEffect {
             level.getEntitiesByClass(LivingEntity.class, victim.getBoundingBox().expand(3.0), e->true).forEach(e->e
                     .addStatusEffect(new StatusEffectInstance(ModEffects.TIBERIUM_POISON, DURATION_TPOISON, 1), victim));
         }
+    }
+    private static void spawnParticles(Entity victim, World world){
+        double e = victim.getX();
+        double f = victim.getY();
+        double g = victim.getZ();
+        int y = (int) victim.getY();
+        world.addParticle(ModParticles.TIBERIUM_PARTICLE, victim.getX() + e, victim.getY() + f, victim.getZ() + g,
+                0.5f, Math.cos(y * 20) * 0.15d, 0.5F);
     }
 }

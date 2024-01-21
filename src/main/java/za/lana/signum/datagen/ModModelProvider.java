@@ -136,7 +136,45 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem)ModItems.STEEL_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem)ModItems.STEEL_BOOTS));
 
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.BLACK_DIAMOND_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.BLACK_DIAMOND_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.BLACK_DIAMOND_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.BLACK_DIAMOND_BOOTS));
 
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.ELEMENT_ZERO_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.ELEMENT_ZERO_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.ELEMENT_ZERO_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.ELEMENT_ZERO_BOOTS));
+
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.EXOTIC_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.EXOTIC_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.EXOTIC_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.EXOTIC_BOOTS));
+
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.FIRE_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.FIRE_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.FIRE_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.FIRE_BOOTS));
+
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.ICE_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.ICE_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.ICE_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.ICE_BOOTS));
+
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.MOISSANITE_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.MOISSANITE_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.MOISSANITE_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.MOISSANITE_BOOTS));
+
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.QUARTZ_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.QUARTZ_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.QUARTZ_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.QUARTZ_BOOTS));
+
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.TIBERIUM_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.TIBERIUM_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.TIBERIUM_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.TIBERIUM_BOOTS));
 
     }
 }

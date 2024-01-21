@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "signum:element_zero_crystal"
+    }
+  },
+  "result": {
+    "item": "signum:element_zero_helmet"
+  }
+}

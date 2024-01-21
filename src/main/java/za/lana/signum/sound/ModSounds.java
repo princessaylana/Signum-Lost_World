@@ -101,6 +101,11 @@ public class ModSounds {
     public static SoundEvent WIZARD_HELP1 = registerSoundEvent("wizard_help1");
     public static SoundEvent WIZARD_HELP2 = registerSoundEvent("wizard_help2");
     public static SoundEvent WIZARD_HELP3 = registerSoundEvent("wizard_help3");
+    public static SoundEvent FREEZE_EFFECT = registerSoundEvent("freeze_effect");
+    public static SoundEvent GRAVITY_EFFECT = registerSoundEvent("gravity_effect");
+    public static SoundEvent HEALING_EFFECT = registerSoundEvent("healing_effect");
+    public static SoundEvent SHOCK_EFFECT = registerSoundEvent("shock_effect");
+    public static SoundEvent TRANSMUTE_EFFECT = registerSoundEvent("transmute_effect");
 
     public static final BlockSoundGroup TIBERIUM_BLOCK_SOUNDS = new BlockSoundGroup(1f, 1f,
             ModSounds.TIBERIUM_BREAK, ModSounds.TIBERIUM_WALK, ModSounds.TIBERIUM_PLACE,

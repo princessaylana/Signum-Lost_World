@@ -170,6 +170,13 @@ public class ModItemGroups {
                         // WEAPONS
                         entries.add(ModItems.WOODEN_CLUB);
                         entries.add(ModItems.SPIKED_CLUB);
+                        entries.add(ModItems.BLACK_DIAMOND_SWORD);
+                        entries.add(ModItems.ELEMENT_ZERO_SWORD);
+                        entries.add(ModItems.EXOTIC_CRYSTAL_SWORD);
+                        entries.add(ModItems.FIRE_CRYSTAL_SWORD);
+                        entries.add(ModItems.ICE_CRYSTAL_SWORD);
+                        entries.add(ModItems.MOISSANITE_SWORD);
+                        entries.add(ModItems.QUARTZ_CRYSTAL_SWORD);
                         entries.add(ModItems.PLASMA_SWORD);
                         entries.add(ModItems.TIBERIUM_SWORD);
                         // ARMORS
@@ -177,6 +184,46 @@ public class ModItemGroups {
                         entries.add(ModItems.STEEL_CHESTPLATE);
                         entries.add(ModItems.STEEL_LEGGINGS);
                         entries.add(ModItems.STEEL_BOOTS);
+
+                        entries.add(ModItems.BLACK_DIAMOND_HELMET);
+                        entries.add(ModItems.BLACK_DIAMOND_CHESTPLATE);
+                        entries.add(ModItems.BLACK_DIAMOND_LEGGINGS);
+                        entries.add(ModItems.BLACK_DIAMOND_BOOTS);
+
+                        entries.add(ModItems.ELEMENT_ZERO_HELMET);
+                        entries.add(ModItems.ELEMENT_ZERO_CHESTPLATE);
+                        entries.add(ModItems.ELEMENT_ZERO_LEGGINGS);
+                        entries.add(ModItems.ELEMENT_ZERO_BOOTS);
+
+                        entries.add(ModItems.EXOTIC_HELMET);
+                        entries.add(ModItems.EXOTIC_CHESTPLATE);
+                        entries.add(ModItems.EXOTIC_LEGGINGS);
+                        entries.add(ModItems.EXOTIC_BOOTS);
+
+                        entries.add(ModItems.FIRE_HELMET);
+                        entries.add(ModItems.FIRE_CHESTPLATE);
+                        entries.add(ModItems.FIRE_LEGGINGS);
+                        entries.add(ModItems.FIRE_BOOTS);
+
+                        entries.add(ModItems.ICE_HELMET);
+                        entries.add(ModItems.ICE_CHESTPLATE);
+                        entries.add(ModItems.ICE_LEGGINGS);
+                        entries.add(ModItems.ICE_BOOTS);
+
+                        entries.add(ModItems.MOISSANITE_HELMET);
+                        entries.add(ModItems.MOISSANITE_CHESTPLATE);
+                        entries.add(ModItems.MOISSANITE_LEGGINGS);
+                        entries.add(ModItems.MOISSANITE_BOOTS);
+
+                        entries.add(ModItems.QUARTZ_HELMET);
+                        entries.add(ModItems.QUARTZ_CHESTPLATE);
+                        entries.add(ModItems.QUARTZ_LEGGINGS);
+                        entries.add(ModItems.QUARTZ_BOOTS);
+
+                        entries.add(ModItems.TIBERIUM_HELMET);
+                        entries.add(ModItems.TIBERIUM_CHESTPLATE);
+                        entries.add(ModItems.TIBERIUM_LEGGINGS);
+                        entries.add(ModItems.TIBERIUM_BOOTS);
                         // STAFFS
                         entries.add(ModItems.TIBERIUM_STAFF);
                         entries.add(ModItems.FIRE_STAFF);

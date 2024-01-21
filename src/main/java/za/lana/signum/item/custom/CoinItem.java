@@ -19,6 +19,9 @@ import za.lana.signum.item.ModItems;
 import java.util.List;
 
 public class CoinItem extends Item {
+    public int COPPER_VALUE = 1;
+    public int IRON_VALUE = 2;
+    public int GOLD_VALUE = 5;
 
     public CoinItem(Settings settings) {
         super(settings);
@@ -26,15 +29,15 @@ public class CoinItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (this == ModItems.COPPER_COIN){
-            tooltip.add(Text.literal("1 Credit")
+            tooltip.add(Text.literal("Credits " + stack.getCount() * COPPER_VALUE)
                     .fillStyle(Style.EMPTY.withColor(Formatting.GOLD)));
         }
         if (this == ModItems.IRON_COIN){
-            tooltip.add(Text.literal("2 Credits")
+            tooltip.add(Text.literal("Credits " + stack.getCount() * IRON_VALUE)
                     .fillStyle(Style.EMPTY.withColor(Formatting.GOLD)));
         }
         if (this == ModItems.GOLD_COIN){
-            tooltip.add(Text.literal("5 Credits")
+            tooltip.add(Text.literal("Credits " + stack.getCount() * GOLD_VALUE)
                     .fillStyle(Style.EMPTY.withColor(Formatting.GOLD)));
         }
         super.appendTooltip(stack, world, tooltip, context);

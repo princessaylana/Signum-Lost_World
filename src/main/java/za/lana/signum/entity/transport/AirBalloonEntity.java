@@ -55,11 +55,13 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
+import za.lana.signum.client.networking.AirballoonVec3SyncPacket;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.event.KeyInputHandler;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.networking.packet.ABKeyInputSyncS2CPacket;
+import za.lana.signum.networking.packet.AirballoonVec3SyncS2CPacket;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.screen.AirBalloonScreenHandler;
 import za.lana.signum.sound.ModSounds;
@@ -239,10 +241,21 @@ public class AirBalloonEntity
     }
     // SHAPE
     public static boolean canCollide(Entity entity, Entity other) {
-        return (other.isCollidable() || other.isPushable()) && !entity.isConnectedThroughVehicle(other);
+        if (other.isCollidable() || other.isPushable()){
+            other.pushAwayFrom(entity);
+            other.velocityModified = true;
+            return true;
+            /**
+            if ((other instanceof LivingEntity)) {
+                other.damage(entity.getDamageSources().mobAttack((LivingEntity) entity), 6.0F);
+                return true;
+            }
+             **/
+        }
+        return false;
     }
     public boolean isPushable() {
-        return true;
+        return false;
     }
     public boolean collidesWith(Entity other) {
         return canCollide(this, other);
@@ -317,6 +330,7 @@ public class AirBalloonEntity
             if (getWorld() instanceof ServerWorld world && hasPassengers())
                 for (ServerPlayerEntity player : PlayerLookup.tracking(world, getBlockPos())) {
                     ABKeyInputSyncS2CPacket.send(player, this);
+                    AirballoonVec3SyncS2CPacket.send(player, this);
                 }
         }
         if(this.getWorld().isClient()) {
@@ -361,6 +375,9 @@ public class AirBalloonEntity
                         y = (float) T;
                         increaseHeat(getEntityWorld(), getBlockPos());
                         //
+                    } if (isFlyUpPressed && this.isOnGround()){
+                        this.jump();
+                        return;
                     }
                 }
                 // Float slowly down in Air

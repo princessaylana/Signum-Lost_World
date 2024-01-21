@@ -9,9 +9,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import za.lana.signum.particle.ModParticles;
+import za.lana.signum.sound.ModSounds;
 
 public class BurnEffect extends StatusEffect {
     private final int SEC = 2; // seconds = burntime
@@ -31,10 +33,9 @@ public class BurnEffect extends StatusEffect {
 
             World level = pLivingEntity.getWorld();
             pLivingEntity.setOnFireFor(SEC);
-            // is below needed?
-            // pLivingEntity.damage(pLivingEntity.getDamageSources().inFire(), 2.0f);
             spreadBurn(pLivingEntity, level);
             level.addParticle(ModParticles.FLAME_PARTICLE, x, y, z, 0.0F, 0.5F, 0.0F);
+           pLivingEntity.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 2F, 2F);
         }
         super.applyUpdateEffect(pLivingEntity, pAmplifier);
     }

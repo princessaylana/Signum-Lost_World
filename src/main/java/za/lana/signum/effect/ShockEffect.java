@@ -29,7 +29,7 @@ public class ShockEffect extends StatusEffect {
                 victim.damage(victim.getDamageSources().magic(), 2.0f);
                 World level = victim.getWorld();
                 spawnParticles(victim, level);
-                victim.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+                victim.playSound(ModSounds.SHOCK_EFFECT, 2F, 2F);
             }
             if (!victim.getWorld().isClient()) {
                 World level = victim.getWorld();

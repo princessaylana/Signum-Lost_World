@@ -31,11 +31,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import za.lana.signum.effect.ModEffects;
+import za.lana.signum.item.ModItems;
 
 public class SSwordItem
 extends ToolItem
 implements Vanishable {
     private final float attackDamage;
+
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
     // TODO WIP
@@ -71,9 +73,32 @@ implements Vanishable {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {;
         if (target instanceof LivingEntity) {
-            target.addStatusEffect((new StatusEffectInstance(StatusEffects.GLOWING, 10, 0)));
+            if (stack.isOf(ModItems.BLACK_DIAMOND_SWORD)){
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.GRAVITY_EFFECT, 60 * 2 , 1 / 4)));
+            }
+            if (stack.isOf(ModItems.ELEMENT_ZERO_SWORD)){
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.GRAVITY_EFFECT, 60 * 2 , 1 / 4)));
+            }
+            if (stack.isOf(ModItems.EXOTIC_CRYSTAL_SWORD)){
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
+            }
+            if (stack.isOf(ModItems.FIRE_CRYSTAL_SWORD)){
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.BURN_EFFECT, 60 * 2 , 1 / 4)));
+            }
+            if (stack.isOf(ModItems.ICE_CRYSTAL_SWORD)){
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.FREEZE_EFFECT, 60 * 2 , 1 / 4)));
+            }
+
+            if (stack.isOf(ModItems.QUARTZ_CRYSTAL_SWORD)){
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.SHOCK_EFFECT, 60 * 2 , 1 / 4)));
+            }
+            if (stack.isOf(ModItems.TIBERIUM_SWORD)){
             target.addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
-            target.playSound(SoundEvents.BLOCK_GLASS_HIT, 2F, 2F); // plays a sound for the entity hit only
+            }
+            if (stack.isOf(ModItems.MOISSANITE_SWORD)){
+                attacker.addStatusEffect((new StatusEffectInstance(ModEffects.HEALING_EFFECT, 60 * 2 , 1 / 4)));
+            }
+            target.playSound(SoundEvents.ENTITY_ARROW_HIT, 2F, 2F); // plays a sound for the entity hit only
         }
         stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
         return true;
@@ -100,17 +125,5 @@ implements Vanishable {
         return super.getAttributeModifiers(slot);
     }
 
-    protected void onEntityHit(EntityHitResult entityHitResult){
-        //super.onEntityHit(entityHitResult);
-        Entity entity = entityHitResult.getEntity();
-        int i = entity instanceof EndermanEntity ? 6 : 0;
-        if (entity instanceof LivingEntity) {
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.GLOWING, 10, 0)));
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
-            entity.playSound(SoundEvents.BLOCK_GLASS_HIT, 2F, 2F); // plays a sound for the entity hit only
-            //entity.damage(getWorld().getDamageSources().magic(), 1.5f * 2);
-            //this.discard();
-        }
-    }
 }
 

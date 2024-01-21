@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "sword",
+  "pattern": [
+    " W ",
+    " W ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "signum:stainless_steel_ingot"
+    },
+    "W": {
+      "item": "signum:ice_crystal"
+    }
+  },
+  "result": {
+    "item": "signum:ice_crystal_sword",
+    "count": 1
+  }
+}

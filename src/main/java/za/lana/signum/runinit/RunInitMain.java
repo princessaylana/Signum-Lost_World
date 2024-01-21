@@ -20,6 +20,10 @@ import za.lana.signum.entity.transport.AirShipEntity;
 import za.lana.signum.entity.transport.CargoDroneEntity;
 import za.lana.signum.item.ModFuels;
 import za.lana.signum.item.ModItems;
+import za.lana.signum.networking.ModMessages;
+import za.lana.signum.networking.packet.ABKeyInputC2SPacket;
+import za.lana.signum.networking.packet.AirballoonVec3SyncS2CPacket;
+import za.lana.signum.tag.ModBlockTags;
 
 public class RunInitMain {
     public static void registerInits(){
@@ -29,6 +33,8 @@ public class RunInitMain {
         registerStrippableBlocks();
         registerFlammableBlocks();
         registerBlockEntities();
+        registerModTags();
+        registerSignumPackets();
         Signum.LOGGER.debug("RUNINIT for " + Signum.MOD_ID);
     }
     private static void createLostWorldPortal(){
@@ -89,6 +95,12 @@ public class RunInitMain {
     public static void registerBlockEntities(){
         ModBlockEntities.registerBlockEntities();
         ModBlockEntities.registerLibGuiBlockEntities();
-
+    }
+    public static void registerModTags(){
+        ModBlockTags.registerModBlockTags();
+    }
+    public static void registerSignumPackets(){
+        ABKeyInputC2SPacket.init();
+        ModMessages.registerC2SPackets();
     }
 }

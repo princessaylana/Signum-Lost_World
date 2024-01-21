@@ -27,6 +27,7 @@ import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.*;
 import za.lana.signum.client.networking.ABKeyInputPacket;
 import za.lana.signum.client.networking.ABKeyInputSyncPacket;
+import za.lana.signum.client.networking.AirballoonVec3SyncPacket;
 import za.lana.signum.client.renderer.dimension.LostWorldRenderer;
 import za.lana.signum.client.renderer.entity.*;
 import za.lana.signum.client.renderer.transport.AirBalloonRenderer;
@@ -54,6 +55,7 @@ public class SignumClient implements ClientModInitializer {
 
         KeyInputHandler.register();
         ModMessages.registerS2CPackets();
+        AirballoonVec3SyncPacket.recieve();
         ModModelPredicateProvider.registerModModels();
 
         // TRANSLUCENT

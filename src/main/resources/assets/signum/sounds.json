@@ -586,5 +586,40 @@
       "signum:wizard_help3"
     ],
     "volume":"0.15"
+  },
+  "freeze_effect": {
+    "subtitle": "sounds.signum.freeze_effect",
+    "sounds": [
+      "signum:freeze_effect"
+    ],
+    "volume":"0.15"
+  },
+  "gravity_effect": {
+    "subtitle": "sounds.signum.gravity_effect",
+    "sounds": [
+      "signum:gravity_effect"
+    ],
+    "volume":"0.15"
+  },
+  "shock_effect": {
+    "subtitle": "sounds.signum.shock_effect",
+    "sounds": [
+      "signum:shock_effect"
+    ],
+    "volume":"0.15"
+  },
+  "heal_effect": {
+    "subtitle": "sounds.signum.heal_effect",
+    "sounds": [
+      "signum:heal_effect"
+    ],
+    "volume":"0.15"
+  },
+  "transmute_effect": {
+    "subtitle": "sounds.signum.transmute_effect",
+    "sounds": [
+      "signum:transmute_effect"
+    ],
+    "volume":"0.15"
   }
 }

@@ -9,8 +9,8 @@ package za.lana.signum.networking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
-import za.lana.signum.client.networking.AirBalloonInvenC2SPacket;
-import za.lana.signum.client.networking.SignumTestC2SPacket;
+import za.lana.signum.networking.packet.AirBalloonInvenC2SPacket;
+import za.lana.signum.networking.packet.SignumTestC2SPacket;
 import za.lana.signum.networking.packet.*;
 
 
@@ -29,8 +29,7 @@ public class ModMessages {
     }
     // server to client
     public static void registerS2CPackets() {
-        //ClientPlayNetworking.registerGlobalReceiver(NBT_SC_SYNCPACKET, NBTSyncS2CPacket::recieve);
-        //ClientPlayNetworking.registerGlobalReceiver(ITEM_SYNC, ItemStackSyncS2CPacket::receive);
+
     }
 
 }

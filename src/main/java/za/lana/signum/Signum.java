@@ -16,7 +16,7 @@ import za.lana.signum.entity.ModEntities;
 import za.lana.signum.item.ModItemGroups;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.networking.ModMessages;
-import za.lana.signum.client.networking.ABKeyInputC2SPacket;
+import za.lana.signum.networking.packet.ABKeyInputC2SPacket;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.recipe.ModRecipes;
 import za.lana.signum.runinit.RunInitMain;
@@ -52,10 +52,9 @@ public class Signum implements ModInitializer {
 		ModEffects.RegisterEffects();
 		ModSounds.registerModSounds();
 
-		ModMessages.registerC2SPackets();
+
 		GuiScreens.registerGuiScreens();
 
-		ABKeyInputC2SPacket.init();
 
 		LOGGER.info("Server Initialized " + Signum.MOD_ID +":Lost World");
 	}

@@ -9,6 +9,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import za.lana.signum.entity.transport.AirBalloonEntity;
+import za.lana.signum.networking.packet.ABKeyInputC2SPacket;
 
 @Environment(EnvType.CLIENT)
 public class ABKeyInputPacket {
@@ -22,7 +23,6 @@ public class ABKeyInputPacket {
                     buf.writeBoolean(airBalloon.isFlyDownPressed);
                     buf.writeInt(airBalloon.getId());
                     ClientPlayNetworking.send(ABKeyInputC2SPacket.ABKEY_INPUT_PACKET, buf);
-                    //client.player.sendMessage(Text.literal("Fly Key was pressed!"), false);
                 }
         });
     }
