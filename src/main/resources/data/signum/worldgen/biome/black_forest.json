@@ -61,6 +61,12 @@
         "weight": 50,
         "minCount": 2,
         "maxCount": 4
+      },
+      {
+        "type": "signum:espider_entity",
+        "weight": 30,
+        "minCount": 4,
+        "maxCount": 6
       }
     ],
     "misc": [],

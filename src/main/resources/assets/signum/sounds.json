@@ -621,5 +621,12 @@
       "signum:transmute_effect"
     ],
     "volume":"0.15"
+  },
+  "zedvending_block": {
+    "subtitle": "sounds.signum.zedvending_block",
+    "sounds": [
+      "signum:zedvending_block"
+    ],
+    "volume":"0.15"
   }
 }

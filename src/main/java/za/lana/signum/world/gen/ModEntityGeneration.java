@@ -28,10 +28,10 @@ public class ModEntityGeneration {
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CursedWolfEntity::isValidNaturalSpawn);
         //
         // DEATH LANDS BIOME
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.DEATH_LANDS), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.DEATH_LANDS), SpawnGroup.CREATURE,
                 ModEntities.ESPIDER_ENTITY, 50, 2, 4);
         SpawnRestriction.register(ModEntities.ESPIDER_ENTITY, SpawnRestriction.Location.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ESpiderEntity::canSpawnIgnoreLightLevel);
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ESpiderEntity::isValidNaturalSpawn);
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.DEATH_LANDS), SpawnGroup.MONSTER,
                 ModEntities.GHOST, 50, 2, 4);

@@ -16,16 +16,19 @@ import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 
 public class BurnEffect extends StatusEffect {
-    private final int SEC = 2; // seconds = burntime
-    private final int SIZE = 2; // block size of spread
+    private final static int SEC = 2; // seconds = burntime
+    private final static int SIZE = 2; // block size of spread
     //public static final int GROW_CHANCE = 5;
     private final int DURATION_BURN = 100; // duration & random ticks
+    private int soundTimer = 0;
     public BurnEffect(StatusEffectCategory statusEffectCategory, int color) {
         super(statusEffectCategory, color);
+
     }
 
     @Override
     public void applyUpdateEffect(LivingEntity pLivingEntity, int pAmplifier) {
+        soundTimer--;
         if (!pLivingEntity.getWorld().isClient()) {
             double x = pLivingEntity.getX();
             double y = pLivingEntity.getY();
@@ -35,7 +38,7 @@ public class BurnEffect extends StatusEffect {
             pLivingEntity.setOnFireFor(SEC);
             spreadBurn(pLivingEntity, level);
             level.addParticle(ModParticles.FLAME_PARTICLE, x, y, z, 0.0F, 0.5F, 0.0F);
-           pLivingEntity.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 2F, 2F);
+            //pLivingEntity.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 2F, 1.0F);
         }
         super.applyUpdateEffect(pLivingEntity, pAmplifier);
     }

@@ -106,6 +106,7 @@ public class ModSounds {
     public static SoundEvent HEALING_EFFECT = registerSoundEvent("healing_effect");
     public static SoundEvent SHOCK_EFFECT = registerSoundEvent("shock_effect");
     public static SoundEvent TRANSMUTE_EFFECT = registerSoundEvent("transmute_effect");
+    public static SoundEvent ZEDVENDING_BLOCK = registerSoundEvent("zedvending_block");
 
     public static final BlockSoundGroup TIBERIUM_BLOCK_SOUNDS = new BlockSoundGroup(1f, 1f,
             ModSounds.TIBERIUM_BREAK, ModSounds.TIBERIUM_WALK, ModSounds.TIBERIUM_PLACE,

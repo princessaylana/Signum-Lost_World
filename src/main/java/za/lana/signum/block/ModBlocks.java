@@ -323,10 +323,10 @@ public class ModBlocks {
 
     public static final Block SKYFORGE = registerBlock("skyforge",
             new SkyForgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
-    public static final Block DRONEBOX_BLOCK = registerBlock("dronebox_block",
-            new DroneBoxBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block VAULT_BLOCK = registerBlock("vault_block",
             new VaultBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
+    public static final Block ZEDVENDING_BLOCK = registerBlock("zedvending_block",
+            new ZedVendingBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
     public static final Block EXAMPLE_BLOCK = registerBlock("example_block",
             new ExampleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
 

@@ -31,7 +31,7 @@ public class TiberiumPoison extends StatusEffect {
                 entity.damage(entity.getDamageSources().magic(), 2.0f);
                 World level = entity.getWorld();
                 spawnParticles(entity, level);
-                entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
+                //entity.playSound(ModSounds.TIBERIUM_HIT, 2F, 2F);
 
             } else if (entity.getType().isIn(ModEntityTypeTags.TIBERIUM_TYPE)){
                 if (entity.getHealth() < entity.getMaxHealth()) {

@@ -33,15 +33,16 @@
       }
     ],
     "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [
+    "creature": [
       {
         "type": "signum:espider_entity",
-        "weight": 50,
+        "weight": 75,
         "minCount": 4,
-        "maxCount": 6
-      },
+        "maxCount": 8
+      }
+    ],
+    "misc": [],
+    "monster": [
       {
         "type": "signum:ghost",
         "weight": 50,

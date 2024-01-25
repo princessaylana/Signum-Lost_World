@@ -260,6 +260,7 @@ public class ModItemGroups {
                         entries.add(ModItems.ESPIDER_SPAWN_EGG);
                         entries.add(ModItems.GIANT_ESPIDER_SPAWN_EGG);
                         entries.add(ModItems.GHOST_SPAWN_EGG);
+                        //entries.add(ModItems.TORTURED_SOUL_SPAWN_EGG);
                         entries.add(ModItems.FALLEN_SPAWN_EGG);
                         //entries.add(ModItems.SUMSKELETON_SPAWN_EGG);
                         entries.add(ModItems.TIBSKELETON_SPAWN_EGG);
@@ -276,8 +277,7 @@ public class ModItemGroups {
                         // BLOCKENTITIES
                         entries.add(ModBlocks.SKYFORGE);
                         entries.add(ModBlocks.VAULT_BLOCK);
-                        // ENABLE TO TEST DRONE
-                        //entries.add(ModBlocks.DRONEBOX_BLOCK);
+                        entries.add(ModBlocks.ZEDVENDING_BLOCK);
 
                         //TODO: BELOW TO BE REMOVED - FOR TESTING ONLY
                         entries.add(ModBlocks.EXAMPLE_BLOCK);

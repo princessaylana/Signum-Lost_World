@@ -206,6 +206,9 @@ public class SignumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GHOST_ENTITY, GhostEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GHOST, GhostEntityRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TORTURED_SOUL_ENTITY, TorturedSoulEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.TORTURED_SOUL, TorturedSoulRenderer::new);
+
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.TIBERIUM_FLOATER, TiberiumFloaterEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TIBERIUM_FLOATER, TiberiumFloaterEntityRenderer::new);
 
@@ -259,9 +262,6 @@ public class SignumClient implements ClientModInitializer {
         // LIBGUI SCREENS
         HandledScreens.<ExampleDescription, CottonInventoryScreen<ExampleDescription>>register(
                 GuiScreens.EXAMPLE_GUI, ExampleBlockScreen::new);
-        HandledScreens.<DroneBoxDescription, CottonInventoryScreen<DroneBoxDescription>>register(
-                GuiScreens.DRONEBOX_GUI, DroneBoxBlockScreen::new);
-
         // SHADERS
         //SignumShaders.register();
         LOGGER.info("Client Initialized " + Signum.MOD_ID +":Lost World");

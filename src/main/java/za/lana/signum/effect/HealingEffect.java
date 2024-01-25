@@ -23,7 +23,7 @@ class HealingEffect
             entity.heal(1.0f);
             World level = entity.getWorld();
             spawnParticles(entity, level);
-            entity.playSound(ModSounds.HEALING_EFFECT, 2F, 2F);
+            //entity.playSound(ModSounds.HEALING_EFFECT, 2F, 2F);
         }
     }
 

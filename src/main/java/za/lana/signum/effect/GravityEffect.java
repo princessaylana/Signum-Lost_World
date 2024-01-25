@@ -33,7 +33,7 @@ public class GravityEffect extends StatusEffect {
                 entity.addStatusEffect((new StatusEffectInstance(StatusEffects.LEVITATION, 60, 1/2)));
                 World level = entity.getWorld();
                 spawnParticles(entity, level);
-                entity.playSound(ModSounds.GRAVITY_EFFECT, 2F, 2F);
+                //entity.playSound(ModSounds.GRAVITY_EFFECT, 2F, 2F);
 
             }
         }

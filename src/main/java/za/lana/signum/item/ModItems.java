@@ -92,7 +92,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
     public static final Item BLACK_DIAMOND_HELMET = registerItem("black_diamond_helmet",
-            new ArmorItem(ModArmorMaterials.BLACK_DIAMOND, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.BLACK_DIAMOND, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item BLACK_DIAMOND_CHESTPLATE = registerItem("black_diamond_chestplate",
             new ArmorItem(ModArmorMaterials.BLACK_DIAMOND, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item BLACK_DIAMOND_LEGGINGS = registerItem("black_diamond_leggings",
@@ -101,7 +101,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.BLACK_DIAMOND, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
     public static final Item ELEMENT_ZERO_HELMET = registerItem("element_zero_helmet",
-            new ArmorItem(ModArmorMaterials.ELEMENT_ZERO, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.ELEMENT_ZERO, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item ELEMENT_ZERO_CHESTPLATE = registerItem("element_zero_chestplate",
             new ArmorItem(ModArmorMaterials.ELEMENT_ZERO, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item ELEMENT_ZERO_LEGGINGS = registerItem("element_zero_leggings",
@@ -110,7 +110,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.ELEMENT_ZERO, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
     public static final Item EXOTIC_HELMET = registerItem("exotic_helmet",
-            new ArmorItem(ModArmorMaterials.EXOTIC, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.EXOTIC, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item EXOTIC_CHESTPLATE = registerItem("exotic_chestplate",
             new ArmorItem(ModArmorMaterials.EXOTIC, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item EXOTIC_LEGGINGS = registerItem("exotic_leggings",
@@ -119,7 +119,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.EXOTIC, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
     public static final Item FIRE_HELMET = registerItem("fire_helmet",
-            new ArmorItem(ModArmorMaterials.FIRE, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.FIRE, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item FIRE_CHESTPLATE = registerItem("fire_chestplate",
             new ArmorItem(ModArmorMaterials.FIRE, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item FIRE_LEGGINGS = registerItem("fire_leggings",
@@ -128,7 +128,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.FIRE, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
     public static final Item ICE_HELMET = registerItem("ice_helmet",
-            new ArmorItem(ModArmorMaterials.ICE, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.ICE, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item ICE_CHESTPLATE = registerItem("ice_chestplate",
             new ArmorItem(ModArmorMaterials.ICE, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item ICE_LEGGINGS = registerItem("ice_leggings",
@@ -137,7 +137,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.ICE, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
     public static final Item MOISSANITE_HELMET = registerItem("moissanite_helmet",
-            new ArmorItem(ModArmorMaterials.MOISSANITE, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.MOISSANITE, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item MOISSANITE_CHESTPLATE = registerItem("moissanite_chestplate",
             new ArmorItem(ModArmorMaterials.MOISSANITE, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item MOISSANITE_LEGGINGS = registerItem("moissanite_leggings",
@@ -146,7 +146,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.MOISSANITE, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
     public static final Item QUARTZ_HELMET = registerItem("quartz_helmet",
-            new ArmorItem(ModArmorMaterials.QUARTZ, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.QUARTZ, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item QUARTZ_CHESTPLATE = registerItem("quartz_chestplate",
             new ArmorItem(ModArmorMaterials.QUARTZ, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item QUARTZ_LEGGINGS = registerItem("quartz_leggings",
@@ -155,7 +155,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.QUARTZ, ArmorItem.Type.BOOTS, new FabricItemSettings()));
     //
     public static final Item TIBERIUM_HELMET = registerItem("tiberium_helmet",
-            new ArmorItem(ModArmorMaterials.TIBERIUM, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.TIBERIUM, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item TIBERIUM_CHESTPLATE = registerItem("tiberium_chestplate",
             new ArmorItem(ModArmorMaterials.TIBERIUM, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item TIBERIUM_LEGGINGS = registerItem("tiberium_leggings",
@@ -228,6 +228,8 @@ public class ModItems {
 
     public static final Item GHOST_SPAWN_EGG = registerItem("ghost_spawn_egg", new SpawnEggItem(
             ModEntities.GHOST, 0x444342, 0x857D7C, new FabricItemSettings()));
+    public static final Item TORTURED_SOUL_SPAWN_EGG = registerItem("tortured_soul_spawn_egg", new SpawnEggItem(
+            ModEntities.TORTURED_SOUL, 0x444342, 0x857D7C, new FabricItemSettings()));
     public static final Item AIRBALOON_SPAWN_EGG = registerItem("airballoon_spawn_egg", new SpawnEggItem(
             ModEntities.AIRBALLOON, 0xD83E36, 0x1D0550, new FabricItemSettings()));
 
@@ -328,6 +330,7 @@ public class ModItems {
 
         // OTHER
         entries.add(GHOST_SPAWN_EGG);
+        entries.add(TORTURED_SOUL_SPAWN_EGG);
         //entries.add(SUMSKELETON_SPAWN_EGG);
         entries.add(TIBSKELETON_SPAWN_EGG);
         entries.add(ICESKELETON_SPAWN_EGG);

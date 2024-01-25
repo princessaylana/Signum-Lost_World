@@ -104,6 +104,10 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "ghost"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GhostEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
+    public static final EntityType<TorturedSoulEntity> TORTURED_SOUL = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tortured_soul"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TorturedSoulEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 2.0f)).build());
     // SKELETONS
     public static final EntityType<TibSkeletonEntity> TIBSKELETON_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "tibskeleton_entity"),

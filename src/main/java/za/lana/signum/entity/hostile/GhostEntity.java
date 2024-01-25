@@ -8,7 +8,6 @@ package za.lana.signum.entity.hostile;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.util.ParticleUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.ai.TargetPredicate;
@@ -16,7 +15,6 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -24,15 +22,12 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.*;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -41,7 +36,6 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.item.ModItems;
@@ -49,6 +43,7 @@ import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -90,7 +85,11 @@ public class GhostEntity extends HostileEntity implements Angerable {
         this.targetSelector.add(1, new GhostEntity.TeleportTowardsPlayerGoal(this, this::shouldAngerAt));
         this.targetSelector.add(1, new GhostEntity.TeleportTowardsEntityGoal(this, this::shouldAngerAt));
         this.targetSelector.add(2, new RevengeGoal(this));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+
+        ItemStack itemStack = (Objects.requireNonNull(this.getTarget())).getEquippedStack(EquipmentSlot.HEAD);
+        if(!itemStack.isOf(ModItems.BLACK_DIAMOND_HELMET)){
+            this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        }
 
         this.initCustomTargets();
     }
@@ -369,14 +368,14 @@ public class GhostEntity extends HostileEntity implements Angerable {
             this.ageWhenTargetSet = this.age;
         }
     }
-    protected boolean teleportRandomly() {
+    protected void teleportRandomly() {
         if (this.getWorld().isClient() || !this.isAlive()) {
-            return false;
+            return;
         }
         double d = this.getX() + (this.random.nextDouble() - 0.5) * 64.0;
         double e = this.getY() + (double)(this.random.nextInt(64) - 32);
         double f = this.getZ() + (this.random.nextDouble() - 0.5) * 64.0;
-        return this.teleportTo(d, e, f);
+        this.teleportTo(d, e, f);
     }
     boolean teleportTo(Entity entity) {
         Vec3d vec3d = new Vec3d(this.getX() - entity.getX(), this.getBodyY(0.5) - entity.getEyeY(), this.getZ() - entity.getZ());
@@ -439,6 +438,11 @@ public class GhostEntity extends HostileEntity implements Angerable {
         @Override
         public boolean canStart() {
             this.targetPlayer = this.ghost.getWorld().getClosestPlayer(this.staringPlayerPredicate, this.ghost);
+            assert this.targetPlayer != null;
+            ItemStack itemStack = this.targetPlayer.getEquippedStack(EquipmentSlot.HEAD);
+            if(itemStack.isOf(ModItems.BLACK_DIAMOND_HELMET)){
+                return false;
+            }
             return this.targetPlayer != null;
         }
 
@@ -523,8 +527,12 @@ public class GhostEntity extends HostileEntity implements Angerable {
 
         @Override
         public boolean canStart() {
-            //this.targetPlayer = this.ghost.getWorld().getClosestPlayer(this.staringPlayerPredicate, this.ghost);
             this.targetPlayer = this.ghost.getTarget();
+            assert this.targetPlayer != null;
+            ItemStack itemStack = this.targetPlayer.getEquippedStack(EquipmentSlot.HEAD);
+            if(itemStack.isOf(ModItems.BLACK_DIAMOND_HELMET)){
+                return false;
+            }
             return this.targetPlayer != null;
         }
 
@@ -610,6 +618,11 @@ public class GhostEntity extends HostileEntity implements Angerable {
             }
             double d = this.target.squaredDistanceTo(this.ghost);
             if (d > 256.0) {
+                return false;
+            }
+            assert this.target != null;
+            ItemStack itemStack = this.target.getEquippedStack(EquipmentSlot.HEAD);
+            if(itemStack.isOf(ModItems.BLACK_DIAMOND_HELMET)){
                 return false;
             }
             return this.ghost.isPlayerStaring((PlayerEntity)this.target);

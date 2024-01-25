@@ -26,7 +26,7 @@ public class TransmuteEffect extends StatusEffect {
             target.damage(target.getDamageSources().magic(), i);
             World level = target.getWorld();
             spawnParticles(target, level);
-            target.playSound(ModSounds.TRANSMUTE_EFFECT, 2F, 2F);
+            //target.playSound(ModSounds.TRANSMUTE_EFFECT, 2F, 2F);
         }
     }
     private static void spawnParticles(Entity victim, World world){
