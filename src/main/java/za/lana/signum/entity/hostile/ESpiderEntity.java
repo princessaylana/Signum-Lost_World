@@ -23,23 +23,32 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
+import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.ModEntityGroup;
 import za.lana.signum.entity.ai.ESpiderAttackGoal;
 import za.lana.signum.entity.ai.MonsterFindHomeGoal;
@@ -49,9 +58,14 @@ import za.lana.signum.sound.ModSounds;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
-public class ESpiderEntity extends HostileEntity implements Mount {
+public class ESpiderEntity extends TameableEntity implements Mount{
     private int eatingTime;
+    @Nullable
+    private UUID ownerUuid;
+
     public int attackAniTimeout = 0;
     public int spitAniTimeout = 0;
     private int idleAniTimeout = 0;
@@ -172,7 +186,7 @@ public class ESpiderEntity extends HostileEntity implements Mount {
         // SPIDERS MUST KILL AND EAT VANILLA ZOMBIES
         this.targetSelector.add(3, new ESpiderEntity.TargetGoal<>(this, ZombieEntity.class));
 
-        if (level.isNight()) {
+        if (level.isNight() && !this.isTamed()) {
             this.goalSelector.add(3, new MonsterFindHomeGoal(this, 1.05f, 32));
             this.goalSelector.add(4, new SearchAndDestroyGoal(this, 10.0f));
             this.targetSelector.add(4, new ESpiderEntity.TargetGoal<>(this, PlayerEntity.class));
@@ -187,8 +201,10 @@ public class ESpiderEntity extends HostileEntity implements Mount {
         this.goalSelector.add(2, new AvoidSunlightGoal(this));
     }
     protected void initCustomTargets() {
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, false,
-                entity -> entity instanceof LivingEntity && entity.getGroup() == ModEntityGroup.TEAM_LIGHT));
+        if (!this.isTamed()) {
+            this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, false,
+                    entity -> entity instanceof LivingEntity && entity.getGroup() == ModEntityGroup.TEAM_LIGHT));
+        }
     }
 
     public void setAttacking(boolean attacking) {
@@ -223,10 +239,12 @@ public class ESpiderEntity extends HostileEntity implements Mount {
     }
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
+        nbt.putUuid("Owner", this.getOwnerUuid());
     }
 
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
+        nbt.getUuid("Owner");
     }
 
     // SOUNDS
@@ -311,22 +329,69 @@ public class ESpiderEntity extends HostileEntity implements Mount {
     public boolean isBreedingItem(ItemStack stack) {
         return BREEDING_INGREDIENT.test(stack);
     }
+    @Nullable
+    public ESpiderEntity createChild(ServerWorld serverWorld, PassiveEntity passiveEntity) {
+        ESpiderEntity eSpider = ModEntities.ESPIDER_ENTITY.create(serverWorld);
+        if (eSpider != null) {
+            UUID uUID = this.getOwnerUuid();
+            if (uUID != null) {
+                eSpider.setOwnerUuid(uUID);
+                eSpider.setTamed(true);
+            }
+        }
+        return eSpider;
+    }
 
     private boolean canEat(ItemStack stack) {
         return stack.getItem().isFood() && this.getTarget() == null && this.isOnGround();
     }
 
-    // RIDEABLE
-    @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getStackInHand(hand);
-        if(hand == Hand.MAIN_HAND && !isBreedingItem(itemstack)) {
-            if(!player.isSneaking() && this.getAttacker() == null) {
-                setRiding(player);
+        ItemStack itemStack = player.getStackInHand(hand);
+        Item item = itemStack.getItem();
+        if (this.getWorld().isClient) {
+            boolean tryEatItem = this.isOwner(player) || this.isTamed() || itemStack.isOf(Items.ROTTEN_FLESH) && !this.isTamed();
+            return tryEatItem ? ActionResult.CONSUME : ActionResult.PASS;
+        } else {
+            ActionResult actionResult;
+            {
+                if (this.isTamed()) {
+                    if (this.isBreedingItem(itemStack) && this.getHealth() < this.getMaxHealth()) {
+                        if (!player.getAbilities().creativeMode) {
+                            itemStack.decrement(1);
+                        }
+                        this.heal((float) Objects.requireNonNull(item.getFoodComponent()).getHunger());
+                        return ActionResult.SUCCESS;
+                    }
+                    if(this.isOwner(player) && !player.isSneaking() && this.getAttacker() == null) {
+                        setRiding(player);
+                        return ActionResult.SUCCESS;
+                    }
+                    actionResult = super.interactMob(player, hand);
+                    if (this.isOwner(player) && player.isSneaking() && !actionResult.isAccepted() || this.isBaby()) {
+                        this.setSitting(!this.isSitting());
+                    }
+                    return actionResult;
+
+                } else if (itemStack.isOf(Items.ROTTEN_FLESH)) {
+                    if (!player.getAbilities().creativeMode) {
+                        itemStack.decrement(1);
+                    }
+                    if (this.random.nextInt(3) == 0) {
+                        this.setOwner(player);
+                        this.navigation.stop();
+                        this.setTarget(null);
+                        this.setSitting(true);
+                        this.getWorld().sendEntityStatus(this, (byte)7);
+                    } else {
+                        this.getWorld().sendEntityStatus(this, (byte)6);
+                    }
+
+                    return ActionResult.SUCCESS;
+                }
+                return super.interactMob(player, hand);
             }
-            return ActionResult.SUCCESS;
         }
-        return super.interactMob(player, hand);
     }
 
     @Nullable
@@ -430,6 +495,20 @@ public class ESpiderEntity extends HostileEntity implements Mount {
             this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.TIBERIUM_HIT, this.getSoundCategory(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
         }
         this.getWorld().spawnEntity(spiderSpit);
+    }
+
+    @Nullable
+    public UUID getOwnerUuid() {
+        return this.ownerUuid;
+    }
+
+    public void setOwnerUuid(@Nullable UUID ownerUuid) {
+        this.ownerUuid = ownerUuid;
+    }
+
+    @Override
+    public EntityView method_48926() {
+        return this.getWorld();
     }
 
 

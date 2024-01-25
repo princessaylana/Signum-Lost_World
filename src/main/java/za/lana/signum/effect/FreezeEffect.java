@@ -26,7 +26,7 @@ public class FreezeEffect extends StatusEffect {
             pLivingEntity.setInPowderSnow(true);
             World level = pLivingEntity.getWorld();
             spawnParticles(pLivingEntity, level);
-            pLivingEntity.playSound(ModSounds.FREEZE_EFFECT, 2F, 2F);
+           // pLivingEntity.playSound(ModSounds.FREEZE_EFFECT, 2F, 2F);
         }
         super.applyUpdateEffect(pLivingEntity, pAmplifier);
     }

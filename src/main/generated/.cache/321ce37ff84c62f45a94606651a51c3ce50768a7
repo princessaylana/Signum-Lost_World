@@ -1,4 +1,4 @@
-// 1.20.2	2024-01-21T23:18:55.693896306	Signum/Model Definitions
+// 1.20.2	2024-01-23T19:11:44.091244824	Signum/Model Definitions
 88b548a134391820dd75dfa08b67ae3608acfe9d assets/signum/models/item/moissanite_leggings_netherite_trim.json
 95aa014c4e0f1ea2ec9e6d34f2b6cbf8e1de7c94 assets/signum/models/item/ice_boots_diamond_trim.json
 e6fd3488990c52139996b01678eb49bf5fe2aca1 assets/signum/models/item/manganese_dust.json
@@ -31,8 +31,8 @@ c4a262b28a92223b3dd605469b3a52317bac3fc4 assets/signum/models/item/moissanite_he
 90ada6a0d13674ffae79016ddf2b5deb792eaefc assets/signum/models/item/ice_helmet_redstone_trim.json
 a5a53e11c5c99d017e9b732ffbaf6f8c9cc3ff57 assets/signum/models/item/quartz_chestplate_emerald_trim.json
 49566a3e31e17ffc0e6ba037332f40b1ff13dc11 assets/signum/models/item/tiberium_boots_redstone_trim.json
-ad9db99ec635050afb01e11d03d71c0801c28b24 assets/signum/models/item/steel_chestplate_emerald_trim.json
 97bd2a82d34ae1007ad2900c79f28f6c8d0bc4ef assets/signum/models/item/exotic_boots_netherite_trim.json
+ad9db99ec635050afb01e11d03d71c0801c28b24 assets/signum/models/item/steel_chestplate_emerald_trim.json
 2f615725e406ce08b55b7a839f3ac32ccdfb7004 assets/signum/models/item/moissanite_chestplate.json
 677c29e8c1389405d6cd7ea8a41c7c4dd413a44c assets/signum/models/item/quartz_boots_diamond_trim.json
 fb8efca061a47be071abd5c6554d5cd62d759309 assets/signum/models/item/element_zero_boots_gold_trim.json

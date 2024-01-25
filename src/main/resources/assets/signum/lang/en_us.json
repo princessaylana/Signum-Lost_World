@@ -42,6 +42,7 @@
 
   "item.signum.element_zero_crystal": "Element Zero Crystal",
   "item.signum.moissanite_crystal": "Moissanite Crystal",
+  "item.signum.ender_crystal": "Ender Crystal",
 
   "item.signum.manganese_dust": "Manganese Dust",
   "item.signum.tiberium_dust": "Tiberium Dust",
@@ -58,6 +59,9 @@
   "item.signum.manganese_pickaxe": "Manganese Pickaxe",
   "item.signum.manganese_shovel": "Manganese Shovel",
   "item.signum.manganese_sword": "Manganese Sword",
+
+  "item.signum.wooden_club": "Wooden Club",
+  "item.signum.spiked_club": "Spiked Club",
 
   "item.signum.black_diamond_sword": "Death Sword",
   "item.signum.element_zero_sword": "Gravity Sword",
@@ -160,7 +164,9 @@
   "item.signum.unicorn_spawn_egg": "Unicorn Spawn Egg",
   "item.signum.cursed_wolf_spawn_egg": "Cursed Wolf Spawn Egg",
   "item.signum.espider_spawn_egg": "Evolved Spider Egg",
+  "item.signum.giant_espider_spawn_egg": "Giant Evolved Spider Egg",
   "item.signum.ghost_spawn_egg": "Ghost Spawn Egg",
+  "item.signum.fallen_spawn_egg": "Fallen Spawn Egg",
   "item.signum.pidgeon_spawn_egg": "Pidgeon Spawn Egg",
 
   "item.signum.elve_guard_spawn_egg": "Elve Guard Spawn Egg",
@@ -261,6 +267,7 @@
   "block.signum.frosted_sky_ice_block": "Frosted Sky Ice",
   "block.signum.ash_block": "Ash Block",
   "block.signum.blight_block": "Blight Block",
+  "block.signum.airship_landing_block": "Airship Landing Block",
   "block.signum.rock_block": "Rock Block",
   "block.signum.rainbow_marble": "Rainbow Marble Block",
   "block.signum.spiderweb_block": "Spiderweb Block",
@@ -282,6 +289,9 @@
   "block.signum.vault_block.test": "Success Test",
   "block.signum.vault.tooltip": "Keep all your belongings safe from others",
   "block.signum.vault.tooltip2": "Only you can open or break your vault",
+
+  "block.signum.zedvending_block": "Zeds Medical Vending Machine",
+  "block.signum.zed_block.screen": "Zeds Dispensary",
 
   "block.signum.dronebox_block": "DroneBox Block",
   "block.signum.dronebox_block.screen": "DroneBox",
@@ -310,6 +320,8 @@
   "entity.signum.tiberium_worm": "Tiberium Worm",
   "entity.signum.tiberium_floater": "Tiberium Floater",
   "entity.signum.ghost": "Ghost",
+  "entity.signum.fallen_entity": "Fallen",
+  "entity.signum.tortured_soul": "Tortured Soul",
 
   "entity.signum.sskeleton_entity": "Summoned Skeleton",
   "entity.signum.tibskeleton_entity": "Tiberium Skeleton",
@@ -326,6 +338,7 @@
   "entity.signum.gravity_projectile": "Gravity Magick",
   "entity.signum.spiderspit_projectile": "Spider Spit",
   "entity.signum.tiberiumspit_projectile": "Floater Spit",
+
 
   "entity.signum.giantespider_entity": "Giant Spider",
 
@@ -350,6 +363,8 @@
   "effect.signum.transmute_effect": "Transmute Effect",
 
   "example_gui.signum.examplebutton":"Send",
+  "zedvending_gui.signum.buy_button": "Buy",
+  "zedvending_gui.signum.refund_button": "Refund",
   "message.signum.airballoon.mount":"Press Y to go up, B to go down, H for Airballoon Inventory",
   "message.signum.airballoon.empty":"Out of Fuel",
   "message.signum.airballoon.wind":"Winds are Blowing",

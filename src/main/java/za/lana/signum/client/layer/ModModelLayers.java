@@ -56,6 +56,8 @@ public class ModModelLayers {
 
     public static final EntityModelLayer GHOST_ENTITY =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "ghost_entity"), "mainBody");
+    public static final EntityModelLayer TORTURED_SOUL_ENTITY =
+            new EntityModelLayer(new Identifier(Signum.MOD_ID, "tortured_soul_entity"), "mainBody");
 
     public static final EntityModelLayer WIZARD_ENTITY =
             new EntityModelLayer(new Identifier(Signum.MOD_ID, "wizard_entity"), "mainBody");

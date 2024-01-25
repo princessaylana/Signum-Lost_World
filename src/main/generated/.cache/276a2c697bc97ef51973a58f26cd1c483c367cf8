@@ -1,4 +1,4 @@
-// 1.20.2	2024-01-21T23:18:55.717902727	Signum/Block Loot Tables
+// 1.20.2	2024-01-23T19:11:44.132467012	Signum/Block Loot Tables
 1850f726862d4a4b7d962cfcb634d86f3a549f55 data/signum/loot_tables/blocks/budding_quartz_crystal.json
 bbf09d87467d9cd4a2f52f56e9bd2d77bb018256 data/signum/loot_tables/blocks/soulwood_leaves.json
 09ef9489a63be5731ba43d88c7bd8f7a8e0792c7 data/signum/loot_tables/blocks/endstone_manganese_ore.json
@@ -71,6 +71,7 @@ d555e7e3fbdedc541eddb4505bc30d5d367d896d data/signum/loot_tables/blocks/manganes
 9a593fde8e4c00fd5c9a35c798589b6894c7359e data/signum/loot_tables/blocks/deepslate_black_diamond_ore.json
 a93f0eb1bb32f7515310b4ca43c2c36ed18b0b57 data/signum/loot_tables/blocks/spiderweb_block.json
 03e174b525f9778f0721e762117a007e6740b0cf data/signum/loot_tables/blocks/black_diamond_block.json
+234c9eca7e86352870743718a4a5fc6dbb92bd6d data/signum/loot_tables/blocks/zedvending_block.json
 95fbec5493f968a5f8dd51880e3fe2705404edd8 data/signum/loot_tables/blocks/fire_crystal_block.json
 db05198d280b1e5100337769c47aab296716333a data/signum/loot_tables/blocks/large_fire_crystal_bud.json
 72f0a1eb77c5882110a0e002849188bde508d39d data/signum/loot_tables/blocks/purple_shroom_block.json

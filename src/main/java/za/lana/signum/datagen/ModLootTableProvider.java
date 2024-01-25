@@ -49,6 +49,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(ModBlocks.RAZORWIRE_BLOCK);
         addDrop(ModBlocks.SKYFORGE);
+        addDrop(ModBlocks.ZEDVENDING_BLOCK);
 
         //silk touch ad normal drop
         addDrop(ModBlocks.ELEMENT_ZERO_ORE, uncommonOreDrops(ModBlocks.ELEMENT_ZERO_ORE, ModItems.RAW_ELEMENT_ZERO));

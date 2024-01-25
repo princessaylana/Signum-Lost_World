@@ -38,7 +38,6 @@ public class Signum implements ModInitializer {
 		ModItems.registerModItems();
 
 		ModBlocks.registerModBlocks();
-		//ModBlockEntities.registerBlockEntities();
 
 		ModRecipes.registerRecipes();
 		ModScreenHandlers.registerScreenHandler();
@@ -52,9 +51,7 @@ public class Signum implements ModInitializer {
 		ModEffects.RegisterEffects();
 		ModSounds.registerModSounds();
 
-
 		GuiScreens.registerGuiScreens();
-
 
 		LOGGER.info("Server Initialized " + Signum.MOD_ID +":Lost World");
 	}

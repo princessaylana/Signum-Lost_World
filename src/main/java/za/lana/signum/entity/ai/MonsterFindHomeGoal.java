@@ -1,9 +1,12 @@
 package za.lana.signum.entity.ai;
 
 import com.google.common.collect.Lists;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.NoPenaltyTargeting;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -21,14 +24,14 @@ import java.util.Optional;
 public class MonsterFindHomeGoal
         extends Goal {
     protected final Random random = Random.create();
-    private final HostileEntity mob;
+    private final MobEntity mob;
     private final double speed;
     private BlockPos home;
     private final List<BlockPos> lastHomes = Lists.newArrayList();
     private final int distance;
     private boolean finished;
 
-    public MonsterFindHomeGoal(HostileEntity mob, double speed, int distance) {
+    public MonsterFindHomeGoal(MobEntity mob, double speed, int distance) {
         this.mob = mob;
         this.speed = speed;
         this.distance = distance;
@@ -89,9 +92,9 @@ public class MonsterFindHomeGoal
     public void tick() {
         if (this.mob.getNavigation().isIdle()) {
             Vec3d vec3d = Vec3d.ofBottomCenter(this.home);
-            Vec3d vec3d2 = NoPenaltyTargeting.findTo(this.mob, 16, 7, vec3d, 0.3141592741012573);
+            Vec3d vec3d2 = NoPenaltyTargeting.findTo((PathAwareEntity) this.mob, 16, 7, vec3d, 0.3141592741012573);
             if (vec3d2 == null) {
-                vec3d2 = NoPenaltyTargeting.findTo(this.mob, 8, 7, vec3d, 1.5707963705062866);
+                vec3d2 = NoPenaltyTargeting.findTo((PathAwareEntity) this.mob, 8, 7, vec3d, 1.5707963705062866);
             }
             if (vec3d2 == null) {
                 this.finished = true;

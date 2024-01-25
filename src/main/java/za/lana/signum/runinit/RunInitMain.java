@@ -64,6 +64,7 @@ public class RunInitMain {
         FabricDefaultAttributeRegistry.register(ModEntities.ESPIDER_ENTITY, ESpiderEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.GIANTESPIDER_ENTITY, ESpiderEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.GHOST, GhostEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.TORTURED_SOUL, TorturedSoulEntity.setAttributes());
 
 
         FabricDefaultAttributeRegistry.register(ModEntities.SSKELETON_ENTITY, SumSkeletonEntity.setAttributes());

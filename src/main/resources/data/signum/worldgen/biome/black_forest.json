@@ -61,10 +61,22 @@
         "weight": 50,
         "minCount": 2,
         "maxCount": 4
+      },
+      {
+        "type": "signum:espider_entity",
+        "weight": 30,
+        "minCount": 4,
+        "maxCount": 6
       }
     ],
     "misc": [],
     "monster": [
+      {
+        "type": "signum:fallen_entity",
+        "weight": 75,
+        "minCount": 6,
+        "maxCount": 12
+      },
       {
         "type": "minecraft:zombie",
         "weight": 95,

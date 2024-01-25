@@ -2,7 +2,7 @@
  * SIGNUM
  * MIT License
  * Lana
- * 2023
+ * 2024
  * */
 package za.lana.signum.item.custom;
 
@@ -10,33 +10,34 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.Vanishable;
+import net.minecraft.item.*;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import za.lana.signum.effect.ModEffects;
+import za.lana.signum.entity.ModEntities;
+import za.lana.signum.entity.hostile.TorturedSoulEntity;
 import za.lana.signum.item.ModItems;
 
 public class SSwordItem
 extends ToolItem
 implements Vanishable {
     private final float attackDamage;
+    private final static int duration = 60 * 2;
+    private final static int amplifier = 2;
 
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
@@ -71,32 +72,49 @@ implements Vanishable {
     }
 
     @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {;
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        World level = attacker.getWorld();
+        Random random = attacker.getRandom();
         if (target instanceof LivingEntity) {
+
             if (stack.isOf(ModItems.BLACK_DIAMOND_SWORD)){
-                target.addStatusEffect((new StatusEffectInstance(ModEffects.GRAVITY_EFFECT, 60 * 2 , 1 / 4)));
+
+                TorturedSoulEntity torturedSoul = ModEntities.TORTURED_SOUL.spawn(((ServerWorld) attacker.getWorld()), target.getBlockPos(), SpawnReason.TRIGGERED);
+                assert torturedSoul != null;
+                if (!(target instanceof TorturedSoulEntity)
+                        && !(target instanceof EnderDragonEntity)
+                        && !(target instanceof WitherEntity)
+                        && !(target instanceof PlayerEntity)){
+                    if (random.nextFloat() < 0.25) {
+                        level.spawnEntity(torturedSoul);
+                        torturedSoul.setOwner((PlayerEntity) attacker);
+                        target.discard();
+                    }
+                }if (target instanceof TorturedSoulEntity || target instanceof PlayerEntity || target instanceof EnderDragonEntity || target instanceof WitherEntity){
+                    target.addStatusEffect((new StatusEffectInstance(ModEffects.DEATH_EFFECT, duration, amplifier)));
+                }
             }
             if (stack.isOf(ModItems.ELEMENT_ZERO_SWORD)){
-                target.addStatusEffect((new StatusEffectInstance(ModEffects.GRAVITY_EFFECT, 60 * 2 , 1 / 4)));
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.GRAVITY_EFFECT, duration, amplifier)));
             }
             if (stack.isOf(ModItems.EXOTIC_CRYSTAL_SWORD)){
-                target.addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, 60 * 2 , 1 / 4)));
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.TRANSMUTE_EFFECT, duration, amplifier)));
             }
             if (stack.isOf(ModItems.FIRE_CRYSTAL_SWORD)){
-                target.addStatusEffect((new StatusEffectInstance(ModEffects.BURN_EFFECT, 60 * 2 , 1 / 4)));
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.BURN_EFFECT, duration, amplifier)));
             }
             if (stack.isOf(ModItems.ICE_CRYSTAL_SWORD)){
-                target.addStatusEffect((new StatusEffectInstance(ModEffects.FREEZE_EFFECT, 60 * 2 , 1 / 4)));
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.FREEZE_EFFECT, duration, amplifier)));
             }
-
             if (stack.isOf(ModItems.QUARTZ_CRYSTAL_SWORD)){
-                target.addStatusEffect((new StatusEffectInstance(ModEffects.SHOCK_EFFECT, 60 * 2 , 1 / 4)));
+                target.addStatusEffect((new StatusEffectInstance(ModEffects.SHOCK_EFFECT, duration, amplifier)));
             }
             if (stack.isOf(ModItems.TIBERIUM_SWORD)){
-            target.addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, 60 * 2 , 1 / 4)));
+            target.addStatusEffect((new StatusEffectInstance(ModEffects.TIBERIUM_POISON, duration, amplifier)));
             }
             if (stack.isOf(ModItems.MOISSANITE_SWORD)){
-                attacker.addStatusEffect((new StatusEffectInstance(ModEffects.HEALING_EFFECT, 60 * 2 , 1 / 4)));
+                // ADD STATUS TO ATTACKER
+                attacker.addStatusEffect((new StatusEffectInstance(ModEffects.HEALING_EFFECT, duration, amplifier)));
             }
             target.playSound(SoundEvents.ENTITY_ARROW_HIT, 2F, 2F); // plays a sound for the entity hit only
         }
