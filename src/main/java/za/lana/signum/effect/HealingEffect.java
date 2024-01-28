@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 
-class HealingEffect
+public class HealingEffect
         extends StatusEffect {
     protected HealingEffect(StatusEffectCategory statusEffectCategory, int i) {
         super(statusEffectCategory, i);

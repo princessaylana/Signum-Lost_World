@@ -12,9 +12,7 @@ import za.lana.signum.block.ModBlocks;
 import za.lana.signum.block.entity.ModBlockEntities;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.*;
-import za.lana.signum.entity.mob.CursedWolfEntity;
-import za.lana.signum.entity.mob.PidgeonEntity;
-import za.lana.signum.entity.mob.UnicornEntity;
+import za.lana.signum.entity.mob.*;
 import za.lana.signum.entity.transport.AirBalloonEntity;
 import za.lana.signum.entity.transport.AirShipEntity;
 import za.lana.signum.entity.transport.CargoDroneEntity;
@@ -22,8 +20,9 @@ import za.lana.signum.item.ModFuels;
 import za.lana.signum.item.ModItems;
 import za.lana.signum.networking.ModMessages;
 import za.lana.signum.networking.packet.ABKeyInputC2SPacket;
-import za.lana.signum.networking.packet.AirballoonVec3SyncS2CPacket;
 import za.lana.signum.tag.ModBlockTags;
+import za.lana.signum.util.ModCustomTrades;
+import za.lana.signum.villager.ModVillagers;
 
 public class RunInitMain {
     public static void registerInits(){
@@ -33,6 +32,8 @@ public class RunInitMain {
         registerStrippableBlocks();
         registerFlammableBlocks();
         registerBlockEntities();
+        ModVillagers.registerVillagers();
+        ModCustomTrades.registerCustomTrades();
         registerModTags();
         registerSignumPackets();
         Signum.LOGGER.debug("RUNINIT for " + Signum.MOD_ID);

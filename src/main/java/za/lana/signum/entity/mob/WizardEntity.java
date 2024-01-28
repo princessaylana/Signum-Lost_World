@@ -4,9 +4,8 @@
  * Lana
  * 2023
  * */
-package za.lana.signum.entity.hostile;
+package za.lana.signum.entity.mob;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
@@ -31,13 +30,10 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
-import za.lana.signum.entity.ai.MonsterFindHomeGoal;
 import za.lana.signum.entity.ai.WizardAttackGoal;
 import za.lana.signum.entity.ai.WizardSleepGoal;
 import za.lana.signum.entity.projectile.SpellBoltEntity;
@@ -49,7 +45,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 
-public class WizardEntity extends HostileEntity implements InventoryOwner{
+public class WizardEntity extends PathAwareEntity implements InventoryOwner{
     public int attackAniTimeout = 0;
     private int idleAniTimeout = 0;
     public int spellAniTimeout = 0;
@@ -69,7 +65,7 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
 
     public final Random random = Random.create();
 
-    public WizardEntity(EntityType<? extends HostileEntity> entityType, World world) {
+    public WizardEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
         ((MobNavigation)this.getNavigation()).setCanPathThroughDoors(true);
@@ -82,7 +78,7 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
 
         this.goalSelector.add(2, new WizardAttackGoal(this, 1.0D, true));
         this.goalSelector.add(3, new LookAroundGoal(this));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
         //this.goalSelector.add(4, new MonsterFindHomeGoal(this, 1.05f, 32));
         this.goalSelector.add(5, new WanderAroundGoal(this, 1.0));
         //
@@ -198,6 +194,9 @@ public class WizardEntity extends HostileEntity implements InventoryOwner{
         this.dataTracker.startTracking(SPELL_SHOOTING, false);
         this.dataTracker.startTracking(SLEEPING, false);
         this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    }
+    public static boolean canSpawnIgnoreLightLevel(EntityType<? extends PathAwareEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getDifficulty() != Difficulty.PEACEFUL && PathAwareEntity.canMobSpawn(type, world, spawnReason, pos, random);
     }
     // VARIANT
 

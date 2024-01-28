@@ -61,7 +61,7 @@ public class FallenAttackGoal extends MeleeAttackGoal {
         }
     }
     private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy) {
-        return this.entity.distanceTo(pEnemy) <= 2f; // TODO
+        return this.entity.distanceTo(pEnemy) <= 1.0f; // TODO def 2.0f
     }
     protected void resetAttackCooldown() {
         this.ticksUntilNextAttack = this.getTickCount(attackDelay * 2); // 40 ticks
@@ -82,7 +82,7 @@ public class FallenAttackGoal extends MeleeAttackGoal {
     //
     @Nullable
     protected Vec3d getWanderTarget() {
-        return NoPenaltyTargeting.find(this.mob, 10, 7);
+        return NoPenaltyTargeting.find(this.mob, 24, 2);
     }
     private boolean canStartToFlee(){
         Vec3d vec3d;

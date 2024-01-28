@@ -167,6 +167,8 @@ public class ModItems {
             new ShieldItem(new FabricItemSettings().maxDamage(500)));
 
     // Weapons
+    public static final Item STEEL_SWORD = registerItem("steel_sword",
+            new SSwordItem(ModToolMaterials.STEEL, 5, 3.5f, new FabricItemSettings()));
 
     public static final Item BLACK_DIAMOND_SWORD = registerItem("black_diamond_sword",
             new SSwordItem(ModToolMaterials.BLACK_DIAMOND_CRYSTAL, crystalDamage,crystalSpeed, new FabricItemSettings()));
@@ -210,11 +212,6 @@ public class ModItems {
 
     public static final Item WATER_STAFF = registerItem("water_staff",
             new Item(new FabricItemSettings()));
-
-    public static final StewItem TOXIC_SOUP = (StewItem) registerItem("toxic_soup",
-            new StewItem(new FabricItemSettings().maxCount(1).food(ModFoodComponents.TOXIC_SOUP)));
-    public static final StewItem MIXED_MUSHROOM_STEW = (StewItem) registerItem("mixed_mushroom_stew",
-            new StewItem(new FabricItemSettings().maxCount(1).food(ModFoodComponents.MIXED_MUSHROOM_STEW)));
 
     public static final Item DETECTOR_ITEM = registerItem("detector_item", new OreDetectorItem(new FabricItemSettings().maxDamage(64)));
     //
@@ -268,6 +265,23 @@ public class ModItems {
     public static final Item TIBERIUM_WIZARD_SPAWN_EGG = registerItem("tiberium_wizard_spawn_egg", new SpawnEggItem(
             ModEntities.TIBERIUM_WIZARD_ENTITY, 0xDCE8E8, 0xbf9000, new FabricItemSettings()));
 
+    // FOOD
+    public static final StewItem TOXIC_SOUP = (StewItem) registerItem("toxic_soup",
+            new StewItem(new FabricItemSettings().maxCount(1).food(ModFoodComponents.TOXIC_SOUP)));
+    public static final StewItem MIXED_MUSHROOM_STEW = (StewItem) registerItem("mixed_mushroom_stew",
+            new StewItem(new FabricItemSettings().maxCount(1).food(ModFoodComponents.MIXED_MUSHROOM_STEW)));
+    // BAKER FOOD
+    public static final Item YELLOW_JELLY = registerItem("yellow_jelly", new Item(new FabricItemSettings().food(ModFoodComponents.YELLOW_JELLY)));
+    public static final Item WAFFLES = registerItem("waffles", new Item(new FabricItemSettings().food(ModFoodComponents.WAFFLES)));
+    public static final Item CINNAMON_ROLL = registerItem("cinnamon_roll", new Item(new FabricItemSettings().food(ModFoodComponents.CINNAMON_ROLL)));
+    public static final Item RED_JELLY = registerItem("red_jelly", new Item(new FabricItemSettings().food(ModFoodComponents.RED_JELLY)));
+    public static final Item STRAWBERRY_WAFFLES = registerItem("strawberry_waffles", new Item(new FabricItemSettings().food(ModFoodComponents.STRAWBERRY_WAFFLES)));
+    public static final Item GLAZED_CINNAMON_ROLL = registerItem("glazed_cinnamon_roll", new Item(new FabricItemSettings().food(ModFoodComponents.GLAZED_CINNAMON_ROLL)));
+    public static final Item PURPLE_JELLY = registerItem("purple_jelly", new Item(new FabricItemSettings().food(ModFoodComponents.PURPLE_JELLY)));
+    public static final Item ICE_CREAM_WAFFLES = registerItem("ice_cream_waffles", new Item(new FabricItemSettings().food(ModFoodComponents.ICE_CREAM_WAFFLES)));
+    public static final Item CHOCOLATE_SWISS_ROLL = registerItem("chocolate_swiss_roll", new Item(new FabricItemSettings().food(ModFoodComponents.CHOCOLATE_SWISS_ROLL)));
+    public static final Item CROISSANT_SANDWICH = registerItem("croissant_sandwich", new Item(new FabricItemSettings().food(ModFoodComponents.CROISSANT_SANDWICH)));
+    public static final Item RAINBOW_CAKE = registerItem("rainbow_cake", new Item(new FabricItemSettings().food(ModFoodComponents.RAINBOW_CAKE)));
     public static void addItemsToIngredientGroup(FabricItemGroupEntries entries) {
         entries.add(BLACK_DIAMOND_SHARD);
         entries.add(BLACK_DIAMOND_CRYSTAL);
@@ -390,6 +404,7 @@ public class ModItems {
 
         entries.add(MANGANESE_SWORD);
 
+        entries.add(STEEL_SWORD);
         entries.add(BLACK_DIAMOND_SWORD);
         entries.add(ELEMENT_ZERO_SWORD);
         entries.add(EXOTIC_CRYSTAL_SWORD);
@@ -425,6 +440,18 @@ public class ModItems {
     public static void addItemsToFoodGroup(FabricItemGroupEntries entries){
         entries.add(TOXIC_SOUP);
         entries.add(MIXED_MUSHROOM_STEW);
+        entries.add(YELLOW_JELLY);
+        entries.add(WAFFLES);
+        entries.add(CINNAMON_ROLL);
+        entries.add(RED_JELLY);
+        entries.add(STRAWBERRY_WAFFLES);
+        entries.add(GLAZED_CINNAMON_ROLL);
+        entries.add(PURPLE_JELLY);
+        entries.add(ICE_CREAM_WAFFLES);
+        entries.add(CHOCOLATE_SWISS_ROLL);
+        entries.add(CROISSANT_SANDWICH);
+        entries.add(RAINBOW_CAKE);
+
     }
     public static void addItemsToNaturalGroup(FabricItemGroupEntries entries){
         // ORES

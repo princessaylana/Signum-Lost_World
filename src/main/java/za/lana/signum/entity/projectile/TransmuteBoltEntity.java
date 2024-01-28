@@ -13,7 +13,6 @@ import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.entity.passive.FrogEntity;
-import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
@@ -27,8 +26,6 @@ import net.minecraft.world.World;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntities;
-import za.lana.signum.entity.hostile.ElveGuardEntity;
-import za.lana.signum.entity.hostile.WizardEntity;
 import za.lana.signum.particle.ModParticles;
 import za.lana.signum.sound.ModSounds;
 

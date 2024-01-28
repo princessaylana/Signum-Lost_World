@@ -150,7 +150,7 @@ public class FallenAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(2f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
-    public static final Animation FALLEN_ATTACK = Animation.Builder.create(2f).looping()
+    public static final Animation FALLEN_ATTACK = Animation.Builder.create(1f).looping()
             .addBoneAnimation("mainBody",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),

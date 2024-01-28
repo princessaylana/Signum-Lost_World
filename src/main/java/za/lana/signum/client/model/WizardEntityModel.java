@@ -12,7 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
 import za.lana.signum.client.animation.WizardAnimations;
-import za.lana.signum.entity.hostile.WizardEntity;
+import za.lana.signum.entity.mob.WizardEntity;
 
 public class WizardEntityModel <T extends WizardEntity> extends SinglePartEntityModel<T> implements ModelWithArms{
 	private final ModelPart mainBody;

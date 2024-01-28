@@ -32,6 +32,8 @@ import org.jetbrains.annotations.Nullable;
 import za.lana.signum.block.ModBlocks;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
+import za.lana.signum.entity.ai.FollowTibWizardGoal;
+import za.lana.signum.entity.ai.FollowWizardGoal;
 import za.lana.signum.item.ModItems;
 
 import java.util.List;
@@ -57,6 +59,7 @@ public class TTrooperEntity extends HostileEntity implements InventoryOwner {
         this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
         this.goalSelector.add(3, new LookAroundGoal(this));
         this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
+        this.goalSelector.add(5, new FollowTibWizardGoal(this, 1.0, 2, 16));
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new TTrooperEntity.ProtectHordeGoal());

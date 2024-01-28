@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.ElveGuardEntityModel;
-import za.lana.signum.entity.hostile.ElveGuardEntity;
+import za.lana.signum.entity.mob.ElveGuardEntity;
 
 public class ElveGuardEntityRenderer extends MobEntityRenderer<ElveGuardEntity, ElveGuardEntityModel<ElveGuardEntity>> {
     private final Identifier TEXTURE = new Identifier(Signum.MOD_ID, "textures/entity/hostile/elve_guard_texture.png");

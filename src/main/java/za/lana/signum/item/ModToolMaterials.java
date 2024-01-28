@@ -18,9 +18,9 @@ public enum ModToolMaterials implements ToolMaterial {
             () -> Ingredient.fromTag(ItemTags.PLANKS)),
     MANGANESE(4, 650, 5.0f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.MANGANESE_INGOT)),
-    SIGSTEEL(4, 1200, 8.5f, 3.5f, 26,
+    STEEL(4, 700, 8.5f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.STEEL_INGOT)),
-    SIGSTAINSTEEL(4, 2200, 9f, 3.5f, 26,
+    STAINLESS_STEEL(4, 900, 9f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.STAINLESS_STEEL_INGOT)),
     // Staffs materials:
     TIBERIUM_CRYSTAL(4, 750, 5.5f, 3.5f, 26,

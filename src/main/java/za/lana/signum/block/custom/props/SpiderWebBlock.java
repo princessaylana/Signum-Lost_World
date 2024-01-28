@@ -34,7 +34,7 @@ public class SpiderWebBlock
     }
 
     protected void degrade(BlockState state, World world, BlockPos pos) {
-        if (world.isRaining() || world.isNight()) {
+        if (!world.isClient) {
             world.removeBlock(pos, false);
             return;
         }
@@ -47,7 +47,8 @@ public class SpiderWebBlock
         if (random.nextInt(DEGRADE_CHANCE) != 0) {
             return;
         }
-        if (world.getLightLevel(LightType.SKY, pos) <= 6 || world.isRaining() || world.isNight()) {
+        Block block = this;
+        if (world.isNight()){
             ESpiderEntity eSpider = new ESpiderEntity(ModEntities.ESPIDER_ENTITY, world);
             world.spawnEntity(eSpider);
             eSpider.playSpawnEffects();

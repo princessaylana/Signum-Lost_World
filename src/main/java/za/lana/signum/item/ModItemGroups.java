@@ -170,6 +170,7 @@ public class ModItemGroups {
                         // WEAPONS
                         entries.add(ModItems.WOODEN_CLUB);
                         entries.add(ModItems.SPIKED_CLUB);
+                        entries.add(ModItems.STEEL_SWORD);
                         entries.add(ModItems.BLACK_DIAMOND_SWORD);
                         entries.add(ModItems.ELEMENT_ZERO_SWORD);
                         entries.add(ModItems.EXOTIC_CRYSTAL_SWORD);
@@ -246,6 +247,17 @@ public class ModItemGroups {
                         // FOODS
                         entries.add(ModItems.TOXIC_SOUP);
                         entries.add(ModItems.MIXED_MUSHROOM_STEW);
+                        entries.add(ModItems.YELLOW_JELLY);
+                        entries.add(ModItems.WAFFLES);
+                        entries.add(ModItems.CINNAMON_ROLL);
+                        entries.add(ModItems.RED_JELLY);
+                        entries.add(ModItems.STRAWBERRY_WAFFLES);
+                        entries.add(ModItems.GLAZED_CINNAMON_ROLL);
+                        entries.add(ModItems.PURPLE_JELLY);
+                        entries.add(ModItems.ICE_CREAM_WAFFLES);
+                        entries.add(ModItems.CHOCOLATE_SWISS_ROLL);
+                        entries.add(ModItems.CROISSANT_SANDWICH);
+                        entries.add(ModItems.RAINBOW_CAKE);
                         // SPAWN EGGS
                         entries.add(ModItems.AIRBALOON_SPAWN_EGG);
                         entries.add(ModItems.AIRSHIP_SPAWN_EGG);
@@ -277,7 +289,11 @@ public class ModItemGroups {
                         // BLOCKENTITIES
                         entries.add(ModBlocks.SKYFORGE);
                         entries.add(ModBlocks.VAULT_BLOCK);
+                        // POI
+                        entries.add(ModBlocks.BANKER_BLOCK);
                         entries.add(ModBlocks.ZEDVENDING_BLOCK);
+                        entries.add(ModBlocks.TORGUEBAKER_BLOCK);
+
 
                         //TODO: BELOW TO BE REMOVED - FOR TESTING ONLY
                         entries.add(ModBlocks.EXAMPLE_BLOCK);

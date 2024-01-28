@@ -10,7 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.util.Hand;
-import za.lana.signum.entity.hostile.WizardEntity;
+import za.lana.signum.entity.mob.WizardEntity;
 
 public class WizardAttackGoal extends MeleeAttackGoal {
     private final WizardEntity entity;

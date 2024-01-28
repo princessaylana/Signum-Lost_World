@@ -81,6 +81,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                     .add(ModBlocks.RAZORWIRE_BLOCK)
                     .add(ModBlocks.SKYFORGE)
                     .add(ModBlocks.VAULT_BLOCK)
+                    .add(ModBlocks.BANKER_BLOCK)
+                    .add(ModBlocks.ZEDVENDING_BLOCK)
                     .add(ModBlocks.SKY_ICE_BLOCK)
                     .add(ModBlocks.FROSTED_SKY_ICE_BLOCK);
 
@@ -147,6 +149,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.RAZORWIRE_BLOCK)
                 .add(ModBlocks.SKYFORGE)
                 .add(ModBlocks.VAULT_BLOCK)
+                .add(ModBlocks.BANKER_BLOCK)
+                .add(ModBlocks.ZEDVENDING_BLOCK)
                 .add(ModBlocks.SKY_ICE_BLOCK)
                 .add(ModBlocks.FROSTED_SKY_ICE_BLOCK);
 

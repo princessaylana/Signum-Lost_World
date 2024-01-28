@@ -62,7 +62,7 @@
 
   "item.signum.wooden_club": "Wooden Club",
   "item.signum.spiked_club": "Spiked Club",
-
+  "item.signum.steel_sword": "Steel Sword",
   "item.signum.black_diamond_sword": "Death Sword",
   "item.signum.element_zero_sword": "Gravity Sword",
   "item.signum.exotic_crystal_sword": "Transmute Sword",
@@ -143,6 +143,18 @@
 
   "item.signum.toxic_soup": "Toxic Stew",
   "item.signum.mixed_mushroom_stew": "Mixed Mushroom Stew",
+  "item.signum.yellow_jelly": "Yellow Jelly",
+  "item.signum.waffles": "Waffles",
+  "item.signum.cinnamon_roll": "Cinnamon Roll",
+  "item.signum.red_jelly": "Red Jelly",
+  "item.signum.strawberry_waffles": "Strawberry Waffles",
+  "item.signum.glazed_cinnamon_roll": "Glazed Cinnamon Roll",
+  "item.signum.purple_jelly": "Purple Jelly",
+  "item.signum.ice_cream_waffles": "Ice Cream Waffles",
+  "item.signum.chocolate_swiss_roll": "Chocolate Swiss Roll",
+  "item.signum.croissant_sandwhich": "Croissant Sandwhich",
+  "item.signum.rainbow_cake": "Rainbow Cake",
+
 
   "item.signum.detector_item": "Ore Detector",
   "item.signum.detector_item.info": "Item Used to Test Ore WorldGen",
@@ -289,9 +301,10 @@
   "block.signum.vault_block.test": "Success Test",
   "block.signum.vault.tooltip": "Keep all your belongings safe from others",
   "block.signum.vault.tooltip2": "Only you can open or break your vault",
-
+  "block.signum.banker_block": "Banker Profession Block",
   "block.signum.zedvending_block": "Zeds Medical Vending Machine",
   "block.signum.zed_block.screen": "Zeds Dispensary",
+  "block.signum.torguebaker_block": "Torgue Baker WorkStation",
 
   "block.signum.dronebox_block": "DroneBox Block",
   "block.signum.dronebox_block.screen": "DroneBox",
@@ -381,6 +394,8 @@
   "key.signum.flydown":"Fly Down",
   "key.signum.shift": "Press Shift for Info",
   
-  "sounds.signum.snowy_wind": "Freezing Cold"
-
+  "sounds.signum.snowy_wind": "Freezing Cold",
+  "entity.minecraft.villager.dr_zed": "Dr Zed",
+  "entity.minecraft.villager.banker": "Banker",
+  "entity.minecraft.villager.baker": "Torgue Baker"
 }

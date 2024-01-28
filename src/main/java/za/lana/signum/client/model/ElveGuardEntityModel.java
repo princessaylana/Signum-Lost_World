@@ -12,7 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
 import za.lana.signum.client.animation.ElveGuardAnimations;
-import za.lana.signum.entity.hostile.ElveGuardEntity;
+import za.lana.signum.entity.mob.ElveGuardEntity;
 
 public class ElveGuardEntityModel<T extends ElveGuardEntity> extends SinglePartEntityModel<T> implements ModelWithArms {
     private final ModelPart elve;

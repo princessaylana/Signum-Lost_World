@@ -17,7 +17,7 @@ import net.minecraft.util.Util;
 import za.lana.signum.Signum;
 import za.lana.signum.client.layer.ModModelLayers;
 import za.lana.signum.client.model.WizardEntityModel;
-import za.lana.signum.entity.hostile.WizardEntity;
+import za.lana.signum.entity.mob.WizardEntity;
 import za.lana.signum.entity.variant.WizardEntityVariant;
 
 import java.util.Map;

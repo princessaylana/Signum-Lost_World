@@ -14,7 +14,7 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
-import za.lana.signum.entity.hostile.WizardEntity;
+import za.lana.signum.entity.mob.WizardEntity;
 
 import java.util.EnumSet;
 

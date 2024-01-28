@@ -11,15 +11,12 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.mob.GiantEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import za.lana.signum.Signum;
 import za.lana.signum.entity.hostile.*;
-import za.lana.signum.entity.mob.CursedWolfEntity;
-import za.lana.signum.entity.mob.PidgeonEntity;
-import za.lana.signum.entity.mob.UnicornEntity;
+import za.lana.signum.entity.mob.*;
 import za.lana.signum.entity.projectile.*;
 import za.lana.signum.entity.transport.AirBalloonEntity;
 import za.lana.signum.entity.transport.AirShipEntity;
@@ -67,11 +64,11 @@ public class ModEntities {
                     .dimensions(EntityDimensions.fixed(2.0f * GiantESpiderEntity.SCALED, 1.3f * GiantESpiderEntity.SCALED)).build());
     public static final EntityType<ElveGuardEntity> ELVE_GUARD_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "elve_guard_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ElveGuardEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ElveGuardEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.9f)).build());
     public static final EntityType<WizardEntity> WIZARD_ENTITY = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(Signum.MOD_ID, "wizard_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, WizardEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, WizardEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.9f)).build());
     public static final EntityType<SpellBoltEntity> SPELLBOLT_ENTITY = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(Signum.MOD_ID, "spellbolt_entity"),

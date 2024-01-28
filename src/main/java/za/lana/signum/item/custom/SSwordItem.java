@@ -78,7 +78,6 @@ implements Vanishable {
         if (target instanceof LivingEntity) {
 
             if (stack.isOf(ModItems.BLACK_DIAMOND_SWORD)){
-
                 TorturedSoulEntity torturedSoul = ModEntities.TORTURED_SOUL.spawn(((ServerWorld) attacker.getWorld()), target.getBlockPos(), SpawnReason.TRIGGERED);
                 assert torturedSoul != null;
                 if (!(target instanceof TorturedSoulEntity)

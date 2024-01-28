@@ -12,9 +12,7 @@ import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.world.Heightmap;
 import za.lana.signum.entity.ModEntities;
 import za.lana.signum.entity.hostile.*;
-import za.lana.signum.entity.mob.CursedWolfEntity;
-import za.lana.signum.entity.mob.PidgeonEntity;
-import za.lana.signum.entity.mob.UnicornEntity;
+import za.lana.signum.entity.mob.*;
 import za.lana.signum.world.biomes.SignumBioKeys;
 
 public class ModEntityGeneration {
@@ -84,12 +82,12 @@ public class ModEntityGeneration {
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UnicornEntity::isValidNaturalSpawn);
 
         // GOLDEN KINGDOM BIOME
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.GOLDEN_KINGDOM), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.GOLDEN_KINGDOM), SpawnGroup.CREATURE,
                 ModEntities.ELVE_GUARD_ENTITY, 50, 2, 4);
         SpawnRestriction.register(ModEntities.ELVE_GUARD_ENTITY, SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ElveGuardEntity::canSpawnIgnoreLightLevel);
 
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.GOLDEN_KINGDOM), SpawnGroup.MONSTER,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(SignumBioKeys.GOLDEN_KINGDOM), SpawnGroup.CREATURE,
                 ModEntities.WIZARD_ENTITY, 50, 2, 4);
         SpawnRestriction.register(ModEntities.WIZARD_ENTITY, SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WizardEntity::canSpawnIgnoreLightLevel);

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "signum:item/food/glazed_cinnamon_roll"
+  }
+}

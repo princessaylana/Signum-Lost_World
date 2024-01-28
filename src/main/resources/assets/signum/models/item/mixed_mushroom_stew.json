@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "signum:item/mixed_mushroom_stew"
+    "layer0": "signum:item/food/mixed_mushroom_stew"
   }
 }

@@ -20,7 +20,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import za.lana.signum.Signum;
 import za.lana.signum.block.custom.*;
-import za.lana.signum.block.custom.props.TransLucentBlock;
+import za.lana.signum.block.custom.poi.BankerBlock;
+import za.lana.signum.block.custom.poi.TorgueBakerBlock;
+import za.lana.signum.block.custom.poi.ZedVendingBlock;
 import za.lana.signum.block.custom.crystal.*;
 import za.lana.signum.block.custom.modore.ElementZeroOreBlock;
 import za.lana.signum.block.custom.plants.*;
@@ -324,9 +326,16 @@ public class ModBlocks {
     public static final Block SKYFORGE = registerBlock("skyforge",
             new SkyForgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block VAULT_BLOCK = registerBlock("vault_block",
-            new VaultBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
+            new VaultBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(20.0f,250.0f)));
+    // POI BLOCKS
+    public static final Block BANKER_BLOCK = registerBlock("banker_block",
+            new BankerBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(20.0f,250.0f)));
     public static final Block ZEDVENDING_BLOCK = registerBlock("zedvending_block",
-            new ZedVendingBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
+            new ZedVendingBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(20.0f,250.0f)));
+    public static final Block TORGUEBAKER_BLOCK = registerBlock("torguebaker_block",
+            new TorgueBakerBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(20.0f,250.0f)));
+
+    // DEV
     public static final Block EXAMPLE_BLOCK = registerBlock("example_block",
             new ExampleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5.0f,20.0f)));
 

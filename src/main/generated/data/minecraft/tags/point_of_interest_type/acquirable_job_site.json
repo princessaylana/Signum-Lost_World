@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "signum:zed_vending",
+      "required": false
+    },
+    {
+      "id": "signum:banker",
+      "required": false
+    },
+    {
+      "id": "signum:baker",
+      "required": false
+    }
+  ]
+}

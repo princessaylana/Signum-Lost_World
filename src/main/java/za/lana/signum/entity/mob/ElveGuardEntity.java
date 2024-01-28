@@ -4,7 +4,7 @@
  * Lana
  * 2023
  * */
-package za.lana.signum.entity.hostile;
+package za.lana.signum.entity.mob;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -16,26 +16,27 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.*;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 import za.lana.signum.effect.ModEffects;
 import za.lana.signum.entity.ModEntityGroup;
+import za.lana.signum.entity.ai.ElveGuardWanderPOIGoal;
+import za.lana.signum.entity.ai.FollowWizardGoal;
 import za.lana.signum.item.ModItems;
 
 import java.util.List;
 
-public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
+public class ElveGuardEntity extends PathAwareEntity implements InventoryOwner {
     public int attackAniTimeout = 0;
     private int idleAniTimeout = 0;
     public final AnimationState attackAniState = new AnimationState();
@@ -55,6 +56,8 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
         //this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
         this.goalSelector.add(2, new LookAroundGoal(this));
         this.goalSelector.add(3, new WanderAroundGoal(this, 1.0));
+        this.goalSelector.add(4, new FollowWizardGoal(this, 1.0, 2, 16));
+        this.goalSelector.add(5, new ElveGuardWanderPOIGoal(this, 1.0f, false));
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new ElveGuardEntity.ProtectHordeGoal());
@@ -160,10 +163,10 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
         this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
         this.equipStack(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
 
-        this.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
-        this.equipStack(EquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
-        this.equipStack(EquipmentSlot.LEGS, new ItemStack(Items.IRON_LEGGINGS));
-        this.equipStack(EquipmentSlot.FEET, new ItemStack(Items.IRON_BOOTS));
+        this.equipStack(EquipmentSlot.HEAD, new ItemStack(ModItems.EXOTIC_HELMET));
+        this.equipStack(EquipmentSlot.CHEST, new ItemStack(ModItems.EXOTIC_CHESTPLATE));
+        this.equipStack(EquipmentSlot.LEGS, new ItemStack(ModItems.EXOTIC_LEGGINGS));
+        this.equipStack(EquipmentSlot.FEET, new ItemStack(ModItems.EXOTIC_BOOTS));
     }
 
     @Override
@@ -185,7 +188,7 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
         if ((double)this.random.nextFloat() < 0.5) {
             return new ItemStack(Items.IRON_SWORD);
         }
-        return new ItemStack(ModItems.TIBERIUM_SWORD);
+        return new ItemStack(ModItems.STEEL_SWORD);
     }
 
     @Override
@@ -221,6 +224,9 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
         }
         //this.dropItem(Items.ROTTEN_FLESH);
     }
+    public static boolean canSpawnIgnoreLightLevel(EntityType<? extends PathAwareEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getDifficulty() != Difficulty.PEACEFUL && PathAwareEntity.canMobSpawn(type, world, spawnReason, pos, random);
+    }
 
     @Override
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
@@ -241,9 +247,6 @@ public class ElveGuardEntity extends HostileEntity implements InventoryOwner {
         @Override
         public boolean canStart() {
             if (super.canStart()) {
-                if (this.mob.isSleeping()){
-                    return false;
-                }
                 List<ElveGuardEntity> list = ElveGuardEntity.this.getWorld().getNonSpectatingEntities(ElveGuardEntity.class, ElveGuardEntity.this.getBoundingBox().expand(16.0, 4.0, 16.0));
                 for (ElveGuardEntity elveGuard : list) {
                     if (!elveGuard.isBaby()) continue;
